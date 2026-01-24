@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portafolio BIM de Said Herrera. Gestión de datos 6D y Coordinación Técnica.">
     <title>SYSTEM_ONLINE // SAID HERRERA</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -13,63 +14,56 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
 
     <style>
         /* =========================================
            ESTILO CORE - TECH DASHBOARD THEME
            ========================================= */
         :root {
-            --bg-dark: #0b1016;       
-            --bg-panel: #151b26;      
-            --bg-panel-transparent: rgba(21, 27, 38, 0.85);
-            --accent-cyan: #22d3ee;   
-            --accent-dim: #0e7490;    
-            --text-main: #f1f5f9;     
-            --text-muted: #94a3b8;    
-            --text-inverse: #0b1016;
-            --grid-line: rgba(34, 211, 238, 0.03);
+            /* MODO OSCURO (DEFAULT) */
+            --bg-dark: #0b1016;
+            --bg-panel: #151b26;
+            --bg-panel-transparent: rgba(21, 27, 38, 0.95);
+            --accent-cyan: #22d3ee;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
             --border-color: rgba(34, 211, 238, 0.15);
-            --map-fill: #1e293b;
-            --map-stroke: #334155;
-            --card-shadow: 0 0 20px rgba(34, 211, 238, 0.05);
             --radius-box: 12px;
         }
 
         body.light-mode {
-            --bg-dark: #f0f4f8;       
-            --bg-panel: #ffffff;      
+            --bg-dark: #f0f4f8;
+            --bg-panel: #ffffff;
             --bg-panel-transparent: rgba(255, 255, 255, 0.95);
-            --accent-cyan: #0891b2;   
-            --accent-dim: #cbd5e1;    
-            --text-main: #1e293b;     
-            --text-muted: #64748b;    
-            --text-inverse: #ffffff;
-            --grid-line: rgba(8, 145, 178, 0.05);
+            --accent-cyan: #0891b2;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
             --border-color: rgba(148, 163, 184, 0.3);
-            --map-fill: #cbd5e1;
-            --map-stroke: #ffffff;
-            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
-            background-image: 
-                linear-gradient(var(--grid-line) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-image:
+                linear-gradient(rgba(34, 211, 238, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 211, 238, 0.02) 1px, transparent 1px);
             background-size: 40px 40px;
             scroll-behavior: smooth;
             margin-bottom: 100px;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .font-tech { font-family: 'JetBrains Mono', monospace; }
-        
-        .text-cyan { color: var(--accent-cyan); }
-        .text-glow { text-shadow: 0 0 10px rgba(34, 211, 238, 0.4); }
-        body.light-mode .text-glow { text-shadow: none; }
+        .font-tech {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .text-cyan {
+            color: var(--accent-cyan);
+        }
 
         .section-desc {
             font-size: 0.85rem;
@@ -77,9 +71,9 @@
             margin-top: -1rem;
             margin-bottom: 2rem;
             max-width: 100%;
-            white-space: nowrap;      
-            overflow: hidden;         
-            text-overflow: ellipsis;  
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             border-left: 2px solid var(--accent-cyan);
             padding-left: 1rem;
         }
@@ -92,19 +86,23 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: var(--card-shadow);
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.05);
         }
-        .tech-card:hover { border-color: var(--accent-cyan); }
+
+        .tech-card:hover {
+            border-color: var(--accent-cyan);
+        }
 
         .btn-tech-primary {
             background-color: var(--accent-cyan);
-            color: var(--text-inverse);
+            color: #0b1016;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             border-radius: 4px;
             transition: all 0.2s;
         }
+
         .btn-tech-primary:hover {
             transform: translateY(-1px);
             filter: brightness(1.1);
@@ -118,54 +116,244 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             transition: all 0.2s;
+            cursor: pointer;
         }
-        
-        .btn-tech-outline.active, 
+
+        .btn-tech-outline.active,
         .view-btn.active {
             border-color: var(--accent-cyan);
             background-color: var(--accent-cyan) !important;
-            color: var(--text-inverse) !important;
+            color: #0b1016 !important;
             font-weight: 700;
             box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
         }
-        
+
         .btn-tech-outline:hover {
             border-color: var(--accent-cyan);
             color: var(--accent-cyan);
         }
 
-        .section-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
-        .section-header i { color: var(--accent-cyan); }
-        .section-title { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.25rem; color: var(--accent-cyan); letter-spacing: -0.05em; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
 
-        .hero-stat-box { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 1rem; border-radius: 0.5rem; text-align: right; min-width: 140px; }
-        body.light-mode .hero-stat-box { background: rgba(0,0,0,0.03); }
-        .hero-stat-num { font-size: 2.5rem; font-weight: 900; line-height: 1; color: var(--text-main); }
-        .hero-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; margin-top: 4px; display: block; }
+        .section-header i {
+            color: var(--accent-cyan);
+        }
 
-        .map-wrapper { position: relative; height: 500px; width: 100%; background: var(--bg-panel); border-radius: var(--radius-box); overflow: hidden; border: 1px solid var(--border-color); }
-        .city-marker { transition: r 0.3s ease, fill 0.3s ease; cursor: pointer; stroke: none; }
-        .city-marker:hover { r: 6px; stroke: var(--text-main); stroke-width: 1px; }
-        .country { fill: var(--map-fill); stroke: var(--map-stroke); stroke-width: 0.5px; transition: fill 0.3s ease; }
-        .country-label-text { font-family: 'JetBrains Mono', sans-serif; font-weight: 900; font-size: 14px; fill: var(--text-muted); opacity: 0.5; pointer-events: none; letter-spacing: 0.2em; }
-        
-        .map-legend-overlay { position: absolute; bottom: 20px; left: 20px; background: var(--bg-panel); border: 1px solid var(--border-color); padding: 12px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--accent-cyan);
+            letter-spacing: -0.05em;
+        }
 
-        #map-tooltip { position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: auto; opacity: 0; visibility: hidden; transition: opacity 0.15s ease, visibility 0.15s ease; background: var(--bg-panel); backdrop-filter: blur(12px); border: 1px solid var(--border-color); color: var(--text-main); padding: 0; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); width: auto; max-width: 90vw; }
-        .tooltip-header { font-weight: 800; font-size: 0.75rem; background: rgba(34, 211, 238, 0.05); border-bottom: 1px solid var(--border-color); padding: 8px 12px; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; display: flex; justify-content: space-between; align-items: center; }
-        .tooltip-content { padding: 4px; display: grid; grid-template-columns: 1fr; gap: 0; }
-        .tooltip-cols-2 { grid-template-columns: repeat(2, 300px); }
-        .tooltip-cols-3 { grid-template-columns: repeat(3, 300px); }
-        .tooltip-row { display: grid; grid-template-columns: 40px 1fr; gap: 12px; padding: 6px 12px; cursor: pointer; transition: background 0.2s; align-items: center; border-bottom: 1px solid transparent; }
-        .tooltip-row:hover { background: rgba(125,125,125,0.05); }
-        .tooltip-pid { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; }
-        .tooltip-info { display: flex; flex-direction: column; line-height: 1.2; }
-        .tooltip-name { font-size: 0.75rem; font-weight: 600; color: var(--text-main); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .tooltip-meta { font-size: 0.65rem; color: var(--text-muted); font-family: 'Inter', sans-serif; }
+        .hero-stat-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: right;
+            min-width: 140px;
+        }
 
-        .controls-bar { background: var(--bg-panel); border: 1px solid var(--border-color); padding: 0.75rem; border-radius: var(--radius-box); display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: space-between; }
-        .search-input-tech { background: transparent; border: none; border-bottom: 1px solid var(--border-color); color: var(--text-main); padding: 4px 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; width: 200px; outline: none; transition: 0.3s; }
-        .search-input-tech:focus { border-color: var(--accent-cyan); }
+        body.light-mode .hero-stat-box {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .hero-stat-num {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--text-main);
+        }
+
+        .hero-stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* MAPA */
+        .map-wrapper {
+            position: relative;
+            height: 500px;
+            width: 100%;
+            background: var(--bg-panel);
+            border-radius: var(--radius-box);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .city-marker {
+            transition: r 0.3s ease, fill 0.3s ease;
+            cursor: pointer;
+            stroke: none;
+        }
+
+        .city-marker:hover {
+            r: 6px;
+            stroke: var(--text-main);
+            stroke-width: 1px;
+        }
+
+        .country {
+            fill: var(--map-fill);
+            stroke: var(--map-stroke);
+            stroke-width: 0.5px;
+            transition: fill 0.3s ease;
+        }
+
+        .country-label-text {
+            font-family: 'JetBrains Mono', sans-serif;
+            font-weight: 900;
+            font-size: 14px;
+            fill: var(--text-muted);
+            opacity: 0.5;
+            pointer-events: none;
+            letter-spacing: 0.2em;
+        }
+
+        .map-legend-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #map-tooltip {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            pointer-events: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.15s ease, visibility 0.15s ease;
+            background: var(--bg-panel);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            width: auto;
+            max-width: 90vw;
+        }
+
+        .tooltip-header {
+            font-weight: 800;
+            font-size: 0.75rem;
+            background: rgba(34, 211, 238, 0.05);
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 12px;
+            text-transform: uppercase;
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tooltip-content {
+            padding: 4px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        .tooltip-cols-2 {
+            grid-template-columns: repeat(2, 300px);
+        }
+
+        .tooltip-cols-3 {
+            grid-template-columns: repeat(3, 300px);
+        }
+
+        .tooltip-row {
+            display: grid;
+            grid-template-columns: 40px 1fr;
+            gap: 12px;
+            padding: 6px 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+            align-items: center;
+            border-bottom: 1px solid transparent;
+        }
+
+        .tooltip-row:hover {
+            background: rgba(34, 211, 238, 0.05);
+        }
+
+        .tooltip-pid {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .tooltip-info {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .tooltip-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-main);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .tooltip-meta {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* UI CONTROLS */
+        .controls-bar {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            border-radius: var(--radius-box);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-input-tech {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 4px 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            width: 200px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-input-tech:focus {
+            border-color: var(--accent-cyan);
+        }
 
         #status-bar-container {
             font-family: 'JetBrains Mono', monospace;
@@ -178,72 +366,388 @@
             text-align: right;
         }
 
-        #list-view-wrapper { height: 500px; max-height: 500px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: var(--radius-box); background: var(--bg-panel); }
-        .tech-table-grid { display: grid; grid-template-columns: 50px 15% 20% 8% 10% 12% 1fr; gap: 1rem; align-items: start; }
-        .tech-table-header { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent-cyan); text-transform: uppercase; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: 8px; background: var(--bg-panel); position: sticky; top: 0; z-index: 10; padding-top: 8px; padding-left: 8px; }
-        .tech-list-row { padding: 0.75rem 0.5rem; border-bottom: 1px solid var(--border-color); transition: 0.2s; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-main); }
-        .tech-list-row div { white-space: normal; word-wrap: break-word; }
-        .tech-list-row:hover { background: rgba(34, 211, 238, 0.05); padding-left: 12px; border-left: 2px solid var(--accent-cyan); }
-        
-        .project-card-tech { display: flex; flex-direction: column; background: var(--bg-panel); border: 1px solid var(--border-color); border-radius: var(--radius-box); overflow: hidden; height: 500px; min-height: 500px; }
-        @media (min-width: 1024px) { .project-card-tech { flex-direction: row; } }
-        .p-info-side { padding: 2rem; width: 100%; display: flex; flex-direction: column; gap: 1rem; position: relative; overflow-y: auto; }
-        .p-img-side { width: 100%; height: 100%; background: #0f172a; position: relative; display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--border-color); }
-        @media (min-width: 1024px) { .p-info-side { width: 40%; } .p-img-side { width: 60%; } }
-        
-        .field-label { font-family: 'JetBrains Mono', monospace; color: var(--accent-cyan); font-size: 0.7rem; margin-bottom: 2px; display: block; }
-        .field-value { font-family: 'JetBrains Mono', monospace; color: var(--text-muted); font-size: 0.8rem; line-height: 1.5; }
+        /* VISTAS */
+        #list-view-wrapper {
+            height: 500px;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-box);
+            background: var(--bg-panel);
+        }
 
-        #gallery-view-wrapper { height: 500px; max-height: 500px; overflow-y: auto; padding-right: 8px; border: 1px solid transparent; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 1rem; }
-        @media (min-width: 768px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 1024px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
-        .gallery-card { height: 240px; background-color: var(--bg-panel); background-size: cover; background-position: center; border-radius: 0.5rem; position: relative; overflow: hidden; border: 1px solid var(--border-color); transition: all 0.3s ease; cursor: pointer; }
-        .gallery-card:hover { transform: scale(1.02); border-color: var(--accent-cyan); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .gallery-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(11, 16, 22, 0.95), rgba(11, 16, 22, 0.5), transparent); padding: 1.5rem 1rem 1rem 1rem; display: flex; flex-direction: column; gap: 0.25rem; }
-        
-        .gallery-id { font-family: 'JetBrains Mono', monospace; color: #FFFFFF; font-size: 0.65rem; font-weight: 700; }
-        .gallery-title { font-family: 'Inter', sans-serif; font-weight: 800; color: #FFFFFF; font-size: 1.1rem; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-        .gallery-loc { font-family: 'JetBrains Mono', monospace; color: #FFFFFF; font-size: 0.75rem; font-weight: 300; display: flex; align-items: center; gap: 4px; }
+        .tech-table-grid {
+            display: grid;
+            grid-template-columns: 50px 15% 20% 8% 10% 12% 1fr;
+            gap: 1rem;
+            align-items: start;
+        }
 
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+        .tech-table-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+            background: var(--bg-panel);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            padding-top: 8px;
+            padding-left: 8px;
+        }
 
-        .dock-nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--bg-panel-transparent); backdrop-filter: blur(12px); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: var(--radius-box); display: flex; gap: 8px; z-index: 50; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .dock-item { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 60px; height: 50px; border-radius: 8px; color: var(--text-muted); font-size: 0.6rem; font-family: 'JetBrains Mono', monospace; cursor: pointer; transition: all 0.2s; text-decoration: none; }
-        .dock-item:hover { color: var(--text-main); background: rgba(125,125,125,0.1); }
-        .dock-item.active { color: var(--accent-cyan); background: rgba(34, 211, 238, 0.1); }
-        
-        .dock-item.highlight-cv { color: var(--accent-cyan); font-weight: 700; }
-        .dock-item.highlight-cv:hover { text-shadow: 0 0 10px rgba(34, 211, 238, 0.6); }
+        .tech-list-row {
+            padding: 0.75rem 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            transition: 0.2s;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-main);
+        }
 
-        #chat-window { background: var(--bg-panel); border: 1px solid var(--border-color); box-shadow: 0 10px 40px -10px rgba(0,0,0,0.3); border-radius: 12px; }
-        #chat-header { background: transparent; border-bottom: 1px solid var(--border-color); padding: 12px 16px; }
-        .bot-msg { background: rgba(34, 211, 238, 0.08); border-left: 2px solid var(--accent-cyan); color: var(--text-main); border-radius: 0 8px 8px 0; }
-        .user-msg { background: rgba(148, 163, 184, 0.1); border-right: 2px solid var(--text-muted); color: var(--text-main); text-align: right; border-radius: 8px 0 0 8px; }
-        #chat-input { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); }
-        #chat-footer { background: transparent; border-top: 1px solid var(--border-color); }
-        #chat-launcher { background: var(--bg-panel); border: 1px solid var(--accent-cyan); color: var(--accent-cyan); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(34, 211, 238, 0.2); transition: 0.3s; }
-        #chat-launcher:hover { transform: scale(1.05); background: var(--accent-cyan); color: var(--bg-dark); }
+        .tech-list-row div {
+            white-space: normal;
+            word-wrap: break-word;
+        }
 
-        .filter-popup { background: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; position: absolute; top: 100%; right: 0; z-index: 20; width: 300px; margin-top: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
-        .filter-select-tech { width: 100%; background: var(--bg-dark); border: 1px solid var(--border-color); color: var(--text-main); padding: 4px; border-radius: 4px; font-size: 0.75rem; }
-        
-        .modal-bg { background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); }
-        .modal-box { background: var(--bg-panel); border: 1px solid var(--border-color); color: var(--text-main); }
+        .tech-list-row:hover {
+            background: rgba(34, 211, 238, 0.05);
+            padding-left: 12px;
+            border-left: 2px solid var(--accent-cyan);
+        }
 
-        .hidden { display: none !important; }
-        .uppercase { text-transform: uppercase; }
-        
+        .project-card-tech {
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-box);
+            overflow: hidden;
+            height: 500px;
+            min-height: 500px;
+        }
+
+        @media (min-width: 1024px) {
+            .project-card-tech {
+                flex-direction: row;
+            }
+        }
+
+        .p-info-side {
+            padding: 2rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .p-img-side {
+            width: 100%;
+            height: 100%;
+            background: #0f172a;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 1px solid var(--border-color);
+        }
+
+        @media (min-width: 1024px) {
+            .p-info-side {
+                width: 40%;
+            }
+
+            .p-img-side {
+                width: 60%;
+            }
+        }
+
+        .field-label {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-cyan);
+            font-size: 0.7rem;
+            margin-bottom: 2px;
+            display: block;
+        }
+
+        .field-value {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+
+        #gallery-view-wrapper {
+            height: 500px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 8px;
+            border: 1px solid transparent;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .gallery-card {
+            height: 240px;
+            background-color: var(--bg-panel);
+            background-size: cover;
+            background-position: center;
+            border-radius: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-card:hover {
+            transform: scale(1.02);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(11, 16, 22, 0.95), rgba(11, 16, 22, 0.5), transparent);
+            padding: 1.5rem 1rem 1rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .gallery-id {
+            font-family: 'JetBrains Mono', monospace;
+            color: #FFFFFF;
+            font-size: 0.65rem;
+            font-weight: 700;
+        }
+
+        .gallery-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            color: #FFFFFF;
+            font-size: 1.1rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .gallery-loc {
+            font-family: 'JetBrains Mono', monospace;
+            color: #FFFFFF;
+            font-size: 0.75rem;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-cyan);
+        }
+
+        /* DOCK */
+        .dock-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-panel-transparent);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: var(--radius-box);
+            display: flex;
+            gap: 8px;
+            z-index: 50;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .dock-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 50px;
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-size: 0.6rem;
+            font-family: 'JetBrains Mono', monospace;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .dock-item:hover {
+            color: var(--text-main);
+            background: rgba(125, 125, 125, 0.1);
+        }
+
+        .dock-item.active {
+            color: var(--accent-cyan);
+            background: rgba(34, 211, 238, 0.1);
+        }
+
+        .dock-item.highlight-cv {
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        .dock-item.highlight-cv:hover {
+            text-shadow: 0 0 10px rgba(34, 211, 238, 0.6);
+        }
+
+        /* CHATBOT */
+        #chat-window {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+        }
+
+        #chat-header {
+            background: transparent;
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+        }
+
+        .bot-msg {
+            background: rgba(34, 211, 238, 0.08);
+            border-left: 2px solid var(--accent-cyan);
+            color: var(--text-main);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .user-msg {
+            background: rgba(148, 163, 184, 0.1);
+            border-right: 2px solid var(--text-muted);
+            color: var(--text-main);
+            text-align: right;
+            border-radius: 8px 0 0 8px;
+        }
+
+        #chat-input {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        #chat-footer {
+            background: transparent;
+            border-top: 1px solid var(--border-color);
+        }
+
+        #chat-launcher {
+            background: var(--bg-panel);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(34, 211, 238, 0.2);
+            transition: 0.3s;
+        }
+
+        #chat-launcher:hover {
+            transform: scale(1.05);
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+        }
+
+        .filter-popup {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            z-index: 20;
+            width: 300px;
+            margin-top: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .filter-select-tech {
+            width: 100%;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 4px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .modal-bg {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-box {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
     </style>
 </head>
+
 <body>
 
     <main class="max-w-7xl mx-auto px-4 md:px-8 pt-12 pb-24">
-        
-        <div class="tech-card p-8 md:p-12 mb-20 flex flex-col md:flex-row justify-between items-start md:items-center relative">
+
+        <div
+            class="tech-card p-8 md:p-12 mb-20 flex flex-col md:flex-row justify-between items-start md:items-center relative">
             <div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-cyan-400"></div>
             <div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-400"></div>
 
@@ -252,11 +756,14 @@
                     <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                     <span class="font-tech text-xs text-cyan-400 tracking-wider">PORTFOLIO V.2025</span>
                 </div>
-                <h1 class="text-6xl md:text-8xl font-black text-white leading-none tracking-tight mb-2" style="color: var(--text-main);">
+                <h1 class="text-6xl md:text-8xl font-black text-white leading-none tracking-tight mb-2"
+                    style="color: var(--text-main);">
                     SAID<br><span class="text-cyan-400">HERRERA</span>
                 </h1>
-                <p class="text-xl text-gray-400 max-w-xl mt-4 border-l-2 border-cyan-900 pl-4" style="color: var(--text-muted);">
-                    <strong style="color: var(--text-main);">Modelador BIM Senior.</strong> Especialista en gestión de datos 6D, coordinación técnica y automatización de procesos.
+                <p class="text-xl text-gray-400 max-w-xl mt-4 border-l-2 border-cyan-900 pl-4"
+                    style="color: var(--text-muted);">
+                    <strong style="color: var(--text-main);">Modelador BIM Senior.</strong> Especialista en gestión de
+                    datos 6D, coordinación técnica y automatización de procesos.
                 </p>
             </div>
 
@@ -274,8 +781,10 @@
                     <span class="hero-stat-label">Ciudades</span>
                 </div>
             </div>
-            
-            <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle, var(--accent-cyan) 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+            <div class="absolute inset-0 opacity-10 pointer-events-none"
+                style="background-image: radial-gradient(circle, var(--accent-cyan) 1px, transparent 1px); background-size: 20px 20px;">
+            </div>
         </div>
 
         <section id="analisis" class="mb-24 scroll-mt-24">
@@ -284,31 +793,42 @@
                 <h2 class="section-title">01_GEO_DATA</h2>
             </div>
             <p class="section-desc">Visualización global interactiva de sedes y proyectos ejecutados.</p>
-            
+
             <div class="map-wrapper relative">
                 <div id="d3-map-svg-container" class="w-full h-full"><svg id="map-svg"></svg></div>
-                
+
                 <div class="map-legend-overlay">
-                    <div class="flex items-center justify-between gap-4 mb-1 cursor-pointer hover:opacity-75 text-gray-400" style="color: var(--text-muted);" onclick="filterMap('Obra')">
-                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> OBRA (SITIO)</div>
+                    <div class="flex items-center justify-between gap-4 mb-1 cursor-pointer hover:opacity-75 text-gray-400"
+                        style="color: var(--text-muted);" onclick="filterMap('Obra')">
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span>
+                            OBRA (SITIO)</div>
                         <span id="pct-obra" class="font-bold" style="color: var(--text-main);">0%</span>
                     </div>
-                    <div class="flex items-center justify-between gap-4 mb-1 cursor-pointer hover:opacity-75 text-gray-400" style="color: var(--text-muted);" onclick="filterMap('Oficina')">
-                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-500"></span> OFICINA (REMOTO)</div>
+                    <div class="flex items-center justify-between gap-4 mb-1 cursor-pointer hover:opacity-75 text-gray-400"
+                        style="color: var(--text-muted);" onclick="filterMap('Oficina')">
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                            OFICINA (REMOTO)</div>
                         <span id="pct-oficina" class="font-bold" style="color: var(--text-main);">0%</span>
                     </div>
-                    <div class="flex items-center justify-between gap-4 cursor-pointer hover:opacity-75 text-gray-400" style="color: var(--text-muted);" onclick="filterMap('Internacional')">
-                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-yellow-500"></span> INT'L</div>
+                    <div class="flex items-center justify-between gap-4 cursor-pointer hover:opacity-75 text-gray-400"
+                        style="color: var(--text-muted);" onclick="filterMap('Internacional')">
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-yellow-500"></span>
+                            INT'L</div>
                         <span id="pct-inter" class="font-bold" style="color: var(--text-main);">0%</span>
                     </div>
-                    <button id="reset-map-btn" class="mt-2 text-xs text-red-400 hover:text-red-300 w-full text-left" style="display:none;" onclick="event.stopPropagation(); filterMap('all')">[x] RESET VISTA</button>
+                    <button id="reset-map-btn" class="mt-2 text-xs text-red-400 hover:text-red-300 w-full text-left"
+                        style="display:none;" onclick="event.stopPropagation(); filterMap('all')">[x] RESET
+                        VISTA</button>
                 </div>
-                
-                <button class="absolute top-4 right-4 p-2 bg-black/20 border border-gray-500/30 hover:bg-cyan-500/20 hover:text-cyan-400 rounded text-white transition z-20" onclick="handleResetZoom()" aria-label="Reset Map Zoom">
+
+                <button
+                    class="absolute top-4 right-4 p-2 bg-black/20 border border-gray-500/30 hover:bg-cyan-500/20 hover:text-cyan-400 rounded text-white transition z-20"
+                    onclick="handleResetZoom()" aria-label="Reset Map Zoom">
                     <i data-lucide="minimize" class="w-5 h-5"></i>
                 </button>
 
-                <div id="map-stats-container" class="hidden absolute top-4 left-4 bg-black/80 p-2 border border-slate-700 rounded text-center z-10">
+                <div id="map-stats-container"
+                    class="hidden absolute top-4 left-4 bg-black/80 p-2 border border-slate-700 rounded text-center z-10">
                     <div class="text-2xl font-bold text-white" id="stat-count-projects">0</div>
                     <div class="text-[0.6rem] text-gray-400 font-mono">PROYECTOS VISIBLES</div>
                 </div>
@@ -321,20 +841,31 @@
                 <h2 class="section-title">02_ANALYTICS</h2>
             </div>
             <p class="section-desc">Análisis cuantitativo de la distribución del portafolio por tipología.</p>
-            
+
             <div class="tech-card p-6 mb-8">
                 <h3 class="font-tech text-xs text-gray-500 uppercase mb-4 tracking-widest">Tipología de Proyecto</h3>
                 <div id="typology-grid" class="flex flex-wrap gap-3"></div>
             </div>
         </section>
 
+        <section id="disciplinas" class="mb-24 scroll-mt-24">
+            <div class="section-header">
+                <i data-lucide="layers" class="w-6 h-6"></i>
+                <h2 class="section-title">03_DISCIPLINAS_MODELADAS</h2>
+            </div>
+            <p class="section-desc">Desglose porcentual por especialidad técnica modelada.</p>
+            <div class="tech-card p-6">
+                <div id="disciplinas-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+            </div>
+        </section>
+
         <section id="tech-value" class="mb-24 scroll-mt-24">
             <div class="section-header">
                 <i data-lucide="zap" class="w-6 h-6"></i>
-                <h2 class="section-title">03_TECH_VALUE</h2>
+                <h2 class="section-title">04_TECH_VALUE</h2>
             </div>
             <p class="section-desc">Soluciones BIM aplicadas a la gestión técnica y reducción de riesgos.</p>
-            
+
             <div class="tech-card p-6">
                 <div id="tech-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
             </div>
@@ -344,55 +875,90 @@
             <div class="section-header justify-between">
                 <div class="flex items-center gap-2">
                     <i data-lucide="folder-open" class="w-6 h-6"></i>
-                    <h2 class="section-title">04_PROJECT_DB</h2>
+                    <h2 class="section-title">05_PROJECT_DB</h2>
                 </div>
                 <div class="controls-bar relative">
                     <div class="flex items-center gap-2">
                         <i data-lucide="search" class="w-4 h-4" style="color:var(--text-muted)"></i>
-                        <input type="text" id="search-bar" class="search-input-tech" placeholder="Buscar ID, nombre..." onkeyup="runFilter('proyectos')">
+                        <input type="text" id="search-bar" class="search-input-tech" placeholder="Buscar ID, nombre..."
+                            onkeyup="runFilter('proyectos')">
                     </div>
-                    
+
                     <div class="h-4 w-px bg-gray-700 mx-2 hidden md:block opacity-30"></div>
 
                     <div class="flex items-center gap-2">
-                        <button id="btn-top5" class="btn-tech-outline px-3 py-1 rounded text-xs font-bold active" onclick="toggleTop5()">TOP 5</button>
-                        
+                        <button id="btn-top5" class="btn-tech-outline px-3 py-1 rounded text-xs font-bold active"
+                            onclick="toggleTop5()">TOP 5</button>
+
                         <div class="relative">
-                            <button id="btn-filter-toggle" class="btn-tech-outline px-2 py-1 rounded" onclick="toggleFilters('proyectos')">
+                            <button id="btn-filter-toggle" class="btn-tech-outline px-2 py-1 rounded"
+                                onclick="toggleFilters('proyectos')">
                                 <i data-lucide="filter" class="w-4 h-4"></i>
                             </button>
                             <div id="proyectos-filters" class="filter-popup hidden">
-                                <h4 class="font-tech text-xs text-cyan-400 mb-3 border-b border-gray-700 pb-2">FILTROS AVANZADOS</h4>
+                                <h4 class="font-tech text-xs text-cyan-400 mb-3 border-b border-gray-700 pb-2">FILTROS
+                                    AVANZADOS</h4>
                                 <div class="grid grid-cols-1 gap-3">
-                                    <div><label class="text-[0.65rem] font-mono block mb-1" style="color:var(--text-muted)">FASE</label><select id="proyectos-filter-fase" class="filter-select-tech" onchange="runFilter('proyectos')"><option value="all">TODAS</option></select></div>
-                                    <div><label class="text-[0.65rem] font-mono block mb-1" style="color:var(--text-muted)">TIPOLOGÍA</label><select id="proyectos-filter-type" class="filter-select-tech" onchange="runFilter('proyectos')"><option value="all">TODAS</option></select></div>
-                                    <div><label class="text-[0.65rem] font-mono block mb-1" style="color:var(--text-muted)">DISCIPLINA</label><select id="proyectos-filter-disc" class="filter-select-tech" onchange="runFilter('proyectos')"><option value="all">TODAS</option></select></div>
-                                    <div><label class="text-[0.65rem] font-mono block mb-1" style="color:var(--text-muted)">AÑO</label><select id="proyectos-filter-year" class="filter-select-tech" onchange="runFilter('proyectos')"><option value="all">TODOS</option></select></div>
-                                    <button class="w-full border border-red-500 text-red-500 text-xs py-1 mt-2 hover:bg-red-500 hover:text-white transition" onclick="clearFilters('proyectos')">LIMPIAR</button>
+                                    <div><label class="text-[0.65rem] font-mono block mb-1"
+                                            style="color:var(--text-muted)">FASE</label><select
+                                            id="proyectos-filter-fase" class="filter-select-tech"
+                                            onchange="runFilter('proyectos')">
+                                            <option value="all">TODAS</option>
+                                        </select></div>
+                                    <div><label class="text-[0.65rem] font-mono block mb-1"
+                                            style="color:var(--text-muted)">TIPOLOGÍA</label><select
+                                            id="proyectos-filter-type" class="filter-select-tech"
+                                            onchange="runFilter('proyectos')">
+                                            <option value="all">TODAS</option>
+                                        </select></div>
+                                    <div><label class="text-[0.65rem] font-mono block mb-1"
+                                            style="color:var(--text-muted)">DISCIPLINA</label><select
+                                            id="proyectos-filter-disc" class="filter-select-tech"
+                                            onchange="runFilter('proyectos')">
+                                            <option value="all">TODAS</option>
+                                        </select></div>
+                                    <div><label class="text-[0.65rem] font-mono block mb-1"
+                                            style="color:var(--text-muted)">AÑO</label><select
+                                            id="proyectos-filter-year" class="filter-select-tech"
+                                            onchange="runFilter('proyectos')">
+                                            <option value="all">TODOS</option>
+                                        </select></div>
+                                    <button
+                                        class="w-full border border-red-500 text-red-500 text-xs py-1 mt-2 hover:bg-red-500 hover:text-white transition"
+                                        onclick="clearFilters('proyectos')">LIMPIAR</button>
                                 </div>
                             </div>
                         </div>
 
-                        <select class="bg-transparent text-xs font-mono border-none outline-none cursor-pointer hover:text-cyan-400" style="color:var(--text-muted)" onchange="updateSort('proyectos', this.value)">
+                        <select
+                            class="bg-transparent text-xs font-mono border-none outline-none cursor-pointer hover:text-cyan-400"
+                            style="color:var(--text-muted)" onchange="updateSort('proyectos', this.value)">
                             <option value="default">ORDEN: RECIENTE</option>
                             <option value="year_asc">ORDEN: ANTIGUO</option>
                             <option value="name_asc">ORDEN: A-Z</option>
                         </select>
 
                         <div class="flex bg-black/10 rounded p-1 gap-1 view-toggle-wrapper border border-white/5">
-                            <button class="p-1 rounded hover:bg-white/10 text-gray-400 view-btn" onclick="setProjectView('proyectos', 'carousel')" title="Vista Ficha"><i data-lucide="rectangle-horizontal" class="w-3 h-3"></i></button>
-                            <button class="p-1 rounded hover:bg-white/10 text-gray-400 view-btn" onclick="setProjectView('proyectos', 'gallery')" title="Vista Galería"><i data-lucide="layout-grid" class="w-3 h-3"></i></button>
-                            <button class="p-1 rounded hover:bg-white/10 text-gray-400 view-btn active" onclick="setProjectView('proyectos', 'list')" title="Vista Lista"><i data-lucide="list" class="w-3 h-3"></i></button>
+                            <button class="p-1 rounded hover:bg-white/10 text-gray-400 view-btn"
+                                onclick="setProjectView('proyectos', 'carousel')" title="Vista Ficha"><i
+                                    data-lucide="rectangle-horizontal" class="w-3 h-3"></i></button>
+                            <button class="p-1 rounded hover:bg-white/10 text-gray-400 view-btn"
+                                onclick="setProjectView('proyectos', 'gallery')" title="Vista Galería"><i
+                                    data-lucide="layout-grid" class="w-3 h-3"></i></button>
+                            <button class="p-1 rounded hover:bg-white/10 text-gray-400 view-btn active"
+                                onclick="setProjectView('proyectos', 'list')" title="Vista Lista"><i data-lucide="list"
+                                    class="w-3 h-3"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="flex flex-col md:flex-row justify-between items-center mb-6 pl-3 border-l border-cyan-900">
-                <p class="section-desc-inline" style="font-size:0.85rem; color:var(--text-muted)">Base de datos completa con filtros dinámicos y fichas técnicas.</p>
+                <p class="section-desc-inline" style="font-size:0.85rem; color:var(--text-muted)">Base de datos completa
+                    con filtros dinámicos y fichas técnicas.</p>
                 <div id="status-bar-container"></div>
             </div>
-            
+
             <p id="project-section-desc" class="hidden"></p>
 
             <div id="list-view-wrapper" class="block w-full overflow-x-auto">
@@ -413,11 +979,16 @@
                     <div class="p-info-side" id="carousel-info-content"></div>
                     <div class="p-img-side" id="carousel-image-bg">
                         <div class="absolute inset-0 flex items-center justify-between px-4 z-20">
-                            <button class="p-2 bg-black/50 hover:bg-cyan-500 hover:text-black text-white rounded-full transition" onclick="navigateCarouselImage(-1)"><i data-lucide="chevron-left"></i></button>
-                            <button class="p-2 bg-black/50 hover:bg-cyan-500 hover:text-black text-white rounded-full transition" onclick="navigateCarouselImage(1)"><i data-lucide="chevron-right"></i></button>
+                            <button
+                                class="p-2 bg-black/50 hover:bg-cyan-500 hover:text-black text-white rounded-full transition"
+                                onclick="navigateCarouselImage(-1)"><i data-lucide="chevron-left"></i></button>
+                            <button
+                                class="p-2 bg-black/50 hover:bg-cyan-500 hover:text-black text-white rounded-full transition"
+                                onclick="navigateCarouselImage(1)"><i data-lucide="chevron-right"></i></button>
                         </div>
                         <div class="font-black text-6xl text-white/5 select-none" id="carousel-img-text">IMG</div>
-                        <div class="absolute bottom-4 right-4 bg-black/70 text-white text-xs px-2 py-1 rounded font-mono" id="carousel-img-count">1 / 3</div>
+                        <div class="absolute bottom-4 right-4 bg-black/70 text-white text-xs px-2 py-1 rounded font-mono"
+                            id="carousel-img-count">1 / 3</div>
                     </div>
                 </div>
             </div>
@@ -431,34 +1002,34 @@
         <section id="software" class="mb-24 scroll-mt-24">
             <div class="section-header">
                 <i data-lucide="cpu" class="w-6 h-6"></i>
-                <h2 class="section-title">05_STACK</h2>
+                <h2 class="section-title">06_STACK</h2>
             </div>
-            <p class="section-desc">Ecosistema digital. Integro <b>Gemini AI</b> como asistente de apoyo para mejorar el flujo de trabajo global.</p>
-            
+            <p class="section-desc">Ecosistema digital. Integro <b>Gemini AI</b> como asistente de apoyo para mejorar el
+                flujo de trabajo global.</p>
+
             <div id="software-list" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-            
+
             <div class="mt-12 text-center">
                 <p class="font-mono text-xs text-gray-500 mb-4">APRENDIZAJE CONTINUO // MASTER BIM + IA</p>
-                <button class="btn-tech-outline px-8 py-3 rounded-full border-gray-600 hover:border-cyan-400" style="color:var(--text-main)">
+                <button class="btn-tech-outline px-8 py-3 rounded-full border-gray-600 hover:border-cyan-400"
+                    style="color:var(--text-main)">
                     <i data-lucide="file-text" class="w-4 h-4 mr-2 inline"></i> VER PROGRAMA ACADÉMICO
                 </button>
             </div>
         </section>
 
-        <div id="discipline-grid" class="hidden"></div> 
-
     </main>
 
     <footer class="w-full text-center py-6 border-t border-gray-800 mt-12 mb-24">
         <p class="font-mono text-xs text-gray-500">
-            POWERED BY <span class="text-cyan-600 font-bold">GEMINI PRO</span> & <span class="text-cyan-600 font-bold">ANTIGRAVITY</span>
+            POWERED BY <span class="text-cyan-600 font-bold">GEMINI PRO</span> & <span
+                class="text-cyan-600 font-bold">ANTIGRAVITY</span>
         </p>
     </footer>
 
     <nav class="dock-nav">
         <a href="#analisis" class="dock-item" title="Geo Data"><i data-lucide="globe"></i> GEO</a>
         <a href="#tipologia" class="dock-item" title="Analytics"><i data-lucide="bar-chart-2"></i> DATA</a>
-        <a href="#tech-value" class="dock-item" title="Valor Técnico"><i data-lucide="zap"></i> TECH</a>
         <a href="#proyectos" class="dock-item" title="Proyectos"><i data-lucide="folder"></i> PROJ</a>
         <a href="#software" class="dock-item" title="Stack"><i data-lucide="cpu"></i> STACK</a>
         <div class="w-px h-6 bg-gray-700 mx-1"></div>
@@ -467,7 +1038,9 @@
     </nav>
 
     <div id="bim-assistant-container" class="fixed bottom-24 right-6 flex flex-col items-end z-50">
-        <div id="proactive-tooltip" class="mb-2 bg-slate-800 border border-cyan-500/50 text-white p-3 rounded-lg text-xs w-56 shadow-lg transform translate-y-4 opacity-0 transition-all duration-300 pointer-events-none" onclick="triggerAssistantSpecial()">
+        <div id="proactive-tooltip"
+            class="mb-2 bg-slate-800 border border-cyan-500/50 text-white p-3 rounded-lg text-xs w-56 shadow-lg transform translate-y-4 opacity-0 transition-all duration-300 pointer-events-none"
+            onclick="triggerAssistantSpecial()">
             <div class="flex items-start gap-2">
                 <span class="text-lg">🤖</span>
                 <div>
@@ -477,27 +1050,40 @@
             </div>
         </div>
 
-        <div id="chat-window" class="hidden mb-4 w-80 h-[500px] flex flex-col overflow-hidden transition-all duration-300" onclick="event.stopPropagation()">
+        <div id="chat-window"
+            class="hidden mb-4 w-80 h-[500px] flex flex-col overflow-hidden transition-all duration-300"
+            onclick="event.stopPropagation()">
             <div id="chat-header" class="flex justify-between items-center">
                 <div class="flex items-center gap-2">
                     <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
                     <span class="font-tech text-xs text-cyan-400 font-bold">AI_ASSISTANT_V1</span>
                 </div>
-                <button onclick="toggleChat()" class="text-gray-400 hover:text-cyan-400"><i data-lucide="x" class="w-4 h-4"></i></button>
+                <button onclick="toggleChat()" class="text-gray-400 hover:text-cyan-400"><i data-lucide="x"
+                        class="w-4 h-4"></i></button>
             </div>
-            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 text-sm font-mono scrollbar-thin scrollbar-thumb-gray-700"></div>
-            <div id="chat-options" class="p-2 grid grid-cols-1 gap-1 border-t border-dashed" style="border-color:var(--border-color)"></div>
+            <div id="chat-messages"
+                class="flex-1 p-4 overflow-y-auto space-y-3 text-sm font-mono scrollbar-thin scrollbar-thumb-gray-700">
+            </div>
+            <div id="chat-options" class="p-2 grid grid-cols-1 gap-1 border-t border-dashed"
+                style="border-color:var(--border-color)"></div>
             <div id="chat-footer" class="p-3">
                 <div class="flex gap-2">
-                    <input type="text" id="chat-input" class="flex-1 rounded px-2 py-1 text-xs outline-none focus:border-cyan-400 font-mono" placeholder="Escriba comando..." onkeypress="handleEnter(event)">
-                    <button id="chat-send-btn" class="bg-cyan-500 text-white p-1 rounded hover:bg-cyan-400" onclick="handleInput()"><i data-lucide="send" class="w-4 h-4"></i></button>
+                    <input type="text" id="chat-input"
+                        class="flex-1 rounded px-2 py-1 text-xs outline-none focus:border-cyan-400 font-mono"
+                        placeholder="Escriba comando..." onkeypress="handleEnter(event)">
+                    <button id="chat-send-btn" class="bg-cyan-500 text-white p-1 rounded hover:bg-cyan-400"
+                        onclick="handleInput()"><i data-lucide="send" class="w-4 h-4"></i></button>
                 </div>
                 <div class="flex justify-between mt-2 px-1">
-                    <button id="nav-back" class="text-gray-500 hover:text-cyan-400 disabled:opacity-30" onclick="goBack()"><i data-lucide="arrow-left" class="w-4 h-4"></i></button>
-                    <button onclick="resetChat()" class="text-gray-500 hover:text-cyan-400"><i data-lucide="rotate-ccw" class="w-4 h-4"></i></button>
+                    <button id="nav-back" class="text-gray-500 hover:text-cyan-400 disabled:opacity-30"
+                        onclick="goBack()"><i data-lucide="arrow-left" class="w-4 h-4"></i></button>
+                    <button onclick="resetChat()" class="text-gray-500 hover:text-cyan-400"><i data-lucide="rotate-ccw"
+                            class="w-4 h-4"></i></button>
                 </div>
             </div>
-            <div id="toast-notification" class="absolute bottom-20 left-1/2 transform -translate-x-1/2 bg-green-600 text-white text-xs py-1 px-3 rounded-full opacity-0 transition">Comando Copiado</div>
+            <div id="toast-notification"
+                class="absolute bottom-20 left-1/2 transform -translate-x-1/2 bg-green-600 text-white text-xs py-1 px-3 rounded-full opacity-0 transition">
+                Comando Copiado</div>
         </div>
 
         <button id="chat-launcher" onclick="toggleChat()" aria-label="Abrir Terminal">
@@ -505,32 +1091,45 @@
         </button>
     </div>
 
-    <div id="gallery-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center modal-bg opacity-0 transition-opacity duration-300">
-        <div class="modal-content relative w-[95%] max-w-6xl modal-box rounded-lg shadow-2xl flex flex-col max-h-[90vh] overflow-hidden transform scale-95 transition-transform duration-300">
-            <div class="p-4 border-b flex justify-between items-center bg-black/20" style="border-color:var(--border-color)">
+    <div id="gallery-modal"
+        class="fixed inset-0 z-[100] hidden flex items-center justify-center modal-bg opacity-0 transition-opacity duration-300">
+        <div
+            class="modal-content relative w-[95%] max-w-6xl modal-box rounded-lg shadow-2xl flex flex-col max-h-[90vh] overflow-hidden transform scale-95 transition-transform duration-300">
+            <div class="p-4 border-b flex justify-between items-center bg-black/20"
+                style="border-color:var(--border-color)">
                 <div id="modal-header" class="flex items-center gap-4 overflow-hidden">
                     <div id="modal-title-container" class="flex items-baseline gap-2"></div>
                 </div>
                 <div class="flex gap-2">
-                    <button class="p-2 hover:bg-white/10 rounded" style="color:var(--text-main)" onclick="navigateProject(-1)"><i data-lucide="chevron-left"></i></button>
-                    <button class="p-2 hover:bg-white/10 rounded" style="color:var(--text-main)" onclick="navigateProject(1)"><i data-lucide="chevron-right"></i></button>
-                    <button class="p-2 hover:bg-red-500/20 text-red-400 hover:text-red-200 rounded" onclick="closeGallery()"><i data-lucide="x"></i></button>
+                    <button class="p-2 hover:bg-white/10 rounded" style="color:var(--text-main)"
+                        onclick="navigateProject(-1)"><i data-lucide="chevron-left"></i></button>
+                    <button class="p-2 hover:bg-white/10 rounded" style="color:var(--text-main)"
+                        onclick="navigateProject(1)"><i data-lucide="chevron-right"></i></button>
+                    <button class="p-2 hover:bg-red-500/20 text-red-400 hover:text-red-200 rounded"
+                        onclick="closeGallery()"><i data-lucide="x"></i></button>
                 </div>
             </div>
             <div class="modal-image-container relative flex-1 bg-black flex items-center justify-center min-h-[400px]">
-                <div id="modal-img-bg" class="absolute inset-0 bg-contain bg-center bg-no-repeat transition-all duration-300"></div>
-                <div class="img-counter absolute bottom-4 right-4 bg-black/60 text-white text-xs px-2 py-1 rounded font-mono" id="modal-counter">1 / 5</div>
-                <button class="img-nav-btn absolute left-4 p-3 bg-black/50 hover:bg-cyan-500 hover:text-black rounded-full text-white transition z-10" onclick="navigateImage(-1)"><i data-lucide="chevron-left"></i></button>
-                <button class="img-nav-btn absolute right-4 p-3 bg-black/50 hover:bg-cyan-500 hover:text-black rounded-full text-white transition z-10" onclick="navigateImage(1)"><i data-lucide="chevron-right"></i></button>
+                <div id="modal-media-content" class="absolute inset-0 flex items-center justify-center w-full h-full">
+                </div>
+                <div class="img-counter absolute bottom-4 right-4 bg-black/60 text-white text-xs px-2 py-1 rounded font-mono"
+                    id="modal-counter">1 / 5</div>
+                <button
+                    class="img-nav-btn absolute left-4 p-3 bg-black/50 hover:bg-cyan-500 hover:text-black rounded-full text-white transition z-10"
+                    onclick="navigateImage(-1)"><i data-lucide="chevron-left"></i></button>
+                <button
+                    class="img-nav-btn absolute right-4 p-3 bg-black/50 hover:bg-cyan-500 hover:text-black rounded-full text-white transition z-10"
+                    onclick="navigateImage(1)"><i data-lucide="chevron-right"></i></button>
             </div>
         </div>
     </div>
-    
-    <div id="map-tooltip" class="fixed z-[9999] opacity-0 invisible transition-opacity duration-200 text-xs pointer-events-none"></div>
+
+    <div id="map-tooltip"
+        class="fixed z-[9999] opacity-0 invisible transition-opacity duration-200 text-xs pointer-events-none"></div>
 
     <script>
         const stdSoftware = "AutoCAD, BIM 360, Monday.com, Navisworks, Revit, Twinmotion";
-        
+
         // --- BASE DE DATOS FINAL (RE-NUMERADA CRONOLÓGICAMENTE) ---
         const projectsDB = {
             // 2014
@@ -550,7 +1149,7 @@
             P10: { name: "Central de Mezclas", year: "2022", fase: "Oficina", tipologia: "SALUD", rol: "Modelador BIM SR", desafio: "Extracción planos...", ubicacion: "San Quintín, B.C.", comunicacion: "BIM Manager, Cliente", disciplinas: "Arquitectura • General", software: stdSoftware, coords: [-115.95, 30.43] },
             P11: { name: "Central de Mezclas", year: "2022", fase: "Oficina", tipologia: "SALUD", rol: "Modelador BIM SR", desafio: "Documentación...", ubicacion: "Tampico, Tamps.", comunicacion: "BIM Manager, Cliente", disciplinas: "Arquitectura • Estructura • MEP", software: stdSoftware, coords: [-97.85, 22.25] },
             P12: { name: "Central de Mezclas", year: "2022", fase: "Oficina", tipologia: "SALUD", rol: "Modelador BIM SR", desafio: "Modelado...", ubicacion: "Tijuana, B.C.", comunicacion: "BIM Manager, Cliente", disciplinas: "Arquitectura • Estructura • MEP", software: stdSoftware, coords: [-117.03, 32.51] },
-            // Módulos COVID (2022) - Reordenados P13-P38
+            // Módulos COVID (2022)
             P13: { name: "Módulo COVID", year: "2022", fase: "Oficina", tipologia: "SALUD", rol: "Modelador BIM SR", desafio: "Diseño acelerado...", ubicacion: "Agua Prieta, Son.", comunicacion: "Modelador", disciplinas: "MEP", software: stdSoftware, coords: [-109.55, 31.33] },
             P14: { name: "Módulo COVID", year: "2022", fase: "Oficina", tipologia: "SALUD", rol: "Modelador BIM SR", desafio: "Diseño acelerado...", ubicacion: "Agua Prieta, Son.", comunicacion: "Modelador", disciplinas: "MEP", software: stdSoftware, coords: [-109.56, 31.34] },
             P15: { name: "Módulo COVID", year: "2022", fase: "Oficina", tipologia: "SALUD", rol: "Modelador BIM SR", desafio: "Diseño acelerado...", ubicacion: "Cd. Juárez, Chih.", comunicacion: "Modelador", disciplinas: "MEP", software: stdSoftware, coords: [-106.42, 31.69] },
@@ -604,7 +1203,7 @@
             P60: { name: "Akasia", year: "2025", fase: "Oficina", tipologia: "EDIFICACIÓN", rol: "Modelador BIM SR", desafio: "Tablas...", ubicacion: "Monterrey, N.L.", comunicacion: "BIM Manager, Cliente", disciplinas: "MEP", software: stdSoftware, coords: [-100.31, 25.68] },
             P61: { name: "Aulas X", year: "2025", fase: "Oficina", tipologia: "EDUCACIÓN", rol: "Modelador BIM SR", desafio: "Modelado estructural.", ubicacion: "Monterrey, N.L.", comunicacion: "BIM Manager, Cliente", disciplinas: "Estructura", software: stdSoftware, coords: [-100.31, 25.68] },
             P62: { name: "Belgica", year: "2025", fase: "Oficina", tipologia: "EDIFICACIÓN", rol: "Modelador BIM SR", desafio: "Coordinación...", ubicacion: "Monterrey, N.L.", comunicacion: "BIM Manager, Cliente", disciplinas: "MEP", software: stdSoftware, coords: [-100.31, 25.68] },
-            P63: { name: "Barrio Santa Lucía", year: "2025", fase: "Obra", tipologia: "VIVIENDA", rol: "Modelador BIM SR", desafio: "Coordinación de acabados.", ubicacion: "Monterrey, N.L.", comunicacion: "BIM Manager, Cliente", disciplinas: "Arquitectura", software: stdSoftware, coords: [-100.31, 25.68], isTop: true },
+            P63: { name: "Barrio Santa Lucía", year: "2025", fase: "Obra", tipologia: "VIVIENDA", rol: "Modelador BIM SR", desafio: "Coordinación de acabados.", ubicacion: "Monterrey, N.L.", comunicacion: "BIM Manager, Cliente", disciplinas: "Arquitectura", software: stdSoftware, coords: [-100.31, 25.68], isTop: true, format: "png" },
             P64: { name: "Corporativo CEMEX", year: "2025", fase: "Obra", tipologia: "OTROS", rol: "Modelador BIM SR", desafio: "Optimización...", ubicacion: "CDMX", comunicacion: "BIM Manager, Jefe de Control", disciplinas: "Arquitectura", software: stdSoftware, coords: [-99.13, 19.43] },
             P65: { name: "Grazia", year: "2025", fase: "Oficina", tipologia: "EDIFICACIÓN", rol: "Modelador BIM SR", desafio: "Modelado...", ubicacion: "Monterrey, N.L.", comunicacion: "BIM Manager, Cliente", disciplinas: "MEP", software: stdSoftware, coords: [-100.31, 25.68] },
             P66: { name: "Makmul", year: "2025", fase: "Oficina", tipologia: "VIVIENDA", rol: "Modelador BIM SR", desafio: "Solución...", ubicacion: "Cancún, Q.Roo", comunicacion: "BIM Manager, Cliente", disciplinas: "Arquitectura", software: stdSoftware, coords: [-86.85, 21.16] },
@@ -623,35 +1222,31 @@
         let currentCarouselIdx = 0;
         let currentImageIdx = 1;
         let tooltipElement, hideTimeout, svg, g;
-        
-        // --- CAMBIO DE DEFAULT STATE ---
-        let currentViewMode = 'list'; 
-        let isTop5Active = true; 
-        let chatHistory = []; 
+
+        let currentViewMode = 'list';
+        let isTop5Active = true;
+        let chatHistory = [];
 
         document.addEventListener('DOMContentLoaded', () => {
             initData();
             renderAll();
             populateFilterOptions();
             lucide.createIcons();
-            
+
             tooltipElement = document.getElementById('map-tooltip');
-            
-            // --- INICIALIZACIÓN POR DEFECTO (TOP 5 + LISTA) ---
             setProjectView('proyectos', 'list');
             toggleTop5(); // Activa el filtro Top 5 al inicio
-            
-            // Listeners globales
+
             document.addEventListener('click', (e) => {
                 const filterPanel = document.getElementById('proyectos-filters');
                 const filterBtn = document.querySelector('button[onclick="toggleFilters(\'proyectos\')"]');
                 const filterToggleBtn = document.getElementById('btn-filter-toggle');
-                
+
                 if (filterPanel && !filterPanel.classList.contains('hidden')) {
                     if (!filterPanel.contains(e.target) && !filterBtn.contains(e.target) && !filterToggleBtn.contains(e.target)) {
                         filterPanel.classList.add('hidden');
-                        if(currentFilters.type === 'all' && currentFilters.fase === 'all' && currentFilters.disc === 'all' && currentFilters.year === 'all') {
-                             filterToggleBtn.classList.remove('active');
+                        if (currentFilters.type === 'all' && currentFilters.fase === 'all' && currentFilters.disc === 'all' && currentFilters.year === 'all') {
+                            filterToggleBtn.classList.remove('active');
                         }
                     }
                 }
@@ -662,20 +1257,20 @@
             });
 
             window.addEventListener('resize', () => {
-                 const container = document.getElementById('d3-map-svg-container');
-                 if(container && d3.select("#map-svg").node()) {
-                     const w = container.clientWidth;
-                     d3.select("#map-svg").attr("width", w);
-                 }
+                const container = document.getElementById('d3-map-svg-container');
+                if (container && d3.select("#map-svg").node()) {
+                    const w = container.clientWidth;
+                    d3.select("#map-svg").attr("width", w);
+                }
             });
-            
+
             animateValue("hero-stat-projects", 0, sortedProjects.length, 1500);
             const uniqueCities = new Set(sortedProjects.map(p => p.ubicacion.split(',')[0].trim())).size;
             animateValue("hero-stat-cities", 0, uniqueCities, 1500);
 
             setTimeout(() => {
                 const tooltip = document.getElementById('proactive-tooltip');
-                if(tooltip) {
+                if (tooltip) {
                     tooltip.classList.remove('opacity-0', 'translate-y-4');
                     tooltip.classList.add('pointer-events-auto');
                     setTimeout(() => {
@@ -690,18 +1285,17 @@
             document.body.classList.toggle('light-mode');
             const isLight = document.body.classList.contains('light-mode');
             const icon = document.querySelector('.dock-item[onclick="toggleTheme()"] i');
-            
-            if(isLight) {
-                if(icon) { icon.setAttribute('data-lucide', 'moon'); lucide.createIcons(); }
+            if (isLight) {
+                if (icon) { icon.setAttribute('data-lucide', 'moon'); lucide.createIcons(); }
             } else {
-                if(icon) { icon.setAttribute('data-lucide', 'sun'); lucide.createIcons(); }
+                if (icon) { icon.setAttribute('data-lucide', 'sun'); lucide.createIcons(); }
             }
         }
 
         /* ================= FUNCIONES DE RENDERIZADO ================= */
 
         function initData() {
-            sortedProjects = Object.entries(projectsDB).map(([id, data]) => ({id, ...data}));
+            sortedProjects = Object.entries(projectsDB).map(([id, data]) => ({ id, ...data }));
             const total = sortedProjects.length;
             const isInt = (p) => p.ubicacion.includes('USA') || p.ubicacion.includes('Jamaica');
             const countInter = sortedProjects.filter(p => isInt(p)).length;
@@ -715,17 +1309,18 @@
 
         function renderAll() {
             renderProjects('proyectos', sortedProjects);
-            renderSoftware(); 
-            generateTypologyStats(); 
-            renderTech(); 
+            renderSoftware();
+            generateTypologyStats();
+            renderDisciplinesStats();
+            renderTech();
             renderD3Map();
         }
 
         function renderProjects(section, list) {
             window.currentFilteredList = list;
-            if(currentViewMode === 'list') {
+            if (currentViewMode === 'list') {
                 renderListView(list);
-            } else if(currentViewMode === 'gallery') {
+            } else if (currentViewMode === 'gallery') {
                 renderGalleryView(list);
             } else {
                 renderCarouselView(list);
@@ -737,16 +1332,16 @@
             const listWrapper = document.getElementById('list-view-wrapper');
             const carouselWrapper = document.getElementById('carousel-view-wrapper');
             const galleryWrapper = document.getElementById('gallery-view-wrapper');
-            
+
             listWrapper.classList.remove('hidden');
             carouselWrapper.style.display = 'none';
             galleryWrapper.classList.add('hidden');
 
-            if(list.length === 0) {
+            if (list.length === 0) {
                 container.innerHTML = `<div class="p-4 text-center text-gray-500 font-mono">NO DATA FOUND</div>`;
                 return;
             }
-            
+
             container.innerHTML = list.map(p => {
                 const discTextList = p.disciplinas.includes('•') ? p.disciplinas.replace(/•/g, ', ') : p.disciplinas;
                 return `
@@ -764,37 +1359,56 @@
             }).join('');
         }
 
-        function renderGalleryView(list) {
-            const listWrapper = document.getElementById('list-view-wrapper');
-            const carouselWrapper = document.getElementById('carousel-view-wrapper');
-            const galleryWrapper = document.getElementById('gallery-view-wrapper');
-            const container = document.getElementById('gallery-grid-container');
-            
-            listWrapper.classList.add('hidden');
-            carouselWrapper.style.display = 'none';
-            galleryWrapper.classList.remove('hidden');
+        function getMediaContent(p, idx) {
+            const ext = p.format || 'jpg';
+            const path = `img/${p.id} ${p.name}/${idx}.${ext}`;
 
-            if(list.length === 0) {
-                container.innerHTML = `<div class="col-span-full p-4 text-center text-gray-500 font-mono">NO DATA FOUND</div>`;
-                return;
-            }
-
-            container.innerHTML = list.map((p, idx) => {
-                const rutaImagen = `img/${p.id} ${p.name}/1.jpg`;
+            if (['mp4', 'avi'].includes(ext)) {
                 return `
-                <div class="gallery-card group bg-gray-800 relative" 
-                     style="background-image: url('${rutaImagen}'); background-size: cover; background-position: center;"
-                     onclick="openGallery('${p.id}')">
+                <div class="gallery-card group bg-gray-800 relative" onclick="openGallery('${p.id}')">
+                    <video src="${path}" class="absolute inset-0 w-full h-full object-cover" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>
                     <div class="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
-                        <span class="text-white font-black text-xs tracking-[0.2em] select-none">PRÓXIMAMENTE</span>
+                        <i data-lucide="play-circle" class="w-12 h-12 text-white/50"></i>
                     </div>
-                    <div class="gallery-overlay">
+                    <div class="gallery-overlay z-10">
                         <span class="gallery-id">${p.id}</span>
                         <h3 class="gallery-title">${p.name}</h3>
                         <span class="gallery-loc"><i data-lucide="map-pin" class="w-3 h-3"></i> ${p.ubicacion}</span>
                     </div>
                 </div>`;
-            }).join('');
+            } else {
+                return `
+                <div class="gallery-card group bg-gray-800 relative" 
+                     style="background-image: url('${path}'); background-size: cover; background-position: center;"
+                     onclick="openGallery('${p.id}')">
+                    <div class="absolute inset-0 flex items-center justify-center bg-gray-900/50 pointer-events-none z-0">
+                        <span class="text-white font-black text-xs tracking-[0.2em] select-none opacity-20">PRÓXIMAMENTE</span>
+                    </div>
+                    <div class="gallery-overlay z-10">
+                        <span class="gallery-id">${p.id}</span>
+                        <h3 class="gallery-title">${p.name}</h3>
+                        <span class="gallery-loc"><i data-lucide="map-pin" class="w-3 h-3"></i> ${p.ubicacion}</span>
+                    </div>
+                </div>`;
+            }
+        }
+
+        function renderGalleryView(list) {
+            const listWrapper = document.getElementById('list-view-wrapper');
+            const carouselWrapper = document.getElementById('carousel-view-wrapper');
+            const galleryWrapper = document.getElementById('gallery-view-wrapper');
+            const container = document.getElementById('gallery-grid-container');
+
+            listWrapper.classList.add('hidden');
+            carouselWrapper.style.display = 'none';
+            galleryWrapper.classList.remove('hidden');
+
+            if (list.length === 0) {
+                container.innerHTML = `<div class="col-span-full p-4 text-center text-gray-500 font-mono">NO DATA FOUND</div>`;
+                return;
+            }
+
+            container.innerHTML = list.map((p) => getMediaContent(p, 1)).join('');
             lucide.createIcons();
         }
 
@@ -803,18 +1417,18 @@
             const listWrapper = document.getElementById('list-view-wrapper');
             const carouselWrapper = document.getElementById('carousel-view-wrapper');
             const galleryWrapper = document.getElementById('gallery-view-wrapper');
-            
+
             listWrapper.classList.add('hidden');
             galleryWrapper.classList.add('hidden');
             carouselWrapper.style.display = 'block';
-            carouselWrapper.classList.remove('hidden'); 
+            carouselWrapper.classList.remove('hidden');
 
-            if(list.length === 0) {
+            if (list.length === 0) {
                 container.innerHTML = "SYSTEM ERROR: NO DATA";
                 return;
             }
-            if(currentCarouselIdx >= list.length) currentCarouselIdx = 0;
-            if(currentCarouselIdx < 0) currentCarouselIdx = list.length - 1;
+            if (currentCarouselIdx >= list.length) currentCarouselIdx = 0;
+            if (currentCarouselIdx < 0) currentCarouselIdx = list.length - 1;
 
             currentImageIdx = 1;
             updateCarouselImageState();
@@ -862,14 +1476,14 @@
                 msg += "FILTRO ACTIVO: TOP 5 PROYECTOS DESTACADOS";
             } else {
                 const filters = [];
-                if(currentFilters.fase !== 'all') filters.push(`FASE: ${currentFilters.fase}`);
-                if(currentFilters.type !== 'all') filters.push(`TIPO: ${currentFilters.type}`);
-                if(currentFilters.disc !== 'all') filters.push(`DISC: ${currentFilters.disc}`);
-                if(currentFilters.year !== 'all') filters.push(`AÑO: ${currentFilters.year}`);
-                if(filters.length > 0) msg += "FILTRO: " + filters.join(" + ");
+                if (currentFilters.fase !== 'all') filters.push(`FASE: ${currentFilters.fase}`);
+                if (currentFilters.type !== 'all') filters.push(`TIPO: ${currentFilters.type}`);
+                if (currentFilters.disc !== 'all') filters.push(`DISC: ${currentFilters.disc}`);
+                if (currentFilters.year !== 'all') filters.push(`AÑO: ${currentFilters.year}`);
+                if (filters.length > 0) msg += "FILTRO: " + filters.join(" + ");
                 else msg += "BASE DE DATOS ONLINE";
             }
-            const viewNames = {list: "LISTA", carousel: "FICHA", gallery: "GALERÍA"};
+            const viewNames = { list: "LISTA", carousel: "FICHA", gallery: "GALERÍA" };
             msg += ` | VISTA: ${viewNames[currentViewMode]}`;
             bar.innerText = msg;
         }
@@ -878,7 +1492,7 @@
             currentViewMode = mode;
             document.querySelectorAll('.view-toggle-wrapper .view-btn').forEach(b => b.classList.remove('active', 'text-cyan-400'));
             const activeBtn = document.querySelector(`.view-toggle-wrapper button[onclick*="${mode}"]`);
-            if(activeBtn) { activeBtn.classList.add('active', 'text-cyan-400'); }
+            if (activeBtn) { activeBtn.classList.add('active', 'text-cyan-400'); }
             runFilter('proyectos');
         };
 
@@ -893,8 +1507,8 @@
             const btn = document.getElementById('btn-top5');
             if (!isTop5Active) {
                 isTop5Active = true;
-                btn.classList.add('active'); 
-                const topIds = ['P63', 'P44', 'P61', 'P15', 'P49']; 
+                btn.classList.add('active');
+                const topIds = ['P63', 'P44', 'P61', 'P15', 'P49'];
                 const filtered = sortedProjects.filter(p => topIds.includes(p.id));
                 document.getElementById('search-bar').value = '';
                 currentCarouselIdx = 0;
@@ -919,17 +1533,17 @@
             const yearVal = document.getElementById(`${section}-filter-year`).value;
             const faseVal = document.getElementById(`${section}-filter-fase`).value;
             const searchTerm = document.getElementById('search-bar').value.toLowerCase();
-            
+
             const filterBtn = document.getElementById('btn-filter-toggle');
-            if(typeVal !== 'all' || discVal !== 'all' || yearVal !== 'all' || faseVal !== 'all') {
+            if (typeVal !== 'all' || discVal !== 'all' || yearVal !== 'all' || faseVal !== 'all') {
                 filterBtn.classList.add('active');
             } else {
                 const panel = document.getElementById(`${section}-filters`);
-                if(panel.classList.contains('hidden')) {
+                if (panel.classList.contains('hidden')) {
                     filterBtn.classList.remove('active');
                 }
             }
-            
+
             currentFilters = { type: typeVal, disc: discVal, year: yearVal, fase: faseVal };
 
             let filtered = sortedProjects.filter(p => {
@@ -937,14 +1551,14 @@
                 const matchDisc = discVal === 'all' || p.disciplinas.includes(discVal);
                 const matchYear = yearVal === 'all' || p.year.includes(yearVal);
                 const matchFase = faseVal === 'all' || p.fase === faseVal;
-                const matchSearch = searchTerm === '' || 
-                                    p.name.toLowerCase().includes(searchTerm) ||
-                                    p.ubicacion.toLowerCase().includes(searchTerm) ||
-                                    p.disciplinas.toLowerCase().includes(searchTerm) ||
-                                    p.tipologia.toLowerCase().includes(searchTerm);
+                const matchSearch = searchTerm === '' ||
+                    p.name.toLowerCase().includes(searchTerm) ||
+                    p.ubicacion.toLowerCase().includes(searchTerm) ||
+                    p.disciplinas.toLowerCase().includes(searchTerm) ||
+                    p.tipologia.toLowerCase().includes(searchTerm);
                 return matchType && matchDisc && matchYear && matchFase && matchSearch;
             });
-            currentCarouselIdx = 0; 
+            currentCarouselIdx = 0;
             renderProjects(section, filtered);
             updateStatusBar();
         }
@@ -959,9 +1573,9 @@
         }
 
         function updateSort(sec, val) {
-            if (val === 'year_asc') sortedProjects.sort((a,b) => parseInt(a.year) - parseInt(b.year));
-            else if (val === 'name_asc') sortedProjects.sort((a,b) => a.name.localeCompare(b.name));
-            else sortedProjects.sort((a,b) => parseInt(a.staticId) - parseInt(b.staticId)); 
+            if (val === 'year_asc') sortedProjects.sort((a, b) => parseInt(a.year) - parseInt(b.year));
+            else if (val === 'name_asc') sortedProjects.sort((a, b) => a.name.localeCompare(b.name));
+            else sortedProjects.sort((a, b) => parseInt(a.staticId) - parseInt(b.staticId));
             runFilter(sec);
         }
 
@@ -970,8 +1584,8 @@
 
         window.navigateCarouselImage = (dir) => {
             currentImageIdx += dir;
-            if(currentImageIdx > 3) currentImageIdx = 1; 
-            if(currentImageIdx < 1) currentImageIdx = 3;
+            if (currentImageIdx > 3) currentImageIdx = 1;
+            if (currentImageIdx < 1) currentImageIdx = 3;
             updateCarouselImageState();
         };
 
@@ -980,21 +1594,37 @@
             const countText = document.getElementById('carousel-img-count');
             const bg = document.getElementById('carousel-image-bg');
             const p = window.currentFilteredList[currentCarouselIdx];
-            
-            const ruta = `img/${p.id} ${p.name}/${currentImageIdx}.jpg`;
+
+            const ext = p.format || 'jpg';
+            const ruta = `img/${p.id} ${p.name}/${currentImageIdx}.${ext}`;
+
             imgText.innerText = `IMG_0${currentImageIdx}`;
             countText.innerText = `${currentImageIdx} / 3`;
             const opacity = 0.5 + (currentImageIdx * 0.1);
-            bg.style.background = `linear-gradient(45deg, #0f172a, rgba(34, 211, 238, ${opacity * 0.1})), url('${ruta}') center/cover no-repeat`;
+
+            if (['mp4', 'avi'].includes(ext)) {
+                bg.innerHTML = `<video src="${ruta}" autoplay muted loop class="absolute inset-0 w-full h-full object-cover"></video>`;
+                bg.style.backgroundImage = 'none';
+            } else {
+                bg.innerHTML = `<div class="absolute inset-0 flex items-center justify-between px-4 z-20">
+                            <button class="p-2 bg-black/50 hover:bg-cyan-500 hover:text-black text-white rounded-full transition" onclick="navigateCarouselImage(-1)"><i data-lucide="chevron-left"></i></button>
+                            <button class="p-2 bg-black/50 hover:bg-cyan-500 hover:text-black text-white rounded-full transition" onclick="navigateCarouselImage(1)"><i data-lucide="chevron-right"></i></button>
+                        </div>
+                        <div class="font-black text-6xl text-white/5 select-none" id="carousel-img-text">IMG_0${currentImageIdx}</div>
+                        <div class="absolute bottom-4 right-4 bg-black/70 text-white text-xs px-2 py-1 rounded font-mono" id="carousel-img-count">${currentImageIdx} / 3</div>`;
+                bg.style.background = `linear-gradient(45deg, #0f172a, rgba(34, 211, 238, ${opacity * 0.1})), url('${ruta}') center/cover no-repeat`;
+            }
         }
 
         function openGallery(pid) {
             const idx = sortedProjects.findIndex(p => p.id === pid);
-            if(idx === -1) return;
-            currentIdx = idx; updateModal();
+            if (idx === -1) return;
+            currentIdx = idx;
+            currentImageIdx = 1;
+            updateModal();
             const modal = document.getElementById('gallery-modal');
             modal.classList.remove('hidden');
-            modal.classList.add('flex'); // Centrado corregido
+            modal.classList.add('flex');
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
                 modal.querySelector('.modal-content').classList.remove('scale-95');
@@ -1005,16 +1635,27 @@
 
         function updateModal() {
             const p = sortedProjects[currentIdx];
-            const ruta = `img/${p.id} ${p.name}/${currentImageIdx}.jpg`;
+            const ext = p.format || 'jpg';
+            const ruta = `img/${p.id} ${p.name}/${currentImageIdx}.${ext}`;
+            const container = document.getElementById('modal-media-content');
+
             document.getElementById('modal-title-container').innerHTML = `
                 <span class="font-mono text-cyan-400 font-bold">${p.id}</span>
                 <span class="text-xl font-bold uppercase" style="color:var(--text-main)">${p.name}</span>
             `;
-            document.getElementById('modal-img-bg').style.backgroundImage = `url('${ruta}')`;
+
+            if (['mp4', 'avi'].includes(ext)) {
+                container.innerHTML = `<video src="${ruta}" controls autoplay class="w-full h-full object-contain"></video>`;
+                document.getElementById('modal-img-bg').style.backgroundImage = 'none';
+            } else {
+                container.innerHTML = '';
+                document.getElementById('modal-img-bg').style.backgroundImage = `url('${ruta}')`;
+            }
+
             document.getElementById('modal-counter').innerText = `${currentImageIdx} / 3`;
         }
 
-        function closeGallery() { 
+        function closeGallery() {
             const modal = document.getElementById('gallery-modal');
             modal.classList.add('opacity-0');
             modal.querySelector('.modal-content').classList.remove('scale-100');
@@ -1022,34 +1663,37 @@
             setTimeout(() => {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
-                document.body.style.overflow = ''; 
+                document.body.style.overflow = '';
+                // Stop any video
+                const v = document.querySelector('#modal-media-content video');
+                if (v) v.pause();
             }, 300);
         }
 
         function navigateProject(dir) { currentIdx += dir; if (currentIdx < 0) currentIdx = sortedProjects.length - 1; if (currentIdx >= sortedProjects.length) currentIdx = 0; currentImageIdx = 1; updateModal(); }
-        function navigateImage(dir) { 
-             currentImageIdx += dir; 
-             if(currentImageIdx > 3) currentImageIdx = 1; 
-             if(currentImageIdx < 1) currentImageIdx = 3; 
-             updateModal(); 
+        function navigateImage(dir) {
+            currentImageIdx += dir;
+            if (currentImageIdx > 3) currentImageIdx = 1;
+            if (currentImageIdx < 1) currentImageIdx = 3;
+            updateModal();
         }
-        
-        window.scrollToCard = (id) => { 
-            if(currentViewMode !== 'carousel') {
-               setProjectView('proyectos', 'carousel');
+
+        window.scrollToCard = (id) => {
+            if (currentViewMode !== 'carousel') {
+                setProjectView('proyectos', 'carousel');
             }
             const idx = window.currentFilteredList.findIndex(p => p.id === id);
-            if(idx !== -1) {
+            if (idx !== -1) {
                 currentCarouselIdx = idx;
                 renderCarouselView(window.currentFilteredList);
-                document.getElementById('proyectos').scrollIntoView({behavior:'smooth'});
+                document.getElementById('proyectos').scrollIntoView({ behavior: 'smooth' });
             }
         };
 
         function toggleChat() {
             const chat = document.getElementById('chat-window');
             chat.classList.toggle('hidden');
-            if(!chat.classList.contains('hidden') && document.getElementById('chat-messages').innerHTML === '') {
+            if (!chat.classList.contains('hidden') && document.getElementById('chat-messages').innerHTML === '') {
                 initChat();
             }
         }
@@ -1073,7 +1717,7 @@
 
         function renderChatOptions(options) {
             const div = document.getElementById('chat-options');
-            div.innerHTML = options.map(opt => 
+            div.innerHTML = options.map(opt =>
                 `<button class="text-left text-xs font-mono text-cyan-400 hover:bg-cyan-400/10 p-1 border border-transparent hover:border-cyan-400/30 rounded transition" onclick="handleChatOption('${opt}')">> ${opt}</button>`
             ).join('');
         }
@@ -1084,53 +1728,53 @@
             div.scrollTop = div.scrollHeight;
             chatHistory.push(document.getElementById('chat-options').innerHTML);
 
-            if(opt.includes('Top 5')) {
-                addBotMessage("Recuperando registros destacados:\n1. Central de Mezclas\n2. Hospital GZ\n3. Naomi\n4. Santa Lucía\n5. Tren Ligero");
+            if (opt.includes('Top 5')) {
+                addBotMessage("Recuperando registros destacados:\n1. Barrio Santa Lucía\n2. Aldaba\n3. Aulas X\n4. Módulo COVID");
                 renderChatOptions(['Habilidades', 'Volver']);
             } else if (opt.includes('MÁSTER')) {
                 addBotMessage("El Máster en BIM + IA se enfoca en automatización (Python/Dynamo) y optimización de procesos AECO.");
                 renderChatOptions(['Volver']);
             } else {
-                 addBotMessage("Comando recibido. ¿Desea más información?");
-                 renderChatOptions(['Ver Top 5', 'Contacto', 'Volver']);
+                addBotMessage("Comando recibido. ¿Desea más información?");
+                renderChatOptions(['Ver Top 5', 'Contacto', 'Volver']);
             }
         }
 
         function handleInput() {
             const input = document.getElementById('chat-input');
             const text = input.value.trim();
-            if(!text) return;
+            if (!text) return;
             const div = document.getElementById('chat-messages');
             div.innerHTML += `<div class="user-msg p-2 mb-2 text-xs font-mono">${text}</div>`;
             input.value = '';
             div.scrollTop = div.scrollHeight;
             addBotMessage("Procesando consulta en lenguaje natural... (Simulación: Respuesta genérica activada).");
         }
-        function handleEnter(e) { if(e.key === 'Enter') handleInput(); }
-        function resetChat() { document.getElementById('chat-messages').innerHTML=''; initChat(); }
-        function goBack() { 
-            if(chatHistory.length > 0) {
+        function handleEnter(e) { if (e.key === 'Enter') handleInput(); }
+        function resetChat() { document.getElementById('chat-messages').innerHTML = ''; initChat(); }
+        function goBack() {
+            if (chatHistory.length > 0) {
                 document.getElementById('chat-options').innerHTML = chatHistory.pop();
             }
         }
         function triggerAssistantSpecial() {
-             const chat = document.getElementById('chat-window');
-             if(chat.classList.contains('hidden')) toggleChat();
-             addBotMessage("¡Alerta de Sistema! La integración de IA permite reducir tiempos de modelado hasta un 40%.");
+            const chat = document.getElementById('chat-window');
+            if (chat.classList.contains('hidden')) toggleChat();
+            addBotMessage("¡Alerta de Sistema! La integración de IA permite reducir tiempos de modelado hasta un 40%.");
         }
 
         function renderSoftware() {
-             const softData = [
-                 { name: "ACC / BIM 360", icon: "cloud", desc: "Gestión Documental" },
-                 { name: "AutoCAD", icon: "pen-tool", desc: "Dibujo 2D" },
-                 { name: "Dynamo", icon: "cpu", desc: "Automatización" },
-                 { name: "Gemini AI", icon: "sparkles", desc: "Asistente de Inteligencia Artificial" }, 
-                 { name: "Monday", icon: "layout-list", desc: "Gestión Tareas" },
-                 { name: "Navisworks", icon: "crosshair", desc: "Interferencias" },
-                 { name: "ReCap", icon: "scan", desc: "Nubes Puntos" },
-                 { name: "Revit", icon: "layers", desc: "Modelado BIM" },
-                 { name: "Twinmotion", icon: "image", desc: "Render Real-Time" }
-             ];
+            const softData = [
+                { name: "ACC / BIM 360", icon: "cloud", desc: "Gestión Documental" },
+                { name: "AutoCAD", icon: "pen-tool", desc: "Dibujo 2D" },
+                { name: "Dynamo", icon: "cpu", desc: "Automatización" },
+                { name: "Gemini AI", icon: "sparkles", desc: "Asistente de Inteligencia Artificial" },
+                { name: "Monday", icon: "layout-list", desc: "Gestión Tareas" },
+                { name: "Navisworks", icon: "crosshair", desc: "Interferencias" },
+                { name: "ReCap", icon: "scan", desc: "Nubes Puntos" },
+                { name: "Revit", icon: "layers", desc: "Modelado BIM" },
+                { name: "Twinmotion", icon: "image", desc: "Render Real-Time" }
+            ];
             document.getElementById('software-list').innerHTML = softData.map(s => `
                 <div class="tech-card p-4 flex flex-col items-center justify-center text-center hover:bg-gray-800/10 transition">
                     <i data-lucide="${s.icon}" class="text-cyan-400 mb-2 w-8 h-8"></i>
@@ -1141,32 +1785,67 @@
         }
 
         function generateTypologyStats() {
-            const counts = {}; 
-            let total = 0;
-            let countedCM = false;      
-            let countedCovid = false;   
-
+            const counts = {}; let total = 0; let countedCM = false; let countedCovid = false;
             sortedProjects.forEach(p => {
                 let shouldCount = true;
                 if (p.name.includes("Central de Mezclas")) { if (countedCM) shouldCount = false; else countedCM = true; }
                 else if (p.name.includes("Módulo COVID")) { if (countedCovid) shouldCount = false; else countedCovid = true; }
                 if (shouldCount) {
-                    if(!counts[p.tipologia]) counts[p.tipologia] = 0;
+                    if (!counts[p.tipologia]) counts[p.tipologia] = 0;
                     counts[p.tipologia]++;
                     total++;
                 }
             });
-            const sorted = Object.entries(counts).map(([t,c]) => ({type:t, pct:Math.round((c/total)*100)})).sort((a,b)=>b.pct-a.pct);
-            document.getElementById('typology-grid').innerHTML = sorted.map(t => 
-                `<div class="border bg-white/5 px-3 py-2 rounded text-xs font-mono flex justify-between items-center min-w-[140px] flex-grow" style="border-color:var(--border-color)">
-                    <span style="color:var(--text-muted)">${t.type}</span> <span class="text-cyan-400 font-bold">${t.pct}%</span>
-                </div>`
-            ).join('');
+            const sorted = Object.entries(counts).map(([t, c]) => ({ type: t, pct: Math.round((c / total) * 100) })).sort((a, b) => b.pct - a.pct);
+
+            // MAPEO DE ICONOS PARA TIPOLOGÍAS
+            const icons = {
+                'VIVIENDA': 'home', 'SALUD': 'activity', 'EDIFICACIÓN': 'building',
+                'INFRAESTRUCTURA': 'road', 'OTROS': 'box', 'EDUCACIÓN': 'graduation-cap',
+                'SEGURIDAD': 'shield', 'CONFIDENCIAL': 'lock'
+            };
+
+            document.getElementById('typology-grid').innerHTML = sorted.map(t => {
+                const iconName = icons[t.type] || 'circle';
+                return `<div class="border bg-white/5 px-3 py-2 rounded text-xs font-mono flex justify-between items-center min-w-[140px] flex-grow" style="border-color:var(--border-color)">
+                    <div class="flex items-center gap-2"><i data-lucide="${iconName}" class="w-3 h-3 text-gray-500"></i><span style="color:var(--text-muted)">${t.type}</span></div>
+                    <span class="text-cyan-400 font-bold">${t.pct}%</span>
+                </div>`;
+            }).join('');
+        }
+
+        function renderDisciplinesStats() {
+            const discs = {}; let total = 0;
+            sortedProjects.forEach(p => {
+                p.disciplinas.split('•').forEach(d => {
+                    const cleanD = d.trim();
+                    if (!discs[cleanD]) discs[cleanD] = 0;
+                    discs[cleanD]++;
+                    total++;
+                });
+            });
+            const sorted = Object.entries(discs).map(([d, c]) => ({ name: d, pct: Math.round((c / total) * 100) })).sort((a, b) => b.pct - a.pct);
+
+            const icons = {
+                'Arquitectura': 'layout', 'Estructura': 'box', 'MEP': 'zap',
+                'Infraestructura': 'activity', 'General': 'grid', 'Confidencial': 'lock'
+            };
+
+            document.getElementById('disciplinas-grid').innerHTML = sorted.map(d => {
+                const iconName = icons[d.name] || 'layers';
+                return `<div class="tech-card p-4 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-white/5 rounded"><i data-lucide="${iconName}" class="text-cyan-400 w-5 h-5"></i></div>
+                        <span class="font-bold text-sm" style="color:var(--text-main)">${d.name.toUpperCase()}</span>
+                    </div>
+                    <span class="font-mono text-xl font-bold text-cyan-400">${d.pct}%</span>
+                </div>`;
+            }).join('');
         }
 
         function renderTech() {
-             const data = [{t:"AS-BUILT 6D", d:"Documentación de condiciones existentes."},{t:"COSTOS 5D", d:"Extracción de QTO"},{t:"COORDINACIÓN MEP", d:"Gestión proactiva de conflictos"},{t:"AUTOMATIZACIÓN", d:"Dynamo + Python"},{t:"GESTIÓN CDE", d:"BIM 360 / ACC"},{t:"SCAN-TO-BIM", d:"Nubes de Puntos"}];
-            document.getElementById('tech-grid').innerHTML = data.map(x=> `
+            const data = [{ t: "AS-BUILT 6D", d: "Documentación de condiciones existentes." }, { t: "COSTOS 5D", d: "Extracción de QTO" }, { t: "COORDINACIÓN MEP", d: "Gestión proactiva de conflictos" }, { t: "AUTOMATIZACIÓN", d: "Dynamo + Python" }, { t: "GESTIÓN CDE", d: "BIM 360 / ACC" }, { t: "SCAN-TO-BIM", d: "Nubes de Puntos" }];
+            document.getElementById('tech-grid').innerHTML = data.map(x => `
                 <div class="bg-white/5 border p-4 rounded hover:border-cyan-400 transition cursor-default" style="border-color:var(--border-color)">
                     <h4 class="font-black text-sm mb-1 uppercase" style="color:var(--text-main)">${x.t}</h4>
                     <p class="text-xs" style="color:var(--text-muted)">${x.d}</p>
@@ -1175,79 +1854,79 @@
         }
 
         function populateFilterOptions() {
-             const fases = [...new Set(sortedProjects.map(p => p.fase))].sort();
-             const types = [...new Set(sortedProjects.map(p => p.tipologia))].sort();
-             const discs = [...new Set(sortedProjects.map(p => p.disciplinas.split('•')[0].trim()))].sort();
-             const years = [...new Set(sortedProjects.map(p => p.year.split('-')[0]))].sort().reverse();
-             const f = (id, arr) => arr.forEach(v => document.getElementById(id).innerHTML += `<option value="${v}">${v}</option>`);
-             f('proyectos-filter-fase', fases); f('proyectos-filter-type', types); 
-             f('proyectos-filter-disc', discs); f('proyectos-filter-year', years);
+            const fases = [...new Set(sortedProjects.map(p => p.fase))].sort();
+            const types = [...new Set(sortedProjects.map(p => p.tipologia))].sort();
+            const discs = [...new Set(sortedProjects.map(p => p.disciplinas.split('•')[0].trim()))].sort();
+            const years = [...new Set(sortedProjects.map(p => p.year.split('-')[0]))].sort().reverse();
+            const f = (id, arr) => arr.forEach(v => document.getElementById(id).innerHTML += `<option value="${v}">${v}</option>`);
+            f('proyectos-filter-fase', fases); f('proyectos-filter-type', types);
+            f('proyectos-filter-disc', discs); f('proyectos-filter-year', years);
         }
 
         function renderD3Map() {
-            const container = document.getElementById('d3-map-svg-container'); 
+            const container = document.getElementById('d3-map-svg-container');
             const w = container.clientWidth; const h = 500;
             svg = d3.select("#map-svg").attr("width", w).attr("height", h);
-            const proj = d3.geoMercator().center([-96, 26]).scale(w * 0.9).translate([w/2, h/2]); 
-            const path = d3.geoPath().projection(proj); 
+            const proj = d3.geoMercator().center([-96, 26]).scale(w * 0.9).translate([w / 2, h / 2]);
+            const path = d3.geoPath().projection(proj);
             g = svg.append("g");
 
             d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(data => {
                 g.selectAll("path").data(topojson.feature(data, data.objects.countries).features).enter().append("path").attr("class", "country").attr("d", path);
-                const cities = {}; 
-                sortedProjects.forEach(p => { 
-                    if(p.coords && !p.isConfidential) { 
-                        const name = p.ubicacion.split(',')[0].trim(); 
-                        if(!cities[name]) cities[name] = {name:name, coords:p.coords, projects:[], hasObra:false, isInt: p.ubicacion.includes("USA")||p.ubicacion.includes("Jamaica")}; 
-                        if(p.fase==='Obra') cities[name].hasObra = true; 
-                        cities[name].projects.push(p); 
-                    } 
+                const cities = {};
+                sortedProjects.forEach(p => {
+                    if (p.coords && !p.isConfidential) {
+                        const name = p.ubicacion.split(',')[0].trim();
+                        if (!cities[name]) cities[name] = { name: name, coords: p.coords, projects: [], hasObra: false, isInt: p.ubicacion.includes("USA") || p.ubicacion.includes("Jamaica") };
+                        if (p.fase === 'Obra') cities[name].hasObra = true;
+                        cities[name].projects.push(p);
+                    }
                 });
-                const cityData = Object.values(cities).map(c => ({...c, color: c.isInt?'#EAB308':(c.hasObra?'#22c55e':'#3b82f6')}));
-                g.selectAll("circle").data(cityData).enter().append("circle").attr("class","city-marker")
-                  .attr("cx",d=>proj(d.coords)[0]).attr("cy",d=>proj(d.coords)[1]).attr("r",4).attr("fill",d=>d.color)
-                  .on("mouseenter", (e,d) => { 
-                      clearTimeout(hideTimeout); 
-                      const rows = d.projects.sort((a,b) => parseInt(a.staticId) - parseInt(b.staticId)).map(p=>`
+                const cityData = Object.values(cities).map(c => ({ ...c, color: c.isInt ? '#EAB308' : (c.hasObra ? '#22c55e' : '#3b82f6') }));
+                g.selectAll("circle").data(cityData).enter().append("circle").attr("class", "city-marker")
+                    .attr("cx", d => proj(d.coords)[0]).attr("cy", d => proj(d.coords)[1]).attr("r", 4).attr("fill", d => d.color)
+                    .on("mouseenter", (e, d) => {
+                        clearTimeout(hideTimeout);
+                        const rows = d.projects.sort((a, b) => parseInt(a.staticId) - parseInt(b.staticId)).map(p => `
                         <div class="tooltip-row" onclick="scrollToCard('${p.id}')">
                             <span class="tooltip-pid" style="color:${d.color}">P.${p.staticId}</span>
                             <div class="tooltip-info"><span class="tooltip-name">${p.name}</span><span class="tooltip-meta">${p.tipologia}</span></div>
                         </div>`
-                      ).join(''); 
-                      let gridClass = '';
-                      if(d.projects.length > 20) gridClass = 'tooltip-cols-3'; else if (d.projects.length > 10) gridClass = 'tooltip-cols-2';
-                      tooltipElement.innerHTML = `<div class="tooltip-header" style="border-left: 3px solid ${d.color}; color:${d.color}">${d.name} <span style="font-size:0.6rem; opacity:0.7">${d.projects.length} PROY.</span></div><div class="tooltip-content ${gridClass}">${rows}</div>`; 
-                      tooltipElement.style.opacity=1; tooltipElement.style.visibility='visible'; tooltipElement.style.width = 'auto'; 
-                      const rect = tooltipElement.getBoundingClientRect(); 
-                      let top = e.clientY - rect.height - 15; let left = e.clientX - rect.width/2;
-                      if(top < 0) top = e.clientY + 15; if(left < 10) left = 10; if(left + rect.width > window.innerWidth) left = window.innerWidth - rect.width - 10;
-                      tooltipElement.style.top = top + 'px'; tooltipElement.style.left = left + 'px'; 
-                  })
-                  .on("mouseleave", () => { hideTimeout = setTimeout(() => { tooltipElement.style.opacity=0; tooltipElement.style.visibility='hidden'; }, 1500); });
+                        ).join('');
+                        let gridClass = '';
+                        if (d.projects.length > 20) gridClass = 'tooltip-cols-3'; else if (d.projects.length > 10) gridClass = 'tooltip-cols-2';
+                        tooltipElement.innerHTML = `<div class="tooltip-header" style="border-left: 3px solid ${d.color}; color:${d.color}">${d.name} <span style="font-size:0.6rem; opacity:0.7">${d.projects.length} PROY.</span></div><div class="tooltip-content ${gridClass}">${rows}</div>`;
+                        tooltipElement.style.opacity = 1; tooltipElement.style.visibility = 'visible'; tooltipElement.style.width = 'auto';
+                        const rect = tooltipElement.getBoundingClientRect();
+                        let top = e.clientY - rect.height - 15; let left = e.clientX - rect.width / 2;
+                        if (top < 0) top = e.clientY + 15; if (left < 10) left = 10; if (left + rect.width > window.innerWidth) left = window.innerWidth - rect.width - 10;
+                        tooltipElement.style.top = top + 'px'; tooltipElement.style.left = left + 'px';
+                    })
+                    .on("mouseleave", () => { hideTimeout = setTimeout(() => { tooltipElement.style.opacity = 0; tooltipElement.style.visibility = 'hidden'; }, 1500); });
                 document.getElementById('stat-count-projects').innerText = sortedProjects.length;
-                const labels = [{n:"MÉXICO",c:[-103,24.5]},{n:"USA",c:[-100,32]},{n:"JAM",c:[-77.5,18]}];
-                g.selectAll(".country-label").data(labels).enter().append("text").attr("class","country-label-text").attr("x",d=>proj(d.c)[0]).attr("y",d=>proj(d.c)[1]).text(d=>d.n).attr("text-anchor","middle");
+                const labels = [{ n: "MÉXICO", c: [-103, 24.5] }, { n: "USA", c: [-100, 32] }, { n: "JAM", c: [-77.5, 18] }];
+                g.selectAll(".country-label").data(labels).enter().append("text").attr("class", "country-label-text").attr("x", d => proj(d.c)[0]).attr("y", d => proj(d.c)[1]).text(d => d.n).attr("text-anchor", "middle");
             }).catch(err => console.log("Error cargando mapa:", err));
-            const zoom = d3.zoom().scaleExtent([1,8]).on("zoom", e => { g.attr("transform", e.transform); g.selectAll("circle").attr("r", 4/e.transform.k); g.selectAll(".country-label-text").attr("font-size", (14/e.transform.k)+"px"); });
-            svg.call(zoom); 
+            const zoom = d3.zoom().scaleExtent([1, 8]).on("zoom", e => { g.attr("transform", e.transform); g.selectAll("circle").attr("r", 4 / e.transform.k); g.selectAll(".country-label-text").attr("font-size", (14 / e.transform.k) + "px"); });
+            svg.call(zoom);
             window.handleResetZoom = () => svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
         }
 
         function filterMap(category) {
             const circles = d3.selectAll('.city-marker');
             let visibleProjects = 0;
-            circles.each(function(d) {
+            circles.each(function (d) {
                 let isVisible = false;
                 if (category === 'all') isVisible = true;
                 else if (category === 'Obra' && d.hasObra) isVisible = true;
                 else if (category === 'Oficina' && !d.hasObra && !d.isInt) isVisible = true;
                 else if (category === 'Internacional' && d.isInt) isVisible = true;
                 d3.select(this).transition().duration(300).attr('r', isVisible ? 4 : 0).attr('opacity', isVisible ? 1 : 0);
-                if(isVisible) visibleProjects += d.projects.length;
+                if (isVisible) visibleProjects += d.projects.length;
             });
             document.getElementById('stat-count-projects').innerText = visibleProjects;
             const resetBtn = document.getElementById('reset-map-btn');
-            if(category === 'all') resetBtn.style.display = 'none'; else resetBtn.style.display = 'block';
+            if (category === 'all') resetBtn.style.display = 'none'; else resetBtn.style.display = 'block';
         }
 
         function animateValue(id, start, end, duration) {
@@ -1263,4 +1942,5 @@
         }
     </script>
 </body>
+
 </html>
