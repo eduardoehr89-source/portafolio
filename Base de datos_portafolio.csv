@@ -1,6 +1,6 @@
 id,name,year,fase,tipologia,ubicacion,comunicacion,disciplinas,software,lat,lon,desafio,isConfidential,cliente
 P01,Estadio BBVA,2014,Obra,DEPORTIVO,"Monterrey, N.L.","BIM Manager, Jefe de Control, Seguridad",Estructura,"AutoCAD, BIM 360, Monday.com, Navisworks, Revit, Twinmotion",25.65,-100.22,,,
-P02,Proyectos Vivienda,2017-2022,Obra,VIVIENDA,"Monterrey, N.L.","BIM Manager, Jefe de Control",Arquitectura • Estructura,"AutoCAD, BIM 360, Monday.com, Navisworks, Revit, Twinmotion",25.68,-100.31,,,
+P02,Proyectos Vivienda,2017,Obra,VIVIENDA,"Monterrey, N.L.","BIM Manager, Jefe de Control",Arquitectura • Estructura,"AutoCAD, BIM 360, Monday.com, Navisworks, Revit, Twinmotion",25.68,-100.31,,,
 P03,Torre KOI,2017,Obra,EDIFICACIÓN,"Monterrey, N.L.","BIM Manager, Jefe de Control",MEP,"AutoCAD, BIM 360, Monday.com, Navisworks, Revit, Twinmotion",25.65,-100.38,,,
 P04,Escuela Secundaria TX,2018,Oficina,EDUCACIÓN,"Austin, TX, USA","BIM Manager, Cliente",Estructura • Estructura,"AutoCAD, BIM 360, Monday.com, Navisworks, Revit, Twinmotion",30.26,-97.74,,,
 P05,Nave Industrial AZ,2018,Oficina,INDUSTRIAL,"Phoenix, AZ, USA","BIM Manager, Cliente",Estructura • Estructura,"AutoCAD, BIM 360, Monday.com, Navisworks, Revit, Twinmotion",33.44,-112.07,,,
