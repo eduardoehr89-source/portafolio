@@ -43,31 +43,31 @@ P41,Puentes Libramiento,2022,Obra,INFRAESTRUCTURA,Edo. Méx.,"Técnico de Desarr
 P42,Salina Cruz,2023,Oficina,VIVIENDA,"Salina Cruz, Oax.","Técnico de Desarrollo, Jefe Nacional de Planeación y Desarrollo, Cliente, Otros Modeladores",Estructura • MEP,"AutoCAD, BIM 360, Navisworks, Revit, Twinmotion",16.16,-95.2
 P43,Salón Hernández,2023,Oficina,COMERCIAL,"Orizaba, Ver.",Superintendente de Control de Proyecto,Arquitectura,"Revit, Twinmotion",18.84,-97.1
 P44,Silos,2023,Oficina,INDUSTRIAL,"Cd, Juárez","BIM Manager, Coordinador BIM",Estructura,"AutoCAD, BIM 360, Navisworks, Revit",31.76,-106.48
-P46,Aldaba,2024,Obra,VIVIENDA,"León, Gto.","Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Arquitectura,"BIM 360, Navisworks, Revit",21.12,-101.68
-P47,Barrio W,2024,Oficina,EDIFICACIÓN,"Monterrey, N.L.","BIM Manager, Coordinador BIM, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",25.67,-100.3
-P48,Carretera San Miguel,2024,Obra,INFRAESTRUCTURA,"San Miguel, GTO","Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Infraestructura,"ACC, Civil 3D, Navisworks, Revit, Twinmotion",20.91,-100.74
-P49,Casa Cerro Abanico,2024,Obra,VIVIENDA,CDMX,"Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Arquitectura,"AutoCAD, BIM 360, Navisworks, Revit",19.43,-99.13
-P50,Distrito República,2024,Oficina,EDIFICACIÓN,"Guadalajara, Jal.","BIM Manager, Coordinador BIM, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",20.65,-103.34
-P51,Esplendor II,2024,Oficina,VIVIENDA,"Nacajuca, Tab.","BIM Manager, Coordinador BIM, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",18.14,-93.01
-P52,Unidad de Medicina Familiar,2024,Obra,SALUD,"Tula, Hgo.","Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",MEP,"AutoCAD, BIM 360, Navisworks, Revit, Twinmotion",20.05,-99.34
-P53,Hospital General de Zona,2024,Obra,SALUD,"Tula, Hgo.","Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Arquitectura • Estructura,"AutoCAD, BIM 360, Navisworks, Revit, Twinmotion",20.05,-99.34
-P54,Bubledeck,2024,Obra,SALUD,Edo. Méx.,"Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Estructura,"AutoCAD, ACC, Navisworks, Revit, Twinmotion",19.5,-99.5
-P55,Metrobús Línea 3,2024,Obra,INFRAESTRUCTURA,CDMX,"Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",19.43,-99.13
-P56,Proyecto Seguridad,2024,Obra,SEGURIDAD,Confidencial,Confidencial,Confidencial,Confidencial,21.5,-98
-P57,Puentes Periféricos,2024,Obra,INFRAESTRUCTURA,Edo. Méx.,"Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Estructura,"BIM 360, Civil 3D, Navisworks, Revit, Twinmotion",19.5,-99.5
-P58,Tawra,2024,Oficina,EDIFICACIÓN,"Monterrey, N.L.","BIM Manager, Coordinador BIM, Otros Modeladores",MEP,"AutoCAD, BIM 360, Navisworks, Revit, Twinmotion",25.68,-100.31
-P59,Tren Ligero,2024,Obra,INFRAESTRUCTURA,"Campeche, Camp.","Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Infraestructura,"ACC, AutoCAD, Navisworks, Revit, Twinmotion",19.83,-90.53
-P60,Aeropuerto Int. Cancún,2025,Oficina,INFRAESTRUCTURA,"Cancún, Q.Roo",Confidencial,Confidencial,Confidencial,21.16,-86.85
-P61,Akasia,2025,Oficina,EDIFICACIÓN,"Monterrey, N.L.","BIM Manager, Coordinador BIM, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",25.68,-100.31
-P62,Barrio Santa Lucía,2025,Obra,VIVIENDA,"Monterrey, N.L.","Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Arquitectura,"AutoCAD, BIM 360, Monday.com, Navisworks, Revit, Twinmotion",25.68,-100.31
-P63,Belgica,2025,Oficina,EDIFICACIÓN,"Monterrey, N.L.","BIM Manager, Coordinador BIM, Otros Modeladores",Visualización,"AutoCAD, BIM 360, Monday.com, Navisworks, Revit, Twinmotion",25.68,-100.31
-P64,Corporativo CEMEX,2025,Obra,CORPORATIVO,CDMX,BIM Manager,Arquitectura • Estructura • MEP,"BIM 360, Gamma AR, Recap, Revit",19.43,-99.13
-P65,Grazia,2025,Oficina,EDIFICACIÓN,"Monterrey, N.L.","BIM Manager, Coordinador BIM, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",25.68,-100.31
-P66,Makmul,2025,Oficina,VIVIENDA,"Cancún, Q.Roo","BIM Manager, Coordinador BIM, Otros Modeladores",Arquitectura • Estructura • MEP,"AutoCAD, BIM 360, Monday.com, Navisworks, Revit, Twinmotion",21.16,-86.85
-P67,Mediterráneo,2025,Oficina,EDIFICACIÓN,"Monterrey, N.L.","BIM Manager, Coordinador BIM, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",25.68,-100.31
-P68,Medline,2025,Oficina,INFRAESTRUCTURA,"Nuevo Laredo, Tamps.","BIM Manager, Coordinador BIM, Otros Modeladores",Infraestructura,"ACC, Civil 3D, Monday.com, Navisworks, Revit, Twinmotion",27.47,-99.51
-P69,Naomi,2025,Oficina,EDIFICACIÓN,"Cancún, Q.Roo","BIM Manager, Coordinador BIM, Otros Modeladores",MEP,"AutoCAD, BIM 360, Monday.com, Navisworks, Revit, Twinmotion",21.16,-86.85
-P70,Residencias TEC,2025,Oficina,VIVIENDA,"Puebla, Pue.","BIM Manager, Coordinador BIM, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",19.04,-98.2
-P71,Semillero,2025,Oficina,EDIFICACIÓN,"Monterrey, N.L.","BIM Manager, Coordinador BIM, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",25.68,-100.31
-P45,Aeropuerto Norman Manley,2025,Oficina,INFRAESTRUCTURA,"Kingston, Jamaica",Confidencial,Confidencial,Confidencial,17.97,-76.79
+P45,Aldaba,2024,Obra,VIVIENDA,"León, Gto.","Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Arquitectura,"BIM 360, Navisworks, Revit",21.12,-101.68
+P46,Barrio W,2024,Oficina,EDIFICACIÓN,"Monterrey, N.L.","BIM Manager, Coordinador BIM, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",25.67,-100.3
+P47,Carretera San Miguel,2024,Obra,INFRAESTRUCTURA,"San Miguel, GTO","Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Infraestructura,"ACC, Civil 3D, Navisworks, Revit, Twinmotion",20.91,-100.74
+P48,Casa Cerro Abanico,2024,Obra,VIVIENDA,CDMX,"Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Arquitectura,"AutoCAD, BIM 360, Navisworks, Revit",19.43,-99.13
+P49,Distrito República,2024,Oficina,EDIFICACIÓN,"Guadalajara, Jal.","BIM Manager, Coordinador BIM, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",20.65,-103.34
+P50,Esplendor II,2024,Oficina,VIVIENDA,"Nacajuca, Tab.","BIM Manager, Coordinador BIM, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",18.14,-93.01
+P51,Unidad de Medicina Familiar,2024,Obra,SALUD,"Tula, Hgo.","Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",MEP,"AutoCAD, BIM 360, Navisworks, Revit, Twinmotion",20.05,-99.34
+P52,Hospital General de Zona,2024,Obra,SALUD,"Tula, Hgo.","Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Arquitectura • Estructura,"AutoCAD, BIM 360, Navisworks, Revit, Twinmotion",20.05,-99.34
+P53,Bubledeck,2024,Obra,SALUD,Edo. Méx.,"Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Estructura,"AutoCAD, ACC, Navisworks, Revit, Twinmotion",19.5,-99.5
+P54,Metrobús Línea 3,2024,Obra,INFRAESTRUCTURA,CDMX,"Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",19.43,-99.13
+P55,Proyecto Seguridad,2024,Obra,SEGURIDAD,Confidencial,Confidencial,Confidencial,Confidencial,21.5,-98
+P56,Puentes Periféricos,2024,Obra,INFRAESTRUCTURA,Edo. Méx.,"Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Estructura,"BIM 360, Civil 3D, Navisworks, Revit, Twinmotion",19.5,-99.5
+P57,Tawra,2024,Oficina,EDIFICACIÓN,"Monterrey, N.L.","BIM Manager, Coordinador BIM, Otros Modeladores",MEP,"AutoCAD, BIM 360, Navisworks, Revit, Twinmotion",25.68,-100.31
+P58,Tren Ligero,2024,Obra,INFRAESTRUCTURA,"Campeche, Camp.","Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Infraestructura,"ACC, AutoCAD, Navisworks, Revit, Twinmotion",19.83,-90.53
+P59,Aeropuerto Int. Cancún,2025,Oficina,INFRAESTRUCTURA,"Cancún, Q.Roo",Confidencial,Confidencial,Confidencial,21.16,-86.85
+P60,Akasia,2025,Oficina,EDIFICACIÓN,"Monterrey, N.L.","BIM Manager, Coordinador BIM, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",25.68,-100.31
+P61,Barrio Santa Lucía,2025,Obra,VIVIENDA,"Monterrey, N.L.","Superintendente, Jefe de Control, Jefe de Seguridad, Contratistas, Cliente, Otros Modeladores",Arquitectura,"AutoCAD, BIM 360, Monday.com, Navisworks, Revit, Twinmotion",25.68,-100.31
+P62,Belgica,2025,Oficina,EDIFICACIÓN,"Monterrey, N.L.","BIM Manager, Coordinador BIM, Otros Modeladores",Visualización,"AutoCAD, BIM 360, Monday.com, Navisworks, Revit, Twinmotion",25.68,-100.31
+P63,Corporativo CEMEX,2025,Obra,CORPORATIVO,CDMX,BIM Manager,Arquitectura • Estructura • MEP,"BIM 360, Gamma AR, Recap, Revit",19.43,-99.13
+P64,Grazia,2025,Oficina,EDIFICACIÓN,"Monterrey, N.L.","BIM Manager, Coordinador BIM, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",25.68,-100.31
+P65,Makmul,2025,Oficina,VIVIENDA,"Cancún, Q.Roo","BIM Manager, Coordinador BIM, Otros Modeladores",Arquitectura • Estructura • MEP,"AutoCAD, BIM 360, Monday.com, Navisworks, Revit, Twinmotion",21.16,-86.85
+P66,Mediterráneo,2025,Oficina,EDIFICACIÓN,"Monterrey, N.L.","BIM Manager, Coordinador BIM, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",25.68,-100.31
+P67,Medline,2025,Oficina,INFRAESTRUCTURA,"Nuevo Laredo, Tamps.","BIM Manager, Coordinador BIM, Otros Modeladores",Infraestructura,"ACC, Civil 3D, Monday.com, Navisworks, Revit, Twinmotion",27.47,-99.51
+P68,Naomi,2025,Oficina,EDIFICACIÓN,"Cancún, Q.Roo","BIM Manager, Coordinador BIM, Otros Modeladores",MEP,"AutoCAD, BIM 360, Monday.com, Navisworks, Revit, Twinmotion",21.16,-86.85
+P69,Residencias TEC,2025,Oficina,VIVIENDA,"Puebla, Pue.","BIM Manager, Coordinador BIM, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",19.04,-98.2
+P70,Semillero,2025,Oficina,EDIFICACIÓN,"Monterrey, N.L.","BIM Manager, Coordinador BIM, Otros Modeladores",Documentación y Cuantificación,"BIM 360, Navisworks, Revit",25.68,-100.31
+P71,Aeropuerto Norman Manley,2025,Oficina,INFRAESTRUCTURA,"Kingston, Jamaica",Confidencial,Confidencial,Confidencial,17.97,-76.79
 P72,Zonna,2025,Oficina,EDIFICACIÓN,"Cancún, Q.Roo","BIM Manager, Coordinador BIM, Otros Modeladores",Arquitectura • Estructura • MEP,"AutoCAD, BIM 360, Monday.com, Navisworks, Revit, Twinmotion",21.16,-86.85
