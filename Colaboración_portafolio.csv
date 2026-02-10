@@ -1,0 +1,13 @@
+Seccion,Rol,Descripcion,Icono
+En Obra,Superintendente,"Solicita planos recientes, vistas del modelo y cuantificaciones para gestionar la información técnica.",hard-hat
+En Obra,Residente de Obra,Proporciona cambios de campo para actualizar el modelo y mantener la información al día.,clipboard-check
+En Obra,Jefe de Control,Solicita planos de áreas específicas y cuantificaciones para preparar la información de cobro y presupuestos.,calculator
+En Obra,Contratistas,"Comparo levantamientos y cantidades, resuelvo problemas constructivos y dudas generales con el modelo.",tools
+En Obra,Mano de Obra,Acompaño su ejecución para entender cómo construyen y evitar suposiciones en el modelo.,user-worker
+En Obra,Cliente,Escucho sus ideas de diseño y realizamos levantamientos conjuntos para reflejarlas en el modelo.,user-tie
+En Oficina,Gerente BIM,Propone ideas para el negocio y ayuda a destrabar cuellos de botella operativos.,building
+En Oficina,BIM Manager,Encargado de redactar el BEP y supervisar que cumplamos con el cronograma previsto.,desktop
+En Oficina,Coordinador BIM,"Coordina tareas, apoya al Gerente, detecta colisiones técnicas y vincula modelos federados.",project-diagram
+En Oficina,Modeladores,"Comunicación diaria constante para compartir familias, resolver dudas y apoyarnos técnicamente.",cubes
+En Oficina,Cliente,"Reuniones de avance, solicitudes de cambio y resolución de dudas sobre el diseño.",users-class
+En Oficina,Despachos externos,Coordinación diaria para resolver dudas y avanzar en el modelado de especialidades subcontratadas.,external-link
