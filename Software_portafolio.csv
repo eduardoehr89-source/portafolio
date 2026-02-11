@@ -1,11 +1,12 @@
-Nombre,Icono,Descripción
-ACC / BIM 360,cloud,Gestión CDE y Cloud
-AutoCAD,pen-tool,Planos y 2D
-Dynamo / Python,code,Scripting y Automatización
-Gemini AI,sparkles,Asistente Flujo Global
-Monday,layout-list,Gestión de tiempos
-Navisworks,crosshair,Clash Detection
-Power BI,bar-chart-3,Inteligencia de Datos
-Revit,layers,Modelado BIM
-Speckle,box,Interoperabilidad
-Twinmotion,image,Render Real-time
+Nombre,Descripción,Icono
+ACC / BIM 360,Gestión CDE y Cloud,cloud
+AutoCAD,Planos y 2D,pen-tool
+Dynamo / Python,Scripting y Automatización,code
+Gemini AI,Asistente Flujo Global,sparkles
+Monday,Gestión de tiempos,layout-list
+Navisworks,Clash Detection,crosshair
+Power BI,Inteligencia de Datos,bar-chart-3
+Recap,Nubes de puntos,scan
+Revit,Modelado BIM,layers
+Speckle,Interoperabilidad,box
+Twinmotion,Render Real-time,image
