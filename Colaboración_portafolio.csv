@@ -6,7 +6,7 @@ En Obra,Contratistas,Ejecución y plazos.,"Comparo levantamientos y cantidades, 
 En Obra,Mano de Obra,Ejecución técnica supervisada.,Acompaño su ejecución para entender cómo construyen y evitar suposiciones en el modelo.,user-worker
 En Obra,Cliente,Supervisión diseño estética.,Escucho sus ideas de diseño y realizamos levantamientos conjuntos para reflejarlas en el modelo.,user-tie
 En Oficina,Gerente BIM,Estrategia y gestión.,Propone ideas para el negocio y ayuda a destrabar cuellos de botella operativos.,building
-En Oficina,BIM Manager,Calidad y BEP.,Encargado de redactar el BEP y supervisar que cumplamos con el cronograma previsto.,desktop
+En Oficina,BIM Manager,"Calidad, PIR, EIR y BEP.",Encargado de redactar el BEP y supervisar que cumplamos con el cronograma previsto.,desktop
 En Oficina,Coordinador BIM,Coordinación e integración.,"Coordina tareas, apoya al Gerente, detecta colisiones técnicas y vincula modelos federados.",project-diagram
 En Oficina,Modeladores,Modelado y datos.,"Comunicación diaria constante para compartir familias, resolver dudas y apoyarnos técnicamente.",cubes
 En Oficina,Cliente,Decisiones y aprobación.,"Reuniones de avance, solicitudes de cambio y resolución de dudas sobre el diseño.",users-class
