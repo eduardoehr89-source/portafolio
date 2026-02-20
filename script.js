@@ -1361,7 +1361,7 @@ function updateModalContent() {
             videoEl.classList.add('hidden');
             imgEl.classList.remove('hidden');
 
-            if (currentSrc && !currentSrc.includes('undefined')) {
+            if (currentSrc && typeof currentSrc === 'string' && currentSrc.trim() !== '' && currentSrc !== 'undefined' && !currentSrc.includes('undefined')) {
                 imgEl.style.backgroundImage = `url('${currentSrc}')`;
                 imgEl.innerText = "";
                 imgEl.className = "w-full h-full bg-contain bg-center bg-no-repeat transition-all duration-300";
