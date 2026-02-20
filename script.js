@@ -1089,8 +1089,6 @@ window.runFilter = function () {
     updateSystemStatus();
 };
 
-window.handleFilterChange = window.runFilter;
-
 function populateAllFilters() {
     const getOptions = (key) => [...new Set(projectsData.map(p => p[key]))].filter(Boolean).sort();
     const setOptions = (id, label, opts) => { const el = document.getElementById(id); if (el) el.innerHTML = `<option value="all">${label}</option>` + opts.map(x => `<option value="${x}">${x}</option>`).join(''); };
@@ -1415,6 +1413,35 @@ function updateModalContent() {
     // Actualizar textos
     document.getElementById('modal-project-id').innerText = `${p.id} / ${filteredProjects.length}`;
     document.getElementById('modal-project-name').innerText = p.nombre;
+    document.getElementById('modal-project-details').innerText = `${p.ubicacion} | ${p.anioStr} | ${p.tipologia} | ${p.fase}`;
+
+    // Descripcion y Reto en Galería
+    const descEl = document.getElementById('modal-project-desc');
+    const retoEl = document.getElementById('modal-project-reto');
+    const textBlock = document.getElementById('modal-text-block');
+
+    if (descEl && retoEl && textBlock) {
+        let hasText = false;
+
+        if (p.descripcion && p.descripcion.trim() !== '') {
+            descEl.innerText = p.descripcion;
+            descEl.classList.remove('hidden');
+            hasText = true;
+        } else {
+            descEl.classList.add('hidden');
+        }
+
+        if (p.reto && p.reto.trim() !== '') {
+            retoEl.querySelector('.content').innerText = p.reto;
+            retoEl.classList.remove('hidden');
+            hasText = true;
+        } else {
+            retoEl.classList.add('hidden');
+        }
+
+        // Mostrar solo si hay algo que leer
+        textBlock.classList.toggle('opacity-0', !hasText);
+    }
 
     const detailsContainer = document.getElementById('modal-project-details');
     // Usar innerHTML para poder inyectar el span con color
