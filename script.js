@@ -34,6 +34,7 @@ let currentProjectIndex = -1;
 let disciplinesData = []; // Global variable for disciplines
 
 let aiData = [];
+let hasSeenTopWarning = false; // Flag for first-time Top Projects warning
 
 // ==========================================================================
 // 2. MOTORES DE INTELIGENCIA DE DATOS
@@ -888,6 +889,14 @@ window.goHome = function () {
 };
 window.showHome = window.goHome;
 
+window.dismissTopWarning = function () {
+    const warningEl = document.getElementById('top-projects-warning');
+    if (warningEl) {
+        warningEl.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => warningEl.classList.add('hidden'), 500); // Esperar CSS transition
+    }
+};
+
 window.switchView = function (viewName, fromHome = false) {
     const hero = document.getElementById('hero-dashboard');
     const appWrapper = document.getElementById('app-wrapper');
@@ -904,6 +913,20 @@ window.switchView = function (viewName, fromHome = false) {
         } else {
             document.getElementById('view-ai').classList.remove('ai-container-mode');
         }
+
+        // Trigger warning si entra a proyectos por primera vez
+        if (viewName === 'projects' && !hasSeenTopWarning && isTop5Active) {
+            hasSeenTopWarning = true;
+            setTimeout(() => {
+                const warningEl = document.getElementById('top-projects-warning');
+                if (warningEl) {
+                    warningEl.classList.remove('opacity-0', 'pointer-events-none', 'hidden');
+                    // Ocultar automáticamente después de 10 segundos
+                    setTimeout(() => dismissTopWarning(), 10000);
+                }
+            }, 800); // Dar tiempo a la animación de cambio de pantalla
+        }
+
         sidebar.classList.remove('open');
     };
 
@@ -1619,6 +1642,7 @@ window.handleFilterChange = window.handleFilterChange;
 window.setProjectView = window.setProjectView;
 window.openRetoModal = window.openRetoModal;
 window.closeTextModal = window.closeTextModal;
+window.dismissTopWarning = window.dismissTopWarning;
 window.openGallery = window.openGallery;
 window.closeGallery = window.closeGallery;
 window.navigateProject = window.navigateProject;
