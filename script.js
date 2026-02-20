@@ -1331,7 +1331,14 @@ window.openGallery = function (id) {
     document.getElementById('gallery-modal').classList.remove('hidden');
 };
 
-window.closeGallery = () => document.getElementById('gallery-modal').classList.add('hidden');
+window.closeGallery = () => {
+    document.getElementById('gallery-modal').classList.add('hidden');
+    const videoEl = document.getElementById('modal-video-element');
+    if (videoEl) {
+        videoEl.pause();
+        videoEl.src = '';
+    }
+};
 
 window.navigateProject = function (direction) {
     if (currentProjectIndex === -1) return;
