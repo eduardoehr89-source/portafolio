@@ -824,8 +824,7 @@ function processProjects(data) {
     filteredProjects = [...projectsData];
     renderGlobalAnalytics(projectsData);
     populateAllFilters();
-    updateSystemStatus();
-    runSort();
+    runFilter(); // Apply initial filters (like Top 5) which will also call runSort() and updateSystemStatus()
 }
 
 function hideLoadingScreen() {
@@ -958,8 +957,16 @@ function updateSystemStatus() {
 
     // Construir texto de estado
     let statusText = `ITEMS:${filteredProjects.length}`;
-    if (activeFilters.length > 0) {
-        statusText += ` | ${activeFilters.join(' | ')}`;
+
+    // Convertir vista a texto amigable
+    const viewText = currentViewMode === 'gallery' ? 'GALERÍA' : 'LISTA';
+
+    if (isTop5Active) {
+        statusText += ` | TIPO: TOP PROJECTS | VISTA: ${viewText}`;
+    } else if (activeFilters.length > 0) {
+        statusText += ` | ${activeFilters.join(' | ')} | VISTA: ${viewText}`;
+    } else {
+        statusText += ` | VISTA: ${viewText}`;
     }
 
     // Asignar texto
@@ -995,10 +1002,21 @@ function updateSystemStatus() {
     }
 }
 
-window.toggleTop5 = function () { isTop5Active = !isTop5Active; runFilter(); };
+window.toggleTop5 = function () {
+    isTop5Active = !isTop5Active;
+    if (isTop5Active) {
+        // Limpiar otros filtros si se reactiva Top Projects
+        document.querySelectorAll('.filter-select').forEach(s => s.value = 'all');
+        document.getElementById('search-bar').value = '';
+    }
+    runFilter();
+};
 window.toggleFilterMenu = function () { document.getElementById('filter-dropdown').classList.toggle('hidden'); };
 window.resetFilters = function () { document.querySelectorAll('.filter-select').forEach(s => s.value = 'all'); handleFilterChange(); };
-window.handleFilterChange = function () { if (isTop5Active) isTop5Active = false; runFilter(); };
+window.handleFilterChange = function () {
+    if (isTop5Active) isTop5Active = false;
+    runFilter();
+};
 
 window.runFilter = function () {
     const s = document.getElementById('search-bar').value.toLowerCase();
@@ -1107,6 +1125,8 @@ window.setProjectView = function (mode) {
             ? 'p-1.5 hover:bg-white/10 rounded text-cyan-400 active transition'
             : 'p-1.5 hover:bg-white/10 rounded text-gray-400 transition';
     }
+
+    updateSystemStatus();
 };
 
 function renderProjects(list) {
