@@ -790,11 +790,29 @@ function processProjects(data) {
                 const entry = PROJECT_IMAGES_DB[pid];
 
                 // La DB ya contiene rutas relativas completas desde la raíz del sitio
-                // entry.images = ["img_optimizadas/P01/1.jpg", "videos/P01/video.mp4"]
                 projectImages = entry.images || [];
 
-                // La portada es la primera imagen alfabéticamente
-                if (projectImages.length > 0) coverImage = projectImages[0];
+                // Diccionario de overrides para la portada
+                const topCoverOverrides = {
+                    'P27': 'scudo de Armas_02', // Estación Escudo de Armas_02
+                    'P25': 'rea_02', // Aérea_02
+                    'P18': 'Acceso_02',
+                    'P08': 'Fachada Principal_03'
+                };
+
+                // La portada por defecto es la primera imagen alfabéticamente
+                if (projectImages.length > 0) {
+                    coverImage = projectImages[0];
+
+                    if (topCoverOverrides[pid]) {
+                        const keyword = topCoverOverrides[pid];
+                        // Buscar la imagen que contenga el keyword (ignorando mayúsculas/minúsculas para mayor seguridad)
+                        const foundImg = projectImages.find(img => img.toLowerCase().includes(keyword.toLowerCase()));
+                        if (foundImg) {
+                            coverImage = foundImg;
+                        }
+                    }
+                }
             }
         } else {
             // Fallback antiguo: intentar adivinar ruta hardcodeada
