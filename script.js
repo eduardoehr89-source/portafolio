@@ -1311,15 +1311,13 @@ function updateModalContent() {
 
     // Extraer nombre del espacio
     let spaceName = "";
-    if (currentSrc) {
+    if (currentSrc && !currentSrc.includes('undefined')) {
         const filename = currentSrc.split('/').pop(); // "Archivo.jpg"
         spaceName = filename.split('.')[0]; // "Archivo"
-        // Opcional: Limpiar guiones bajos si se desea
-        // spaceName = spaceName.replace(/_/g, ' '); 
     }
 
     // Actualizar textos
-    document.getElementById('modal-project-id').innerText = p.id;
+    document.getElementById('modal-project-id').innerText = `${p.id} / ${filteredProjects.length}`;
     document.getElementById('modal-project-name').innerText = p.nombre;
 
     const detailsContainer = document.getElementById('modal-project-details');
@@ -1330,8 +1328,9 @@ function updateModalContent() {
         locationDisplay = "Múltiples Sedes";
     }
 
-    // Cambio a CYAN brillante (text-[#00e5ff])
-    detailsContainer.innerHTML = `${locationDisplay} | ${p.anioStr} | ${p.tipologia} | ${p.fase} <span class="text-[#00e5ff] font-bold ml-2">| ${spaceName}</span>`;
+    // Cambio a CYAN brillante sin negrita (eliminado font-bold)
+    let spaceNameHtml = spaceName ? `<span class="text-[#00e5ff] ml-2">| ${spaceName}</span>` : "";
+    detailsContainer.innerHTML = `${locationDisplay} | ${p.anioStr} | ${p.tipologia} | ${p.fase} ${spaceNameHtml}`;
 
     // Determinar tipo de archivo (Soportando mayúsculas también)
     const srcLower = (currentSrc || "").toLowerCase();
@@ -1368,8 +1367,8 @@ function updateModalContent() {
                 imgEl.className = "w-full h-full bg-contain bg-center bg-no-repeat transition-all duration-300";
             } else {
                 imgEl.style.backgroundImage = 'none';
-                imgEl.innerText = "PRÓXIMAMENTE";
-                imgEl.className = "w-full h-full flex items-center justify-center text-gray-500 font-bold bg-[#1a202c] transition-all duration-300";
+                imgEl.innerText = "CONFIDENCIAL";
+                imgEl.className = "w-full h-full flex items-center justify-center text-gray-500 font-bold tracking-[1em] text-2xl md:text-4xl bg-[#1a202c] transition-all duration-300";
             }
             imgEl.style.opacity = '1';
         }
