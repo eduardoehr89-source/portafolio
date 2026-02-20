@@ -1309,6 +1309,30 @@ function updateModalContent() {
         if (counterEl) counterEl.innerText = "1 / 1";
     }
 
+    // Extraer nombre del espacio
+    let spaceName = "";
+    if (currentSrc) {
+        const filename = currentSrc.split('/').pop(); // "Archivo.jpg"
+        spaceName = filename.split('.')[0]; // "Archivo"
+        // Opcional: Limpiar guiones bajos si se desea
+        // spaceName = spaceName.replace(/_/g, ' '); 
+    }
+
+    // Actualizar textos
+    document.getElementById('modal-project-id').innerText = p.id;
+    document.getElementById('modal-project-name').innerText = p.nombre;
+
+    const detailsContainer = document.getElementById('modal-project-details');
+    // Usar innerHTML para poder inyectar el span con color
+    // Compactar ubicación si es muy larga (específicamente P07 y P08)
+    let locationDisplay = p.ubicacion;
+    if (p.id === 'P07' || p.id === 'P08' || locationDisplay.length > 50) {
+        locationDisplay = "Múltiples Sedes";
+    }
+
+    // Cambio a CYAN brillante (text-[#00e5ff])
+    detailsContainer.innerHTML = `${locationDisplay} | ${p.anioStr} | ${p.tipologia} | ${p.fase} <span class="text-[#00e5ff] font-bold ml-2">| ${spaceName}</span>`;
+
     // Determinar tipo de archivo (Soportando mayúsculas también)
     const srcLower = (currentSrc || "").toLowerCase();
     const isVideo = srcLower.endsWith('.mp4') || srcLower.endsWith('.mov') || srcLower.endsWith('.webm') || srcLower.endsWith('.mkv');
