@@ -1439,8 +1439,10 @@ function updateModalContent() {
             retoEl.classList.add('hidden');
         }
 
-        // Mostrar solo si hay algo que leer
-        textBlock.classList.toggle('opacity-0', !hasText);
+        // Mostrar solo si hay algo que leer Y estamos en la primera imagen
+        const shouldShow = hasText && currentImageIndex === 0;
+        textBlock.classList.toggle('opacity-0', !shouldShow);
+        textBlock.classList.toggle('pointer-events-none', !shouldShow);
     }
 
     const detailsContainer = document.getElementById('modal-project-details');
