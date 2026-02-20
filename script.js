@@ -28,8 +28,8 @@ let projectsData = [];
 let filteredProjects = [];
 let roiData = [];
 let sectionsData = []; // Nueva variable para secciones
-let currentViewMode = 'list';
-let isTop5Active = false;
+let currentViewMode = 'gallery';
+let isTop5Active = true;
 let currentProjectIndex = -1;
 let disciplinesData = []; // Global variable for disciplines
 
@@ -783,17 +783,18 @@ function processProjects(data) {
         let projectImages = [];
         let coverImage = null;
 
-        if (hasImageDB && PROJECT_IMAGES_DB[pid]) {
-            // Usar DB generado
-            const entry = PROJECT_IMAGES_DB[pid];
+        if (hasImageDB) {
+            if (PROJECT_IMAGES_DB[pid]) {
+                // Usar DB generado
+                const entry = PROJECT_IMAGES_DB[pid];
 
-            // La DB ya contiene rutas relativas completas desde la raíz del sitio
-            // entry.images = ["img_optimizadas/P01/1.jpg", "videos/P01/video.mp4"]
-            projectImages = entry.images;
+                // La DB ya contiene rutas relativas completas desde la raíz del sitio
+                // entry.images = ["img_optimizadas/P01/1.jpg", "videos/P01/video.mp4"]
+                projectImages = entry.images || [];
 
-            // La portada es la primera imagen alfabéticamente
-            if (projectImages.length > 0) coverImage = projectImages[0];
-
+                // La portada es la primera imagen alfabéticamente
+                if (projectImages.length > 0) coverImage = projectImages[0];
+            }
         } else {
             // Fallback antiguo: intentar adivinar ruta hardcodeada
             coverImage = `img/${pid} ${getVal(d, 'nombre')}/1.jpg`;
@@ -980,6 +981,18 @@ function updateSystemStatus() {
             filterBtn.classList.remove('border-cyan-500', 'text-cyan-400', 'bg-cyan-900/10');
         }
     }
+
+    // Feedback visual para botón Top 5
+    const top5Btn = document.getElementById('btn-top5');
+    if (top5Btn) {
+        if (isTop5Active) {
+            top5Btn.classList.remove('bg-transparent', 'border-gray-700', 'text-gray-400');
+            top5Btn.classList.add('border-cyan-500', 'text-cyan-400', 'bg-cyan-900/10');
+        } else {
+            top5Btn.classList.remove('border-cyan-500', 'text-cyan-400', 'bg-cyan-900/10');
+            top5Btn.classList.add('bg-transparent', 'border-gray-700', 'text-gray-400');
+        }
+    }
 }
 
 window.toggleTop5 = function () { isTop5Active = !isTop5Active; runFilter(); };
@@ -1079,6 +1092,21 @@ window.setProjectView = function (mode) {
     currentViewMode = mode;
     document.getElementById('list-view-wrapper').classList.toggle('hidden', mode !== 'list');
     document.getElementById('gallery-view-wrapper').classList.toggle('hidden', mode !== 'gallery');
+
+    // Actualizar estado visual de los botones
+    const btnList = document.getElementById('btn-view-list');
+    const btnGallery = document.getElementById('btn-view-gallery');
+
+    if (btnList) {
+        btnList.className = mode === 'list'
+            ? 'p-1.5 hover:bg-white/10 rounded text-cyan-400 active transition'
+            : 'p-1.5 hover:bg-white/10 rounded text-gray-400 transition';
+    }
+    if (btnGallery) {
+        btnGallery.className = mode === 'gallery'
+            ? 'p-1.5 hover:bg-white/10 rounded text-cyan-400 active transition'
+            : 'p-1.5 hover:bg-white/10 rounded text-gray-400 transition';
+    }
 };
 
 function renderProjects(list) {
@@ -1132,7 +1160,7 @@ function renderProjects(list) {
     if (galleryContainer) {
         galleryContainer.innerHTML = list.map(p => `
             <div class="group relative aspect-[4/3] bg-gray-800 rounded-lg overflow-hidden cursor-pointer border border-gray-800 hover:border-cyan-500 transition" onclick="openGallery('${p.id}')">
-                ${p.imagen && !p.imagen.includes('undefined') ? `<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('${p.imagen}');"></div>` : `<div class="absolute inset-0 flex items-center justify-center bg-[#1a202c] text-gray-500 text-[10px]">PRÓXIMAMENTE</div>`}
+                ${p.imagen && !p.imagen.includes('undefined') ? `<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('${p.imagen}');"></div>` : `<div class="absolute inset-0 flex items-center justify-center bg-[#1a202c] text-gray-500 text-[10px] font-bold tracking-widest">CONFIDENCIAL</div>`}
                 <div class="absolute bottom-0 w-full p-3 bg-gradient-to-t from-black/90 to-transparent font-mono text-white">
                     <div class="text-[10px] opacity-80">${p.id}</div>
                     <div class="text-xs leading-tight truncate my-0.5">${p.nombre}</div>
