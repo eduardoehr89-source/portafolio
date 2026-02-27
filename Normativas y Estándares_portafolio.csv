@@ -1,5 +1,9 @@
 Título,Icono,Descripción
-ISO 19650,globe,"CDE, BEP, PIR/EIR, COBie."
-ISO 16739,database,Formatos IFC y BCF.
-ISO 7817,clipboard-check,Gestión del LOIN.
-CTE (España),book-open,Código Técnico de la Edificación.
+CTE (España),book-open,Código Técnico de la Edificación
+IDS,check-square,Especificación de Entrega de Información
+IFC / COBie,database,Interoperabilidad y OpenBIM
+ISO 7817,clipboard-check,Nivel de Información Necesario
+ISO 19650,globe,Gestión de la Info. y CDE
+LOD,layers,Nivel de Desarrollo
+Omniclass,tag,Sistema de Clasificación de la Construcción
+PIR / EIR / BEP,file-check,Requisitos y Plan de Ejecución
