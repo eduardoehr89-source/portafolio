@@ -1,13 +1,13 @@
-Nombre,Descripción,Icono
-ACC / BIM 360,Gestión CDE y Cloud,cloud
-AutoCAD,Planos y 2D,pen-tool
-Dalux,Incidencias y AR,smartphone
-Dynamo / Python,Scripting y Automatización,code
-Gemini AI,Asistente Flujo Global,sparkles
-Monday,Gestión de tiempos,layout-list
-Navisworks,Clash Detection,crosshair
-Power BI,Inteligencia de Datos,bar-chart-3
-Recap,Nubes de puntos,scan
-Revit,Modelado BIM,layers
-Speckle,Interoperabilidad,box
-Twinmotion,Render Real-time,image
+Nombre,Nivel,Capacidad,Descripción,Icono
+ACC / BIM 360,Medio,"Gestión de entorno común de datos, coordinación de modelos y flujos de aprobación.",Gestión CDE y Cloud,cloud
+AutoCAD,Bajo,Consulta de planos 2D y ediciones básicas para soporte al modelado 3D.,Planos y 2D,pen-tool
+Dalux,Medio,"Supervisión de obra, gestión de incidencias y uso de realidad aumentada en sitio.",Incidencias y AR,smartphone
+Dynamo / Python,Bajo,Creación de scripts propios y funcionales para automatizar tareas y optimizar flujos de trabajo.,Scripting y Automatización,code
+Gemini AI,Medio,"Generación de imágenes, videos y creación de asistentes personalizados. Incluye la creación y revisión de documentación técnica para optimizar flujos de trabajo y soporte especializado.",Asistente Flujo Global,sparkles
+Monday,Medio,"Organización de tareas, gestión de cronogramas y seguimiento colaborativo de equipos.",Gestión de tiempos,layout-list
+Navisworks,Bajo,Suficiente para trabajar con interferencias y colisiones desde el rol de modelador BIM.,Clash Detection,crosshair
+Power BI,Medio,Creación de tableros para visualizar métricas y datos extraídos de modelos BIM.,Inteligencia de Datos,bar-chart-3
+Recap,Medio,Procesamiento y limpieza de nubes de puntos para su vinculación y modelado en Revit.,Nubes de puntos,scan
+Revit,Alto,Modelado integral de proyectos complejos y mejora de flujos con scripts e IA.,Modelado BIM,layers
+Speckle,Medio,Intercambio de datos entre plataformas para flujos de diseño colaborativo e interoperabilidad.,Interoperabilidad,box
+Twinmotion,Medio,Visualizaciones rápidas y recorridos virtuales para validación de diseño arquitectónico.,Render Real-time,image
