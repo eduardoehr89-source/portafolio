@@ -26,6 +26,11 @@ body {
     display: none !important;
 }
 
+.db-text-header {
+    font-weight: bold !important;
+    text-transform: uppercase;
+}
+
 .font-tech {
     font-family: 'JetBrains Mono', monospace;
 }
@@ -133,12 +138,47 @@ body {
     text-overflow: ellipsis;
 }
 
+/* --- OVERRIDE NATIVO PARA SELECTS --- */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+}
 
+select option {
+    background-color: #0f141a;
+    /* Fondo oscuro base para aislar del OS */
+    color: #e2e8f0;
+    padding: 8px;
+}
+
+/* --- ANIMACION ASCENDENTE DE PARTICULAS (AI REVOLUTION) --- */
+@keyframes riseUp {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    90% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-100vh) scale(0.5);
+        /* Sube pantalla completa */
+        opacity: 0;
+    }
+}
 
 /* --- DASHBOARD TYPOGRAPHY SYSTEM --- */
 .db-text-header {
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 300;
     color: #94a3b8;
     /* slate-400 */
     text-transform: uppercase;
@@ -430,6 +470,20 @@ body {
 
 .animate-bar {
     animation: growBar 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes growBarVertical {
+    from {
+        height: 0%;
+    }
+
+    to {
+        height: var(--final-height);
+    }
+}
+
+.animate-bar-vertical {
+    animation: growBarVertical 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes spinIn {
@@ -1054,6 +1108,7 @@ body.light-theme.bg-\[\#0b1016\] {
 }
 
 /* Light Slate Background */
+/* Light Slate Background */
 /* 13. AI ORBS - NEON GYROSCOPE (SCI-FI 3D) */
 .ai-orb {
     position: absolute;
@@ -1066,88 +1121,74 @@ body.light-theme.bg-\[\#0b1016\] {
     cursor: pointer;
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     z-index: 50;
-    perspective: 1000px;
-    /* Enable 3D perspective */
+    background: transparent !important;
 }
 
-/* Core Glow (Center) */
-.orb-core {
-    /* Using radial gradient for a "black hole" or "energy core" look */
-    background: radial-gradient(circle at center, rgba(168, 85, 247, 0.8) 0%, rgba(5, 8, 12, 0.95) 70%);
-    box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
-    border-radius: 50%;
-}
-
-/* Outer Ring */
-.orb-ring {
-    border-radius: 50%;
-    border: 2px solid transparent;
-    border-top-color: #22d3ee;
-    /* Cyan */
-    border-bottom-color: #22d3ee;
-    box-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
-    /* Neon Glow */
-}
-
-/* Inner Ring */
-.orb-ring-inner {
-    border-radius: 50%;
-    border: 2px solid transparent;
-    border-left-color: #c084fc;
-    /* Purple */
-    border-right-color: #c084fc;
-    box-shadow: 0 0 15px rgba(192, 132, 252, 0.4);
-    /* Neon Glow */
-}
-
-/* 3D Rotation Animations */
-@keyframes spin3D_Outer {
-    0% {
-        transform: rotateZ(0deg) rotateX(20deg);
-    }
-
-    100% {
-        transform: rotateZ(360deg) rotateX(20deg);
-    }
-}
-
-@keyframes spin3D_Inner {
-    0% {
-        transform: rotateZ(360deg) rotateX(-45deg);
-    }
-
-    100% {
-        transform: rotateZ(0deg) rotateX(-45deg);
-    }
-}
-
-.animate-spin-slow {
-    animation: spin3D_Outer 10s linear infinite;
-}
-
-.animate-spin-reverse {
-    animation: spin3D_Inner 8s linear infinite;
-}
-
-/* Hover Effects */
 .ai-orb:hover {
-    transform: scale(1.2);
-    z-index: 60;
+    transform: scale(1.05);
+    /* Escala general al container en CSS limpio*/
 }
 
-.ai-orb:hover .animate-spin-slow {
-    animation-duration: 4s;
-    box-shadow: 0 0 25px rgba(34, 211, 238, 0.8), inset 0 0 10px rgba(34, 211, 238, 0.2);
+/* 3D Rotation Animations (ELIMINADAS) */
+
+/* --- ESTADO EXPANDIDO DEL ANILLO (RECTANGULAR INFO-CARD) --- */
+.ai-orb.expanded-orb {
+    width: 440px !important;
+    max-width: 90vw !important;
+    height: auto !important;
+    min-height: 250px;
+    max-height: 80vh !important;
+    border-radius: 12px;
+    z-index: 100 !important;
+    padding: 24px;
+    background: rgba(15, 23, 42, 0.65);
+    /* Slate 900 opaco reducido a Glass */
+    border: 1px solid rgba(168, 85, 247, 0.6);
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.4);
+    backdrop-filter: blur(12px);
+    cursor: default;
+
+    /* Anclado Fijo al Centro Absoluto */
+    transform: translate(-50%, -50%) !important;
+    left: 50% !important;
+    top: 50% !important;
+
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    /* Detener rotacion/flotacion */
+    animation: none !important;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.ai-orb:hover .animate-spin-reverse {
-    animation-duration: 3s;
-    box-shadow: 0 0 25px rgba(192, 132, 252, 0.8), inset 0 0 10px rgba(192, 132, 252, 0.2);
+.ai-orb.expanded-orb:hover {
+    transform: translate(-50%, -50%) scale(1.02) !important;
 }
 
-.ai-orb:hover .orb-core {
-    box-shadow: 0 0 50px rgba(168, 85, 247, 0.6);
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.9) 0%, rgba(168, 85, 247, 0.8) 40%, rgba(5, 8, 12, 0.95) 80%);
+/* Ocultar el UI del Anillo normal (Border + Sombras css inline de Tailwind) al expandir*/
+.ai-orb.expanded-orb .ring-ui {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Estilo para revelar el boton Cerrar y Contenido Textual */
+.orb-expanded-content {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease 0.3s;
+    /* Delay hasta que crezca la caja */
+    width: 100%;
+}
+
+.ai-orb.expanded-orb .orb-expanded-content {
+    opacity: 1;
+    visibility: visible;
+}
+
+.ai-orb.expanded-orb .click-zone {
+    pointer-events: none !important;
 }
 
 /* 14. MASSIVE NEON HALO & ENERGY PARTICLES */

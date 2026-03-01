@@ -31,7 +31,7 @@
                 onclick="toggleTheme()">
                 <i data-lucide="sun" class="w-4 h-4"></i>
             </button>
-            <h1 class="font-black text-2xl text-white leading-tight mb-1">SAID<br><span
+            <h1 class="font-light text-2xl text-white leading-tight mb-1">SAID<br><span
                     class="text-cyan-400">HERRERA</span></h1>
             <p class="text-[10px] text-gray-400 font-mono mb-4">BIM OPERATING SYSTEM</p>
             <div
@@ -44,27 +44,27 @@
             <p class="text-[9px] text-gray-500 font-mono tracking-widest uppercase mb-1 px-2">MENÚ PRINCIPAL</p>
 
             <button
-                class="nav-btn w-full flex items-center gap-4 px-4 py-4 rounded-lg text-sm font-bold font-mono text-gray-400 hover:bg-cyan-900/10 hover:text-cyan-400 border border-transparent hover:border-cyan-500/30 transition group"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-4 rounded-lg text-sm font-light font-mono text-gray-400 hover:bg-cyan-900/10 hover:text-cyan-400 border border-transparent hover:border-cyan-500/30 transition group"
                 onclick="goHome()">
                 <i data-lucide="power" class="w-5 h-5 text-gray-500 group-hover:text-cyan-400"></i> SYSTEM_HOME
             </button>
 
             <button
-                class="nav-btn w-full flex items-center gap-4 px-4 py-4 rounded-lg text-sm font-bold font-mono text-gray-400 hover:bg-cyan-900/10 hover:text-cyan-400 border border-transparent hover:border-cyan-500/30 transition group"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-4 rounded-lg text-sm font-light font-mono text-gray-400 hover:bg-cyan-900/10 hover:text-cyan-400 border border-transparent hover:border-cyan-500/30 transition group"
                 onclick="switchView('global')">
                 <i data-lucide="layout-dashboard" class="w-5 h-5 text-gray-500 group-hover:text-cyan-400"></i>
                 01_GLOBAL_DASHBOARD
             </button>
 
             <button
-                class="nav-btn w-full flex items-center gap-4 px-4 py-4 rounded-lg text-sm font-bold font-mono text-gray-400 hover:bg-cyan-900/10 hover:text-cyan-400 border border-transparent hover:border-cyan-500/30 transition group"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-4 rounded-lg text-sm font-light font-mono text-gray-400 hover:bg-cyan-900/10 hover:text-cyan-400 border border-transparent hover:border-cyan-500/30 transition group"
                 onclick="switchView('projects')">
                 <i data-lucide="folder-open" class="w-5 h-5 text-gray-500 group-hover:text-cyan-400"></i>
                 02_PROJECT_DATABASE
             </button>
 
             <button
-                class="nav-btn w-full flex items-center gap-4 px-4 py-4 rounded-lg text-sm font-bold font-mono text-gray-400 hover:bg-purple-900/10 hover:text-purple-400 border border-transparent hover:border-purple-500/30 transition group"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-4 rounded-lg text-sm font-light font-mono text-gray-400 hover:bg-purple-900/10 hover:text-purple-400 border border-transparent hover:border-purple-500/30 transition group"
                 onclick="switchView('ai')">
                 <i data-lucide="sparkles" class="w-5 h-5 text-gray-500 group-hover:text-purple-400"></i>
                 03_AI_REVOLUTION
@@ -80,151 +80,206 @@
     </aside>
 
     <main id="app-wrapper"
-        class="flex-1 h-full w-full relative overflow-hidden bg-[#0f141a] page-transition-container hidden">
+        class="flex-1 h-full w-full relative overflow-hidden bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800 page-transition-container hidden">
 
         <div id="view-global" class="w-full h-full overflow-y-auto thin-scroll p-6 hidden">
             <div class="max-w-7xl mx-auto flex flex-col gap-6 pb-20">
-                <div class="flex items-center gap-3 mb-2 pb-4 border-b border-gray-800">
+                <div
+                    class="flex items-center gap-3 mb-2 pb-4 pt-6 border-b border-gray-800/20 sticky top-0 bg-transparent backdrop-blur-md z-50">
                     <div class="p-2 rounded bg-cyan-900/20 border border-cyan-500/30">
                         <i data-lucide="layout-dashboard" class="text-cyan-400 w-5 h-5"></i>
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-white tracking-widest">GLOBAL_DASHBOARD</h2>
-                        <p class="db-text-meta">RESUMEN EJECUTIVO DE COMPETENCIAS</p>
+                        <h2 class="text-xl font-light text-white tracking-widest">GLOBAL_DASHBOARD</h2>
+                        <p class="db-text-meta">RESUMEN EJECUTIVO DE COMPETENCIAS EN MODELADO BIM</p>
                     </div>
                 </div>
 
                 <div class="bento-grid">
 
-                    <div
-                        class="bento-col-2 bg-[#151b26] rounded-xl border border-gray-800 p-4 hover:border-cyan-500/30 transition flex flex-col">
-                        <div class="flex items-center gap-2 mb-3 border-b border-gray-800/50 pb-2">
-                            <i data-lucide="activity" class="text-gray-400 w-4 h-4"></i>
-                            <span class="db-text-header">TIPOLOGÍA DE PROYECTOS</span>
+                    <!-- Primera fila: 4 tarjetas -->
+                    <div class="bento-col-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[7fr_7fr_7fr_4fr] gap-4">
+                        <div class="bg-transparent flex flex-col h-full group">
+                            <div
+                                class="flex items-center gap-2 mb-1.5 border-b border-gray-800/20 pb-1.5 transition-colors group-hover:border-gray-700/50">
+                                <i data-lucide="activity" class="text-gray-400 w-4 h-4"></i>
+                                <span class="db-text-header text-[11px] xl:text-[13px]">TIPOLOGÍA DE PROYECTOS</span>
+                            </div>
+                            <div
+                                class="flex flex-col xl:flex-row justify-start xl:items-start items-center gap-4 px-2 pt-1">
+                                <div id="global-analytics-chart" class="w-14 h-14 xl:w-16 xl:h-16 relative shrink-0">
+                                </div>
+                                <div id="global-analytics-legend" class="flex-1 w-full space-y-1 min-w-[120px]"></div>
+                            </div>
                         </div>
-                        <div class="flex items-center gap-6 h-full px-2">
-                            <div id="global-analytics-chart" class="w-28 h-28 relative shrink-0"></div>
-                            <div id="global-analytics-legend" class="flex-1 space-y-1.5"></div>
+
+                        <div class="bg-transparent flex flex-col h-full group">
+                            <div
+                                class="flex items-center gap-2 mb-1.5 border-b border-gray-800/20 pb-1.5 transition-colors group-hover:border-gray-700/50">
+                                <i data-lucide="pie-chart" class="text-gray-400 w-4 h-4"></i>
+                                <span class="db-text-header text-[11px] xl:text-[13px]">FASE DEL
+                                    PROYECTO</span>
+                            </div>
+                            <div id="global-phases-list" class="space-y-1 flex flex-col justify-start pt-1">
+                            </div>
+                        </div>
+
+                        <div class="bg-transparent flex flex-col h-full group">
+                            <div
+                                class="flex items-center gap-2 mb-1.5 border-b border-gray-800/20 pb-1.5 transition-colors group-hover:border-gray-700/50">
+                                <i data-lucide="layers" class="text-gray-400 w-4 h-4"></i>
+                                <span class="db-text-header text-[11px] xl:text-[13px]">DISCIPLINAS DOMINADAS</span>
+                            </div>
+                            <div id="global-disciplines-list" class="space-y-1 flex-1 pt-1"></div>
+                        </div>
+
+                        <div class="bg-transparent flex flex-col h-full items-center justify-center group">
+                            <div
+                                class="flex items-center justify-center gap-1 mb-1 border-b border-gray-800/20 pb-1 w-full text-center transition-colors group-hover:border-gray-700/50">
+                                <i data-lucide="map-pin" class="text-blue-400 w-3 h-3 text-center"></i>
+                            </div>
+                            <div id="global-environment-list"
+                                class="flex-1 flex justify-center items-end mt-1 pb-1 w-full"></div>
                         </div>
                     </div>
 
-                    <div
-                        class="bento-col-2 bg-[#151b26] rounded-xl border border-gray-800 p-4 hover:border-cyan-500/30 transition flex flex-col">
-                        <div class="flex items-center gap-2 mb-3 border-b border-gray-800/50 pb-2">
-                            <i data-lucide="layers" class="text-gray-400 w-4 h-4"></i>
-                            <span class="db-text-header">DISCIPLINAS DOMINADAS</span>
-                        </div>
-                        <div id="global-disciplines-list" class="space-y-2 flex-1 pt-1"></div>
-                    </div>
-
-                    <div
-                        class="bento-col-4 bg-[#151b26] rounded-xl border border-gray-800 p-4 hover:border-cyan-500/30 transition">
-                        <div class="flex items-center gap-2 mb-3 border-b border-gray-800/50 pb-2">
+                    <div class="bento-col-4 bg-transparent p-4 w-full">
+                        <div class="flex items-center gap-2 mb-3 border-b border-gray-800/20 pb-2">
                             <i data-lucide="cpu" class="text-gray-400 w-4 h-4"></i>
                             <span class="db-text-header">SOFTWARE STACK (ALFABÉTICO)</span>
                         </div>
-                        <div id="global-software-list" class="grid grid-cols-2 md:grid-cols-5 gap-3"></div>
+                        <div id="global-software-list"
+                            class="flex flex-wrap justify-center gap-2 lg:gap-3 *:w-full *:grow md:*:w-[calc(30%)] lg:*:w-[calc(16%-12px)] xl:*:w-[calc(16%-12px)]">
+                        </div>
                     </div>
 
-                    <div
-                        class="bento-col-4 bg-[#151b26] rounded-xl border border-gray-800 p-4 hover:border-blue-500/30 transition">
-                        <div class="flex items-center gap-2 mb-3 border-b border-blue-500/20 pb-2">
+                    <div class="bento-col-4 bg-transparent p-4 w-full">
+                        <div class="flex items-center gap-2 mb-3 border-b border-gray-800/20 pb-2">
                             <i data-lucide="book-open" class="text-blue-400 w-4 h-4"></i>
                             <span class="db-text-header text-blue-400">NORMATIVAS Y ESTÁNDARES
                                 BIM</span>
                         </div>
-                        <div id="global-norms-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                        <div id="global-norms-list" class="flex flex-col lg:flex-row gap-3 items-stretch">
                         </div>
                     </div>
 
-                    <div
-                        class="bento-col-4 bg-[#151b26] rounded-xl border border-gray-800 p-4 hover:border-green-500/30 transition overflow-visible relative z-10">
-                        <div class="flex items-center gap-2 mb-3 border-b border-green-500/20 pb-2">
+                    <div class="bento-col-4 bg-transparent p-4 w-full overflow-visible relative z-10">
+                        <div class="flex items-center gap-2 mb-3 border-b border-gray-800/20 pb-2">
                             <i data-lucide="timer" class="text-green-400 w-4 h-4"></i>
                             <span class="db-text-header text-green-400">AHORRO DE TIEMPO (ROI)</span>
                         </div>
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr>
-                                    <th class="pb-2 db-text-meta font-mono font-normal">DISCIPLINA</th>
-                                    <th class="pb-2 db-text-meta font-mono font-normal">HERRAMIENTA</th>
-                                    <th class="pb-2 db-text-meta font-mono font-normal">DESCRIPCIÓN</th>
-                                    <th class="pb-2 db-text-meta font-mono font-normal text-right">MANUAL (HRS)</th>
-                                    <th class="pb-2 db-text-meta text-green-400 font-mono font-bold text-right">AUTO
-                                        (MIN)
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody id="global-roi-table" class="db-text-body font-mono"></tbody>
-                        </table>
-
-                        <!-- BOTÓN VER MÁS / MENOS -->
-                        <div class="mt-3 text-center border-t border-gray-800/50 pt-2">
-                            <button id="roi-toggle-btn"
-                                class="text-[10px] font-bold font-mono text-green-500 hover:text-green-400 transition uppercase tracking-widest border border-green-500/30 rounded px-4 py-1.5 bg-green-500/5 hover:bg-green-500/10"
-                                onclick="toggleROI()">
-                                VER MÁS +
-                            </button>
+                        <div class="overflow-y-auto thin-scroll max-h-[250px] pr-2 w-full">
+                            <table class="w-full text-left border-collapse">
+                                <thead class="sticky top-0 bg-transparent z-10 shadow-sm backdrop-blur-md">
+                                    <tr>
+                                        <th class="pb-2 pt-1 db-text-meta font-mono font-bold">DISCIPLINA</th>
+                                        <th class="pb-2 pt-1 db-text-meta font-mono font-bold">HERRAMIENTA</th>
+                                        <th class="pb-2 pt-1 db-text-meta font-mono font-bold">DESCRIPCIÓN</th>
+                                        <th class="pb-2 pt-1 db-text-meta font-mono font-bold text-right">MANUAL (HRS)
+                                        </th>
+                                        <th
+                                            class="pb-2 pt-1 db-text-meta text-green-400 font-mono font-bold text-right">
+                                            AUTO (MIN)</th>
+                                        <th
+                                            class="pb-2 pt-1 db-text-meta font-mono font-bold text-right text-green-400">
+                                            SPEEDUP</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="global-roi-table" class="db-text-body font-mono"></tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div
-                        class="bento-col-4 bg-[#151b26] rounded-xl border border-gray-800 p-4 hover:border-blue-500/30 transition overflow-visible relative z-10">
+                    <!-- SECCIÓN COLABORACIÓN -->
+                    <div class="bento-col-4 bg-transparent p-4 w-full">
+                        <div class="flex items-center gap-2 border-b border-gray-800/20 pb-2">
+                            <i data-lucide="users" class="text-gray-400 w-4 h-4"></i>
+                            <span class="db-text-header text-white/90">COLABORACIÓN</span>
+                        </div>
+                    </div>
 
+                    <!-- Contenido de las 3 Columnas Flotando en el Fondo -->
+                    <div class="bento-col-4 w-full mt-2 relative" id="collab-container">
+                        <!-- SVG para Dibujo Dinámico de Líneas -->
+                        <svg id="collab-lines-svg"
+                            class="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible">
+                            <!-- La línea se inyectará aquí vía JS -->
+                        </svg>
 
-                        <div id="collab-header-injection-point"></div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 h-full relative z-10">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 relative z-20 items-start w-full px-2 mt-4">
                             <!-- COLUMNA IZQUIERDA: SITIO -->
-                            <div class="flex flex-col gap-2">
+                            <div class="flex flex-col gap-1 justify-start">
+                                <span class="db-text-meta font-light tracking-widest uppercase mb-0">EN
+                                    OBRA (SITIO)</span>
+                                <div id="global-collab-site" class="flex flex-col gap-0.5 relative z-20"></div>
+                            </div>
+
+                            <!-- COLUMNA CENTRAL: YO (MODELADOR) -->
+                            <div class="flex flex-col items-center justify-start relative w-full pt-1">
+                                <div id="collab-center-avatar"
+                                    class="relative z-20 bg-transparent border border-cyan-500/10 p-4 rounded-full flex flex-col items-center justify-center transition">
+                                    <i data-lucide="user" class="w-7 h-7 text-cyan-400"></i>
+                                </div>
                                 <span
-                                    class="db-text-meta font-bold tracking-widest uppercase mb-1 border-b border-gray-800 pb-1">EN
-                                    OBRA
-                                    (SITIO)</span>
-                                <div id="global-collab-site" class="flex flex-col gap-1.5"></div>
+                                    class="text-xs font-light text-cyan-400 mt-2 font-mono tracking-widest z-20 text-center leading-tight">SAID
+                                    HERRERA /<br>MODELADOR
+                                    BIM</span>
+
+                                <!-- Caja de Información (Siempre Secuencial bajo el icono) -->
+                                <div id="collab-central-popup"
+                                    class="w-full mt-2 z-50 flex flex-col justify-start min-h-[100px] transition-all duration-300">
+                                    <div
+                                        class="flex flex-col items-center justify-start h-full text-center text-gray-500 text-[9px] font-mono tracking-widest uppercase opacity-70 mt-2">
+                                        <i data-lucide="mouse-pointer-click"
+                                            class="w-4 h-4 mb-1.5 text-cyan-500/50"></i>
+                                        Pasa el cursor sobre un rol para ver la información
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- COLUMNA DERECHA: OFICINA -->
-                            <div class="flex flex-col gap-2">
-                                <span
-                                    class="db-text-meta font-bold tracking-widest uppercase mb-1 border-b border-gray-800 pb-1">EN
+                            <div class="flex flex-col gap-1 justify-start">
+                                <span class="db-text-meta font-light tracking-widest uppercase mb-0 text-right">EN
                                     OFICINA</span>
-                                <div id="global-collab-office" class="flex flex-col gap-1.5"></div>
+                                <div id="global-collab-office"
+                                    class="flex flex-col gap-0.5 relative z-20 items-stretch">
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div
-                        class="bento-col-4 bg-[#151b26] rounded-xl border border-gray-800 p-4 hover:border-green-500/30 transition">
-                        <div class="flex items-center justify-between gap-2 mb-3 border-b border-green-500/20 pb-2">
-                            <div class="flex items-center gap-2">
-                                <i data-lucide="graduation-cap" class="text-green-400 w-4 h-4"></i>
-                                <span class="db-text-header text-green-400">FORMACIÓN: MÁSTER
-                                    MBIA</span>
-                            </div>
-                            <span class="db-text-meta border border-gray-700 px-2 py-0.5 rounded font-mono">EN
-                                CURSO</span>
+                    <div class="bento-col-4 bg-transparent p-4 w-full relative group">
+                        <div class="flex items-center gap-2 mb-3 border-b border-gray-800/20 pb-2">
                         </div>
-                        <div id="global-education-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                        <div id="global-education-list" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2">
                         </div>
                     </div>
 
                 </div>
             </div>
+
+            <div class="mt-8 mb-4 text-center pointer-events-none w-full"><span
+                    class="text-[9px] font-mono text-gray-600/50 uppercase tracking-[0.2em] font-bold">POWERED BY GEMINI
+                    PRO & ANTIGRAVITY</span></div>
         </div>
 
         <div id="view-projects" class="w-full h-full flex flex-col relative hidden">
-            <div class="h-16 border-b border-gray-800 px-6 flex items-center justify-between shrink-0 bg-[#151b26]">
+            <div
+                class="h-16 border-b border-gray-800/20 px-6 flex items-center justify-between shrink-0 bg-transparent backdrop-blur-md z-20">
                 <div class="flex items-center gap-3"><i data-lucide="folder-open" class="text-cyan-400 w-6 h-6"></i>
-                    <h2 class="font-bold text-white text-base tracking-widest">02_PROJECT_DATABASE</h2>
+                    <h2 class="font-light text-white text-base tracking-widest">02_PROJECT_DATABASE</h2>
                 </div>
                 <div class="flex items-center gap-3">
-                    <div id="system-status-bar" class="flex items-center gap-2 mr-6 border-r border-gray-800 pr-6"><span
-                            class="text-xs font-mono text-cyan-500 animate-pulse">●</span><span id="system-status-text"
-                            class="text-xs font-mono text-gray-400 uppercase tracking-tight">READY</span></div>
+                    <div id="system-status-bar" class="flex items-center gap-2 mr-6 border-r border-gray-800 pr-6">
+                        <span class="text-xs font-mono text-cyan-500 animate-pulse">●</span><span
+                            id="system-status-text"
+                            class="text-xs font-mono text-gray-400 uppercase tracking-tight">READY</span>
+                    </div>
                     <div class="relative group/top">
                         <button id="btn-top5"
                             class="border-cyan-500 text-cyan-400 bg-cyan-900/10 border rounded px-3 py-1.5 text-xs font-bold font-mono transition flex items-center gap-1"
-                            onclick="toggleTop5()"><i data-lucide="trophy" class="w-3 h-3"></i> TOP PROJECTS</button>
+                            onclick="toggleTop5()"><i data-lucide="trophy" class="w-3 h-3"></i> TOP
+                            PROJECTS</button>
                         <!-- Warning Popup -->
                         <div id="top-projects-warning"
                             class="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 bg-[#151b26] border border-cyan-500/50 rounded-lg shadow-2xl p-3 z-50 flex flex-col items-center text-center opacity-0 pointer-events-none transition-opacity duration-500 hidden">
@@ -232,33 +287,43 @@
                                 class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#151b26] border-l border-t border-cyan-500/50 transform rotate-45">
                             </div>
                             <i data-lucide="info" class="text-cyan-400 w-5 h-5 mb-2 relative z-10"></i>
-                            <p class="text-gray-300 text-xs font-mono relative z-10">Estás viendo la <strong>selección
-                                    Top</strong>.<br>Haz clic aquí para ver la base de datos completa.</p>
+                            <p class="text-gray-300 text-xs font-mono relative z-10">Estás viendo la
+                                <strong>selección
+                                    Top</strong>.<br>Haz clic aquí para ver la base de datos completa.
+                            </p>
                             <button onclick="dismissTopWarning()"
                                 class="mt-2 text-gray-500 hover:text-white text-[10px] uppercase font-bold tracking-widest relative z-10">Entendido</button>
                         </div>
                     </div>
-                    <div class="flex items-center bg-transparent border border-gray-700 rounded px-3 py-1.5 w-48"><i
-                            data-lucide="search" class="w-3 h-3 text-gray-500 mr-2"></i><input type="text"
-                            id="search-bar"
-                            class="bg-transparent border-none outline-none text-xs text-white w-full font-mono"
-                            placeholder="Buscar..." onkeyup="runFilter()"></div>
+                    <div
+                        class="relative flex items-center bg-transparent border border-gray-700 rounded px-3 py-1.5 w-60">
+                        <i data-lucide="search" class="w-3 h-3 text-gray-500 mr-2"></i>
+                        <input type="text" id="search-bar"
+                            class="bg-transparent border-none outline-none text-xs text-white w-full pr-5 font-mono"
+                            placeholder="Buscar..." oninput="toggleClearSearch()" onkeyup="runFilter()">
+                        <button id="clear-search-btn" onclick="clearSearch()"
+                            class="absolute right-2 text-gray-500 hover:text-white hidden transition-colors"
+                            title="Borrar búsqueda">
+                            <i data-lucide="x" class="w-3 h-3"></i>
+                        </button>
+                    </div>
 
                     <div
-                        class="flex items-center bg-transparent border border-gray-800 rounded px-1.5 py-1.5 w-auto hover:border-blue-500/30 transition">
+                        class="flex items-center bg-transparent border border-gray-800/30 rounded px-1.5 py-1.5 w-auto hover:border-blue-500/30 transition">
                         <i data-lucide="arrow-up-down" class="w-3 h-3 text-gray-500 mr-2"></i>
                         <select id="sort-order"
                             class="bg-transparent border-none outline-none text-xs text-gray-400 cursor-pointer font-mono w-full"
                             onchange="runFilter()">
-                            <option value="id-desc" class="bg-[#151b26] text-gray-300">RECIENTES (ID DESC)</option>
-                            <option value="id-asc" class="bg-[#151b26] text-gray-300">ANTIGUOS (ID ASC)</option>
-                            <option value="name-asc" class="bg-[#151b26] text-gray-300">NOMBRE (A-Z)</option>
-                            <option value="name-desc" class="bg-[#151b26] text-gray-300">NOMBRE (Z-A)</option>
-                            <option value="loc" class="bg-[#151b26] text-gray-300">UBICACIÓN</option>
-                            <option value="year-desc" class="bg-[#151b26] text-gray-300">AÑO (REC-ANT)</option>
-                            <option value="year-asc" class="bg-[#151b26] text-gray-300">AÑO (ANT-REC)</option>
-                            <option value="type" class="bg-[#151b26] text-gray-300">TIPOLOGÍA</option>
-                            <option value="phase" class="bg-[#151b26] text-gray-300">FASE</option>
+                            <option value="id-desc" class="bg-[#0f141a] text-gray-300">RECIENTES (ID DESC)</option>
+                            <option value="id-asc" class="bg-[#0f141a] text-gray-300">ANTIGUOS (ID ASC)</option>
+                            <option value="name-asc" class="bg-[#0f141a] text-gray-300">NOMBRE (A-Z)</option>
+                            <option value="name-desc" class="bg-[#0f141a] text-gray-300">NOMBRE (Z-A)</option>
+                            <option value="loc" class="bg-[#0f141a] text-gray-300">UBICACIÓN</option>
+                            <option value="year-desc" class="bg-[#0f141a] text-gray-300">AÑO (REC-ANT)</option>
+                            <option value="year-asc" class="bg-[#0f141a] text-gray-300">AÑO (ANT-REC)</option>
+                            <option value="type" class="bg-[#0f141a] text-gray-300">TIPOLOGÍA</option>
+                            <option value="entorno" class="bg-[#0f141a] text-gray-300">ENTORNO</option>
+                            <option value="phase" class="bg-[#0f141a] text-gray-300">FASE</option>
                         </select>
                     </div>
 
@@ -267,31 +332,50 @@
                             class="bg-transparent border border-gray-700 text-gray-400 hover:text-white rounded px-3 py-1.5 text-xs font-mono flex items-center gap-1"><i
                                 data-lucide="filter" class="w-3 h-3"></i> FILTROS</button>
                         <div id="filter-dropdown"
-                            class="hidden absolute top-full right-0 mt-2 w-64 bg-[#080c10] border border-gray-800 rounded-lg shadow-2xl p-4 z-50 flex flex-col gap-3">
+                            class="hidden absolute top-full right-0 mt-2 w-64 bg-[#0f141a] border border-gray-800 rounded-lg shadow-2xl p-3 z-50 flex flex-col gap-1.5">
                             <select id="filter-loc"
-                                class="filter-select w-full bg-[#151b26] border border-gray-700 rounded px-2 py-2 text-xs text-gray-300"
+                                class="filter-select w-full bg-[#151b26] border-none rounded px-2 py-1 text-xs text-gray-300 relative"
                                 onchange="handleFilterChange()">
                                 <option value="all">UBICACIÓN: TODAS</option>
                             </select>
                             <select id="filter-type"
-                                class="filter-select w-full bg-[#151b26] border border-gray-700 rounded px-2 py-2 text-xs text-gray-300"
+                                class="filter-select w-full bg-[#151b26] border-none rounded px-2 py-1 text-xs text-gray-300 relative"
                                 onchange="handleFilterChange()">
                                 <option value="all">TIPO: TODOS</option>
                             </select>
                             <select id="filter-year"
-                                class="filter-select w-full bg-[#151b26] border border-gray-700 rounded px-2 py-2 text-xs text-gray-300"
+                                class="filter-select w-full bg-[#151b26] border-none rounded px-2 py-1 text-xs text-gray-300 relative"
                                 onchange="handleFilterChange()">
                                 <option value="all">AÑO: TODOS</option>
                             </select>
                             <select id="filter-disc"
-                                class="filter-select w-full bg-[#151b26] border border-gray-700 rounded px-2 py-2 text-xs text-gray-300"
+                                class="filter-select w-full bg-[#151b26] border-none rounded px-2 py-1 text-xs text-gray-300 relative"
                                 onchange="handleFilterChange()">
                                 <option value="all">DISCIPLINA: TODAS</option>
                             </select>
+                            <select id="filter-entorno"
+                                class="filter-select w-full bg-[#151b26] border-none rounded px-2 py-1 text-xs text-gray-300 relative"
+                                onchange="handleFilterChange()">
+                                <option value="all">ENTORNO: TODOS</option>
+                            </select>
                             <select id="filter-phase"
-                                class="filter-select w-full bg-[#151b26] border border-gray-700 rounded px-2 py-2 text-xs text-gray-300"
+                                class="filter-select w-full bg-[#151b26] border-none rounded px-2 py-1 text-xs text-gray-300 relative"
                                 onchange="handleFilterChange()">
                                 <option value="all">FASE: TODAS</option>
+                            </select>
+                            <select id="filter-ia"
+                                class="filter-select w-full bg-[#151b26] border-none rounded px-2 py-1 text-xs text-gray-300 relative"
+                                onchange="handleFilterChange()">
+                                <option value="all" class="font-normal">USO DE IA: TODOS</option>
+                                <option value="si" class="text-cyan-400">USO DE IA: SÍ</option>
+                                <option value="no">USO DE IA: NO</option>
+                            </select>
+                            <select id="filter-video"
+                                class="filter-select w-full bg-[#151b26] border-none rounded px-2 py-1 text-xs text-gray-300 relative"
+                                onchange="handleFilterChange()">
+                                <option value="all" class="font-normal">VIDEO: TODOS</option>
+                                <option value="si" class="text-cyan-400">VIDEO: SÍ</option>
+                                <option value="no">VIDEO: NO</option>
                             </select>
                             <button onclick="resetFilters()"
                                 class="w-full mt-1 bg-red-900/20 text-red-400 border border-red-900/30 rounded py-2 text-xs font-bold">LIMPIAR</button>
@@ -306,10 +390,10 @@
                                 class="w-4 h-4"></i></button></div>
                 </div>
             </div>
-            <div class="flex-1 overflow-hidden relative bg-[#0f141a]">
+            <div class="flex-1 overflow-hidden relative bg-transparent">
                 <div id="list-view-wrapper" class="hidden w-full h-full overflow-auto custom-scroll">
                     <div
-                        class="sticky top-0 bg-[#0f141a] border-b border-gray-700 text-xs font-mono text-cyan-500 font-bold uppercase p-4 grid grid-cols-[40px_10%_15%_15%_10%_5%_8%_8%_6%_1fr] gap-4 w-full z-10 min-w-[1200px]">
+                        class="sticky top-0 bg-transparent backdrop-blur-md border-b border-gray-800/30 text-xs font-mono text-cyan-500 font-bold uppercase p-4 grid grid-cols-[40px_10%_15%_12%_8%_4%_8%_8%_6%_6%_1fr] gap-4 w-full z-10 min-w-[1200px]">
                         <span>ID</span>
                         <span>PROYECTO</span>
                         <span>DESCRIPCION</span>
@@ -318,18 +402,26 @@
                         <span>AÑO</span>
                         <span>DISCIPLINA</span>
                         <span>TIPOLOGIA</span>
+                        <span>ENTORNO</span>
                         <span>FASE</span>
                         <span>SOFTWARE</span>
                     </div>
                     <div id="proyectos-list-container" class="w-full min-w-[1200px]"></div>
+                    <div class="mt-8 mb-4 text-center pointer-events-none w-full"><span
+                            class="text-[9px] font-mono text-gray-600/50 uppercase tracking-[0.2em] font-bold">POWERED
+                            BY GEMINI PRO & ANTIGRAVITY</span></div>
                 </div>
                 <div id="gallery-view-wrapper" class="h-full overflow-auto p-6 custom-scroll">
-                    <div id="gallery-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                    <div id="gallery-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    </div>
+                    <div class="mt-8 mb-4 text-center pointer-events-none w-full"><span
+                            class="text-[9px] font-mono text-gray-600/50 uppercase tracking-[0.2em] font-bold">POWERED
+                            BY GEMINI PRO & ANTIGRAVITY</span></div>
                 </div>
             </div>
-            <div id="gallery-modal" class="hidden absolute inset-0 z-50 bg-[#0b1016] flex flex-col">
+            <div id="gallery-modal" class="hidden absolute inset-0 z-50 bg-black/80 backdrop-blur-xl flex flex-col">
                 <div id="modal-header"
-                    class="h-16 flex justify-between items-center px-6 pl-24 border-b border-gray-800 bg-[#151b26] shrink-0 font-mono">
+                    class="h-16 flex justify-between items-center px-6 pl-24 border-b border-gray-800/30 bg-transparent shrink-0 font-mono">
                     <!-- Left: Project Info (Single Line) -->
                     <div class="flex items-center gap-4 overflow-hidden mr-4">
                         <span class="text-cyan-400 font-bold shrink-0" id="modal-project-id">--</span>
@@ -342,6 +434,17 @@
 
                     <!-- Right: Navigation & Close -->
                     <div class="flex items-center gap-2 shrink-0">
+                        <div class="flex items-center bg-transparent rounded border border-gray-700 p-0.5 mr-2">
+                            <button id="btn-gallery-view-default" onclick="setGalleryViewMode('default')"
+                                class="p-1.5 hover:bg-white/10 rounded text-cyan-400 transition"
+                                title="Vista Individual"><i data-lucide="image" class="w-4 h-4"></i></button>
+                            <button id="btn-gallery-view-list" onclick="setGalleryViewMode('list')"
+                                class="p-1.5 hover:bg-white/10 rounded text-gray-400 transition" title="Vista Lista"><i
+                                    data-lucide="list" class="w-4 h-4"></i></button>
+                            <button id="btn-gallery-view-grid" onclick="setGalleryViewMode('grid')"
+                                class="p-1.5 hover:bg-white/10 rounded text-gray-400 transition"
+                                title="Vista Cuadrícula"><i data-lucide="layout-grid" class="w-4 h-4"></i></button>
+                        </div>
                         <div class="flex items-center bg-black/20 rounded-lg p-1 mr-2 border border-white/5">
                             <button onclick="navigateProject(-1)"
                                 class="p-1.5 hover:bg-white/10 rounded-md text-gray-400 hover:text-white transition"
@@ -357,26 +460,51 @@
                     </div>
                 </div>
                 <div id="gallery-backdrop"
-                    class="flex-1 bg-black/90 flex items-center justify-center relative group/nav">
-                    <button onclick="navigateImage(-1)"
-                        class="absolute left-4 z-10 p-3 bg-black/50 hover:bg-blue-600/80 text-white rounded-full transition opacity-0 group-hover/nav:opacity-100"><i
-                            data-lucide="chevron-left" class="w-6 h-6"></i></button>
-                    <div id="modal-img-bg" class="w-full h-full bg-contain bg-center bg-no-repeat"></div>
-                    <button onclick="navigateImage(1)"
-                        class="absolute right-4 z-10 p-3 bg-black/50 hover:bg-blue-600/80 text-white rounded-full transition opacity-0 group-hover/nav:opacity-100"><i
-                            data-lucide="chevron-right" class="w-6 h-6"></i></button>
+                    class="flex-1 bg-transparent relative overflow-hidden flex flex-col items-center justify-center">
 
-                    <!-- Image Indicator -->
-                    <div class="absolute bottom-4 left-4 bg-black/50 px-3 py-1 rounded-full text-xs text-white font-mono backdrop-blur-sm"
-                        id="modal-image-counter">1 / 1</div>
+                    <!-- VISTA 1: DEFAULT (Carrusel) -->
+                    <div id="modal-view-default" class="absolute inset-0 flex items-center justify-center group/nav">
+                        <button onclick="navigateImage(-1)"
+                            class="absolute left-4 z-10 p-3 bg-black/50 hover:bg-blue-600/80 text-white rounded-full transition opacity-0 group-hover/nav:opacity-100"><i
+                                data-lucide="chevron-left" class="w-6 h-6"></i></button>
+                        <div id="modal-img-bg" class="w-full h-full bg-contain bg-center bg-no-repeat"></div>
+                        <button onclick="navigateImage(1)"
+                            class="absolute right-4 z-10 p-3 bg-black/50 hover:bg-blue-600/80 text-white rounded-full transition opacity-0 group-hover/nav:opacity-100"><i
+                                data-lucide="chevron-right" class="w-6 h-6"></i></button>
+
+                        <!-- Image Indicator -->
+                        <div class="absolute bottom-4 left-4 bg-black/50 px-3 py-1 rounded-full text-xs text-white font-mono backdrop-blur-sm z-20"
+                            id="modal-image-counter">1 / 1</div>
+                    </div>
+
+                    <!-- VISTA 2: LISTA (Sin Scroll Total) -->
+                    <div id="modal-view-list"
+                        class="hidden absolute inset-0 p-8 flex flex-col justify-center items-center">
+                        <div
+                            class="w-full max-w-4xl max-h-full flex flex-col bg-slate-900/50 rounded-xl overflow-hidden border border-gray-800">
+                            <div id="modal-list-container" class="flex-1 flex flex-col w-full overflow-hidden">
+                                <!-- Filas de Lista Inyectadas mediante JS auto-escalables / ocultas -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VISTA 3: GRID (Galería, Mosaico Inteligente) -->
+                    <div id="modal-view-grid"
+                        class="hidden absolute inset-0 p-4 md:px-8 pb-4 flex items-center justify-center">
+                        <div id="modal-grid-container"
+                            class="w-full h-full max-w-[95%] max-h-full overflow-hidden items-center justify-items-center">
+                            <!-- Grilla inyectada dinámicamente mediante JS -->
+                        </div>
+                    </div>
 
                     <!-- Description & Challenge Block -->
                     <div id="modal-text-block"
-                        class="absolute bottom-0 left-0 right-0 p-4 pb-3 bg-gradient-to-t from-black/90 via-black/70 to-transparent flex flex-col gap-2 transition-opacity duration-300 pointer-events-none">
+                        class="absolute bottom-0 left-0 right-0 p-4 pb-3 bg-transparent flex flex-col gap-2 transition-opacity duration-300 pointer-events-none">
                         <div
-                            class="max-w-6xl mx-auto w-[95%] pointer-events-auto bg-black/40 backdrop-blur-md border border-white/10 rounded-lg p-3">
+                            class="max-w-[1400px] mx-auto w-[95%] pointer-events-auto bg-black/40 backdrop-blur-md border border-white/10 rounded-lg p-3">
                             <p id="modal-project-desc"
-                                class="text-white text-xs md:text-sm mb-1.5 leading-relaxed hidden drop-shadow-md"></p>
+                                class="text-white text-xs md:text-sm mb-1.5 leading-relaxed hidden drop-shadow-md uppercase">
+                            </p>
                             <p id="modal-project-reto"
                                 class="text-white text-[10px] md:text-xs font-mono hidden drop-shadow-md"><strong
                                     class="uppercase tracking-widest opacity-80">Reto:</strong> <span
@@ -389,9 +517,10 @@
             <div id="text-modal"
                 class="hidden absolute inset-0 z-[60] bg-black/80 flex items-center justify-center backdrop-blur-sm p-4">
                 <div
-                    class="bg-[#151b26] border border-gray-700 rounded-xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col">
-                    <div class="flex justify-between items-center p-4 border-b border-gray-700">
-                        <h3 id="text-modal-title" class="text-cyan-400 font-bold font-mono text-lg">RETO / DESAFÍO</h3>
+                    class="bg-black/40 backdrop-blur-xl border border-gray-800/50 rounded-xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-col">
+                    <div class="flex justify-between items-center p-4 border-b border-gray-800/30">
+                        <h3 id="text-modal-title" class="text-cyan-400 font-bold font-mono text-lg">RETO / DESAFÍO
+                        </h3>
                         <button onclick="closeTextModal()" class="text-gray-400 hover:text-white"><i
                                 data-lucide="x"></i></button>
                     </div>
@@ -400,142 +529,109 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
-        <section id="view-ai" class="w-full h-full relative overflow-hidden ai-section-bg hidden">
-            <div class="absolute top-8 left-8 z-20 flex items-center gap-3"><i data-lucide="sparkles"
-                    class="text-purple-400 w-8 h-8"></i>
-                <h2 class="text-3xl font-black text-white tracking-widest">03_AI_REVOLUTION</h2>
+        <section id="view-ai" class="w-full h-full relative overflow-hidden bg-zinc-950 hidden">
+            <!-- Fuente de luz inferior para particulas -->
+            <div
+                class="absolute bottom-[-150px] left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[300px] bg-purple-600/20 blur-[100px] rounded-full pointer-events-none z-0">
             </div>
-            <div id="ai-particles" class="absolute inset-0 pointer-events-none"></div>
-            <!-- Massive Neon Halo Background -->
-            <div class="neon-halo">
-                <div class="halo-ring"></div>
-                <!-- halo-core REMOVED -->
-                <div id="halo-particles" class="absolute inset-0 overflow-hidden rounded-full"></div>
-            </div>
+
+            <div id="ai-particles" class="absolute inset-0 pointer-events-none z-0"></div>
             <div id="ai-universe" class="absolute inset-0 w-full h-full z-10"></div>
+        </section>
+
         </section>
 
     </main>
 
     <section id="hero-dashboard"
-        class="fixed inset-0 w-full h-full z-[100] ai-section-bg flex flex-col p-6 overflow-hidden page-transition-container"
+        class="fixed inset-0 w-full h-full z-[100] bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800 flex flex-col p-6 overflow-hidden page-transition-container"
         onmousemove="rotateRoom(event)">
         <div
-            class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,_transparent_0%,_#000_100%)] opacity-80">
+            class="absolute inset-0 pointer-events-none opacity-50 bg-[radial-gradient(circle_at_center,_transparent_0%,_#000_100%)]">
         </div>
 
-        <div class="relative z-10 flex flex-col items-center justify-center pt-10 mb-12">
-            <div
-                class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-900/20 mb-4 backdrop-blur-sm shadow-[0_0_15px_rgba(34,211,238,0.3)]">
-                <div class="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse"></div>
-                <span class="text-[10px] font-mono text-cyan-300 tracking-[0.3em] font-bold">SYSTEM_ONLINE</span>
-            </div>
-            <h1 class="text-7xl font-black text-white tracking-tighter leading-none mb-2"
+        <div class="relative z-10 flex flex-col items-center justify-center pt-10 mb-8">
+            <h1 class="text-7xl font-light text-white tracking-tighter leading-none mb-2 mt-8"
                 style="text-shadow: 0 0 40px rgba(34,211,238,0.3);">BIM<span class="text-cyan-400">.OS</span></h1>
-            <p class="text-xs text-gray-400 font-mono tracking-[0.5em] uppercase opacity-70">Said Herrera // Operating
-                System</p>
-        </div>
+            <p class="text-xs text-gray-400 font-mono tracking-[0.5em] uppercase opacity-70 mb-8">Said Herrera //
+                MODELADOR BIM // MÉXICO</p>
 
-        <div
-            class="scene-3d-container relative z-10 flex-1 min-h-0 flex flex-col items-center justify-center gap-12 pb-20">
-            <div class="floor-grid"></div>
-            <div id="room"
-                class="orb-container max-w-5xl mx-auto flex flex-col items-center justify-center gap-16 transform-style-3d">
-
-                <div class="tesseract-wrapper fade-in-up delay-100" onclick="switchView('global', true)">
-                    <div class="cube">
-                        <div class="face front"><i data-lucide="cpu"></i></div>
-                        <div class="face back"><i data-lucide="cpu"></i></div>
-                        <div class="face right"><i data-lucide="cpu"></i></div>
-                        <div class="face left"><i data-lucide="cpu"></i></div>
-                        <div class="face top"><i data-lucide="cpu"></i></div>
-                        <div class="face bottom"><i data-lucide="cpu"></i></div>
-                        <div class="inner-cube">
-                            <div class="inner-face in-front"></div>
-                            <div class="inner-face in-back"></div>
-                            <div class="inner-face in-right"></div>
-                            <div class="inner-face in-left"></div>
-                            <div class="inner-face in-top"></div>
-                            <div class="inner-face in-bottom"></div>
-                        </div>
-                    </div>
-                    <div class="cube-label text-cyan-300 font-bold tracking-[0.2em] text-xs mt-12">GLOBAL DASHBOARD
-                    </div>
+            <div class="flex items-center justify-center gap-4 animate-fade-in-up" style="animation-delay: 0.2s">
+                <div class="flex flex-col items-center justify-center w-36 transition hover:scale-105">
+                    <span class="text-4xl lg:text-5xl font-light text-white leading-none mb-1 flex items-center">
+                        <span id="stat-projects" class="counter-anim" data-target="0">0</span><span
+                            class="text-2xl lg:text-3xl ml-0.5 font-normal text-white/50">+</span>
+                    </span>
+                    <span class="text-[9px] text-gray-300 font-mono tracking-widest uppercase">PROYECTOS</span>
                 </div>
-
-                <div class="flex flex-wrap justify-center gap-20 items-center">
-                    <div class="tesseract-wrapper fade-in-up delay-200" onclick="switchView('projects', true)">
-                        <div class="cube" style="width:60px; height:60px;">
-                            <div class="face front"
-                                style="width:60px;height:60px;transform:rotateY(0deg) translateZ(30px)"><i
-                                    data-lucide="folder-open" class="w-4 h-4"></i></div>
-                            <div class="face back"
-                                style="width:60px;height:60px;transform:rotateY(180deg) translateZ(30px)"></div>
-                            <div class="face right"
-                                style="width:60px;height:60px;transform:rotateY(90deg) translateZ(30px)"></div>
-                            <div class="face left"
-                                style="width:60px;height:60px;transform:rotateY(-90deg) translateZ(30px)"></div>
-                            <div class="face top"
-                                style="width:60px;height:60px;transform:rotateX(90deg) translateZ(30px)"></div>
-                            <div class="face bottom"
-                                style="width:60px;height:60px;transform:rotateX(-90deg) translateZ(30px)"></div>
-                            <div class="inner-cube" style="width:30px;height:30px;top:15px;left:15px;">
-                                <div class="inner-face in-front"
-                                    style="width:30px;height:30px;transform:rotateY(0deg) translateZ(15px)"></div>
-                                <div class="inner-face in-back"
-                                    style="width:30px;height:30px;transform:rotateY(180deg) translateZ(15px)"></div>
-                                <div class="inner-face in-right"
-                                    style="width:30px;height:30px;transform:rotateY(90deg) translateZ(15px)"></div>
-                                <div class="inner-face in-left"
-                                    style="width:30px;height:30px;transform:rotateY(-90deg) translateZ(15px)"></div>
-                                <div class="inner-face in-top"
-                                    style="width:30px;height:30px;transform:rotateX(90deg) translateZ(15px)"></div>
-                                <div class="inner-face in-bottom"
-                                    style="width:30px;height:30px;transform:rotateX(-90deg) translateZ(15px)"></div>
-                            </div>
-                        </div>
-                        <div class="cube-label text-cyan-400 font-mono tracking-widest text-[10px]">PROJECTS</div>
-                    </div>
-
-                    <div class="tesseract-wrapper fade-in-up delay-300" onclick="switchView('ai', true)">
-                        <div class="cube purple" style="width:60px; height:60px;">
-                            <div class="face front"
-                                style="width:60px;height:60px;transform:rotateY(0deg) translateZ(30px)"><i
-                                    data-lucide="sparkles" class="w-4 h-4"></i></div>
-                            <div class="face back"
-                                style="width:60px;height:60px;transform:rotateY(180deg) translateZ(30px)"></div>
-                            <div class="face right"
-                                style="width:60px;height:60px;transform:rotateY(90deg) translateZ(30px)"></div>
-                            <div class="face left"
-                                style="width:60px;height:60px;transform:rotateY(-90deg) translateZ(30px)"></div>
-                            <div class="face top"
-                                style="width:60px;height:60px;transform:rotateX(90deg) translateZ(30px)"></div>
-                            <div class="face bottom"
-                                style="width:60px;height:60px;transform:rotateX(-90deg) translateZ(30px)"></div>
-                            <div class="inner-cube" style="width:30px;height:30px;top:15px;left:15px;">
-                                <div class="inner-face in-front"
-                                    style="width:30px;height:30px;transform:rotateY(0deg) translateZ(15px)"></div>
-                                <div class="inner-face in-back"
-                                    style="width:30px;height:30px;transform:rotateY(180deg) translateZ(15px)"></div>
-                                <div class="inner-face in-right"
-                                    style="width:30px;height:30px;transform:rotateY(90deg) translateZ(15px)"></div>
-                                <div class="inner-face in-left"
-                                    style="width:30px;height:30px;transform:rotateY(-90deg) translateZ(15px)"></div>
-                                <div class="inner-face in-top"
-                                    style="width:30px;height:30px;transform:rotateX(90deg) translateZ(15px)"></div>
-                                <div class="inner-face in-bottom"
-                                    style="width:30px;height:30px;transform:rotateX(-90deg) translateZ(15px)"></div>
-                            </div>
-                        </div>
-                        <div class="cube-label text-purple-400 font-mono tracking-widest text-[10px]">AI REVOLUTION
-                        </div>
-                    </div>
+                <div class="flex flex-col items-center justify-center w-36 transition hover:scale-105">
+                    <span class="text-4xl lg:text-5xl font-light text-white leading-none mb-1 flex items-center"><span
+                            id="stat-experience" class="counter-anim" data-target="0">0</span><span
+                            class="text-2xl lg:text-3xl ml-0.5 font-normal text-white/50">+</span></span>
+                    <span
+                        class="text-[9px] text-gray-300 font-mono tracking-widest uppercase text-center leading-tight mt-1">AÑOS<br>EXPERIENCIA</span>
+                </div>
+                <div class="flex flex-col items-center justify-center w-36 transition hover:scale-105">
+                    <span class="text-4xl lg:text-5xl font-light text-white leading-none mb-1 flex items-center">
+                        <span id="stat-cities" class="counter-anim" data-target="0">0</span><span
+                            class="text-2xl lg:text-3xl ml-0.5 font-normal text-white/50">+</span>
+                    </span>
+                    <span class="text-[9px] text-gray-300 font-mono tracking-widest uppercase mt-1">CIUDADES</span>
                 </div>
             </div>
         </div>
+
+        <div class="relative z-10 flex-1 min-h-0 flex flex-col items-center justify-end gap-12 pb-32 mt-20">
+            <!-- Menú Principal Horizontal (Puntos Pulsantes) -->
+            <div class="flex flex-row flex-wrap justify-center gap-16 md:gap-24 items-end mb-8">
+
+                <!-- GLOBAL DASHBOARD -->
+                <div class="flex flex-col items-center justify-center cursor-pointer fade-in-up transition hover:scale-110 group"
+                    style="animation-delay: 0.1s" onclick="switchView('global', true)">
+                    <div class="relative flex h-12 w-12 items-center justify-center mb-6">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-50 group-hover:opacity-100"
+                            style="animation-duration: 3s;"></span>
+                        <span
+                            class="relative inline-flex rounded-full h-3 w-3 bg-cyan-300 shadow-[0_0_15px_rgba(103,232,249,1)]"></span>
+                    </div>
+                    <div class="text-white font-light tracking-[0.2em] text-[10px] sm:text-xs">GLOBAL DASHBOARD</div>
+                </div>
+
+                <!-- PROJECTS -->
+                <div class="flex flex-col items-center justify-center cursor-pointer fade-in-up transition hover:scale-110 group"
+                    style="animation-delay: 0.2s" onclick="switchView('projects', true)">
+                    <div class="relative flex h-12 w-12 items-center justify-center mb-6">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0ea5e9] opacity-50 group-hover:opacity-100"
+                            style="animation-duration: 3s; animation-delay: 0.5s;"></span>
+                        <span
+                            class="relative inline-flex rounded-full h-3 w-3 bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,1)]"></span>
+                    </div>
+                    <div class="text-white font-light tracking-[0.2em] text-[10px] sm:text-xs">PROJECTS</div>
+                </div>
+
+                <!-- AI REVOLUTION -->
+                <div class="flex flex-col items-center justify-center cursor-pointer fade-in-up transition hover:scale-110 group"
+                    style="animation-delay: 0.3s" onclick="switchView('ai', true)">
+                    <div class="relative flex h-12 w-12 items-center justify-center mb-6">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-500 opacity-50 group-hover:opacity-100"
+                            style="animation-duration: 3s; animation-delay: 1s;"></span>
+                        <span
+                            class="relative inline-flex rounded-full h-3 w-3 bg-purple-400 shadow-[0_0_15px_rgba(192,132,252,1)]"></span>
+                    </div>
+                    <div class="text-white font-light tracking-[0.2em] text-[10px] sm:text-xs">AI REVOLUTION</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="absolute bottom-4 left-0 right-0 text-center pointer-events-none z-[100]"><span
+                class="text-[9px] font-mono text-gray-600/50 uppercase tracking-[0.2em] font-bold">POWERED BY GEMINI PRO
+                & ANTIGRAVITY</span></div>
     </section>
 
     <!-- Text Modal (Reto / ROI) -->
