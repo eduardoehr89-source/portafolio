@@ -1,13 +1,13 @@
-Nombre,Nivel,Capacidad,Descripción,Icono
-ACC / BIM 360,Medio,"Gestión de entorno común de datos, coordinación de modelos y flujos de aprobación.",Gestión CDE y Cloud,cloud
-AutoCAD,Bajo,Consulta de planos 2D y ediciones básicas para soporte al modelado 3D.,Planos y 2D,pen-tool
-Dalux,Medio,"Supervisión de obra, gestión de incidencias y uso de realidad aumentada en sitio.",Incidencias y AR,smartphone
-Dynamo / Python,Bajo,Creación de scripts propios y funcionales para automatizar tareas y optimizar flujos de trabajo.,Scripting y Automatización,code
-Gemini AI,Medio,"Generación de imágenes, videos y creación de asistentes personalizados. Incluye la creación y revisión de documentación técnica para optimizar flujos de trabajo y soporte especializado.",Asistente Flujo Global,sparkles
-Monday,Medio,"Organización de tareas, gestión de cronogramas y seguimiento colaborativo de equipos.",Gestión de tiempos,layout-list
-Navisworks,Bajo,Suficiente para trabajar con interferencias y colisiones desde el rol de modelador BIM.,Clash Detection,crosshair
-Power BI,Medio,Creación de tableros para visualizar métricas y datos extraídos de modelos BIM.,Inteligencia de Datos,bar-chart-3
-Recap,Medio,Procesamiento y limpieza de nubes de puntos para su vinculación y modelado en Revit.,Nubes de puntos,scan
-Revit,Alto,Modelado integral de proyectos complejos y mejora de flujos con scripts e IA.,Modelado BIM,layers
-Speckle,Medio,Intercambio de datos entre plataformas para flujos de diseño colaborativo e interoperabilidad.,Interoperabilidad,box
-Twinmotion,Medio,Visualizaciones rápidas y recorridos virtuales para validación de diseño arquitectónico.,Render Real-time,image
+Nombre,Nivel,Porcentaje Dominio,Clasificación,Capacidad,Descripción,Icono
+ACC / BIM 360,Medio,60%,Principal,"Gestión de entorno común de datos, coordinación de modelos y flujos de aprobación.",Gestión CDE y Cloud,cloud
+AutoCAD,Bajo,30%,Secundario,Consulta de planos 2D y ediciones básicas para soporte al modelado 3D.,Planos y 2D,pen-tool
+Dalux,Medio,60%,Principal,"Supervisión de obra, gestión de incidencias y uso de realidad aumentada en sitio.",Incidencias y AR,smartphone
+Dynamo / Python,Bajo,30%,Secundario,Creación de scripts propios y funcionales para automatizar tareas y optimizar flujos de trabajo.,Scripting y Automatización,code
+Gemini AI,Medio,60%,Principal,"Generación de scrips para Dynamo/python, creación de imágenes, videos, asistentes personalizados y revisión de documentación.",Asistente Flujo Global,sparkles
+Monday,Medio,60%,Secundario,"Organización de tareas, gestión de cronogramas y seguimiento colaborativo de equipos.",Gestión de tiempos,layout-list
+Navisworks,Bajo,30%,Principal,Suficiente para trabajar con interferencias y colisiones desde el rol de modelador BIM.,Clash Detection,crosshair
+Power BI,Medio,60%,Secundario,Creación de tableros para visualizar métricas y datos extraídos de modelos BIM.,Inteligencia de Datos,bar-chart-3
+Recap,Medio,60%,Secundario,Procesamiento y limpieza de nubes de puntos para su vinculación y modelado en Revit.,Nubes de puntos,scan
+Revit,Alto,90%,Principal,Modelado integral de proyectos complejos y mejora de flujos con scripts e IA.,Modelado BIM,layers
+Speckle,Medio,60%,Secundario,Intercambio de datos entre plataformas para flujos de diseño colaborativo e interoperabilidad.,Interoperabilidad,box
+Twinmotion,Medio,60%,Secundario,Visualizaciones rápidas y recorridos virtuales para validación de diseño arquitectónico.,Render Real-time,image
