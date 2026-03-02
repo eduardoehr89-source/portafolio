@@ -42,7 +42,33 @@ async function loadExternalData() {
     }
 }
 
-// ... (fetchCSV y parseCSV se mantienen igual)
+async function fetchCSV(url) {
+    const response = await fetch(url);
+    const text = await response.text();
+    return parseCSV(text);
+}
+
+function parseCSV(text) {
+    const lines = text.trim().split('\n');
+    if (lines.length < 1) return [];
+
+    // Mejorar el regex para manejar comas dentro de comillas
+    const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+
+    return lines.slice(1).map(line => {
+        // Regex para separar por comas ignorando las que están dentro de comillas
+        const values = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || [];
+        const obj = {};
+        headers.forEach((header, i) => {
+            let val = values[i] ? values[i].trim() : '';
+            if (val.startsWith('"') && val.endsWith('"')) {
+                val = val.substring(1, val.length - 1);
+            }
+            obj[header] = val;
+        });
+        return obj;
+    });
+}
 
 function renderSoftware(data) {
     const mainContainer = document.getElementById('software-main-container');
