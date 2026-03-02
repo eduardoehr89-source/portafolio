@@ -22,11 +22,12 @@ const CSV_URLS = {
 
 async function loadExternalData() {
     try {
+        const ts = Date.now(); // Cache busting
         const [expData, formData, softData, habData] = await Promise.all([
-            fetchCSV(CSV_URLS.experiencia),
-            fetchCSV(CSV_URLS.formacion),
-            fetchCSV(CSV_URLS.software),
-            fetchCSV(CSV_URLS.habilidades)
+            fetchCSV(`${CSV_URLS.experiencia}?v=${ts}`),
+            fetchCSV(`${CSV_URLS.formacion}?v=${ts}`),
+            fetchCSV(`${CSV_URLS.software}?v=${ts}`),
+            fetchCSV(`${CSV_URLS.habilidades}?v=${ts}`)
         ]);
 
         renderExperience(expData);
@@ -49,7 +50,11 @@ async function fetchCSV(url) {
 function parseCSV(text) {
     const lines = text.trim().split('\n');
     if (lines.length < 1) return [];
-    const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+
+    // Identificar el separador (algunos CSV usan ; en regiones latinas, pero aquí asumimos coma)
+    const delimiter = ',';
+    const headers = lines[0].split(delimiter).map(h => h.trim().replace(/"/g, ''));
+
     return lines.slice(1).map(line => {
         const values = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || [];
         const obj = {};
@@ -95,19 +100,39 @@ function renderExperience(data) {
 }
 
 function renderEducation(data) {
-    const container = document.getElementById('education-list');
-    if (!container) return;
-    container.innerHTML = '';
-    data.forEach(edu => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-            <div class="flex justify-between items-center mb-0.5">
-                <strong class="text-gray-800 dark:text-gray-200">${edu.Titulo}</strong>
-                ${edu.Nivel === 'Postgrado' ? '<span class="text-[0.5rem] bg-blue-100 dark:bg-blue-900/50 px-1.5 py-0.5 rounded text-blue-600 no-print">Autodesk Cert.</span>' : ''}
-            </div>
-            <p class="text-[0.6rem] text-gray-500 italic">${edu.Institucion} | ${edu.Periodo}</p>
-        `;
-        container.appendChild(li);
+    const gridContainer = document.getElementById('education-grid');
+    const listContainer = document.getElementById('education-list');
+
+    if (gridContainer) gridContainer.innerHTML = '';
+    if (listContainer) listContainer.innerHTML = '';
+
+    data.forEach((edu, index) => {
+        const isCurrent = edu.Estado === 'En curso';
+
+        if (isCurrent && gridContainer) {
+            // Iconos basados en palabras clave
+            let icon = 'fa-rocket';
+            if (edu.Titulo.toLowerCase().includes('smart')) icon = 'fa-certificate';
+            if (edu.Titulo.toLowerCase().includes('dynamo')) icon = 'fa-code';
+
+            gridContainer.innerHTML += `
+                <div class="future-study group">
+                    <i class="fas ${icon} text-xl mb-1 group-hover:scale-110 transition-transform"></i>
+                    <p class="text-[0.55rem] font-black uppercase leading-tight">${edu.Titulo.split(' - ')[0]}</p>
+                    <p class="text-[0.45rem] opacity-75">${edu.Titulo.split(' - ')[1] || ''}</p>
+                </div>
+            `;
+        } else if (listContainer) {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="flex justify-between items-center mb-0.5">
+                    <strong class="text-gray-800 dark:text-gray-200">${edu.Titulo}</strong>
+                    ${edu.Nivel === 'Postgrado' ? '<span class="text-[0.5rem] bg-blue-100 dark:bg-blue-900/50 px-1.5 py-0.5 rounded text-blue-600 no-print">Autodesk Cert.</span>' : ''}
+                </div>
+                <p class="text-[0.6rem] text-gray-500 italic">${edu.Institucion} | ${edu.Periodo}</p>
+            `;
+            listContainer.appendChild(li);
+        }
     });
 }
 
