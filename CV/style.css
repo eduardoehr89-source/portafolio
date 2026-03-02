@@ -1,0 +1,222 @@
+/* =========================================
+   DESIGN SYSTEM & VARIABLES
+   ========================================= */
+:root {
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --secondary: #10b981;
+    --sidebar-bg: #374151;
+    --sidebar-text: #ffffff;
+    --bg-light: #f3f4f6;
+    --bg-dark: #111827;
+    --card-bg-light: #ffffff;
+    --card-bg-dark: #1f2937;
+    --text-main: #374151;
+    --text-muted: #6b7280;
+    --text-dark-main: #e5e7eb;
+    --text-dark-muted: #9ca3af;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================
+   GENERAL STYLES
+   ========================================= */
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: 9.5pt;
+    color: var(--text-main);
+    background-color: #52525b;
+    /* Zinc 600 default background */
+    margin: 0;
+    padding: 20px 0;
+    min-height: 100vh;
+    transition: var(--transition);
+    -webkit-font-smoothing: antialiased;
+}
+
+.dark body {
+    background-color: var(--bg-dark);
+    color: var(--text-dark-main);
+}
+
+.cv-container {
+    width: 210mm;
+    min-height: 297mm;
+    background-color: var(--card-bg-light);
+    margin: 0 auto;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: visible;
+    border-radius: 12px;
+}
+
+.dark .cv-container {
+    background-color: var(--card-bg-dark);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================
+   SIDEBAR
+   ========================================= */
+.sidebar-color {
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    transition: var(--transition);
+}
+
+.dark .sidebar-color {
+    background-color: #0f172a;
+    /* Slate 900 */
+    border-right: 1px solid #334155;
+}
+
+.soft-skill-tag {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.08);
+    /* More subtle */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-size: 0.55rem;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    backdrop-filter: blur(4px);
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.soft-skill-tag:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: var(--primary);
+    color: white;
+}
+
+.skill-bar {
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+.skill-progress {
+    width: 0;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.glass-tooltip {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #f1f5f9;
+    position: absolute;
+    bottom: 120%;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.65rem;
+    z-index: 50;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: var(--transition);
+    pointer-events: none;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    line-height: 1.4;
+}
+
+.group:hover .glass-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* =========================================
+   COMPONENTS
+   ========================================= */
+.job-card {
+    background-color: #f9fafb;
+    border-radius: 10px;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid #e5e7eb;
+    transition: var(--transition);
+}
+
+.job-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary);
+}
+
+.dark .job-card {
+    background-color: #374151;
+    border-color: #4b5563;
+}
+
+.dark .job-card:hover {
+    border-color: var(--primary);
+}
+
+.future-study {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    color: #1e40af;
+    border-radius: 12px;
+    padding: 0.75rem;
+    border: 1px solid #bfdbfe;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.future-study:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.2);
+}
+
+.dark .future-study {
+    background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
+    border-color: #1e40af;
+    color: #dbeafe;
+}
+
+/* =========================================
+   PRINT STYLES
+   ========================================= */
+@media print {
+    @page {
+        margin: 0;
+        size: A4;
+    }
+
+    body {
+        background-color: white !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .cv-container {
+        box-shadow: none !important;
+        margin: 0 !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        border-radius: 0 !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .sidebar-color {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
