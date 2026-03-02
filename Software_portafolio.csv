@@ -1,11 +1,13 @@
 Nombre,Nivel,Porcentaje Dominio,Clasificación,Capacidad,Descripción,Icono
 ACC / BIM 360,Medio,60%,Principal,"Gestión de entorno común de datos, coordinación de modelos y flujos de aprobación.",Gestión CDE y Cloud,cloud
+Antigravity ,Bajo,30%,Secundario,Herramienta de programación avanzada para la optimización de flujos de datos y desarrollo de soluciones.,Programación y Optimización,code
 AutoCAD,Bajo,30%,Secundario,Consulta de planos 2D y ediciones básicas para soporte al modelado 3D.,Planos y 2D,pen-tool
 Dalux,Medio,60%,Principal,"Supervisión de obra, gestión de incidencias y uso de realidad aumentada en sitio.",Incidencias y AR,smartphone
 Dynamo / Python,Bajo,30%,Secundario,Creación de scripts propios y funcionales para automatizar tareas y optimizar flujos de trabajo.,Scripting y Automatización,code
 Gemini AI,Medio,60%,Principal,"Generación de scrips para Dynamo/python, creación de imágenes, videos, asistentes personalizados y revisión de documentación.",Asistente Flujo Global,sparkles
 Monday,Medio,60%,Secundario,"Organización de tareas, gestión de cronogramas y seguimiento colaborativo de equipos.",Gestión de tiempos,layout-list
 Navisworks,Bajo,30%,Principal,Suficiente para trabajar con interferencias y colisiones desde el rol de modelador BIM.,Clash Detection,crosshair
+NotebookLM,Alto,90%,Secundario,"Análisis de documentos, normativas, contratos y auditoría de datos.",Análisis Documental con IA,book-open
 Power BI,Medio,60%,Secundario,Creación de tableros para visualizar métricas y datos extraídos de modelos BIM.,Inteligencia de Datos,bar-chart-3
 Recap,Medio,60%,Secundario,Procesamiento y limpieza de nubes de puntos para su vinculación y modelado en Revit.,Nubes de puntos,scan
 Revit,Alto,90%,Principal,Modelado integral de proyectos complejos y mejora de flujos con scripts e IA.,Modelado BIM,layers
