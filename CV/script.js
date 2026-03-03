@@ -26,7 +26,7 @@ const CSV_URLS = {
 
 async function loadExternalData() {
     try {
-        const ts = Date.now(); // Cache busting
+        const ts = Date.now() + Math.floor(Math.random() * 1000); // Rompe-caché dinámico
         const [expData, formData, softData, habData, contactData, profileData, projectsGlobal, disciplinesGlobal] = await Promise.all([
             fetchCSV(`${CSV_URLS.experiencia}?v=${ts}`),
             fetchCSV(`${CSV_URLS.formacion}?v=${ts}`),
@@ -73,7 +73,7 @@ const normalizeStr = (str) => {
 };
 
 const getVal = (item, ...keys) => {
-    if (!item) return "";
+    if (!item || typeof item !== 'object') return "";
     const objectKeys = Object.keys(item);
     const foundKey = objectKeys.find(k => {
         const cleanKey = normalizeStr(k);
@@ -82,7 +82,9 @@ const getVal = (item, ...keys) => {
             return cleanKey === sKey || cleanKey.includes(sKey);
         });
     });
-    return foundKey ? (item[foundKey] || "").trim() : "";
+    // Garantizamos que NUNCA sea undefined devolviendo "" como fallback final
+    const value = foundKey ? item[foundKey] : "";
+    return (value === undefined || value === null || value === "undefined") ? "" : String(value).trim();
 };
 
 function parseCSV(text) {
@@ -206,11 +208,12 @@ function renderEducation(data) {
             if (titulo.toLowerCase().includes('smart')) icon = 'fa-certificate';
             if (titulo.toLowerCase().includes('dynamo')) icon = 'fa-code';
 
+            const linkIcon = insignia ? `<i class="fas fa-arrow-up-right-from-square text-[0.4rem] opacity-50"></i>` : '';
             const cardContent = `
                 <div class="future-study group flex flex-row items-center gap-3">
                     <i class="fas ${icon} text-lg text-blue-500 dark:text-blue-400 group-hover:scale-110 transition-transform"></i>
                     <p class="text-[0.6rem] font-light uppercase tracking-wider whitespace-nowrap">
-                        ${titulo} <i class="fas fa-arrow-up-right-from-square text-[0.4rem] opacity-50"></i> <span class="text-gray-400 dark:text-gray-500 normal-case"> — ${institucion}</span>
+                        ${titulo} ${linkIcon} <span class="text-gray-400 dark:text-gray-500 normal-case"> — ${institucion}</span>
                     </p>
                 </div>
             `;
@@ -276,7 +279,7 @@ function renderSoftware(data) {
         mainContainer.innerHTML += `
             <div class="group relative cursor-help flex items-center gap-3 mb-1">
                 <span class="text-[0.6rem] text-gray-200 w-24 shrink-0 truncate">${nombre}</span>
-                <div class="skill-bar flex-1 h-1.5 bg-white/5 rounded-full overflow-hidden mt-0">
+                <div class="skill-bar flex-1 h-[3px] bg-white/5 rounded-full overflow-hidden mt-0">
                     <div class="skill-progress h-full bg-blue-500 rounded-full" data-width="${porcentaje}"></div>
                 </div>
                 <div class="glass-tooltip">
@@ -315,7 +318,8 @@ function renderContact(data) {
         }
         if (campo.includes('telefono') && phoneEl) {
             phoneEl.innerHTML = `${detalle} <i class="fas fa-arrow-up-right-from-square text-[0.45rem] opacity-50 ml-1"></i>`;
-            phoneEl.href = `tel:${detalle.replace(/\s+/g, '')}`;
+            const cleanPhone = detalle.replace(/\D/g, '');
+            phoneEl.href = cleanPhone ? `https://wa.me/${cleanPhone}` : '#';
         }
         if (campo.includes('ubicacion') && locationEl) {
             locationEl.innerText = detalle;
@@ -336,16 +340,14 @@ function renderProfile(data) {
 
     let text = "";
     if (Array.isArray(data) && data.length > 0) {
-        // Formato CSV Campo,Detalle
         const row = data.find(r => normalizeStr(getVal(r, 'Campo')) === 'contenido');
         if (row) text = getVal(row, 'Detalle');
     } else if (typeof data === 'string') {
-        // Formato Texto Plano (sucede si parseCSV devuelve [] y hay texto)
         text = data;
     }
 
-    if (text && el.innerHTML === '') {
-        setTimeout(() => typeEffect(el, text, 30), 1000);
+    if (text) {
+        el.innerHTML = text;
     }
 }
 
@@ -420,16 +422,20 @@ function renderStatsDisciplines(projects, refDisciplines) {
             } else if (refNameClean.includes('mep') &&
                 (pDiscs.includes('mep') || pDiscs.includes('hidro') || pDiscs.includes('elec') || pDiscs.includes('insta'))) {
                 count++;
+            } else if (refNameClean.includes('arquitectura') && (pDiscs.includes('arquitectura') || pDiscs.includes('general'))) {
+                count++;
             } else if (pDiscs.includes(refNameClean) || refNameClean.includes(pDiscs)) {
-                if (pDiscs.length > 2) count++; // Evitar matches vacíos o muy cortos
+                if (pDiscs.length > 2) count++;
             }
         });
 
         return { name: refName, count: count };
-    }).sort((a, b) => b.count - a.count).slice(0, 4);
+    }).sort((a, b) => b.count - a.count).slice(0, 5);
+
+    const totalStats = stats.reduce((acc, curr) => acc + curr.count, 0) || 1;
 
     container.innerHTML = stats.map(s => {
-        const pct = Math.round((s.count / totalProjects) * 100);
+        const pct = Math.round((s.count / totalStats) * 100);
         return `
             <div class="flex justify-between text-[0.6rem] font-mono text-gray-300 uppercase">
                 <span class="truncate pr-1">${s.name}</span>
@@ -458,7 +464,7 @@ function renderStatsEnvironment(projects) {
 
     container.innerHTML = `
         <div class="space-y-1 pt-0.5">
-            <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden flex">
+            <div class="h-[3px] w-full bg-white/5 rounded-full overflow-hidden flex">
                 <div class="h-full bg-blue-500" style="width: ${pctOficina}%"></div>
                 <div class="h-full bg-white" style="width: ${pctObra}%"></div>
             </div>
