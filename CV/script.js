@@ -408,14 +408,11 @@ function renderStatsTypology(data) {
     container.innerHTML = stats.map((s, i) => {
         const pct = Math.round((s.count / total) * 100);
         return `
-            <div class="space-y-0.5">
-                <div class="flex items-center justify-between text-[0.6rem] font-mono">
-                    <span class="truncate text-gray-300 uppercase pr-2">${s.name}</span>
-                    <span class="text-gray-400 opacity-80 percentage-counter" data-target="${pct}">0%</span>
+            <div class="flex items-center justify-between text-[0.6rem] font-mono">
+                <div class="flex items-center gap-1.5 truncate pr-2">
+                    <span class="truncate text-gray-300 uppercase">${s.name}</span>
                 </div>
-                <div class="skill-bar w-full h-[2.5px] bg-white/5 rounded-full overflow-hidden">
-                    <div class="skill-progress h-full bg-blue-500 rounded-full" data-width="${pct}" style="width: ${pct}%"></div>
-                </div>
+                <span class="text-gray-400 opacity-80 percentage-counter" data-target="${pct}">0%</span>
             </div>
         `;
     }).join('');
@@ -465,14 +462,9 @@ function renderStatsDisciplines(projects, refDisciplines) {
     container.innerHTML = stats.map(s => {
         const pct = Math.round((s.count / totalStats) * 100);
         return `
-            <div class="space-y-0.5">
-                <div class="flex justify-between text-[0.6rem] font-mono text-gray-300 uppercase">
-                    <span class="truncate pr-1">${s.name}</span>
-                    <span class="text-gray-400 opacity-80 percentage-counter" data-target="${pct}">0%</span>
-                </div>
-                <div class="skill-bar w-full h-[2.5px] bg-white/5 rounded-full overflow-hidden">
-                    <div class="skill-progress h-full bg-blue-500 rounded-full" data-width="${pct}" style="width: ${pct}%"></div>
-                </div>
+            <div class="flex justify-between text-[0.6rem] font-mono text-gray-300 uppercase">
+                <span class="truncate pr-1">${s.name}</span>
+                <span class="text-gray-400 opacity-80 percentage-counter" data-target="${pct}">0%</span>
             </div>
         `;
     }).join('');
@@ -691,19 +683,15 @@ function typeEffect(el, txt, speed) {
 function initPrintLogic() {
     const modal = document.getElementById('print-modal');
     window.printCV = () => {
-        const html = document.documentElement;
-        const isDark = html.classList.contains('dark');
-        if (isDark) html.classList.remove('dark');
-
-        // Forzar colores de impresión masivos
-        html.style.webkitPrintColorAdjust = 'exact';
-        html.style.printColorAdjust = 'exact';
+        const modal = document.getElementById('print-modal');
+        // Forzar colores de impresión masivos directamente
+        document.documentElement.style.webkitPrintColorAdjust = 'exact';
+        document.documentElement.style.printColorAdjust = 'exact';
 
         modal.classList.remove('hidden');
         window.onafterprint = () => {
-            if (isDark) html.classList.add('dark');
-            html.style.webkitPrintColorAdjust = '';
-            html.style.printColorAdjust = '';
+            document.documentElement.style.webkitPrintColorAdjust = '';
+            document.documentElement.style.printColorAdjust = '';
         };
     };
     window.closeModal = () => modal.classList.add('hidden');

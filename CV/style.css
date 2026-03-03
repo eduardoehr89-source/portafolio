@@ -220,27 +220,17 @@ body {
     }
 
     .sidebar-color {
-        background-color: var(--sidebar-bg) !important;
-        color: white !important;
+        background-color: #0f172a !important;
+        /* Azul Marino Forzado */
+        color: #ffffff !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
-    /* Asegurar visibilidad de textos en sidebar sin afectar iconos ni puntos */
-    .sidebar-color h1,
-    .sidebar-color h2,
-    .sidebar-color p,
-    /* Los h3 y h4 del sidebar deben mantener su color azul/gris original */
-    .sidebar-color span:not(.pulse-dot):not(.static-dot):not(.percentage-counter):not(.text-blue-400) {
-        color: white !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-
-    .sidebar-color h3,
-    .sidebar-color h4 {
-        color: #60a5fa !important;
-        /* Aproximación a text-blue-400 */
+    .soft-skill-tag {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        color: #ffffff !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
@@ -250,6 +240,8 @@ body {
         background-color: #3b82f6 !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
+        display: block !important;
+        min-height: 3px !important;
         transition: none !important;
     }
 
