@@ -252,6 +252,10 @@ body {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
+
+    .glass-tooltip {
+        display: none !important;
+    }
 }
 
 /* Pulse Animation for active roles */

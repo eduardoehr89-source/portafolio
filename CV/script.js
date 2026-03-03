@@ -14,14 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
    DATA LOADING (CSV Parsing)
    ========================================= */
 const CSV_URLS = {
-    experiencia: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Experiencia%20laboral_cv.csv',
-    formacion: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Formaci%C3%B3n%20ac%C3%A1d%C3%A9mica_cv.csv',
-    software: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/Software_portafolio.csv',
-    habilidades: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Soft%20skills_cv.csv',
-    contacto: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Contacto_cv.csv',
-    perfil: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Perfil%20Profesional_cv.csv',
-    proyectos_global: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/Proyectos_portafolio.csv',
-    disciplinas_global: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/Disciplinas_portafolio.csv'
+    experiencia: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Experiencia%20laboral_cv.csv',
+    formacion: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Formaci%C3%B3n%20ac%C3%A1d%C3%A9mica_cv.csv',
+    software: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Software_portafolio.csv',
+    habilidades: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Soft%20skills_cv.csv',
+    contacto: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Contacto_cv.csv',
+    perfil: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Perfil%20Profesional_cv.csv',
+    proyectos_global: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Proyectos_portafolio.csv',
+    disciplinas_global: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Disciplinas_portafolio.csv'
 };
 
 async function loadExternalData() {
