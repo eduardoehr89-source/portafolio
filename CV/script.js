@@ -505,7 +505,10 @@ function renderStatsEnvironment(projects) {
 
 function renderSkills(data) {
     const softContainer = document.getElementById('soft-skills-container');
-    if (!softContainer || !Array.isArray(data)) return;
+    if (!softContainer || !Array.isArray(data) || data.length === 0) {
+        if (softContainer) softContainer.innerHTML = '';
+        return;
+    }
     softContainer.innerHTML = '';
 
     // Agrupar por categoría
@@ -674,10 +677,20 @@ function typeEffect(el, txt, speed) {
 function initPrintLogic() {
     const modal = document.getElementById('print-modal');
     window.printCV = () => {
-        const isDark = document.documentElement.classList.contains('dark');
-        if (isDark) document.documentElement.classList.remove('dark');
+        const html = document.documentElement;
+        const isDark = html.classList.contains('dark');
+        if (isDark) html.classList.remove('dark');
+
+        // Forzar colores de impresión masivos
+        html.style.webkitPrintColorAdjust = 'exact';
+        html.style.printColorAdjust = 'exact';
+
         modal.classList.remove('hidden');
-        window.onafterprint = () => { if (isDark) document.documentElement.classList.add('dark'); };
+        window.onafterprint = () => {
+            if (isDark) html.classList.add('dark');
+            html.style.webkitPrintColorAdjust = '';
+            html.style.printColorAdjust = '';
+        };
     };
     window.closeModal = () => modal.classList.add('hidden');
     window.confirmPrint = () => {
