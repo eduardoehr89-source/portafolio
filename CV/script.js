@@ -14,14 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
    DATA LOADING (CSV Parsing)
    ========================================= */
 const CSV_URLS = {
-    experiencia: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Experiencia%20laboral_cv.csv',
-    formacion: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Formaci%C3%B3n%20ac%C3%A1d%C3%A9mica_cv.csv',
-    software: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/Software_portafolio.csv',
-    habilidades: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Soft%20skills_cv.csv',
-    contacto: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Contacto_cv.csv',
-    perfil: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Perfil%20Profesional_cv.csv',
-    proyectos_global: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/Proyectos_portafolio.csv',
-    disciplinas_global: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/Disciplinas_portafolio.csv'
+    experiencia: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Experiencia%20laboral_cv.csv',
+    formacion: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Formaci%C3%B3n%20ac%C3%A1d%C3%A9mica_cv.csv',
+    software: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Software_portafolio.csv',
+    habilidades: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Soft%20skills_cv.csv',
+    contacto: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Contacto_cv.csv',
+    perfil: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Perfil%20Profesional_cv.csv',
+    proyectos_global: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Proyectos_portafolio.csv',
+    disciplinas_global: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Disciplinas_portafolio.csv'
 };
 
 async function loadExternalData() {
@@ -168,7 +168,14 @@ function renderExperience(data) {
             </div>
             <p class="text-[0.65rem] font-semibold text-gray-500 dark:text-gray-400 italic mb-2.5">${empresa}</p>
 
-            <p class="text-[0.65rem] text-gray-600 dark:text-gray-300 text-justify leading-snug">${descripcion}</p>
+            <div class="space-y-1.5">
+                ${descripcion.split('\n').filter(p => p.trim() !== '').map(p => `
+                    <div class="flex items-start gap-1.5">
+                        <span class="text-gray-400 dark:text-gray-500 text-[0.6rem] mt-0.5">•</span>
+                        <p class="text-[0.65rem] text-gray-600 dark:text-gray-300 text-justify leading-snug flex-1">${p.trim()}</p>
+                    </div>
+                `).join('')}
+            </div>
         `;
         container.appendChild(article);
     });
@@ -399,7 +406,7 @@ function renderStatsTypology(data) {
                 <div class="flex items-center gap-1.5 truncate pr-2">
                     <span class="truncate text-gray-300 uppercase">${s.name}</span>
                 </div>
-                <span class="text-gray-400 opacity-80">${pct}%</span>
+                <span class="text-gray-400 opacity-80 percentage-counter" data-target="${pct}">0%</span>
             </div>
         `;
     }).join('');
@@ -451,7 +458,7 @@ function renderStatsDisciplines(projects, refDisciplines) {
         return `
             <div class="flex justify-between text-[0.6rem] font-mono text-gray-300 uppercase">
                 <span class="truncate pr-1">${s.name}</span>
-                <span class="text-gray-400 opacity-80">${pct}%</span>
+                <span class="text-gray-400 opacity-80 percentage-counter" data-target="${pct}">0%</span>
             </div>
         `;
     }).join('');
@@ -477,19 +484,19 @@ function renderStatsEnvironment(projects) {
     container.innerHTML = `
         <div class="space-y-1 pt-0.5">
             <div class="h-[3px] w-full bg-white/5 rounded-full overflow-hidden flex">
-                <div class="h-full bg-blue-500" style="width: ${pctOficina}%"></div>
-                <div class="h-full bg-white" style="width: ${pctObra}%"></div>
+                <div class="h-full bg-blue-500 skill-progress" data-width="${pctOficina}"></div>
+                <div class="h-full bg-white skill-progress" data-width="${pctObra}"></div>
             </div>
             <div class="flex justify-between text-[0.6rem] font-mono uppercase mt-0.5">
                 <div class="flex items-center gap-1.5">
                     <div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
                     <span class="text-gray-300">Oficina</span>
-                    <span class="text-gray-400 opacity-80 ml-1">${pctOficina}%</span>
+                    <span class="text-gray-400 opacity-80 ml-1 percentage-counter" data-target="${pctOficina}">0%</span>
                 </div>
                 <div class="flex items-center gap-1.5">
                     <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
                     <span class="text-gray-300">Obra</span>
-                    <span class="text-gray-400 opacity-80 ml-1">${pctObra}%</span>
+                    <span class="text-gray-400 opacity-80 ml-1 percentage-counter" data-target="${pctObra}">0%</span>
                 </div>
             </div>
         </div>
@@ -609,19 +616,52 @@ function initTheme() {
 }
 
 function initAnimations() {
-    const animateBars = () => {
+    const animateAll = () => {
         const bars = document.querySelectorAll('.skill-progress');
-        bars.forEach(b => { b.style.transition = 'none'; b.style.width = '0'; });
-        void document.body.offsetWidth;
+        const counters = document.querySelectorAll('.percentage-counter');
+
+        // Reset inmediato sin transiciones
+        bars.forEach(b => {
+            b.style.transition = 'none';
+            b.style.width = '0%';
+        });
+        counters.forEach(c => c.innerText = '0%');
+
+        void document.body.offsetWidth; // Forzar reflujo
+
+        const duration = 2000;
+        const startTime = performance.now();
+
+        // Animación de Barras
         setTimeout(() => {
             bars.forEach(b => {
-                b.style.transition = 'width 2s cubic-bezier(0.4, 0, 0.2, 1)';
-                b.style.width = b.getAttribute('data-width');
+                let target = b.getAttribute('data-width') || '0';
+                // Asegurar que solo sea el número para concatenar %
+                target = target.toString().replace('%', '');
+                b.style.transition = `width ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+                b.style.width = target + '%';
             });
         }, 100);
+
+        // Animación de Contadores Numéricos
+        const updateCounters = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target')) || 0;
+                counter.innerText = Math.round(progress * target) + '%';
+            });
+
+            if (progress < 1) {
+                requestAnimationFrame(updateCounters);
+            }
+        };
+        requestAnimationFrame(updateCounters);
     };
-    animateBars();
-    setInterval(animateBars, 30000);
+
+    animateAll();
+    setInterval(animateAll, 30000);
 }
 
 function typeEffect(el, txt, speed) {
@@ -640,5 +680,13 @@ function initPrintLogic() {
         window.onafterprint = () => { if (isDark) document.documentElement.classList.add('dark'); };
     };
     window.closeModal = () => modal.classList.add('hidden');
-    window.confirmPrint = () => { window.closeModal(); setTimeout(() => window.print(), 500); };
+    window.confirmPrint = () => {
+        window.closeModal();
+        // Asegurar que las barras estén llenas para la impresión
+        document.querySelectorAll('.skill-progress').forEach(b => {
+            const w = b.getAttribute('data-width');
+            if (w) b.style.width = w + '%';
+        });
+        setTimeout(() => window.print(), 500);
+    };
 }
