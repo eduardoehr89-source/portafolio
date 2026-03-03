@@ -17,7 +17,7 @@ const CSV_URLS = {
     experiencia: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Experiencia%20laboral_cv.csv',
     formacion: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Formaci%C3%B3n%20ac%C3%A1d%C3%A9mica_cv.csv',
     software: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/Software_portafolio.csv',
-    habilidades: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Habilidades_cv.csv',
+    habilidades: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Soft%20skills_cv.csv',
     contacto: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Contacto_cv.csv',
     perfil: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Perfil%20Profesional_cv.csv',
     proyectos_global: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/Proyectos_portafolio.csv',
@@ -161,8 +161,8 @@ function renderExperience(data) {
                     <i class="fas fa-bolt text-blue-500"></i> ${puesto}
                 </h4>
                 <div class="text-right flex items-center gap-2">
-                    <span class="text-[0.6rem] text-gray-400 dark:text-gray-500 whitespace-nowrap">(${periodo})</span>
                     <span class="text-[0.6rem] text-blue-600 dark:text-blue-400 whitespace-nowrap">${duration}</span>
+                    <span class="text-[0.6rem] text-gray-400 dark:text-gray-500 whitespace-nowrap">(${periodo})</span>
                 </div>
             </div>
             <p class="text-[0.65rem] font-semibold text-gray-500 dark:text-gray-400 italic mb-0.5">${empresa}</p>
@@ -329,7 +329,7 @@ function renderContact(data) {
             linkedinEl.href = detalle.startsWith('http') ? detalle : `https://${detalle}`;
         }
         if (campo.includes('nacionalidad') && nacionalidadEl) {
-            nacionalidadEl.innerText = detalle;
+            nacionalidadEl.innerHTML = `<span class="text-white/90">${detalle}</span><br><span class="font-extralight text-white/90 tracking-widest text-[0.45rem] mt-0.5 inline-block not-italic">40+ PROYECTOS | 10+ AÑOS EXP. | 20+ CIUDADES</span>`;
         }
     });
 }
@@ -347,7 +347,17 @@ function renderProfile(data) {
     }
 
     if (text) {
-        el.innerHTML = text;
+        el.innerHTML = `
+            ${text}
+            <div class="mt-2 pt-1.5 border-t border-gray-100 dark:border-gray-800">
+                <p class="text-[0.62rem] text-gray-600 dark:text-gray-400">
+                    Si quieres saber más sobre mis proyectos (imágenes, videos, ROI), visita mi 
+                    <a href="../index.html" class="inline-flex items-center gap-1 font-bold text-blue-600 dark:text-blue-400 hover:text-blue-800 transition-colors">
+                        <i class="fas fa-laptop-code"></i> Portafolio <i class="fas fa-external-link-alt text-[0.45rem]"></i>
+                    </a>
+                </p>
+            </div>
+        `;
     }
 }
 
@@ -488,19 +498,36 @@ function renderSkills(data) {
     const softContainer = document.getElementById('soft-skills-container');
     if (!softContainer || !Array.isArray(data)) return;
     softContainer.innerHTML = '';
+
+    // Agrupar por categoría
+    const categories = {};
     data.forEach(skill => {
-        const categoria = getVal(skill, 'Categoría', 'Categoria');
-        const item = getVal(skill, 'Ítem', 'Item');
-        const detalle = getVal(skill, 'Detalle');
-        if (categoria === 'Habilidades Blandas' && softContainer) {
-            softContainer.innerHTML += `
-                <span class="soft-skill-tag group cursor-help">
-                    ${item}
-                    <div class="glass-tooltip">
-                        ${detalle}
-                    </div>
-                </span>`;
-        }
+        const cat = getVal(skill, 'Categoría', 'Categoria');
+        if (!cat) return;
+        if (!categories[cat]) categories[cat] = [];
+        categories[cat].push(skill);
+    });
+
+    // Renderizar cada categoría
+    Object.entries(categories).forEach(([catName, skills]) => {
+        const catDiv = document.createElement('div');
+        catDiv.className = 'w-full mb-2';
+        catDiv.innerHTML = `
+            <h4 class="text-[0.55rem] font-bold text-gray-500 mb-1 uppercase tracking-tighter opacity-80">${catName}</h4>
+            <div class="flex flex-wrap gap-0.5">
+                ${skills.map(skill => {
+            const item = getVal(skill, 'Ítem', 'Item');
+            const detalle = getVal(skill, 'Detalle');
+            return `
+                        <span class="soft-skill-tag group cursor-help">
+                            ${item}
+                            <div class="glass-tooltip">${detalle}</div>
+                        </span>
+                    `;
+        }).join('')}
+            </div>
+        `;
+        softContainer.appendChild(catDiv);
     });
 }
 
