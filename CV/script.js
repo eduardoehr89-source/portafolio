@@ -705,3 +705,28 @@ function initPrintLogic() {
         setTimeout(() => window.print(), 500);
     };
 }
+
+// PDF Download Logic
+window.openPdfModal = () => {
+    document.getElementById('pdf-modal').classList.remove('hidden');
+};
+
+window.closePdfModal = () => {
+    document.getElementById('pdf-modal').classList.add('hidden');
+};
+
+window.downloadPdf = (type) => {
+    const urls = {
+        'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/44439e1beab342c060ee80c6fd9d171176bfe6d4/CV/CV%20-%20Said%20Herrera_light.pdf',
+        'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/44439e1beab342c060ee80c6fd9d171176bfe6d4/CV/CV%20-%20Said%20Herrera_dark.pdf'
+    };
+
+    if (type === 'both') {
+        window.open(urls.light, '_blank');
+        setTimeout(() => window.open(urls.dark, '_blank'), 500); // Pequeño retraso para navegadores seguros
+    } else {
+        window.open(urls[type], '_blank');
+    }
+
+    closePdfModal();
+};
