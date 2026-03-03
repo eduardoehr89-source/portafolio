@@ -226,6 +226,17 @@ body {
         print-color-adjust: exact !important;
     }
 
+    /* Asegurar visibilidad de textos en sidebar sin afectar iconos ni puntos */
+    .sidebar-color h1,
+    .sidebar-color h2,
+    .sidebar-color h3,
+    .sidebar-color p,
+    .sidebar-color span:not(.pulse-dot):not(.static-dot):not(.percentage-counter) {
+        color: white !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
     .skill-progress {
         width: 100% !important;
         background-color: #3b82f6 !important;
@@ -234,9 +245,10 @@ body {
         transition: none !important;
     }
 
-    /* Asegurar visibilidad de textos en sidebar */
-    .sidebar-color * {
-        color: white !important;
+    .pulse-dot,
+    .static-dot {
+        background-color: #3b82f6 !important;
+        border-color: #3b82f6 !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
