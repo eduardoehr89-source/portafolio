@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="flex justify-center py-4 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+<body class="flex justify-center py-2 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
 
     <!-- Print Modal -->
     <div id="print-modal"
@@ -59,62 +59,80 @@
     <!-- CV Main Container -->
     <main class="cv-container flex rounded-xl overflow-hidden shadow-2xl">
         <!-- Sidebar -->
-        <aside class="sidebar-color w-[32%] p-6 flex flex-col h-full relative z-10 border-r border-white/5">
-            <header class="mb-4 text-center">
+        <aside class="sidebar-color w-[32%] p-4 flex flex-col h-full relative z-10 border-r border-white/5">
+            <header class="mb-2 text-center">
                 <div
                     class="w-28 h-28 mx-auto mb-4 overflow-hidden border-4 border-gray-600 shadow-xl rounded-full bg-gray-300">
                     <img src="https://placehold.co/112x112/d1d5db/4b5563?text=SH" alt="Said Herrera"
                         class="w-full h-full object-cover">
                 </div>
-                <h1 class="text-2xl font-black uppercase tracking-widest text-white leading-none mb-2">SAID<br>HERRERA
-                </h1>
+                <h1 class="text-xl font-light uppercase tracking-widest text-white leading-none mb-1">SAID HERRERA</h1>
                 <h2 class="text-[0.65rem] font-semibold text-blue-400 tracking-widest uppercase">Modelador BIM Senior
                 </h2>
+                <p id="contact-nacionalidad" class="text-[0.55rem] text-gray-400 uppercase tracking-widest mt-1 italic">
+                </p>
             </header>
 
             <div class="h-px bg-white/10 my-2 opacity-50"></div>
 
-            <section class="mb-4">
-                <h3 class="text-[0.6rem] font-bold uppercase tracking-widest mb-2 text-blue-400">Contacto</h3>
-                <address class="text-[0.65rem] space-y-2 not-italic text-gray-300">
-                    <p class="flex items-center gap-2"><i class="fas fa-envelope w-4 text-center text-blue-400"></i> <a
-                            href="mailto:eduardoehr89@gmail.com"
-                            class="hover:text-white transition-colors">eduardoehr89@gmail.com</a></p>
-                    <p class="flex items-center gap-2"><i class="fab fa-whatsapp w-4 text-center text-blue-400"></i> <a
-                            href="tel:+528120109796" class="hover:text-white transition-colors">+52 81 2010 9796</a></p>
-                    <p class="flex items-center gap-2"><i
-                            class="fas fa-map-marker-alt w-4 text-center text-blue-400"></i> Ciudad de México, México
+            <section class="mb-2">
+                <h3 class="text-[0.6rem] font-light uppercase tracking-widest mb-1 text-blue-400">Contacto</h3>
+                <address class="text-[0.65rem] space-y-1 not-italic text-gray-300">
+                    <p class="flex items-center gap-2">
+                        <i class="fas fa-envelope w-4 text-center text-blue-400"></i>
+                        <a id="contact-email" href="mailto:eduardoehr89@gmail.com"
+                            class="hover:text-white transition-colors">eduardoehr89@gmail.com</a>
                     </p>
-                    <p class="flex items-center gap-2"><i class="fab fa-linkedin w-4 text-center text-blue-400"></i> <a
-                            href="https://linkedin.com/in/eduardoehr/" target="_blank"
-                            class="hover:text-white transition-colors">/in/eduardoehr</a></p>
-                    <p class="flex items-center gap-2"><i class="fas fa-laptop-code w-4 text-center text-blue-400"></i>
-                        <a href="../index.html"
-                            class="text-blue-300 font-bold hover:text-white transition-colors">Volver al Portafolio</a>
+                    <p class="flex items-center gap-2">
+                        <i class="fab fa-whatsapp w-4 text-center text-blue-400"></i>
+                        <a id="contact-phone" href="tel:+528120109796" class="hover:text-white transition-colors">+52 81
+                            2010 9796</a>
                     </p>
-                </address>
-                <div class="mt-2 flex flex-col items-center">
-                    <div class="bg-white p-1 rounded-lg">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://www.linkedin.com/in/eduardoehr/&color=000000&bgcolor=ffffff"
-                            class="w-16 h-16" alt="QR LinkedIn">
+                    <p class="flex items-center gap-2">
+                        <i class="fas fa-map-marker-alt w-4 text-center text-blue-400"></i>
+                        <span id="contact-location">Ciudad de México, México</span>
+                    </p>
+                    <div class="flex flex-wrap gap-x-4 gap-y-1">
+                        <p class="flex items-center gap-2">
+                            <i class="fab fa-linkedin w-4 text-center text-blue-400"></i>
+                            <a id="contact-linkedin" href="https://linkedin.com/in/eduardoehr/" target="_blank"
+                                class="hover:text-white transition-colors">/in/eduardoehr</a>
+                        </p>
+                        <p class="flex items-center gap-2">
+                            <i class="fas fa-laptop-code w-4 text-center text-blue-400"></i>
+                            <a href="../index.html"
+                                class="text-blue-300 font-bold hover:text-white transition-colors">Portafolio <i
+                                    class="fas fa-arrow-up-right-from-square text-[0.45rem] opacity-70 ml-0.5"></i></a>
+                        </p>
                     </div>
-                    <p class="text-[0.55rem] text-gray-400 mt-1">Escanear para LinkedIn</p>
-                </div>
+                </address>
+
+                <!-- Estadísticas Dinámicas -->
+                <div class="h-px bg-white/10 my-2 opacity-50"></div>
+
+                <section class="mb-2">
+                    <h3 class="text-[0.6rem] font-light uppercase tracking-widest mb-1.5 text-blue-400">Tipología de
+                        Proyectos</h3>
+                    <div id="stats-typology-container" class="space-y-1.5 min-h-[60px]"></div>
+                </section>
+
+                <section class="mb-2">
+                    <h3 class="text-[0.6rem] font-light uppercase tracking-widest mb-1.5 text-blue-400">Disciplinas
+                        Modeladas</h3>
+                    <div id="stats-disciplines-container" class="space-y-1 min-h-[80px]"></div>
+                </section>
+
+                <section class="mb-1">
+                    <h3 class="text-[0.6rem] font-light uppercase tracking-widest mb-2 text-blue-400">Mi Entorno</h3>
+                    <div id="stats-environment-container" class="w-full min-h-[30px]"></div>
+                </section>
             </section>
 
-            <div class="h-px bg-white/10 my-2 opacity-50"></div>
+            <div class="h-px bg-white/10 my-1 opacity-50"></div>
 
-            <section class="mb-4">
-                <h3 class="text-[0.6rem] font-bold uppercase tracking-widest mb-2 text-blue-400">Aptitudes Clave</h3>
-                <ul class="text-[0.65rem] space-y-1.5 text-gray-300 mb-2">
-                    <li><strong class="text-white block mb-0.5">Liderazgo BIM:</strong> Coordinación Multidisciplinaria
-                        (MEP, Est, Arq), Gestión 4D/6D.</li>
-                    <li><strong class="text-white block mb-0.5">Comercial/Logística:</strong> Negociación, Cadena de
-                        Suministro, Asesoría Técnica.</li>
-                </ul>
-                <h4 class="text-[0.55rem] font-bold text-gray-400 mb-1.5 uppercase tracking-tighter">Habilidades Blandas
-                </h4>
-                <div id="soft-skills-container" class="flex flex-wrap gap-1">
+            <section class="mb-1">
+                <h3 class="text-[0.6rem] font-light uppercase tracking-widest mb-1 text-blue-400">Soft Skills</h3>
+                <div id="soft-skills-container" class="flex flex-wrap gap-0.5">
                     <!-- Dinámico -->
                 </div>
             </section>
@@ -122,11 +140,11 @@
             <div class="h-px bg-white/10 my-2 opacity-50"></div>
 
             <section class="mb-4">
-                <h3 class="text-[0.6rem] font-bold uppercase tracking-widest mb-2 text-blue-400">Software Stack</h3>
+                <h3 class="text-[0.6rem] font-light uppercase tracking-widest mb-2 text-blue-400">Software Stack</h3>
 
                 <h4 class="text-[0.55rem] font-bold text-gray-400 mb-2 uppercase tracking-tighter">Herramientas
                     Principales</h4>
-                <div id="software-main-container" class="space-y-3 mb-4">
+                <div id="software-main-container" class="space-y-1.5 mb-2">
                     <!-- Dinámico -->
                 </div>
 
@@ -137,8 +155,8 @@
                 </div>
             </section>
 
-            <section class="mt-auto">
-                <h3 class="text-[0.6rem] font-bold uppercase tracking-widest mb-2 text-blue-400">Idiomas</h3>
+            <section class="mt-4">
+                <h3 class="text-[0.6rem] font-light uppercase tracking-widest mb-2 text-blue-400">Idiomas</h3>
                 <div class="text-[0.65rem] text-gray-300 flex justify-between">
                     <span><strong class="text-white">Español:</strong> Nativo</span>
                     <span><strong class="text-white">Inglés:</strong> A1</span>
@@ -147,10 +165,10 @@
         </aside>
 
         <!-- Main Content -->
-        <div class="w-[68%] p-8 flex flex-col bg-white dark:bg-gray-800 transition-colors">
-            <section class="mb-4">
+        <div class="w-[68%] p-6 flex flex-col bg-white dark:bg-gray-800 transition-colors">
+            <section class="mb-2">
                 <h3
-                    class="text-base font-bold uppercase tracking-wider mb-2 border-b-2 border-blue-500 pb-1 text-gray-800 dark:text-white">
+                    class="text-base font-light uppercase tracking-wider mb-1 border-b-2 border-blue-500 pb-1 text-gray-800 dark:text-white">
                     Perfil Profesional</h3>
                 <div class="text-[0.7rem] text-gray-600 dark:text-gray-300 text-justify leading-relaxed">
                     <span id="profile-text"></span><span
@@ -158,9 +176,9 @@
                 </div>
             </section>
 
-            <section class="mb-4">
+            <section class="mb-2">
                 <h3
-                    class="text-base font-bold uppercase tracking-wider mb-4 border-b-2 border-blue-500 pb-1 text-gray-800 dark:text-white">
+                    class="text-base font-light uppercase tracking-wider mb-1.5 border-b-2 border-blue-500 pb-1 text-gray-800 dark:text-white">
                     Experiencia Laboral</h3>
 
                 <div id="experience-container">
@@ -168,20 +186,20 @@
                 </div>
             </section>
 
-            <section class="mt-auto">
+            <section class="mt-4">
                 <h3
-                    class="text-base font-bold uppercase tracking-wider mb-2 border-b-2 border-blue-500 pb-1 text-gray-800 dark:text-white">
-                    Formación & Estrategia</h3>
-                <p class="text-[0.65rem] font-bold text-blue-600 dark:text-blue-400 mb-2 uppercase tracking-wide">En
+                    class="text-base font-light uppercase tracking-wider mb-2 border-b-2 border-blue-500 pb-1 text-gray-800 dark:text-white">
+                    Formación</h3>
+                <p class="text-[0.6rem] font-bold text-blue-500 dark:text-blue-400 uppercase tracking-widest mb-2">En
                     curso (2025-2026)</p>
-                <div id="education-grid" class="grid grid-cols-3 gap-3 mb-4">
+                <div id="education-grid" class="flex flex-row flex-wrap gap-x-12 gap-y-4 mb-4">
                     <!-- Dinámico -->
                 </div>
 
-                <div class="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
-                    <p class="text-[0.55rem] font-bold mb-2 text-gray-500 dark:text-gray-400 uppercase tracking-widest">
+                <div class="mt-2">
+                    <p class="text-[0.6rem] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1">
                         Estudios Previos</p>
-                    <ul id="education-list" class="text-[0.65rem] space-y-1.5 ml-1">
+                    <ul id="education-list" class="text-[0.65rem] space-y-1 ml-1">
                         <!-- Dinámico -->
                     </ul>
                 </div>

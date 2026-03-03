@@ -34,6 +34,10 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+a {
+    text-decoration: none;
+}
+
 .dark body {
     background-color: var(--bg-dark);
     color: var(--text-dark-main);
@@ -41,7 +45,7 @@ body {
 
 .cv-container {
     width: 210mm;
-    min-height: 297mm;
+    height: auto;
     background-color: var(--card-bg-light);
     margin: 0 auto;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
@@ -76,14 +80,15 @@ body {
     /* More subtle */
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #cbd5e1;
-    padding: 1px 6px;
-    border-radius: 8px;
-    font-size: 0.55rem;
-    margin-right: 2px;
-    margin-bottom: 2px;
+    padding: 1px 4px;
+    border-radius: 6px;
+    font-size: 0.48rem;
+    margin-right: 1px;
+    margin-bottom: 1px;
     backdrop-filter: blur(4px);
     transition: var(--transition);
     white-space: nowrap;
+    position: relative;
 }
 
 .soft-skill-tag:hover {
@@ -108,25 +113,34 @@ body {
 }
 
 .glass-tooltip {
-    background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     color: #f1f5f9;
     position: absolute;
-    bottom: 120%;
+    bottom: 135%;
     left: 0;
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    font-size: 0.65rem;
-    z-index: 50;
+    transform: translateY(10px);
+    width: max-content;
+    min-width: 160px;
+    max-width: 200px;
+    height: auto;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.6rem;
+    z-index: 100;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px);
     transition: var(--transition);
     pointer-events: none;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     line-height: 1.4;
+    white-space: normal;
 }
 
 .group:hover .glass-tooltip {
@@ -141,8 +155,8 @@ body {
 .job-card {
     background-color: #f9fafb;
     border-radius: 10px;
-    padding: 0.75rem;
-    margin-bottom: 0.75rem;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
     border: 1px solid #e5e7eb;
     transition: var(--transition);
 }
@@ -163,11 +177,7 @@ body {
 }
 
 .future-study {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
     color: #1e40af;
-    border-radius: 12px;
-    padding: 0.75rem;
-    border: 1px solid #bfdbfe;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -179,12 +189,9 @@ body {
 
 .future-study:hover {
     transform: scale(1.05);
-    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.2);
 }
 
 .dark .future-study {
-    background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
-    border-color: #1e40af;
     color: #dbeafe;
 }
 
