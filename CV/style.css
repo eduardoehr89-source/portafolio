@@ -229,10 +229,18 @@ body {
     /* Asegurar visibilidad de textos en sidebar sin afectar iconos ni puntos */
     .sidebar-color h1,
     .sidebar-color h2,
-    .sidebar-color h3,
     .sidebar-color p,
-    .sidebar-color span:not(.pulse-dot):not(.static-dot):not(.percentage-counter) {
+    /* Los h3 y h4 del sidebar deben mantener su color azul/gris original */
+    .sidebar-color span:not(.pulse-dot):not(.static-dot):not(.percentage-counter):not(.text-blue-400) {
         color: white !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .sidebar-color h3,
+    .sidebar-color h4 {
+        color: #60a5fa !important;
+        /* Aproximación a text-blue-400 */
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }

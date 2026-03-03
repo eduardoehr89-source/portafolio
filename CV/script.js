@@ -515,9 +515,7 @@ function renderSkills(data) {
         if (softContainer) softContainer.innerHTML = '';
         return;
     }
-    softContainer.innerHTML = `
-        <h3 class="text-[0.6rem] font-light uppercase tracking-widest mb-1.5 text-blue-400 w-full">Soft Skills</h3>
-    `;
+    softContainer.innerHTML = '';
 
     // Agrupar por categoría
     const categories = {};
