@@ -5,12 +5,15 @@
     --primary: #3b82f6;
     --primary-dark: #2563eb;
     --secondary: #10b981;
-    --sidebar-bg: #374151;
+    --sidebar-bg: #0f172a;
+    /* Azul Marino Sólido para Light Mode */
     --sidebar-text: #ffffff;
     --bg-light: #f3f4f6;
-    --bg-dark: #111827;
+    --bg-dark: #09090b;
+    /* Zinc 950 approx */
     --card-bg-light: #ffffff;
-    --card-bg-dark: #1f2937;
+    --card-bg-dark: rgba(24, 24, 27, 0.6);
+    /* Zinc 900 translucent */
     --text-main: #374151;
     --text-muted: #6b7280;
     --text-dark-main: #e5e7eb;
@@ -25,8 +28,7 @@ body {
     font-family: 'Inter', sans-serif;
     font-size: 9.5pt;
     color: var(--text-main);
-    background-color: #52525b;
-    /* Zinc 600 default background */
+    background: linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%);
     margin: 0;
     padding: 20px 0;
     min-height: 100vh;
@@ -34,12 +36,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-a {
-    text-decoration: none;
-}
-
 .dark body {
-    background-color: var(--bg-dark);
     color: var(--text-dark-main);
 }
 
@@ -48,15 +45,18 @@ a {
     height: auto;
     background-color: var(--card-bg-light);
     margin: 0 auto;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     position: relative;
-    overflow: visible;
+    overflow: hidden;
     border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    /* Muy sutil */
 }
 
 .dark .cv-container {
     background-color: var(--card-bg-dark);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 80px rgba(0, 0, 0, 0.5);
 }
 
 /* =========================================
@@ -69,9 +69,10 @@ a {
 }
 
 .dark .sidebar-color {
-    background-color: #0f172a;
-    /* Slate 900 */
-    border-right: 1px solid #334155;
+    background-color: rgba(15, 23, 42, 0.8);
+    /* Glassmorphism sutil en modo oscuro */
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .soft-skill-tag {
@@ -152,28 +153,24 @@ a {
 /* =========================================
    COMPONENTS
    ========================================= */
+/* No job-cards, just flow */
 .job-card {
-    background-color: #f9fafb;
-    border-radius: 10px;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    border: 1px solid #e5e7eb;
+    background-color: transparent;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    border: none;
     transition: var(--transition);
 }
 
 .job-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    border-color: var(--primary);
+    transform: none;
+    box-shadow: none;
 }
 
 .dark .job-card {
-    background-color: #374151;
-    border-color: #4b5563;
-}
-
-.dark .job-card:hover {
-    border-color: var(--primary);
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .future-study {
@@ -226,4 +223,45 @@ a {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
+}
+
+/* Pulse Animation for active roles */
+@keyframes dot-pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    }
+}
+
+.pulse-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: #3b82f6;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    position: relative;
+    top: -1px;
+    animation: dot-pulse 2s infinite;
+}
+
+.static-dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    background-color: #3b82f6;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    position: relative;
+    top: -1px;
 }

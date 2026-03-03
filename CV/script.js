@@ -157,18 +157,17 @@ function renderExperience(data) {
         article.className = 'job-card group';
         article.innerHTML = `
             <div class="flex justify-between items-center mb-0.5">
-                <h4 class="text-xs font-bold text-gray-800 dark:text-white flex items-center gap-2">
-                    <i class="fas fa-bolt text-blue-500"></i> ${puesto}
+                <h4 class="text-xs font-bold text-gray-800 dark:text-white flex items-center">
+                    <span class="${puesto.includes('Modelador BIM Senior') ? 'pulse-dot' : 'static-dot'}"></span>
+                    ${puesto.replace(/\s*\((.*?)\)/g, ' <span class="font-normal opacity-80 ml-1.5">($1)</span>')}
                 </h4>
                 <div class="text-right flex items-center gap-2">
                     <span class="text-[0.6rem] text-blue-600 dark:text-blue-400 whitespace-nowrap">${duration}</span>
                     <span class="text-[0.6rem] text-gray-400 dark:text-gray-500 whitespace-nowrap">(${periodo})</span>
                 </div>
             </div>
-            <p class="text-[0.65rem] font-semibold text-gray-500 dark:text-gray-400 italic mb-0.5">${empresa}</p>
-            <p class="text-[0.6rem] text-gray-500 dark:text-gray-500 flex items-center gap-1 mb-0.5">
-                <i class="fas fa-map-marker-alt"></i> ${ubicacion}
-            </p>
+            <p class="text-[0.65rem] font-semibold text-gray-500 dark:text-gray-400 italic mb-2.5">${empresa}</p>
+
             <p class="text-[0.65rem] text-gray-600 dark:text-gray-300 text-justify leading-snug">${descripcion}</p>
         `;
         container.appendChild(article);
@@ -347,9 +346,12 @@ function renderProfile(data) {
     }
 
     if (text) {
+        // Resaltar Inteligencia Artificial
+        const highlightedText = text.replace(/Inteligencia Artificial/gi, '<strong>Inteligencia Artificial</strong>');
+
         el.innerHTML = `
-            ${text}
-            <div class="mt-2 pt-1.5 border-t border-gray-100 dark:border-gray-800">
+            ${highlightedText}
+            <div class="mt-4 mb-2 pt-1.5 border-t border-gray-100 dark:border-gray-800">
                 <p class="text-[0.62rem] text-gray-600 dark:text-gray-400">
                     Si quieres saber más sobre mis proyectos (imágenes, videos, ROI), visita mi 
                     <a href="../index.html" class="inline-flex items-center gap-1 font-bold text-blue-600 dark:text-blue-400 hover:text-blue-800 transition-colors">
@@ -478,16 +480,16 @@ function renderStatsEnvironment(projects) {
                 <div class="h-full bg-blue-500" style="width: ${pctOficina}%"></div>
                 <div class="h-full bg-white" style="width: ${pctObra}%"></div>
             </div>
-            <div class="flex justify-between text-[0.55rem] font-mono uppercase tracking-tighter mt-0.5">
-                <div class="flex items-center gap-1">
+            <div class="flex justify-between text-[0.6rem] font-mono uppercase mt-0.5">
+                <div class="flex items-center gap-1.5">
                     <div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                    <span class="text-gray-400">Oficina</span>
-                    <span class="text-gray-500 ml-1">${pctOficina}%</span>
+                    <span class="text-gray-300">Oficina</span>
+                    <span class="text-gray-400 opacity-80 ml-1">${pctOficina}%</span>
                 </div>
-                <div class="flex items-center gap-1">
+                <div class="flex items-center gap-1.5">
                     <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
-                    <span class="text-gray-400">Obra</span>
-                    <span class="text-gray-500 ml-1">${pctObra}%</span>
+                    <span class="text-gray-300">Obra</span>
+                    <span class="text-gray-400 opacity-80 ml-1">${pctObra}%</span>
                 </div>
             </div>
         </div>
@@ -513,7 +515,6 @@ function renderSkills(data) {
         const catDiv = document.createElement('div');
         catDiv.className = 'w-full mb-2';
         catDiv.innerHTML = `
-            <h4 class="text-[0.55rem] font-bold text-gray-500 mb-1 uppercase tracking-tighter opacity-80">${catName}</h4>
             <div class="flex flex-wrap gap-0.5">
                 ${skills.map(skill => {
             const item = getVal(skill, 'Ítem', 'Item');
