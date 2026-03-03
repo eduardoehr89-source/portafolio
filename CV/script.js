@@ -292,7 +292,7 @@ function renderSoftware(data) {
             <div class="group relative cursor-help flex items-center gap-3 mb-1">
                 <span class="text-[0.6rem] text-gray-200 w-24 shrink-0 truncate">${nombre}</span>
                 <div class="skill-bar flex-1 h-[3px] bg-white/5 rounded-full overflow-hidden mt-0">
-                    <div class="skill-progress h-full bg-blue-500 rounded-full" data-width="${porcentaje}"></div>
+                    <div class="skill-progress h-full bg-blue-500 rounded-full" data-width="${porcentaje}" style="width: ${porcentaje}%"></div>
                 </div>
                 <div class="glass-tooltip">
                     <strong class="text-blue-400 block mb-1 text-[0.65rem]">${nivel}</strong>
@@ -408,11 +408,14 @@ function renderStatsTypology(data) {
     container.innerHTML = stats.map((s, i) => {
         const pct = Math.round((s.count / total) * 100);
         return `
-            <div class="flex items-center justify-between text-[0.6rem] font-mono">
-                <div class="flex items-center gap-1.5 truncate pr-2">
-                    <span class="truncate text-gray-300 uppercase">${s.name}</span>
+            <div class="space-y-0.5">
+                <div class="flex items-center justify-between text-[0.6rem] font-mono">
+                    <span class="truncate text-gray-300 uppercase pr-2">${s.name}</span>
+                    <span class="text-gray-400 opacity-80 percentage-counter" data-target="${pct}">0%</span>
                 </div>
-                <span class="text-gray-400 opacity-80 percentage-counter" data-target="${pct}">0%</span>
+                <div class="skill-bar w-full h-[2.5px] bg-white/5 rounded-full overflow-hidden">
+                    <div class="skill-progress h-full bg-blue-500 rounded-full" data-width="${pct}" style="width: ${pct}%"></div>
+                </div>
             </div>
         `;
     }).join('');
@@ -462,9 +465,14 @@ function renderStatsDisciplines(projects, refDisciplines) {
     container.innerHTML = stats.map(s => {
         const pct = Math.round((s.count / totalStats) * 100);
         return `
-            <div class="flex justify-between text-[0.6rem] font-mono text-gray-300 uppercase">
-                <span class="truncate pr-1">${s.name}</span>
-                <span class="text-gray-400 opacity-80 percentage-counter" data-target="${pct}">0%</span>
+            <div class="space-y-0.5">
+                <div class="flex justify-between text-[0.6rem] font-mono text-gray-300 uppercase">
+                    <span class="truncate pr-1">${s.name}</span>
+                    <span class="text-gray-400 opacity-80 percentage-counter" data-target="${pct}">0%</span>
+                </div>
+                <div class="skill-bar w-full h-[2.5px] bg-white/5 rounded-full overflow-hidden">
+                    <div class="skill-progress h-full bg-blue-500 rounded-full" data-width="${pct}" style="width: ${pct}%"></div>
+                </div>
             </div>
         `;
     }).join('');
@@ -490,8 +498,8 @@ function renderStatsEnvironment(projects) {
     container.innerHTML = `
         <div class="space-y-1 pt-0.5">
             <div class="h-[3px] w-full bg-white/5 rounded-full overflow-hidden flex">
-                <div class="h-full bg-blue-500 skill-progress" data-width="${pctOficina}"></div>
-                <div class="h-full bg-white skill-progress" data-width="${pctObra}"></div>
+                <div class="h-full bg-blue-500 skill-progress" data-width="${pctOficina}" style="width: ${pctOficina}%"></div>
+                <div class="h-full bg-white skill-progress" data-width="${pctObra}" style="width: ${pctObra}%"></div>
             </div>
             <div class="flex justify-between text-[0.6rem] font-mono uppercase mt-0.5">
                 <div class="flex items-center gap-1.5">
