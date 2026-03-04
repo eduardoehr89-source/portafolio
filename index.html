@@ -53,14 +53,50 @@
         </div>
     </div>
 
+    <!-- PDF Selection Modal -->
+    <div id="pdf-modal"
+        class="hidden fixed inset-0 z-[10000] flex items-center justify-center bg-black/60 backdrop-blur-sm no-print">
+        <div
+            class="bg-white dark:bg-[#0f141a] p-8 rounded-xl shadow-2xl max-w-[320px] w-full text-center border border-gray-200 dark:border-gray-800">
+            <div class="text-blue-500 text-4xl mb-4"><i class="fas fa-file-pdf"></i></div>
+            <h3 class="font-light tracking-wide text-lg text-gray-800 dark:text-gray-200 mb-1">DESCARGAR CV</h3>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mb-6 uppercase tracking-wider">
+                Elige la versión temática
+            </p>
+            <div class="flex flex-col gap-3">
+                <button onclick="downloadPdf('light')"
+                    class="w-full px-4 py-2 text-sm font-medium bg-transparent text-gray-700 dark:text-gray-300 rounded hover:bg-gray-100 dark:hover:bg-white/5 border border-gray-300 dark:border-white/10 transition-colors flex justify-center items-center gap-2">
+                    <i class="fas fa-sun text-blue-500"></i> Claro
+                </button>
+                <button onclick="downloadPdf('dark')"
+                    class="w-full px-4 py-2 text-sm font-medium bg-transparent text-gray-700 dark:text-gray-300 rounded hover:bg-gray-100 dark:hover:bg-white/5 border border-gray-300 dark:border-white/10 transition-colors flex justify-center items-center gap-2">
+                    <i class="fas fa-moon text-blue-500"></i> Oscuro
+                </button>
+                <button onclick="downloadPdf('both')"
+                    class="w-full px-4 py-2 text-sm font-medium bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded hover:bg-blue-500/20 border border-blue-500/20 transition-colors flex justify-center items-center gap-2 mt-1">
+                    <i class="fas fa-download"></i> Ambos
+                </button>
+                <div class="w-full h-px bg-gray-200 dark:bg-gray-800 my-3"></div>
+                <button onclick="closePdfModal()"
+                    class="w-full px-4 py-2 text-xs font-light text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors uppercase tracking-widest">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Floating Controls -->
     <div class="floating-controls no-print fixed top-6 right-6 z-[100] flex gap-3">
-        <a href="CV_Said_Herrera.pdf" target="_blank" download="CV_Said_Herrera.pdf" title="Descargar PDF"
-            class="p-3 w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 hover:bg-red-200 dark:hover:bg-red-900/50 text-red-600 dark:text-red-400 shadow-lg transition-transform hover:scale-110 flex items-center justify-center">
-            <i class="fas fa-file-pdf text-lg"></i>
+        <a href="../index.html" title="Regresar al Portafolio"
+            class="p-3 w-12 h-12 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 shadow-lg transition-transform hover:scale-110 flex items-center justify-center border border-transparent dark:border-gray-700">
+            <i class="fas fa-home text-lg"></i>
         </a>
+        <button onclick="openPdfModal()" title="Elegir PDF a Bajar"
+            class="p-3 w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 hover:bg-blue-200 dark:hover:bg-blue-900/50 text-blue-600 dark:text-blue-400 shadow-lg transition-transform hover:scale-110 flex items-center justify-center">
+            <i class="fas fa-file-pdf text-lg"></i>
+        </button>
         <button id="theme-toggle" title="Cambiar Tema"
-            class="p-3 w-12 h-12 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 shadow-lg transition-transform hover:scale-110 flex items-center justify-center">
+            class="p-3 w-12 h-12 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 shadow-lg transition-transform hover:scale-110 flex items-center justify-center border border-transparent dark:border-gray-700">
             <i id="theme-icon" class="fas fa-moon text-lg"></i>
         </button>
     </div>
@@ -68,7 +104,7 @@
     <!-- CV Main Container -->
     <main class="cv-container flex rounded-xl overflow-hidden shadow-2xl">
         <!-- Sidebar -->
-        <aside class="sidebar-color w-[32%] p-4 flex flex-col h-full relative z-10 border-r border-white/5">
+        <aside class="sidebar-color w-[32%] p-4 flex flex-col h-full relative z-10">
             <!-- Cabecera con Imagen Expansiva (Altura fijada para alineación estructural) -->
             <header class="relative -mx-4 -mt-4 mb-0 h-64 overflow-hidden group">
                 <!-- Imagen de Fondo -->
@@ -185,7 +221,7 @@
             <!-- Perfil Profesional (Funciona como encabezado derecho) -->
             <section class="mb-8">
                 <h3
-                    class="text-base font-light uppercase tracking-wider mb-1 border-b border-white/10 pb-1 text-gray-800 dark:text-white">
+                    class="text-base font-light uppercase tracking-wider mb-1 border-b border-gray-300 dark:border-white/10 pb-1 text-gray-800 dark:text-white">
                     Perfil Profesional</h3>
                 <div class="text-[0.7rem] text-gray-600 dark:text-gray-300 text-justify leading-relaxed">
                     <span id="profile-text"></span>
@@ -194,7 +230,7 @@
 
             <section class="mb-0">
                 <h3
-                    class="text-base font-light uppercase tracking-wider mb-1.5 border-b border-white/10 pb-1 text-gray-800 dark:text-white">
+                    class="text-base font-light uppercase tracking-wider mb-1.5 border-b border-gray-300 dark:border-white/10 pb-1 text-gray-800 dark:text-white">
                     Experiencia Laboral</h3>
 
                 <div id="experience-container">
@@ -204,7 +240,7 @@
 
             <section class="mt-0.5">
                 <h3
-                    class="text-base font-light uppercase tracking-wider mb-2 border-b border-white/10 pb-1 text-gray-800 dark:text-white">
+                    class="text-base font-light uppercase tracking-wider mb-2 border-b border-gray-300 dark:border-white/10 pb-1 text-gray-800 dark:text-white">
                     Formación</h3>
                 <p class="text-[0.6rem] font-bold text-blue-500 dark:text-blue-400 uppercase tracking-widest mb-2">En
                     curso (2025-2026)</p>

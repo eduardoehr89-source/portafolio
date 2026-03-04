@@ -14,14 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
    DATA LOADING (CSV Parsing)
    ========================================= */
 const CSV_URLS = {
-    experiencia: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Experiencia%20laboral_cv.csv',
-    formacion: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Formaci%C3%B3n%20ac%C3%A1d%C3%A9mica_cv.csv',
-    software: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/Software_portafolio.csv',
-    habilidades: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Soft%20skills_cv.csv',
-    contacto: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Contacto_cv.csv',
-    perfil: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/CV/Perfil%20Profesional_cv.csv',
-    proyectos_global: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/Proyectos_portafolio.csv',
-    disciplinas_global: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/Disciplinas_portafolio.csv'
+    experiencia: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Experiencia%20laboral_cv.csv',
+    formacion: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Formaci%C3%B3n%20ac%C3%A1d%C3%A9mica_cv.csv',
+    software: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Software_portafolio.csv',
+    habilidades: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Soft%20skills_cv.csv',
+    contacto: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Contacto_cv.csv',
+    perfil: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Perfil%20Profesional_cv.csv',
+    proyectos_global: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Proyectos_portafolio.csv',
+    disciplinas_global: 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Disciplinas_portafolio.csv'
 };
 
 async function loadExternalData() {
@@ -705,3 +705,47 @@ function initPrintLogic() {
         setTimeout(() => window.print(), 500);
     };
 }
+
+// PDF Download Logic
+window.openPdfModal = () => {
+    document.getElementById('pdf-modal').classList.remove('hidden');
+};
+
+window.closePdfModal = () => {
+    document.getElementById('pdf-modal').classList.add('hidden');
+};
+
+window.downloadPdf = async (type) => {
+    const urls = {
+        'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/44439e1beab342c060ee80c6fd9d171176bfe6d4/CV/CV%20-%20Said%20Herrera_light.pdf',
+        'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/44439e1beab342c060ee80c6fd9d171176bfe6d4/CV/CV%20-%20Said%20Herrera_dark.pdf'
+    };
+
+    const fetchAndDownload = async (url, filename) => {
+        try {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            const blobUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = blobUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(blobUrl);
+        } catch (err) {
+            console.error('Fetch download failed, falling back to open:', err);
+            window.open(url, '_blank');
+        }
+    };
+
+    closePdfModal();
+
+    if (type === 'both') {
+        await fetchAndDownload(urls.light, 'CV_Said_Herrera_Claro.pdf');
+        setTimeout(() => fetchAndDownload(urls.dark, 'CV_Said_Herrera_Oscuro.pdf'), 500);
+    } else {
+        const fileExt = type === 'light' ? 'Claro' : 'Oscuro';
+        await fetchAndDownload(urls[type], `CV_Said_Herrera_${fileExt}.pdf`);
+    }
+};

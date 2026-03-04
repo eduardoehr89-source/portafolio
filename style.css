@@ -213,6 +213,7 @@ body {
         width: 210mm !important;
         height: 297mm !important;
         border-radius: 0 !important;
+        border: none !important;
     }
 
     .no-print {
@@ -223,6 +224,9 @@ body {
         background-color: #0f172a !important;
         /* Azul Marino Forzado */
         color: #ffffff !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
@@ -236,7 +240,6 @@ body {
     }
 
     .skill-progress {
-        width: 100% !important;
         background-color: #3b82f6 !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
@@ -255,6 +258,23 @@ body {
 
     .glass-tooltip {
         display: none !important;
+    }
+
+    #soft-skills-container,
+    #software-main-container,
+    .soft-skill-tag,
+    .job-card,
+    .group,
+    #experience-container,
+    #education-grid {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        filter: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
     }
 }
 
