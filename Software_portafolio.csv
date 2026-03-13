@@ -1,15 +1,18 @@
-Nombre,Nivel,Porcentaje Dominio,Clasificación,Capacidad,Descripción,Icono
-ACC / BIM 360,Medio,60%,Principal,"Gestión de entorno común de datos, coordinación de modelos y flujos de aprobación.",Gestión CDE y Cloud,cloud
-Antigravity ,Bajo,30%,Secundario,Herramienta de programación avanzada para la optimización de flujos de datos y desarrollo de soluciones.,Programación y Optimización,code
-AutoCAD,Bajo,30%,Secundario,Consulta de planos 2D y ediciones básicas para soporte al modelado 3D.,Planos y 2D,pen-tool
-Dalux,Medio,60%,Principal,"Supervisión de obra, gestión de incidencias y uso de realidad aumentada en sitio.",Incidencias y AR,smartphone
-Dynamo / Python,Bajo,30%,Secundario,Creación de scripts propios y funcionales para automatizar tareas y optimizar flujos de trabajo.,Scripting y Automatización,code
-Gemini AI,Medio,60%,Principal,"Generación de scripts para Dynamo/python, creación de imágenes, videos, asistentes personalizados y revisión de documentación.",Asistente Flujo Global,sparkles
-Monday,Medio,60%,Secundario,"Organización de tareas, gestión de cronogramas y seguimiento colaborativo de equipos.",Gestión de tiempos,layout-list
-Navisworks,Bajo,30%,Principal,Suficiente para trabajar con interferencias y colisiones desde el rol de modelador BIM.,Clash Detection,crosshair
-NotebookLM,Alto,90%,Secundario,"Análisis de documentos, normativas, contratos y auditoría de datos.",Análisis Documental con IA,book-open
-Power BI,Medio,60%,Secundario,Creación de tableros para visualizar métricas y datos extraídos de modelos BIM.,Inteligencia de Datos,bar-chart-3
-Recap,Medio,60%,Secundario,Procesamiento y limpieza de nubes de puntos para su vinculación y modelado en Revit.,Nubes de puntos,scan
-Revit,Alto,90%,Principal,Modelado integral de proyectos complejos y mejora de flujos con scripts e IA.,Modelado BIM,layers
-Speckle,Medio,60%,Secundario,Intercambio de datos entre plataformas para flujos de diseño colaborativo e interoperabilidad.,Interoperabilidad,box
-Twinmotion,Medio,60%,Secundario,Visualizaciones rápidas y recorridos virtuales para validación de diseño arquitectónico.,Render Real-time,image
+Grupo,Nombre,Nivel,% Dominio,Clasificación,Capacidad,Descripción,Icono
+1. Producción y Modelado,AutoCAD,Bajo,30%,Secundario,Consulta de planos 2D y ediciones básicas.,Planos y 2D,pen-tool
+1. Producción y Modelado,Recap,Medio,60%,Secundario,Procesamiento y limpieza de nubes de puntos.,Nubes de puntos,scan
+1. Producción y Modelado,Revit,Alto,90%,Principal,Modelado integral de proyectos complejos.,Modelado BIM,layers
+2. Coordinación y CDE,ACC / BIM 360,Medio,60%,Principal,"Gestión de CDE, coordinación y aprobación.",Gestión CDE y Cloud,cloud
+2. Coordinación y CDE,BIMcollab,Bajo,30%,Secundario,Gestión de incidencias BCF y comunicación.,Gestión de incidencias,message-square
+2. Coordinación y CDE,Dalux,Medio,60%,Principal,Supervisión de obra y realidad aumentada.,Incidencias y AR,smartphone
+2. Coordinación y CDE,Navisworks,Bajo,30%,Principal,Trabajo con interferencias y colisiones.,Clash Detection,crosshair
+2. Coordinación y CDE,Solibri,Bajo,30%,Secundario,Validación técnica y detección de colisiones.,Validación y Coordinación,search
+2. Coordinación y CDE,Speckle,Medio,60%,Secundario,Intercambio de datos e interoperabilidad.,Interoperabilidad,box
+3. IA y Automatización,Antigravity,Bajo,30%,Secundario,Optimización de flujos y desarrollo.,Programación y Optimiz.,code
+3. IA y Automatización,Dynamo / Python,Bajo,30%,Secundario,Creación de scripts y automatización.,Scripting y Automatiz.,code
+3. IA y Automatización,Gemini AI,Medio,60%,Principal,"Generación de scripts, imágenes y asistentes.",Asistente Flujo Global,sparkles
+3. IA y Automatización,NotebookLM,Alto,90%,Secundario,Análisis de documentos y normativas con IA.,Análisis Documental,book-open
+4. Gestión y Análisis,Monday,Medio,60%,Secundario,Organización de tareas y cronogramas.,Gestión de tiempos,layout-list
+4. Gestión y Análisis,Plannerly,Bajo,30%,Secundario,Requisitos de información y Clash Avoidance.,Gestión de procesos,shield-check
+4. Gestión y Análisis,Power BI,Medio,60%,Secundario,Tableros para visualizar métricas BIM.,Inteligencia de Datos,bar-chart-3
+5. Visualización,Twinmotion,Medio,60%,Secundario,Visualizaciones y recorridos virtuales.,Render Real-time,image
