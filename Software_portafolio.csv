@@ -6,10 +6,10 @@ Grupo,Nombre,Nivel,% Dominio,Clasificación,Capacidad,Descripción,Icono
 2. Coordinación y CDE,BIMcollab,Bajo,30%,Secundario,Gestión de incidencias BCF y comunicación.,Gestión de incidencias,message-square
 2. Coordinación y CDE,Dalux,Medio,60%,Principal,Supervisión de obra y realidad aumentada.,Incidencias y AR,smartphone
 2. Coordinación y CDE,Navisworks,Bajo,30%,Principal,Trabajo con interferencias y colisiones.,Clash Detection,crosshair
-2. Coordinación y CDE,Solibri,Bajo,30%,Secundario,Validación técnica y detección de colisiones.,Validación y Coordinación,search
+2. Coordinación y CDE,Solibri,En proceso,20%%,Secundario,Validación técnica y detección de colisiones.,Validación y Coordinación,search
 2. Coordinación y CDE,Speckle,Medio,60%,Secundario,Intercambio de datos e interoperabilidad.,Interoperabilidad,box
 3. IA y Automatización,Antigravity,Bajo,30%,Secundario,Optimización de flujos y desarrollo.,Programación y Optimiz.,code
-3. IA y Automatización,Dynamo / Python,Bajo,30%,Secundario,Creación de scripts y automatización.,Scripting y Automatiz.,code
+3. IA y Automatización,Dynamo / Python,En proceso,30%,Secundario,Creación de scripts y automatización.,Scripting y Automatiz.,code
 3. IA y Automatización,Gemini AI,Medio,60%,Principal,"Generación de scripts, imágenes y asistentes.",Asistente Flujo Global,sparkles
 3. IA y Automatización,NotebookLM,Alto,90%,Secundario,Análisis de documentos y normativas con IA.,Análisis Documental,book-open
 4. Gestión y Análisis,Monday,Medio,60%,Secundario,Organización de tareas y cronogramas.,Gestión de tiempos,layout-list
