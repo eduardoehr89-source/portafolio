@@ -1,0 +1,9 @@
+id,ahorro,roi,justificacion
+P41,14 Horas,12X,Automatización de mediciones técnicas y coordinación de redes para evitar errores costosos en obra.
+P27,22 Horas,15X,Procesamiento rápido de grandes volúmenes de datos para el diseño preciso de estaciones ferroviarias.
+P26,12 Horas,10X,Organización automática de planos de acabados y carpinterías, reduciendo el trabajo manual repetitivo considerablemente.
+P25,18 Horas,14X,Limpieza digital de intersecciones complejas para obtener cálculos de materiales exactos en la infraestructura.
+P19,20 Horas,16X,Colocación asistida de soportes y pasos de tuberías, garantizando la integridad técnica del edificio.
+P18,16 Horas,13X,Estandarización masiva de componentes técnicos para asegurar la calidad y el orden en la documentación.
+P11,30 Horas,18X,Creación automatizada de múltiples láminas de dibujo, acelerando la entrega de proyectos de vivienda social.
+P08,15 Horas,11X,Control de calidad automático de datos técnicos, asegurando el cumplimiento estricto de los protocolos BIM.
