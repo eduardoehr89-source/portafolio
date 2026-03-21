@@ -19,7 +19,7 @@ function initProfileCarousel() {
     if (!container) return;
 
     const cacheTs = Math.floor(Date.now() / (1000 * 60 * 60 * 24)); // Cache rollover diario
-    const basePath = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/master/CV/fotos%20de%20perfil/';
+    const basePath = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/89cc64fe4d59fd4266acd84373a379e89b341bd2/CV/fotos%20de%20perfil/';
     const totalImages = 10;
     let currentIndex = 1;
 
