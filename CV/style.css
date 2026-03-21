@@ -18,7 +18,7 @@
     --text-muted: #6b7280;
     --text-dark-main: #e5e7eb;
     --text-dark-muted: #9ca3af;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* =========================================
@@ -32,6 +32,9 @@ body {
     margin: 0;
     padding: 20px 0;
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    overflow-y: scroll !important;
     transition: var(--transition);
     -webkit-font-smoothing: antialiased;
 }
@@ -63,39 +66,144 @@ body {
    SIDEBAR
    ========================================= */
 .sidebar-color {
-    background-color: var(--sidebar-bg);
+    background-color: var(--sidebar-bg) !important;
     color: var(--sidebar-text);
     transition: var(--transition);
 }
 
 .dark .sidebar-color {
-    background-color: rgba(15, 23, 42, 0.8);
-    /* Glassmorphism sutil en modo oscuro */
-    backdrop-filter: blur(10px);
     border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+.sidebar-section-title {
+    font-size: 0.62rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #ffffff;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    transition: var(--transition);
+}
+
+.sidebar-section-title i,
+.sidebar-section-title svg {
+    color: #3b82f6 !important;
+    width: 0.75rem !important;
+    /* Igual a w-3 del portafolio */
+    height: 0.75rem !important;
+    min-width: 0.75rem !important;
+    flex-shrink: 0;
+}
+
+/* Ajuste para iconos de identificación (lead icons) en contacto */
+.sidebar-color address i:not(.fa-external-link-alt) {
+    color: #3b82f6 !important;
+    width: 0.75rem !important;
+    font-size: 0.65rem !important;
+    opacity: 0.9;
+}
+
+/* Forzar que los iconos de enlace sean consistently grises y pequeños */
+.fa-external-link-alt {
+    color: #9ca3af !important;
+    /* text-gray-400 */
+    font-size: 0.45rem !important;
+    width: auto !important;
+    height: auto !important;
+    opacity: 0.7 !important;
+}
+
+/* PERSISTENCIA DE BARRA LATERAL (Independiente del tema) */
+.sidebar-color *:not(#cv-profile-carousel-container *) {
+    transition: none !important; /* Evitar parpadeos de color, excepto en el carrusel */
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    text-rendering: optimizeLegibility !important;
+}
+
+/* BLINDAJE CROMÁTICO TOTAL DE BARRA LATERAL (Paridad 100% entre temas) */
+body.light-theme .sidebar-color {
+    background-color: #0f172a !important; /* Azul Marino Dark de BIM.OS */
+    color: #ffffff !important;
+}
+
+/* Forzamos que los grises y blancos de Tailwind se queden en sus valores de modo oscuro */
+body.light-theme .sidebar-color .text-white { color: #ffffff !important; }
+body.light-theme .sidebar-color .text-gray-50 { color: #f9fafb !important; }
+body.light-theme .sidebar-color .text-gray-100 { color: #f3f4f6 !important; }
+body.light-theme .sidebar-color .text-gray-200 { color: #e5e7eb !important; }
+body.light-theme .sidebar-color .text-gray-300 { color: #d1d5db !important; }
+body.light-theme .sidebar-color .text-gray-400 { color: #9ca3af !important; }
+body.light-theme .sidebar-color .text-gray-500 { color: #6b7280 !important; }
+body.light-theme .sidebar-color .text-gray-600 { color: #4b5563 !important; }
+body.light-theme .sidebar-color .text-gray-700 { color: #374151 !important; }
+body.light-theme .sidebar-color .text-gray-800 { color: #d1d5db !important; } /* Forzado a Gray-300 para legibilidad */
+body.light-theme .sidebar-color .text-gray-900 { color: #e5e7eb !important; } /* Forzado a Gray-200 para legibilidad */
+body.light-theme .sidebar-color .text-black { color: #ffffff !important; }
+
+/* Blindaje de Colores de Acento (Protección de Liderazgo, Links y Accents) */
+body.light-theme .sidebar-color .text-blue-400 { color: #60a5fa !important; }
+body.light-theme .sidebar-color .text-blue-500 { color: #3b82f6 !important; }
+body.light-theme .sidebar-color .text-cyan-400 { color: #0c4a6e !important; }
+body.light-theme .sidebar-color .text-cyan-500 { color: #0c4a6e !important; }
+body.light-theme .sidebar-color i[class*="text-blue"], 
+body.light-theme .sidebar-color i[class*="text-cyan"] { color: inherit !important; }
+
+/* Reset de Elementos Base */
+body.light-theme .sidebar-color h1,
+body.light-theme .sidebar-color h2,
+body.light-theme .sidebar-color h3.sidebar-section-title {
+    color: #ffffff !important;
+}
+
+body.light-theme .sidebar-color address,
+body.light-theme .sidebar-color p,
+body.light-theme .sidebar-color span:not(.skill-progress):not([class*="text-"]),
+body.light-theme .sidebar-color div:not(.soft-skill-tag):not([class*="text-"]),
+body.light-theme .sidebar-color a:not(.nav-btn):not([class*="text-"]) {
+    color: #d1d5db !important; /* Gray-300 como base */
+}
+
+body.light-theme .sidebar-color a:hover {
+    color: #ffffff !important;
+}
+
+body.light-theme .sidebar-color .h-px {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    opacity: 0.5 !important;
+}
+
+.sidebar-subtext {
+    color: #9ca3af !important; /* text-gray-400 fijo */
+    opacity: 0.6;
+    font-size: 0.85em;
+}
+
 .soft-skill-tag {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.08);
-    /* More subtle */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #cbd5e1;
-    padding: 1px 4px;
-    border-radius: 6px;
-    font-size: 0.48rem;
-    margin-right: 1px;
-    margin-bottom: 1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #cbd5e1 !important;
+    padding: 2px 6px !important;
+    border-radius: 4px;
+    font-size: 0.6rem !important; /* Igualado al Software Stack Principal */
     backdrop-filter: blur(4px);
     transition: var(--transition);
-    white-space: nowrap;
+    white-space: normal;
     position: relative;
+    font-weight: 500;
 }
 
 .soft-skill-tag:hover {
-    background: rgba(59, 130, 246, 0.2);
-    border-color: var(--primary);
-    color: white;
+    background: rgba(59, 130, 246, 0.2) !important;
+    border-color: var(--primary) !important;
+    color: white !important;
 }
 
 .skill-bar {
@@ -117,7 +225,7 @@ body {
     background: rgba(15, 23, 42, 0.98);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #f1f5f9;
+    color: #cbd5e1;
     position: absolute;
     bottom: 135%;
     left: 0;
@@ -144,11 +252,75 @@ body {
     white-space: normal;
 }
 
+.glass-tooltip strong {
+    color: #ffffff !important; /* Blanco sólido para títulos en dark mode */
+}
+
 .group:hover .glass-tooltip {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
+
+/* Blindaje de color para tooltips dentro del sidebar (siempre oscuros por herencia de fondo oscuro) */
+.sidebar-color .glass-tooltip {
+    background: rgba(15, 23, 42, 0.98) !important;
+    color: #cbd5e1 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.7) !important;
+}
+
+.sidebar-color .glass-tooltip strong {
+    color: #ffffff !important;
+}
+
+.sidebar-color .glass-tooltip p,
+.sidebar-color .glass-tooltip span,
+.sidebar-color .glass-tooltip em {
+    color: #cbd5e1 !important;
+}
+
+/* Light theme: tooltip claro para áreas de contenido general */
+.light-theme .glass-tooltip,
+[data-theme="light"] .glass-tooltip {
+    background: rgba(255, 255, 255, 0.98) !important;
+    color: #374151 !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.light-theme .glass-tooltip strong,
+[data-theme="light"] .glass-tooltip strong {
+    color: #000000 !important;
+}
+
+.light-theme .glass-tooltip p,
+.light-theme .glass-tooltip span,
+.light-theme .glass-tooltip em,
+[data-theme="light"] .glass-tooltip p,
+[data-theme="light"] .glass-tooltip span,
+[data-theme="light"] .glass-tooltip em {
+    color: #374151 !important;
+}
+
+/* Blindaje: El sidebar SIEMPRE debe tener tooltips oscuros independientemente del tema */
+.sidebar-color .glass-tooltip {
+    background: rgba(15, 23, 42, 0.98) !important;
+    color: #cbd5e1 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.7) !important;
+}
+
+.sidebar-color .glass-tooltip strong {
+    color: #ffffff !important;
+}
+
+.sidebar-color .glass-tooltip p,
+.sidebar-color .glass-tooltip span,
+.sidebar-color .glass-tooltip em {
+    color: #cbd5e1 !important;
+}
+
 
 /* =========================================
    COMPONENTS
@@ -318,3 +490,203 @@ body {
     position: relative;
     top: -1px;
 }
+
+/* Theme Toggle Icons - CV Sincronizado con Home */
+/* En modo CLARO (por defecto o sin clase .dark en html) mostramos la LUNA */
+.light-icon-hide {
+    display: none !important;
+}
+
+.light-icon-show {
+    display: block !important;
+}
+
+/* En modo OSCURO (con clase .dark en html) mostramos el SOL */
+.dark .light-icon-hide {
+    display: block !important;
+}
+
+.dark .light-icon-show {
+    display: none !important;
+}
+
+/* === MODAL RESUMEN (CV) === */
+#summary-cv-popup {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Ajuste para 8 columnas compactas */
+@media (min-width: 1280px) {
+    #summary-cv-popup .lg-grid-cols-9 {
+        grid-template-columns: repeat(9, minmax(0, 1fr)) !important;
+    }
+}
+
+body.light-theme #summary-cv-popup {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    background: white !important;
+    border-color: #cbd5e1 !important;
+}
+
+body.light-theme #summary-cv-popup h3,
+body.light-theme #summary-cv-popup p.text-white {
+    color: #0f172a !important;
+}
+
+body.light-theme #summary-cv-popup .bg-blue-500\/20 {
+    background-color: rgba(59, 130, 246, 0.1) !important;
+}
+
+body.light-theme #summary-cv-popup .border-blue-400\/50 {
+    border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+body.light-theme #summary-cv-popup .bg-white\/5 {
+    background-color: rgba(0, 0, 0, 0.02) !important;
+}
+
+body.light-theme #summary-cv-popup .border-white\/5,
+body.light-theme #summary-cv-popup .border-white\/10 {
+    border-color: #e2e8f0 !important;
+}
+
+body.light-theme #summary-cv-popup .bg-black\/20 {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.3s ease-out forwards;
+}
+
+.thin-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+
+.thin-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.thin-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+body.light-theme .thin-scroll::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* --- GLOBAL PAGE TRANSITIONS --- */
+.page-fade-in {
+    animation: pageFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.page-fade-out {
+    animation: pageFadeOut 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pageFadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/* --- PREMIUM PULSE SYSTEM (Homogenized) --- */
+.premium-pulse-container {
+    position: relative;
+    display: flex;
+    height: 1.25rem;
+    width: 1.25rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.premium-pulse-aura {
+    position: absolute;
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+    border-radius: 9999px;
+    opacity: 0.5;
+    animation: premium-ping 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.premium-pulse-dot {
+    position: relative;
+    display: inline-flex;
+    border-radius: 9999px;
+    height: 6px;
+    width: 6px;
+}
+
+@keyframes premium-ping {
+
+    75%,
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* Color Variants */
+.pulse-cyan .premium-pulse-aura {
+    background-color: #22d3ee;
+}
+
+.pulse-cyan .premium-pulse-dot {
+    background-color: #67e8f9;
+    box-shadow: 0 0 30px rgba(103, 232, 249, 1);
+}
+
+.pulse-purple .premium-pulse-aura {
+    background-color: #a855f7;
+}
+
+.pulse-purple .premium-pulse-dot {
+    background-color: #c084fc;
+    box-shadow: 0 0 30px rgba(192, 132, 252, 1);
+}
+
+.pulse-blue .premium-pulse-aura {
+    background-color: #3b82f6;
+}
+
+.pulse-blue .premium-pulse-dot {
+    background-color: #60a5fa;
+    box-shadow: 0 0 30px rgba(96, 165, 250, 1);
+}
+
+.pulse-green .premium-pulse-aura {
+    background-color: #22c55e;
+}
+
+.pulse-green .premium-pulse-dot {
+    background-color: #4ade80;
+    box-shadow: 0 0 30px rgba(74, 222, 128, 1);
+}
+
+/* Light Theme Adjustments - Mantener colores vibrantes */
