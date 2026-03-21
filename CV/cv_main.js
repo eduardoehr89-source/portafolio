@@ -20,7 +20,7 @@ function initProfileCarousel() {
 
     const cacheTs = Math.floor(Date.now() / (1000 * 60 * 60 * 24)); // Cache rollover diario
     const basePath = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/master/CV/fotos%20de%20perfil/';
-    const totalImages = 16;
+    const totalImages = 10;
     let currentIndex = 1;
 
     setInterval(() => {
