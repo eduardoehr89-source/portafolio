@@ -191,15 +191,21 @@
             <header class="relative -mx-4 -mt-4 mb-0 h-64 overflow-hidden group">
                 <!-- Imagen de Fondo -->
                 <!-- Contenedor Base del Carrusel Temporal -->
-                <!-- Contenedor Base del Carrusel Temporal -->
-                <div id="cv-profile-carousel-container" class="absolute inset-0 w-full h-full bg-[#0f1013] z-0">
-                    <img src="https://raw.githubusercontent.com/eduardoehr89-source/portafolio/89cc64fe4d59fd4266acd84373a379e89b341bd2/CV/fotos%20de%20perfil/profile_optimized_01.jpg"
+                <!-- Contenedores Duales para Carrusel Ultra-Suave -->
+                <div id="cv-profile-carousel-container" class="absolute inset-0 w-full h-full bg-[#0f1013] z-0 overflow-hidden group">
+                    <!-- Imagen de fondo (preparada para la siguiente ronda) -->
+                    <img id="cv-profile-back" src="https://raw.githubusercontent.com/eduardoehr89-source/portafolio/89cc64fe4d59fd4266acd84373a379e89b341bd2/CV/fotos%20de%20perfil/profile_optimized_02.jpg"
+                        alt=""
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-[10000ms] ease-out group-hover:scale-110 z-0">
+                    
+                    <!-- Imagen frontal (visible actual cruzando Fade) -->
+                    <img id="cv-profile-front" src="https://raw.githubusercontent.com/eduardoehr89-source/portafolio/89cc64fe4d59fd4266acd84373a379e89b341bd2/CV/fotos%20de%20perfil/profile_optimized_01.jpg"
                         alt="Said Herrera"
-                        class="carousel-slide absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 z-0">
+                        class="absolute inset-0 w-full h-full object-cover transition-all duration-[2500ms] ease-in-out group-hover:scale-110 z-10 opacity-100">
                 </div>
                 
-                <!-- Overlay Gradiente original -->
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-black/10 z-20 pointer-events-none"></div>
+                <!-- Overlay Gradiente iluminado (menos black list en header) -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent z-20 pointer-events-none opacity-90"></div>
 
                 <!-- Etiqueta CV -->
                 <div class="absolute top-4 right-4 z-10">
@@ -207,10 +213,9 @@
                         class="text-[0.5rem] font-bold tracking-[0.4em] text-gray-700 uppercase font-mono border border-gray-600 px-2 py-0.5 rounded-md">CV</span>
                 </div>
 
-                <!-- Contenido de Texto Superpuesto -->
-                <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
-                    <h1
-                        class="text-2xl font-light uppercase tracking-tighter text-white leading-none mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                <!-- Contenido de Texto Superpuesto Cristalino -->
+                <div class="absolute bottom-0 left-0 right-0 p-4 text-center z-40">
+                    <h1 class="text-[1.65rem] font-bold tracking-tight text-white leading-none mb-1 drop-shadow-[0_4px_6px_rgba(0,0,0,1)] opacity-100">
                         SAID HERRERA
                     </h1>
                 </div>

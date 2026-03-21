@@ -15,52 +15,47 @@ document.addEventListener('DOMContentLoaded', () => {
    PROFILE IMAGE CAROUSEL
    ========================================= */
 function initProfileCarousel() {
-    const container = document.getElementById('cv-profile-carousel-container');
-    if (!container) return;
+    const frontImg = document.getElementById('cv-profile-front');
+    const backImg = document.getElementById('cv-profile-back');
+    if (!frontImg || !backImg) return;
 
-    const cacheTs = Math.floor(Date.now() / (1000 * 60 * 60 * 24)); // Cache rollover diario
     const basePath = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/89cc64fe4d59fd4266acd84373a379e89b341bd2/CV/fotos%20de%20perfil/';
     const totalImages = 10;
+    
     let currentIndex = 1;
+    let nextIndex = 2;
+    let isTransitioning = false;
 
     setInterval(() => {
-        currentIndex++;
-        if (currentIndex > totalImages) currentIndex = 1;
+        if (isTransitioning) return;
+        isTransitioning = true;
         
-        const imgNum = currentIndex.toString().padStart(2, '0');
-        const src = `${basePath}profile_optimized_${imgNum}.jpg?t=${cacheTs}`;
-
-        // Fundido Cruzado Infalible por Inyección de DOM (Stacking Fade)
-        const img = new Image();
-        img.src = src;
+        // Fase 1: Desvanecer la foto visible frontal
+        frontImg.style.opacity = '0';
         
-        img.onload = () => {
-            // Nace completamente invisible y detrás del recubrimiento z-20
-            img.className = 'carousel-slide absolute inset-0 w-full h-full object-cover group-hover:scale-110 z-10';
-            img.style.opacity = '0';
-            img.style.transition = 'opacity 2.5s ease-in-out';
-            img.alt = `Said Herrera ${imgNum}`;
+        // Fase 2: Al completarse la animación de fundido cruzado (en 2.5s)
+        setTimeout(() => {
+            frontImg.style.transition = 'none'; // Quitar anim
+            frontImg.src = backImg.src;         // Mimetizar con la que acabamos de mostrar de fondo
+            frontImg.style.opacity = '1';       // Hacer la front visible de inmediato
             
-            container.appendChild(img);
+            // Forzar reflow navegador para que capte la opacidad instantánea
+            void frontImg.offsetWidth;
             
-            // Forzar dibujo en el GPU para confirmar la opacidad inicial
-            void img.offsetWidth;
+            // Restaurar transición CSS in-line
+            frontImg.style.transition = 'opacity 2500ms ease-in-out, transform 10000ms ease-out';
             
-            // Comenzar transición estéticamente perfecta hacia visible
-            img.style.opacity = '1';
+            // Preparar el apuntador hacia el siguiente slide
+            currentIndex = nextIndex;
+            nextIndex = (currentIndex % totalImages) + 1;
+            const nextImgStr = nextIndex.toString().padStart(2, '0');
             
-            // Limpiar código muerto tras cruzarse al 100%
-            setTimeout(() => {
-                const slides = container.querySelectorAll('.carousel-slide');
-                for(let i = 0; i < slides.length - 1; i++) {
-                    slides[i].remove();
-                }
-                // Degradar al fondo para recibir a la siguiente foto encima
-                img.classList.remove('z-10');
-                img.classList.add('z-0');
-            }, 3000); // 3 segundos es > 2.5 segundos de la animación
-        };
-    }, 6000); // Dar 6 segundos completos de carrusel antes de solicitar la siguiente
+            // Cargar secretamente tras bambalinas la nueva foto
+            backImg.src = `${basePath}profile_optimized_${nextImgStr}.jpg`;
+            
+            isTransitioning = false;
+        }, 2500); // Wait on opacity CSS transition length
+    }, 6000); // 6 segundos de tiempo de vida visual entre picos
 }
 
 /* =========================================
