@@ -21,41 +21,38 @@ function initProfileCarousel() {
 
     const basePath = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/89cc64fe4d59fd4266acd84373a379e89b341bd2/CV/fotos%20de%20perfil/';
     const totalImages = 10;
-    
     let currentIndex = 1;
-    let nextIndex = 2;
-    let isTransitioning = false;
+
+    // Función para precargar imágenes y asegurar transiciones suaves
+    function preloadImage(index) {
+        const nextImgStr = index.toString().padStart(2, '0');
+        return `${basePath}profile_optimized_${nextImgStr}.jpg`;
+    }
 
     setInterval(() => {
-        if (isTransitioning) return;
-        isTransitioning = true;
-        
-        // Fase 1: Desvanecer la foto visible frontal
-        frontImg.style.opacity = '0';
-        
-        // Fase 2: Al completarse la animación de fundido cruzado (en 2.5s)
+        // Determinamos el siguiente índice
+        currentIndex = (currentIndex % totalImages) + 1;
+        const nextSrc = preloadImage(currentIndex);
+
+        // 1. Colocamos la SIGUIENTE imagen en el fondo (backImg)
+        backImg.src = nextSrc;
+
+        // 2. Esperamos un breve momento para que el navegador procese el cambio de src
+        // y luego desvanecemos la frontal (frontImg) para revelar el backImg suavemente
         setTimeout(() => {
-            frontImg.style.transition = 'none'; // Quitar anim
-            frontImg.src = backImg.src;         // Mimetizar con la que acabamos de mostrar de fondo
-            frontImg.style.opacity = '1';       // Hacer la front visible de inmediato
+            frontImg.style.opacity = '0';
             
-            // Forzar reflow navegador para que capte la opacidad instantánea
-            void frontImg.offsetWidth;
-            
-            // Restaurar transición CSS in-line
-            frontImg.style.transition = 'opacity 2500ms ease-in-out, transform 10000ms ease-out';
-            
-            // Preparar el apuntador hacia el siguiente slide
-            currentIndex = nextIndex;
-            nextIndex = (currentIndex % totalImages) + 1;
-            const nextImgStr = nextIndex.toString().padStart(2, '0');
-            
-            // Cargar secretamente tras bambalinas la nueva foto
-            backImg.src = `${basePath}profile_optimized_${nextImgStr}.jpg`;
-            
-            isTransitioning = false;
-        }, 2500); // Wait on opacity CSS transition length
-    }, 6000); // 6 segundos de tiempo de vida visual entre picos
+            // 3. Cuando el desvanecimiento termina (2.5s), igualamos el Front al Back
+            // de forma invisible y lo volvemos a mostrar para el siguiente ciclo
+            setTimeout(() => {
+                frontImg.style.transition = 'none';
+                frontImg.src = backImg.src;
+                frontImg.style.opacity = '1';
+                void frontImg.offsetWidth; // Force Reflow
+                frontImg.style.transition = 'opacity 2500ms ease-in-out, transform 10000ms ease-out';
+            }, 2500);
+        }, 100); // Pequeño delay de seguridad para el render del back
+    }, 6000); 
 }
 
 /* =========================================
