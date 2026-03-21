@@ -15,19 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
    PROFILE IMAGE CAROUSEL
    ========================================= */
 function initProfileCarousel() {
-    const frontImg = document.getElementById('cv-profile-image-front');
-    const backImg = document.getElementById('cv-profile-image-back');
-    if (!frontImg || !backImg) return;
-
-    // Forzar transición extremadamente suave en línea para ignorar topes del framework CSS
-    frontImg.style.transition = 'opacity 2.5s ease-in-out';
-    backImg.style.transition = 'opacity 2.5s ease-in-out';
+    const container = document.getElementById('cv-profile-carousel-container');
+    if (!container) return;
 
     const cacheTs = Math.floor(Date.now() / (1000 * 60 * 60 * 24)); // Cache rollover diario
-    const basePath = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/fotos%20de%20perfil/';
+    const basePath = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/master/CV/fotos%20de%20perfil/';
     const totalImages = 16;
     let currentIndex = 1;
-    let isFrontActive = true;
 
     setInterval(() => {
         currentIndex++;
@@ -36,29 +30,37 @@ function initProfileCarousel() {
         const imgNum = currentIndex.toString().padStart(2, '0');
         const src = `${basePath}profile_optimized_${imgNum}.jpg?t=${cacheTs}`;
 
-        // Fundido Cruzado Real y Lento Precargando en Memoria
-        const tempImg = new Image();
-        tempImg.src = src;
+        // Fundido Cruzado Infalible por Inyección de DOM (Stacking Fade)
+        const img = new Image();
+        img.src = src;
         
-        tempImg.onload = () => {
-            if (isFrontActive) {
-                backImg.src = src;
-                // Forzar reflow para que asimile la carga nativa antes del css transition
-                void backImg.offsetWidth;
-                
-                backImg.style.opacity = '1';
-                frontImg.style.opacity = '0';
-                isFrontActive = false;
-            } else {
-                frontImg.src = src;
-                void frontImg.offsetWidth;
-                
-                frontImg.style.opacity = '1';
-                backImg.style.opacity = '0';
-                isFrontActive = true;
-            }
+        img.onload = () => {
+            // Nace completamente invisible y detrás del recubrimiento z-20
+            img.className = 'carousel-slide absolute inset-0 w-full h-full object-cover group-hover:scale-110 z-10';
+            img.style.opacity = '0';
+            img.style.transition = 'opacity 2.5s ease-in-out';
+            img.alt = `Said Herrera ${imgNum}`;
+            
+            container.appendChild(img);
+            
+            // Forzar dibujo en el GPU para confirmar la opacidad inicial
+            void img.offsetWidth;
+            
+            // Comenzar transición estéticamente perfecta hacia visible
+            img.style.opacity = '1';
+            
+            // Limpiar código muerto tras cruzarse al 100%
+            setTimeout(() => {
+                const slides = container.querySelectorAll('.carousel-slide');
+                for(let i = 0; i < slides.length - 1; i++) {
+                    slides[i].remove();
+                }
+                // Degradar al fondo para recibir a la siguiente foto encima
+                img.classList.remove('z-10');
+                img.classList.add('z-0');
+            }, 3000); // 3 segundos es > 2.5 segundos de la animación
         };
-    }, 6000); // Dar 6 segundos completos de carrusel (2.5 de cruce lento y ~3.5 para leer la foto)
+    }, 6000); // Dar 6 segundos completos de carrusel antes de solicitar la siguiente
 }
 
 /* =========================================
