@@ -1494,17 +1494,17 @@ window.showRoiTooltip = function (e) {
     
     // Aplicar dimensiones y estilos
     globalTooltipEl.classList.remove('hidden', 'max-w-3xl', 'max-w-2xl', 'md:max-w-[540px]');
-    // Eliminamos justify-center para evitar que el texto largo se salga por arriba
-    globalTooltipEl.classList.add('flex', 'flex-col', 'items-center', 'justify-start', isCompact ? 'p-2.5' : 'p-10'); 
+    // Margen reducido para mejor estética (Regla 1.3.1)
+    globalTooltipEl.classList.add('flex', 'flex-col', 'items-center', 'justify-start', isCompact ? 'p-2.5' : 'p-6'); 
     
     globalTooltipEl.style.width = `${idealWidth}px`;
     globalTooltipEl.style.minWidth = isCompact ? '180px' : '450px';
-    globalTooltipEl.style.height = 'auto'; // Altura dinámica para contener todo el texto
-    globalTooltipEl.style.aspectRatio = 'auto'; // Evitar forzar ratio si rompe la visibilidad
+    globalTooltipEl.style.height = 'auto'; 
+    globalTooltipEl.style.aspectRatio = 'auto'; 
     
     globalTooltipEl.innerHTML = `
         <div class="flex flex-col items-center justify-start text-center w-full">
-            <div class="leading-relaxed font-normal ${isCompact ? 'text-[9.6px]' : 'text-[13px]'} text-center w-full font-sans mb-4">
+            <div class="leading-relaxed font-normal ${isCompact ? 'text-[9.6px]' : 'text-[13px]'} text-center w-full font-sans mb-2">
                 ${text}
             </div>
             ${footerHTML}
