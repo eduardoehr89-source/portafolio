@@ -782,7 +782,7 @@ function renderContact(data) {
             linkedinEl.href = detalle.startsWith('http') ? detalle : `https://${detalle}`;
         }
         if (campo.includes('nacionalidad') && nacionalidadEl) {
-            nacionalidadEl.innerHTML = `<span class="text-white/90">${detalle}</span><br><span class="font-extralight text-white/90 tracking-widest text-[0.45rem] mt-0.5 inline-block not-italic">10+ AÑOS EXP. | 40+ PROYECTOS | 20+ CIUDADES</span>`;
+            nacionalidadEl.innerHTML = detalle;
         }
     });
 
