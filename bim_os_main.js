@@ -2048,8 +2048,8 @@ function processProjects(data) {
                 const textColorClass = 'text-cyan-400 [.light-theme_&]:text-sky-900';
 
                 formatted = formatted.replace(/(Planeacion:|Planeación:)/g, `<br><strong class="${textColorClass} font-bold">$1</strong>`);
-                formatted = formatted.replace(/(Ejecucion:|Ejecución:)/g, `<br><br><strong class="${textColorClass} font-bold">$1</strong>`);
-                formatted = formatted.replace(/(Cierre:)/g, `<br><br><strong class="${textColorClass} font-bold">$1</strong>`);
+                formatted = formatted.replace(/(Ejecucion:|Ejecución:)/g, `<br><strong class="${textColorClass} font-bold">$1</strong>`);
+                formatted = formatted.replace(/(Cierre:)/g, `<br><strong class="${textColorClass} font-bold">$1</strong>`);
 
 
                 // Limpiar br extra al inicio si existiera
