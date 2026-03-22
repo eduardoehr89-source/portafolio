@@ -1485,36 +1485,44 @@ window.showRoiTooltip = function (e) {
     let idealWidth;
     
     if (isCompact) {
-        idealWidth = 200;
-        globalTooltipEl.style.height = 'auto'; 
-        globalTooltipEl.style.aspectRatio = 'auto';
+        idealWidth = 240;
     } else {
-        // En modo Reto/ROI, el ancho es el protagonista (Regla 1.4)
-        idealWidth = 650; // Siempre ir al máximo para maximizar área de lectura en 4:3
-        const idealHeight = Math.round(idealWidth / 1.333); // h = w / 1.333 (Proporción 4:3)
+        // Algoritmo de expansión proporcional para evitar scroll (Regla 1.3.7)
+        // Estimamos el área necesaria basada en la longitud del texto
+        const areaPerChar = 90; // Área estimada por carácter para fuente de 13px
+        const estimatedArea = textLength * areaPerChar;
         
-        globalTooltipEl.style.width = `${idealWidth}px`;
-        globalTooltipEl.style.height = `${idealHeight}px`;
-        globalTooltipEl.style.aspectRatio = '4 / 3';
+        // Calculamos el ancho necesario para mantener un ratio 1.333 (4:3)
+        // Área = ancho * alto -> Area = w * (w / 1.333) -> w = sqrt(Area * 1.333)
+        idealWidth = Math.sqrt(estimatedArea * 1.333);
+        
+        // Mantener dentro de los rangos premium (mínimo 450px, máximo 650px)
+        idealWidth = Math.max(450, Math.min(650, idealWidth));
     }
     
-    // Estilos de ROI
+    // Aplicar dimensiones y estilos
     globalTooltipEl.classList.remove('hidden', 'max-w-3xl', 'max-w-2xl', 'md:max-w-[540px]');
-    globalTooltipEl.classList.add('flex', 'flex-col', 'items-center', 'justify-center', isCompact ? 'p-2.5' : 'p-0'); 
+    globalTooltipEl.classList.add('flex', 'flex-col', 'items-center', 'justify-center', isCompact ? 'p-2.5' : 'p-10'); 
     
+    globalTooltipEl.style.width = `${idealWidth}px`;
+    globalTooltipEl.style.minWidth = isCompact ? '180px' : '450px';
+    globalTooltipEl.style.height = 'auto'; // El alto crece naturalmente con el texto para visibilidad total
+    globalTooltipEl.style.aspectRatio = isCompact ? 'auto' : '4 / 3'; // Solo forzado si no causa desbordamiento
+    
+    // Eliminar scroll y forzar visibilidad total (Regla 1.3.8)
     globalTooltipEl.innerHTML = `
-        <div class="flex flex-col w-full h-full ${isCompact ? 'p-2.5' : 'p-8'}">
-            <div class="flex-1 overflow-y-auto custom-scrollbar pr-2 w-full text-center flex flex-col items-center">
-                <div class="leading-relaxed font-normal ${isCompact ? 'text-[9.6px]' : 'text-[13px]'} font-sans w-full">
-                    ${text}
-                </div>
+        <div class="flex flex-col items-center justify-center text-center w-full h-full">
+            <div class="leading-relaxed font-normal ${isCompact ? 'text-[9.6px]' : 'text-[13px]'} text-center w-full font-sans flex flex-col items-center">
+                ${text}
             </div>
             ${footerHTML}
         </div>
     `;
 
-    globalTooltipEl.style.display = 'block'; // Cambiar a block para evitar conflictos de centrado flex con scroll
-    globalTooltipEl.style.overflow = 'hidden';
+    globalTooltipEl.style.display = 'flex';
+    globalTooltipEl.style.flexDirection = 'column';
+    globalTooltipEl.style.justifyContent = 'center';
+    globalTooltipEl.style.overflow = 'visible'; // Asegurar que nada se oculte
     
     window.moveRoiTooltip(e);
 

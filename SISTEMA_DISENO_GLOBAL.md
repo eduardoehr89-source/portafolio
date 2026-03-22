@@ -25,6 +25,8 @@ Homologación absoluta: Todos los tooltips del proyecto deben seguir este esquem
 * 1.3.4. **Resaltado de Fases:** Sensible a MAYÚSCULAS (**Planeación, Ejecución, Cierre**). Prohibido resaltar en minúsculas.
 * 1.3.5. **Proporciones (Regla 4:3):** Prohibido `min-width` > 200px o anchos fijos. Ratio objetivo de **4:3**.
 * 1.3.6. **Alineación Obligatoria:** Todo el contenido debe estar **SIEMPRE CENTRADO** (`text-center` e `items-center`).
+* 1.3.7. **PROHIBICIÓN DE SCROLL:** El uso de barras de desplazamiento (`overflow: auto/scroll`) queda terminantemente prohibido.
+* 1.3.8. **VISIBILIDAD TOTAL:** El tooltip debe expandirse proporcionalmente en ratio 4:3 hasta que el 100% del contenido sea visible.
 
 **1.4. REGLA DE ORO - TOOLTIPS (VISUALIZACIÓN DE RETOS):**
 * 1.4.1. **Proporción:** Visual de 4:3 (más anchos que altos).
@@ -32,6 +34,7 @@ Homologación absoluta: Todos los tooltips del proyecto deben seguir este esquem
 * 1.4.3. **Alineación:** Texto y títulos de fases estrictamente CENTRADOS.
 * 1.4.4. **Minimalismo:** **NO** deben llevar títulos (ej. "RETO: NOMBRE") ni metadatos. Solo las 3 fases.
 * 1.4.5. **Interacción:** Aparecen al hacer hover sobre "ver más".
+* 1.4.6. **Cero Scroll:** Prohibido ocultar texto tras un scroll. El área debe crecer para mostrar todo el contenido manteniendo la estética 4:3.
 
 ---
 
