@@ -1481,22 +1481,23 @@ window.showRoiTooltip = function (e) {
     const titleHTML = title ? `<div class="font-sans font-semibold mb-1 tracking-tight ${isCompact ? 'text-[9.6px] normal-case' : 'text-[12px] uppercase'} tooltip-title leading-tight">${title}</div>` : '';
     const subtitleHTML = subtitle ? `<div class="italic ${isCompact ? 'text-[8.5px]' : 'text-[10px]'} text-gray-500 lowercase font-mono mt-1">${subtitle}</div>` : '';
     const footerHTML = footer ? `<div class="mt-2.5 pt-2 border-t border-gray-700/60 font-mono ${isCompact ? 'text-[8.5px]' : 'text-[10px]'} text-gray-400 leading-normal w-full flex flex-col items-center"><span>${footer}</span></div>` : '';
-
+    // Lógica de Proporción (Regla 1.4)
+    const textLength = (text || '').length;
     let idealWidth;
+    let ratio = 1.333; // Default 4:3
     
     if (isCompact) {
         idealWidth = 240;
     } else {
-        // Algoritmo de expansión proporcional para evitar scroll (Regla 1.3.7)
-        // Estimamos el área necesaria basada en la longitud del texto
-        const areaPerChar = 90; // Área estimada por carácter para fuente de 13px
+        // Si el texto es muy largo, usamos 5:3 (Regla 1.4.7)
+        if (textLength > 800) {
+            ratio = 1.666; // 5:3
+        }
+
+        const areaPerChar = 85; 
         const estimatedArea = textLength * areaPerChar;
+        idealWidth = Math.sqrt(estimatedArea * ratio);
         
-        // Calculamos el ancho necesario para mantener un ratio 1.333 (4:3)
-        // Área = ancho * alto -> Area = w * (w / 1.333) -> w = sqrt(Area * 1.333)
-        idealWidth = Math.sqrt(estimatedArea * 1.333);
-        
-        // Mantener dentro de los rangos premium (mínimo 450px, máximo 650px)
         idealWidth = Math.max(450, Math.min(650, idealWidth));
     }
     
@@ -1506,10 +1507,9 @@ window.showRoiTooltip = function (e) {
     
     globalTooltipEl.style.width = `${idealWidth}px`;
     globalTooltipEl.style.minWidth = isCompact ? '180px' : '450px';
-    globalTooltipEl.style.height = 'auto'; // El alto crece naturalmente con el texto para visibilidad total
-    globalTooltipEl.style.aspectRatio = isCompact ? 'auto' : '4 / 3'; // Solo forzado si no causa desbordamiento
+    globalTooltipEl.style.height = 'auto'; 
+    globalTooltipEl.style.aspectRatio = isCompact ? 'auto' : (ratio === 1.666 ? '5 / 3' : '4 / 3');
     
-    // Eliminar scroll y forzar visibilidad total (Regla 1.3.8)
     globalTooltipEl.innerHTML = `
         <div class="flex flex-col items-center justify-center text-center w-full h-full">
             <div class="leading-relaxed font-normal ${isCompact ? 'text-[9.6px]' : 'text-[13px]'} text-center w-full font-sans flex flex-col items-center">
@@ -1522,7 +1522,7 @@ window.showRoiTooltip = function (e) {
     globalTooltipEl.style.display = 'flex';
     globalTooltipEl.style.flexDirection = 'column';
     globalTooltipEl.style.justifyContent = 'center';
-    globalTooltipEl.style.overflow = 'visible'; // Asegurar que nada se oculte
+    globalTooltipEl.style.overflow = 'visible'; 
     
     window.moveRoiTooltip(e);
 
