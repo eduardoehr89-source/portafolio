@@ -113,7 +113,7 @@ async function loadExternalData() {
         safeRender(renderEducation, formData, softData);
         safeRender(renderSoftware, softData);
         safeRender(renderSkills, habData);
-        // renderProfile eliminado para evitar duplicados con el HTML estático
+        safeRender(renderProfile, profileData);
         safeRender(renderSidebarPortfolioLink);
         safeRender(renderContact, contactData);
 
@@ -791,6 +791,26 @@ function renderContact(data) {
     if (qrContainer && targetLinkedin && targetLinkedin.href) {
         const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(targetLinkedin.href)}`;
         qrContainer.innerHTML = `<img src="${qrUrl}" alt="QR LinkedIn" class="w-full h-full object-contain">`;
+    }
+}
+
+function renderProfile(data) {
+    const el = document.getElementById('profile-text');
+    if (!el || !data) return;
+
+    let text = "";
+    if (Array.isArray(data) && data.length > 0) {
+        const row = data.find(r => normalizeStr(getVal(r, 'Campo')) === 'contenido');
+        if (row) text = getVal(row, 'Detalle');
+    } else if (typeof data === 'string') {
+        text = data;
+    }
+
+    if (text) {
+        let cleanText = text.replace(/^"+|"+$/g, '').trim();
+        const highlightedText = cleanText.replace(/Inteligencia Artificial/gi, '<strong>Inteligencia Artificial</strong>');
+        el.innerHTML = `"${highlightedText}"`;
+        el.className = "italic block text-gray-600 dark:text-gray-400"; 
     }
 }
 
