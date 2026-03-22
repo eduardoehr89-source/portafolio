@@ -1483,10 +1483,10 @@ window.showRoiTooltip = function (e) {
     const footerHTML = footer ? `<div class="mt-2.5 pt-2 border-t border-gray-700/60 font-mono ${isCompact ? 'text-[8.5px]' : 'text-[10px]'} text-gray-400 leading-normal w-full flex flex-col items-center"><span>${footer}</span></div>` : '';
 
     globalTooltipEl.innerHTML = `
-        <div class="flex flex-col items-center text-center w-full">
+        <div class="flex flex-col items-center justify-center text-center w-full h-full">
             ${metaHTML}
             ${titleHTML}
-            <div class="leading-relaxed font-normal ${isCompact ? 'text-[9.6px]' : 'text-[13px]'} text-center w-full font-sans">
+            <div class="leading-relaxed font-normal ${isCompact ? 'text-[9.6px]' : 'text-[13px]'} text-center w-full font-sans flex flex-col items-center">
                 ${text}
             </div>
             ${footerHTML}
@@ -1494,15 +1494,27 @@ window.showRoiTooltip = function (e) {
         </div>
     `;
 
-    // Cálculo dinámico de ancho: Sincronizado con CV (Compacto)
-    const idealWidth = isCompact ? 200 : Math.max(320, Math.min(600, 200 + (text || '').length * 0.6));
+    // Lógica de Proporción 4:3 (Ratio 1.333) - Regla 01
+    const textLength = (text || '').length;
+    let idealWidth;
+    
+    if (isCompact) {
+        idealWidth = 200;
+    } else {
+        // Estimación de área necesaria (basada en empirismo de fuentes de 13px)
+        const estimatedArea = textLength * 55; // Factor de área ajustable
+        idealWidth = Math.sqrt(estimatedArea * 1.333); // w = sqrt(Area * ratio)
+        
+        // Aplicar límites de seguridad
+        idealWidth = Math.max(320, Math.min(650, idealWidth));
+    }
     
     // Estilos de ROI
     globalTooltipEl.classList.remove('hidden', 'max-w-3xl', 'max-w-2xl', 'md:max-w-[540px]');
-    globalTooltipEl.classList.add('flex', 'flex-col', isCompact ? 'p-2.5' : 'p-6');
+    globalTooltipEl.classList.add('flex', 'flex-col', 'items-center', 'justify-center', isCompact ? 'p-2.5' : 'p-6');
     globalTooltipEl.style.width = `${idealWidth}px`;
     globalTooltipEl.style.minWidth = isCompact ? '160px' : '200px'; 
-
+    globalTooltipEl.style.height = 'auto'; // Crecerá hacia abajo si excede 650px
     window.moveRoiTooltip(e);
 
     requestAnimationFrame(() => {
