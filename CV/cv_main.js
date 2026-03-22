@@ -713,7 +713,7 @@ function renderSoftware(data) {
             displayNombre = `Revit <span class="sidebar-subtext font-light lowercase">(multidisciplina)</span>`;
         }
         mainContainer.innerHTML += `
-            <div class="group relative cursor-help flex items-center gap-3 mb-1">
+            <div class="group relative cursor-help flex items-center gap-3 mb-0.5">
                 <span class="text-[0.6rem] text-gray-100 dark:text-gray-200 w-24 shrink-0 truncate">${displayNombre}</span>
                 <div class="skill-bar flex-1 h-[3px] bg-white/5 rounded-full overflow-hidden mt-0">
                     <div class="skill-progress h-full bg-blue-500 rounded-full transition-all duration-1000" 
@@ -735,7 +735,7 @@ function renderSoftware(data) {
                     const desc = getVal(sw, 'Descripción', 'Descripcion', 'desc');
                     const capacidad = getVal(sw, 'Capacidad');
                     return `
-                        <div class="soft-skill-tag group relative cursor-help py-1 px-1.5 grow min-w-[50px]">
+                        <div class="soft-skill-tag group relative cursor-help py-0.5 px-1.5 grow min-w-[50px]">
                             <span class="block px-1 text-center" title="${nombre}">${nombre}</span>
                             <div class="glass-tooltip">
                                 <strong class="text-blue-500 [.dark_&]:text-blue-400 block mb-1 text-[0.6rem]">Nivel: ${nivel}</strong>
