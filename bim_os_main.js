@@ -3267,7 +3267,6 @@ function renderProjects(list) {
                 pName.includes(item.name.toLowerCase()) && pLoc.includes(item.loc.toLowerCase())
             );
 
-            const retoFull = p.reto || '';
             // --- LÓGICA DE TRUNCADO PARA DESCRIPCIÓN ---
             const descFull = p.descripcion || '';
             const descWordCount = descFull.split(/\s+/).filter(w => w.length > 0).length;
@@ -3275,9 +3274,9 @@ function renderProjects(list) {
             let descTooltipAttrs = "";
             if (descWordCount > 20) {
                 const words = descFull.split(/\s+/);
-                displayDesc = words.slice(0, 18).join(' ') + `... <span class="text-cyan-500 [.light-theme_&]:text-sky-700 font-bold ml-1 cursor-help" ${descTooltipAttrs}>ver más</span>`;
-                descTooltipAttrs = ""; // Consumed
+                displayDesc = words.slice(0, 18).join(' ') + `... <span class="text-cyan-500 [.light-theme_&]:text-sky-700 font-bold ml-1 cursor-help">ver más</span>`;
                 descTooltipAttrs = `
+                    data-tooltip-title="DESCRIPCIÓN: ${p.nombre.replace(/"/g, '&quot;')}"
                     data-tooltip-text="${descFull.replace(/"/g, '&quot;').replace(/\n/g, '<br>')}"
                     onmouseenter="window.showRoiTooltip(event)"
                     onmouseleave="window.hideRoiTooltip()"
@@ -3286,15 +3285,20 @@ function renderProjects(list) {
             }
 
             // --- LÓGICA DE TRUNCADO PARA RETO ---
+            const retoFull = p.reto || '';
             const retoWordCount = retoFull.split(/\s+/).filter(w => w.length > 0).length;
             let displayReto = retoFull;
             let retoTooltipAttrs = "";
             if (retoWordCount > 20) {
                 const words = retoFull.split(/\s+/);
-                displayReto = words.slice(0, 18).join(' ') + `... <span class="text-cyan-500 [.light-theme_&]:text-sky-700 font-bold ml-1 cursor-help" 
-                    onmouseenter="window.showRetoTooltip(this, event, '${p.id}')"
+                displayReto = words.slice(0, 18).join(' ') + `... <span class="text-cyan-500 [.light-theme_&]:text-sky-700 font-bold ml-1 cursor-help">ver más</span>`;
+                retoTooltipAttrs = `
+                    data-tooltip-title="RETO: ${p.nombre.replace(/"/g, '&quot;')}"
+                    data-tooltip-text="${retoFull.replace(/"/g, '&quot;').replace(/\n/g, '<br>')}"
+                    onmouseenter="window.showRoiTooltip(event)"
                     onmouseleave="window.hideRoiTooltip()"
-                    onmousemove="window.moveRoiTooltip(event)">ver más</span>`;
+                    onmousemove="window.moveRoiTooltip(event)"
+                `;
             }
 
             return `
