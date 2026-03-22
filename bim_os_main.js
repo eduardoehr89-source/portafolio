@@ -1501,20 +1501,25 @@ window.showRoiTooltip = function (e) {
     if (isCompact) {
         idealWidth = 200;
     } else {
-        // Estimación de área necesaria (basada en empirismo de fuentes de 13px)
-        const estimatedArea = textLength * 55; // Factor de área ajustable
-        idealWidth = Math.sqrt(estimatedArea * 1.333); // w = sqrt(Area * ratio)
+        // Estimación de área necesaria (incrementado factor para forzar expansión horizontal)
+        // Con factor 100-120 el tooltip alcanza los 650px más rápido, evitando el efecto "columna"
+        const estimatedArea = textLength * 120; 
+        idealWidth = Math.sqrt(estimatedArea * 1.333); 
         
         // Aplicar límites de seguridad
-        idealWidth = Math.max(320, Math.min(650, idealWidth));
+        idealWidth = Math.max(400, Math.min(650, idealWidth));
     }
     
     // Estilos de ROI
     globalTooltipEl.classList.remove('hidden', 'max-w-3xl', 'max-w-2xl', 'md:max-w-[540px]');
-    globalTooltipEl.classList.add('flex', 'flex-col', 'items-center', 'justify-center', isCompact ? 'p-2.5' : 'p-6');
+    globalTooltipEl.classList.add('flex', 'flex-col', 'items-center', 'justify-center', isCompact ? 'p-2.5' : 'p-8'); // Más padding para aire premium
     globalTooltipEl.style.width = `${idealWidth}px`;
-    globalTooltipEl.style.minWidth = isCompact ? '160px' : '200px'; 
-    globalTooltipEl.style.height = 'auto'; // Crecerá hacia abajo si excede 650px
+    globalTooltipEl.style.minWidth = isCompact ? '160px' : '400px'; 
+    globalTooltipEl.style.height = 'auto'; 
+    globalTooltipEl.style.aspectRatio = isCompact ? 'auto' : '4 / 3';
+    globalTooltipEl.style.display = 'flex';
+    globalTooltipEl.style.flexDirection = 'column';
+    globalTooltipEl.style.justifyContent = 'center';
     window.moveRoiTooltip(e);
 
     requestAnimationFrame(() => {
