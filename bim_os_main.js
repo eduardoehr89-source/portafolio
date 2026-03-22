@@ -1484,13 +1484,10 @@ window.showRoiTooltip = function (e) {
 
     globalTooltipEl.innerHTML = `
         <div class="flex flex-col items-center justify-center text-center w-full h-full">
-            ${metaHTML}
-            ${titleHTML}
             <div class="leading-relaxed font-normal ${isCompact ? 'text-[9.6px]' : 'text-[13px]'} text-center w-full font-sans flex flex-col items-center">
                 ${text}
             </div>
             ${footerHTML}
-            ${subtitleHTML}
         </div>
     `;
 

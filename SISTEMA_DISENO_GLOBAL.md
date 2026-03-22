@@ -18,12 +18,18 @@ Homologación absoluta: Todos los tooltips del proyecto, sin importar la secció
 
 **REGLAS DE FORMATO:**
 * **Márgenes Internos:** Se debe garantizar un padding generoso (mínimo `p-6` o `pb-10` en contenidos largos) para evitar que el texto toque los bordes inferiores.
-* **Proporciones (Regra 4:3):** Queda estrictamente PROHIBIDO el uso de `min-width` superior a `200px` o anchos fijos (ej. `width: 540px` o `700px`). El tooltip debe ajustar su ancho dinámicamente según el volumen de texto para tender a una relación de aspecto de **4:3**.
 * **Dimensionamiento Dinámico:** Si el texto es breve, el tooltip debe ser pequeño (`max-content`). Para textos extensos, el ancho debe crecer proporcionalmente pero nunca exceder un límite que rompa el balance visual (máximo recomendado `650px`).
-* **Alineación Obligatoria:** Todo el contenido del tooltip (metadatos, títulos, cuerpo de texto y pie de página) debe estar **SIEMPRE CENTRADO** (`text-center` e `items-center`). Queda prohibida la alineación a la izquierda o derecha en cualquier sección.
 * **Espaciado Interno:** Queda estrictamente PROHIBIDO el uso de saltos de línea dobles o triples entre párrafos. Se debe utilizar un único salto de línea para separar bloques de texto (ej. entre fases de Reto).
 * **Resaltado de Fases:** El resaltado automático de fases (**Planeación, Ejecución, Cierre**) debe ser **estrictamente sensible a mayúsculas**. Queda PROHIBIDO resaltar estas palabras en minúsculas cuando forman parte del contenido descriptivo (ej. "plan de ejecución").
+* **Proporciones (Regla 4:3):** Queda estrictamente PROHIBIDO el uso de `min-width` superior a `200px` o anchos fijos (ej. `width: 540px` o `700px`). El tooltip debe ajustar su ancho dinámicamente según el volumen de texto para tender a una relación de aspecto de **4:3**.
+* **Alineación Obligatoria:** Todo el contenido del tooltip (metadatos, títulos, cuerpo de texto y pie de página) debe estar **SIEMPRE CENTRADO** (`text-center` e `items-center`). Queda prohibida la alineación a la izquierda o derecha en cualquier sección.
 
+**REGLA DE ORO - TOOLTIPS (VISUALIZACIÓN DE RETOS):**
+* **Proporción:** Deben tener una proporción visual de 4:3 (más anchos que altos).
+* **Ancho Máximo:** El ancho máximo permitido es de **650px**.
+* **Alineación:** Todo el contenido (texto y títulos de fases) debe estar estrictamente CENTRADO.
+* **Minimalismo:** Los tooltips de Retos **NO** deben llevar títulos (ej. "RETO: NOMBRE") ni metadatos. Deben mostrar exclusivamente los 3 párrafos de las fases (Planeación, Ejecución, Cierre).
+* **Interacción:** Deben aparecer al hacer hover sobre el texto truncado "ver más".
 
 ---
 
