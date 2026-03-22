@@ -1482,23 +1482,14 @@ window.showRoiTooltip = function (e) {
     const subtitleHTML = subtitle ? `<div class="italic ${isCompact ? 'text-[8.5px]' : 'text-[10px]'} text-gray-500 lowercase font-mono mt-1">${subtitle}</div>` : '';
     const footerHTML = footer ? `<div class="mt-2.5 pt-2 border-t border-gray-700/60 font-mono ${isCompact ? 'text-[8.5px]' : 'text-[10px]'} text-gray-400 leading-normal w-full flex flex-col items-center"><span>${footer}</span></div>` : '';
     // Lógica de Proporción (Regla 1.4)
-    const textLength = (text || '').length;
     let idealWidth;
-    let ratio = 1.333; // Default 4:3
     
     if (isCompact) {
         idealWidth = 240;
     } else {
-        // Si el texto es muy largo, usamos 5:3 (Regla 1.4.7)
-        if (textLength > 800) {
-            ratio = 1.666; // 5:3
-        }
-
-        const areaPerChar = 85; 
-        const estimatedArea = textLength * areaPerChar;
-        idealWidth = Math.sqrt(estimatedArea * ratio);
-        
-        idealWidth = Math.max(450, Math.min(650, idealWidth));
+        // SOLUCIÓN RADICAL: Ancho fijo de 650px para garantizar horizontalidad (Regla 1.4)
+        // No más cálculos de área que fallan en textos medianos/largos
+        idealWidth = 650;
     }
     
     // Aplicar dimensiones y estilos
