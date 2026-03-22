@@ -202,6 +202,14 @@
                     <img id="cv-profile-front" src="https://raw.githubusercontent.com/eduardoehr89-source/portafolio/89cc64fe4d59fd4266acd84373a379e89b341bd2/CV/fotos%20de%20perfil/profile_optimized_01.jpg"
                         alt="Said Herrera"
                         class="absolute inset-0 w-full h-full object-cover transition-all duration-[2500ms] ease-in-out group-hover:scale-110 z-10 opacity-100">
+
+                    <!-- Navegación Manual Minimalista -->
+                    <button id="cv-nav-prev" onclick="navigateProfile(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 z-50 p-2 text-white/30 hover:text-white transition-all opacity-0 group-hover:opacity-100 cursor-pointer" title="Anterior">
+                        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                    </button>
+                    <button id="cv-nav-next" onclick="navigateProfile(1)" class="absolute right-2 top-1/2 -translate-y-1/2 z-50 p-2 text-white/30 hover:text-white transition-all opacity-0 group-hover:opacity-100 cursor-pointer" title="Siguiente">
+                        <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                    </button>
                 </div>
                 
                 <!-- Overlay Gradiente iluminado (menos black list en header) -->

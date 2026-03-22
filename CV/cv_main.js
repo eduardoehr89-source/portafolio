@@ -14,46 +14,59 @@ document.addEventListener('DOMContentLoaded', () => {
 /* =========================================
    PROFILE IMAGE CAROUSEL
    ========================================= */
+let profileCarouselInterval;
+let currentProfileIndex = 1;
+
 function initProfileCarousel() {
+    startProfileCarousel();
+}
+
+function startProfileCarousel() {
+    if (profileCarouselInterval) clearInterval(profileCarouselInterval);
+    profileCarouselInterval = setInterval(() => {
+        executeProfileTransition(1);
+    }, 6000);
+}
+
+function executeProfileTransition(direction) {
     const frontImg = document.getElementById('cv-profile-front');
     const backImg = document.getElementById('cv-profile-back');
     if (!frontImg || !backImg) return;
 
     const basePath = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/89cc64fe4d59fd4266acd84373a379e89b341bd2/CV/fotos%20de%20perfil/';
     const totalImages = 18;
-    let currentIndex = 1;
 
-    // Función para precargar imágenes y asegurar transiciones suaves
-    function preloadImage(index) {
-        const nextImgStr = index.toString().padStart(2, '0');
-        return `${basePath}profile_optimized_${nextImgStr}.jpg`;
-    }
+    // Determinamos el siguiente índice basándonos en la dirección
+    currentProfileIndex = currentProfileIndex + direction;
+    if (currentProfileIndex > totalImages) currentProfileIndex = 1;
+    if (currentProfileIndex < 1) currentProfileIndex = totalImages;
 
-    setInterval(() => {
-        // Determinamos el siguiente índice
-        currentIndex = (currentIndex % totalImages) + 1;
-        const nextSrc = preloadImage(currentIndex);
+    const nextImgStr = currentProfileIndex.toString().padStart(2, '0');
+    const nextSrc = `${basePath}profile_optimized_${nextImgStr}.jpg`;
 
-        // 1. Colocamos la SIGUIENTE imagen en el fondo (backImg)
-        backImg.src = nextSrc;
+    // 1. Colocamos la SIGUIENTE imagen en el fondo (backImg)
+    backImg.src = nextSrc;
 
-        // 2. Esperamos un breve momento para que el navegador procese el cambio de src
-        // y luego desvanecemos la frontal (frontImg) para revelar el backImg suavemente
+    // 2. Transición de fundido
+    setTimeout(() => {
+        frontImg.style.opacity = '0';
+        
         setTimeout(() => {
-            frontImg.style.opacity = '0';
-            
-            // 3. Cuando el desvanecimiento termina (2.5s), igualamos el Front al Back
-            // de forma invisible y lo volvemos a mostrar para el siguiente ciclo
-            setTimeout(() => {
-                frontImg.style.transition = 'none';
-                frontImg.src = backImg.src;
-                frontImg.style.opacity = '1';
-                void frontImg.offsetWidth; // Force Reflow
-                frontImg.style.transition = 'opacity 2500ms ease-in-out, transform 10000ms ease-out';
-            }, 2500);
-        }, 100); // Pequeño delay de seguridad para el render del back
-    }, 6000); 
+            frontImg.style.transition = 'none';
+            frontImg.src = backImg.src;
+            frontImg.style.opacity = '1';
+            void frontImg.offsetWidth; // Force Reflow
+            frontImg.style.transition = 'opacity 2500ms ease-in-out, transform 10000ms ease-out';
+        }, 2500);
+    }, 100);
 }
+
+// Función global para navegación manual
+window.navigateProfile = function(direction) {
+    executeProfileTransition(direction);
+    // Al navegar manualmente, reiniciamos el contador para que no salte de inmediato
+    startProfileCarousel();
+};
 
 /* =========================================
    DATA LOADING (CSV Parsing)
