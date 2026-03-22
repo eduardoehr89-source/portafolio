@@ -1503,17 +1503,18 @@ window.showRoiTooltip = function (e) {
     globalTooltipEl.classList.add('flex', 'flex-col', 'items-center', 'justify-center', isCompact ? 'p-2.5' : 'p-0'); 
     
     globalTooltipEl.innerHTML = `
-        <div class="flex flex-col items-center justify-center text-center w-full h-full ${isCompact ? '' : 'p-8'}">
-            <div class="leading-relaxed font-normal ${isCompact ? 'text-[9.6px]' : 'text-[13px]'} text-center w-full font-sans overflow-y-auto custom-scrollbar pr-1 flex flex-col items-center">
-                ${text}
+        <div class="flex flex-col w-full h-full ${isCompact ? 'p-2.5' : 'p-8'}">
+            <div class="flex-1 overflow-y-auto custom-scrollbar pr-2 w-full text-center flex flex-col items-center">
+                <div class="leading-relaxed font-normal ${isCompact ? 'text-[9.6px]' : 'text-[13px]'} font-sans w-full">
+                    ${text}
+                </div>
             </div>
             ${footerHTML}
         </div>
     `;
 
-    globalTooltipEl.style.display = 'flex';
-    globalTooltipEl.style.flexDirection = 'column';
-    globalTooltipEl.style.justifyContent = 'center';
+    globalTooltipEl.style.display = 'block'; // Cambiar a block para evitar conflictos de centrado flex con scroll
+    globalTooltipEl.style.overflow = 'hidden';
     
     window.moveRoiTooltip(e);
 
