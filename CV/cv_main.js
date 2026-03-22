@@ -713,7 +713,7 @@ function renderSoftware(data) {
             displayNombre = `Revit <span class="sidebar-subtext font-light lowercase">(multidisciplina)</span>`;
         }
         mainContainer.innerHTML += `
-            <div class="group relative cursor-help flex items-center gap-3 mb-0.5">
+            <div class="group relative cursor-help flex items-center gap-2 mb-0">
                 <span class="text-[0.6rem] text-gray-100 dark:text-gray-200 w-24 shrink-0 truncate">${displayNombre}</span>
                 <div class="skill-bar flex-1 h-[3px] bg-white/5 rounded-full overflow-hidden mt-0">
                     <div class="skill-progress h-full bg-blue-500 rounded-full transition-all duration-1000" 
