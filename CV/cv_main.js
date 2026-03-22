@@ -33,7 +33,7 @@ function executeProfileTransition(direction) {
     const backImg = document.getElementById('cv-profile-back');
     if (!frontImg || !backImg) return;
 
-    const basePath = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/89cc64fe4d59fd4266acd84373a379e89b341bd2/CV/fotos%20de%20perfil/';
+    const basePath = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/f70bfc4c31c58274aaafa175d142f5a6f4145e46/CV/fotos%20de%20perfil/';
     const totalImages = 9;
 
     // Determinamos el siguiente índice basándonos en la dirección
