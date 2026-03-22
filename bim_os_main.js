@@ -2043,8 +2043,10 @@ function processProjects(data) {
             get reto() {
                 // Formateo automático de las secciones Planeacion, Ejecucion, Cierre
                 if (!this.retoRaw) return '';
-                let formatted = this.retoRaw;
-                // Reemplazos Regex para hacer negritas las palabras clave y forzar saltos doble de linea
+                // LIMPIEZA AGRESIVA: Eliminar saltos de línea preexistentes para evitar dobles espacios (Regla 1.3.3)
+                let formatted = this.retoRaw.replace(/\r?\n|\r/g, ' ').replace(/\s\s+/g, ' ').trim();
+                
+                // Reemplazos Regex para hacer negritas las palabras clave y forzar saltos SENCILOS
                 const textColorClass = 'text-cyan-400 [.light-theme_&]:text-sky-900';
 
                 formatted = formatted.replace(/(Planeacion:|Planeación:)/g, `<br><strong class="${textColorClass} font-bold">$1</strong>`);
