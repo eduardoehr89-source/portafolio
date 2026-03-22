@@ -113,7 +113,7 @@ async function loadExternalData() {
         safeRender(renderEducation, formData, softData);
         safeRender(renderSoftware, softData);
         safeRender(renderSkills, habData);
-        safeRender(renderProfile, profileData);
+        // renderProfile eliminado para evitar duplicados con el HTML estático
         safeRender(renderSidebarPortfolioLink);
         safeRender(renderContact, contactData);
 
@@ -794,30 +794,6 @@ function renderContact(data) {
     }
 }
 
-function renderProfile(data) {
-    const el = document.getElementById('profile-text');
-    if (!el || !data) return;
-
-    let text = "";
-    if (Array.isArray(data) && data.length > 0) {
-        const row = data.find(r => normalizeStr(getVal(r, 'Campo')) === 'contenido');
-        if (row) text = getVal(row, 'Detalle');
-    } else if (typeof data === 'string') {
-        text = data;
-    }
-
-    if (text) {
-        // Limpiamos comillas residuales antes de renderizar (asegurar una sola " al inicio/final)
-        let cleanText = text.replace(/^"+|"+$/g, '').trim();
-        
-        // Resaltar Inteligencia Artificial
-        const highlightedText = cleanText.replace(/Inteligencia Artificial/gi, '<strong>Inteligencia Artificial</strong>');
-        
-        // Renderizar con comillas únicas y en cursiva (solo el párrafo)
-        el.innerHTML = `"${highlightedText}"`;
-        el.className = "italic block text-gray-600 dark:text-gray-400"; 
-    }
-}
 
 function renderNorms(data) {
     const container = document.getElementById('normas-list');
