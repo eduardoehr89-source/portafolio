@@ -1482,39 +1482,39 @@ window.showRoiTooltip = function (e) {
     const subtitleHTML = subtitle ? `<div class="italic ${isCompact ? 'text-[8.5px]' : 'text-[10px]'} text-gray-500 lowercase font-mono mt-1">${subtitle}</div>` : '';
     const footerHTML = footer ? `<div class="mt-2.5 pt-2 border-t border-gray-700/60 font-mono ${isCompact ? 'text-[8.5px]' : 'text-[10px]'} text-gray-400 leading-normal w-full flex flex-col items-center"><span>${footer}</span></div>` : '';
 
+    let idealWidth;
+    
+    if (isCompact) {
+        idealWidth = 200;
+        globalTooltipEl.style.height = 'auto'; 
+        globalTooltipEl.style.aspectRatio = 'auto';
+    } else {
+        // En modo Reto/ROI, el ancho es el protagonista (Regla 1.4)
+        idealWidth = 650; // Siempre ir al máximo para maximizar área de lectura en 4:3
+        const idealHeight = Math.round(idealWidth / 1.333); // h = w / 1.333 (Proporción 4:3)
+        
+        globalTooltipEl.style.width = `${idealWidth}px`;
+        globalTooltipEl.style.height = `${idealHeight}px`;
+        globalTooltipEl.style.aspectRatio = '4 / 3';
+    }
+    
+    // Estilos de ROI
+    globalTooltipEl.classList.remove('hidden', 'max-w-3xl', 'max-w-2xl', 'md:max-w-[540px]');
+    globalTooltipEl.classList.add('flex', 'flex-col', 'items-center', 'justify-center', isCompact ? 'p-2.5' : 'p-0'); 
+    
     globalTooltipEl.innerHTML = `
-        <div class="flex flex-col items-center justify-center text-center w-full h-full">
-            <div class="leading-relaxed font-normal ${isCompact ? 'text-[9.6px]' : 'text-[13px]'} text-center w-full font-sans flex flex-col items-center">
+        <div class="flex flex-col items-center justify-center text-center w-full h-full ${isCompact ? '' : 'p-8'}">
+            <div class="leading-relaxed font-normal ${isCompact ? 'text-[9.6px]' : 'text-[13px]'} text-center w-full font-sans overflow-y-auto custom-scrollbar pr-1 flex flex-col items-center">
                 ${text}
             </div>
             ${footerHTML}
         </div>
     `;
 
-    // Lógica de Proporción 4:3 (Ratio 1.333) - Regla 01
-    const textLength = (text || '').length;
-    let idealWidth;
-    
-    if (isCompact) {
-        idealWidth = 200;
-    } else {
-        // Factor 140-150 para que el ancho sea protagónico y busque los 650px
-        const estimatedArea = textLength * 140; 
-        idealWidth = Math.sqrt(estimatedArea * 1.333); 
-        
-        // Aplicar límites de seguridad
-        idealWidth = Math.max(450, Math.min(650, idealWidth));
-    }
-    
-    // Estilos de ROI
-    globalTooltipEl.classList.remove('hidden', 'max-w-3xl', 'max-w-2xl', 'md:max-w-[540px]');
-    globalTooltipEl.classList.add('flex', 'flex-col', 'items-center', 'justify-center', isCompact ? 'p-2.5' : 'p-6');
-    globalTooltipEl.style.width = `${idealWidth}px`;
-    globalTooltipEl.style.minWidth = isCompact ? '160px' : '450px'; 
-    globalTooltipEl.style.height = 'auto'; 
     globalTooltipEl.style.display = 'flex';
     globalTooltipEl.style.flexDirection = 'column';
     globalTooltipEl.style.justifyContent = 'center';
+    
     window.moveRoiTooltip(e);
 
     requestAnimationFrame(() => {
