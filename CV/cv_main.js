@@ -34,7 +34,7 @@ function executeProfileTransition(direction) {
     if (!frontImg || !backImg) return;
 
     const basePath = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/89cc64fe4d59fd4266acd84373a379e89b341bd2/CV/fotos%20de%20perfil/';
-    const totalImages = 10;
+    const totalImages = 9;
 
     // Determinamos el siguiente índice basándonos en la dirección
     currentProfileIndex = currentProfileIndex + direction;
