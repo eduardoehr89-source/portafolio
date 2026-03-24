@@ -19,7 +19,7 @@ body {
     width: 100vw;
     overflow: hidden;
     display: flex;
-    transition: background-color 0.3s;
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 .hidden {
@@ -46,8 +46,52 @@ body {
     /* Base text darker */
 }
 
+/* Custom Badge theme adaptation */
+.custom-badge-card {
+    background-color: #1e293b !important; /* slate-800 default */
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.custom-badge-text {
+    color: #ffffff !important;
+}
+
+.light-theme .custom-badge-card {
+    background-color: #cbd5e1 !important; /* slate-300 - Consistent Gray */
+    border-color: #cbd5e1 !important;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05) !important;
+}
+
+.light-theme .custom-badge-text {
+    color: #ffffff !important; /* White text as per user request */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important; /* Subtle shadow for legibility */
+}
+
+/* Curved Text Badges (Institution Names) */
+.badge-ring-text {
+    fill: #94a3b8; /* Slate-400 equivalent for Dark Mode */
+    transition: fill 0.3s ease;
+}
+
+.light-theme .badge-ring-text {
+    fill: #475569 !important; /* Slate-600 - High contrast gray for Light Mode */
+}
+
+/* Educación: Tarjetas adaptables para evitar brillo excesivo */
+.edu-premium-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(31, 41, 55, 0.4); /* border-gray-800/40 */
+    backdrop-filter: blur(8px);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.light-theme .edu-premium-card {
+    background-color: rgba(15, 23, 42, 0.05) !important; /* Tinte oscuro muy sutil en lugar de blanco */
+    border-color: rgba(203, 213, 225, 0.8) !important; /* slate-300 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
 /* Base backgrounds */
-.light-theme aside,
 .light-theme main,
 .light-theme #hero-dashboard {
     background: linear-gradient(135deg, #ffffff 0%, #f8fafc 40%, #cbd5e1 100%) !important;
@@ -59,6 +103,8 @@ body {
 .light-theme .bg-\[\#080c10\],
 .light-theme .bg-\[\#0b1016\],
 .light-theme .bg-\[\#0f141a\],
+.light-theme .bg-zinc-950,
+.light-theme .bg-black,
 .light-theme #gallery-modal .bg-\[\#151b26\],
 .light-theme #text-modal .bg-\[\#151b26\] {
     background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%) !important;
@@ -67,29 +113,110 @@ body {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
+.light-theme .db-text-body {
+    color: #1e293b !important;
+    /* Slate-800 for content */
+}
+
 .light-theme .text-white {
     color: #0f172a !important;
     /* Slate-900 */
-    font-weight: 800 !important;
+    font-weight: 800;
     /* Extra bold for headers */
 }
 
+.light-theme .text-gray-200,
+.light-theme .text-gray-300,
 .light-theme .text-gray-400,
 .light-theme .text-gray-500 {
     color: #1e293b !important;
-    /* Slate-800 for maximum readability */
+    /* Slate-800 for high contrast content */
 }
 
-/* Forzar cyan a azul oscuro en toda la interfaz claro */
+/* Fix hover visibility in light mode */
+.light-theme .hover\:text-white:hover {
+    color: #0f172a !important;
+}
+
+/* Forzar cyan a azul/cian vibrante en toda la interfaz claro - Para resaltar estados activos */
+.light-theme .text-cyan-300,
 .light-theme .text-cyan-400,
-.light-theme .text-cyan-500 {
+.light-theme .text-cyan-500,
+.light-theme .text-cyan-600,
+.light-theme .text-cyan-700,
+.light-theme .text-cyan-800,
+.light-theme .text-cyan-900,
+.light-theme [class*="text-cyan-"] {
+    color: #0369a1 !important; /* Sky-700 - M&aacute;s azul y vibrante para resaltar */
+}
+
+/* Highlighted state for filter buttons (BIM.OS) */
+.btn-filter-active {
+    transition: all 0.3s ease;
+}
+
+/* Light mode override for active filter button */
+.light-theme .btn-filter-active {
+    background-color: rgba(6, 182, 212, 0.15) !important;
     color: #0369a1 !important;
-    /* Sky-700 */
+    border-color: #0284c7 !important; /* Sky-600 */
+}
+
+/* Specific fix for the reset button (X) when active in light mode */
+.light-theme #btn-reset-filters.btn-filter-active {
+    background-color: transparent !important; /* X doesn't need bg */
+    color: #0284c7 !important;
 }
 
 .light-theme .border-gray-800,
-.light-theme .border-gray-700 {
+.light-theme .border-gray-700,
+.light-theme .bg-gray-800 {
     border-color: #cbd5e1 !important;
+    background-color: #cbd5e1 !important;
+}
+
+/* Forzar texto blanco incondicionalmente para elementos criticos como tooltips */
+.force-text-white {
+    color: #ffffff !important;
+}
+
+
+/* Modal Info Gallery Contrast Fix */
+.light-theme #modal-info-bg {
+    background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%) !important;
+    border-color: #cbd5e1 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme #modal-project-desc {
+    color: #1e293b !important;
+    font-weight: 700 !important;
+}
+
+.light-theme #modal-project-reto {
+    color: #1e293b !important;
+    font-weight: 400 !important;
+}
+
+.light-theme #modal-project-reto .content {
+    color: #475569 !important;
+}
+
+/* --- PROJECT DATABASE HEADER ICONS (v50.16) --- */
+#btn-view-list, #btn-view-gallery, #btn-view-groups, 
+#btn-back-to-groups, #btn-forward-nav, .theme-nav-btn {
+    transition: color 0.3s ease, opacity 0.3s ease !important;
+}
+
+/* Estado Deshabilitado Premium */
+button:disabled i {
+    opacity: 0.3 !important;
+    cursor: not-allowed;
+}
+
+.light-theme #btn-toggle-modal-info {
+    background-color: #cbd5e1 !important;
+    color: #1e293b !important;
 }
 
 /* --- LIGHT MODE TYPOGRAPHY CONTRAST --- */
@@ -108,12 +235,251 @@ body {
     /* Slate-600 - High contrast */
 }
 
+/* --- PREMIUM VISUAL EFFECTS --- */
+/* Sidebar Base */
+body.light-theme {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+}
+
+#main-sidebar {
+    background-color: #080c10 !important;
+    border-right: 1px solid #1f2937;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.light-theme #main-sidebar {
+    background-color: #f1f5f9 !important;
+    border-right-color: #cbd5e1 !important;
+}
+
+.light-theme #app-wrapper,
+.light-theme .bento-col-4,
+.light-theme .bg-transparent {
+    background-color: transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.light-theme #summary-popup,
+.light-theme #text-modal>div {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    border-color: rgba(203, 213, 225, 0.5) !important;
+    /* Slate-300 semi-transparent */
+}
+
+/* Specific Refinements for Light Mode */
+.light-theme .text-white\/50 {
+    color: #94a3b8 !important;
+    /* Slate-400 for "+" stats in Home */
+}
+
+.light-theme .text-green-400 {
+    color: #047857 !important;
+    /* Emerald-700 for ROI speedup */
+}
+
+.light-theme #collab-central-popup .text-gray-500 {
+    color: #475569 !important;
+    /* Darker Slate for help text */
+    opacity: 1 !important;
+}
+
+.light-theme input#search-bar::placeholder {
+    color: #64748b !important;
+    /* Slate-500 for search placeholder */
+}
+
+/* AI Section Light Mode Adaptations */
+.light-theme #view-ai {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 40%, #cbd5e1 100%) !important;
+    color: #1e293b !important;
+}
+
+/* Base Light Mode Orb Gradient */
+.light-theme .ai-orb {
+    background: radial-gradient(circle at 30% 30%, rgba(147, 51, 234, 0.5), rgba(241, 245, 249, 0.9)) !important;
+    border: 1px solid rgba(168, 85, 247, 0.6) !important;
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.3), inset 0 0 20px rgba(168, 85, 247, 0.2) !important;
+}
+
+/* Hover/Active Light Mode Orb */
+.light-theme .ai-orb:hover,
+.light-theme .ai-orb.expanded-orb {
+    background: radial-gradient(circle at 30% 30%, rgba(168, 85, 247, 0.7), rgba(255, 255, 255, 0.95)) !important;
+    border-color: rgba(168, 85, 247, 1) !important;
+    box-shadow: 0 0 50px rgba(168, 85, 247, 0.5), inset 0 0 30px rgba(168, 85, 247, 0.3) !important;
+}
+
+/* Expanded Orb Text Fixes for Light Mode */
+.light-theme .orb-expanded-content h3 {
+    color: #0f172a !important;
+    /* Slate 900 */
+    text-shadow: none !important;
+}
+
+.light-theme .orb-expanded-content div.text-gray-300 {
+    color: #334155 !important;
+    /* Slate 700 */
+    text-shadow: none !important;
+    font-weight: 600 !important;
+}
+
+.light-theme .close-orb-btn {
+    color: #64748b !important;
+}
+
+.light-theme .close-orb-btn:hover {
+    color: #0f172a !important;
+}
+
 .light-theme .bg-white\/5 {
     background-color: #f8fafc !important;
     border-color: #e2e8f0;
 }
 
 /* .light-theme .sticky eliminada para permitir bg-transparent original */
+
+/* GRACIOUS GROUPS CONTRAST - LIGHT MODE */
+.light-theme .bg-\[\#111827\]\/40 {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+    /* Un poco más gris para integrar con fondo */
+    border-color: #cbd5e1 !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03) !important;
+    /* Sombra más sutil */
+}
+
+.light-theme .group\/card:hover {
+    background: #ffffff !important;
+    border-color: #0ea5e9 !important;
+    /* Sky-500 */
+    box-shadow: 0 10px 25px rgba(14, 165, 233, 0.1) !important;
+}
+
+.light-theme .group\/card .text-white {
+    color: #0f172a !important;
+    /* Slate-900 */
+}
+
+.light-theme .group\/card .text-gray-300 {
+    color: #334155 !important;
+    /* Slate-700 */
+}
+
+.light-theme .group\/card .text-gray-500 {
+    color: #64748b !important;
+    /* Slate-500 */
+}
+
+.light-theme .group\/card .bg-gray-800 {
+    background-color: #e2e8f0 !important;
+    /* Slate-200 */
+}
+
+.light-theme .group\/card .text-cyan-500\/70 {
+    color: #0369a1 !important;
+    /* Sky-700 */
+    opacity: 0.8 !important;
+}
+
+.light-theme .group\/card:hover .group-hover\/card\:text-cyan-400 {
+    color: #0c4a6e !important;
+    /* Sky-900 */
+}
+
+.light-theme .group\/card .text-cyan-500 {
+    color: #0369a1 !important;
+    /* Sky-700 */
+}
+
+/* --- ESTADOS ACTIVOS EN SIDEBAR --- */
+.nav-active {
+    background-color: rgba(6, 182, 212, 0.15) !important;
+    color: #22d3ee !important;
+    border-color: rgba(34, 211, 238, 0.4) !important;
+}
+
+.nav-active i {
+    color: #22d3ee !important;
+}
+
+/* Color específico para AI Revolution */
+#nav-ai.nav-active {
+    background-color: rgba(147, 51, 234, 0.15) !important;
+    color: #c084fc !important;
+    border-color: rgba(168, 85, 247, 0.4) !important;
+}
+
+#nav-ai.nav-active i {
+    color: #c084fc !important;
+}
+
+/* Color específico para Digital CV */
+#nav-cv.nav-active {
+    background-color: rgba(29, 78, 216, 0.15) !important;
+    color: #60a5fa !important;
+    border-color: rgba(59, 130, 246, 0.4) !important;
+}
+
+#nav-cv.nav-active i {
+    color: #60a5fa !important;
+}
+
+/* Color específico para Academic Records */
+#nav-education.nav-active {
+    background-color: rgba(34, 197, 94, 0.15) !important;
+    color: #4ade80 !important;
+    border-color: rgba(74, 222, 128, 0.4) !important;
+}
+
+#nav-education.nav-active i {
+    color: #4ade80 !important;
+}
+
+/* Light Theme Overrides for Active Sidebar items - NO CYAN */
+.light-theme .nav-active {
+    background-color: rgba(3, 105, 161, 0.1) !important;
+    color: #0c4a6e !important; /* Sky-900 */
+    border-color: rgba(12, 74, 110, 0.3) !important;
+}
+
+.light-theme .nav-active i {
+    color: #0c4a6e !important;
+}
+
+.light-theme #nav-ai.nav-active {
+    background-color: rgba(126, 34, 206, 0.1) !important;
+    color: #7e22ce !important;
+    border-color: rgba(126, 34, 206, 0.3) !important;
+}
+
+.light-theme #nav-ai.nav-active i {
+    color: #7e22ce !important;
+}
+
+.light-theme #nav-cv.nav-active {
+    background-color: rgba(29, 78, 216, 0.1) !important;
+    color: #1d4ed8 !important;
+    border-color: rgba(29, 78, 216, 0.3) !important;
+}
+
+.light-theme #nav-cv.nav-active i {
+    color: #1d4ed8 !important;
+}
+
+.light-theme #nav-education.nav-active {
+    background-color: rgba(21, 128, 61, 0.1) !important;
+    color: #15803d !important;
+    border-color: rgba(21, 128, 61, 0.3) !important;
+}
+
+.light-theme #nav-education.nav-active i {
+    color: #15803d !important;
+}
 
 /* Scrollbars */
 .custom-scroll::-webkit-scrollbar {
@@ -128,10 +494,93 @@ body {
 .custom-scroll::-webkit-scrollbar-thumb {
     background: #334155;
     border-radius: 3px;
+    transition: background 0.3s ease;
+}
+
+.light-theme .custom-scroll::-webkit-scrollbar-thumb {
+    background: #cbd5e1 !important;
+    /* Slate-300 for light mode */
 }
 
 .custom-scroll::-webkit-scrollbar-thumb:hover {
     background: var(--accent-cyan);
+}
+
+.light-theme .custom-scroll::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8 !important;
+    /* Slate-400 on hover */
+}
+
+/* --- SIDEBAR PROFILE PHOTO --- */
+/* --- SIDEBAR PROFILE PHOTO (Static Flow) --- */
+#sidebar-image-container {
+    background-color: #080c10;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    height: 100px !important;
+}
+
+.light-theme #sidebar-image-container {
+    background-color: #e2e8f0 !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+.sidebar-profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+}
+
+.light-theme .sidebar-profile-img {
+    opacity: 1 !important;
+}
+
+#main-sidebar:hover .sidebar-profile-img {
+    transform: scale(1.05);
+}
+
+.sidebar-profile-overlay,
+#sidebar-image-overlay {
+    background: linear-gradient(to bottom, transparent 0%, rgba(8, 12, 16, 0.8) 100%);
+}
+
+.light-theme #sidebar-image-overlay {
+    background: linear-gradient(to bottom, transparent 0%, rgba(241, 245, 249, 0.4) 100%) !important;
+}
+
+#sidebar-name {
+    position: relative;
+    z-index: 10;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.5);
+    display: block !important;
+    white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+/* Force Name and Slogan to maintain correct contrast in light mode */
+.light-theme #sidebar-name {
+    color: #0f172a !important; /* Slate-900 for Light Sidebar */
+    font-weight: 700 !important;
+    -webkit-font-smoothing: antialiased !important;
+    text-shadow: none !important;
+}
+
+.light-theme #sidebar-name span,
+.light-theme .sidebar-name-highlight {
+    color: #0369a1 !important; /* Sky-700 */
+}
+
+.sidebar-name-highlight {
+    color: #22d3ee; /* Cyan-400 default */
+}
+
+.light-theme #home-slogan {
+    color: #475569 !important; /* Slate-600 */
+    position: relative;
+    z-index: 10;
 }
 
 /* --- NUEVO: UTILIDAD PARA TRUNCAR TEXTO (RETO) --- */
@@ -225,10 +674,7 @@ select option {
     color: #fff;
 }
 
-[data-theme="light"] .nav-btn:hover:not(.active-tab) {
-    background: rgba(0, 0, 0, 0.05);
-    color: #000;
-}
+/* .light-theme .nav-btn:hover:not(.active-tab) eliminada para mantener sidebar oscuro */
 
 /* Headers */
 .section-header {
@@ -245,13 +691,10 @@ select option {
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 0.25rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     transition: background 0.2s;
 }
 
-[data-theme="light"] .compact-list-row {
-    border-bottom: 1px solid #e2e8f0;
-}
+/* Removed compact-list-row border per Rule 14 */
 
 .compact-list-row:hover {
     background: rgba(255, 255, 255, 0.02);
@@ -276,20 +719,120 @@ select option {
 /* TABLA PROYECTOS */
 .tech-list-row {
     transition: background 0.2s;
-    border-bottom: 1px solid #1e293b;
     cursor: pointer;
     font-size: 11px;
 }
 
-[data-theme="light"] .tech-list-row {
-    border-bottom: 1px solid #e2e8f0;
-}
+/* Removed tech-list-row border per Rule 14 */
 
 .tech-list-row:hover {
     background: rgba(34, 211, 238, 0.05);
 }
 
-/* Galería */
+/* Glass Tooltip (Ported from CV) */
+.glass-tooltip {
+    background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #cbd5e1;
+    position: absolute;
+    bottom: 135%;
+    left: 0;
+    transform: translateY(10px);
+    height: auto;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 10px; /* Homologado a 10px */
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 1.4;
+    white-space: normal;
+}
+
+.glass-tooltip strong {
+    color: #ffffff !important; /* Blanco sólido para títulos en dark mode */
+}
+
+.group\/cert:hover .glass-tooltip,
+.group:hover .glass-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.light-theme .glass-tooltip,
+[data-theme="light"] .glass-tooltip {
+    background: rgba(255, 255, 255, 0.98) !important;
+    color: #374151 !important; /* Gris oscuro para contenido */
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.light-theme .glass-tooltip strong,
+[data-theme="light"] .glass-tooltip strong {
+    color: #000000 !important; /* Negro sólido para títulos */
+}
+
+/* Forzar que todos los elementos internos sigan el color de contenido */
+.light-theme .glass-tooltip p,
+[data-theme="light"] .glass-tooltip p,
+.light-theme .glass-tooltip span,
+[data-theme="light"] .glass-tooltip span,
+.light-theme .glass-tooltip em,
+[data-theme="light"] .glass-tooltip em {
+    color: #374151 !important;
+}
+
+/* ROI / Global Hover Tooltip */
+.roi-tooltip {
+    background: rgba(15, 23, 42, 0.95) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: #cbd5e1 !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+.roi-tooltip .tooltip-title {
+    color: #ffffff !important;
+}
+
+/* Light Theme Overrides for ROI Tooltip */
+.light-theme .roi-tooltip,
+[data-theme="light"] .roi-tooltip {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    color: #374151 !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+
+.light-theme .roi-tooltip .tooltip-title,
+[data-theme="light"] .roi-tooltip .tooltip-title {
+    color: #000000 !important;
+}
+
+.light-theme .roi-tooltip .text-white,
+[data-theme="light"] .roi-tooltip .text-white,
+.light-theme .roi-tooltip .force-text-white,
+[data-theme="light"] .roi-tooltip .force-text-white {
+    color: #374151 !important;
+}
+
+.light-theme .roi-tooltip .text-gray-400,
+[data-theme="light"] .roi-tooltip .text-gray-400 {
+    color: #4b5563 !important; /* Gray 600 */
+}
+
+/* GalerÃƒÂ­a */
 .gallery-card {
     background: #151b26;
     border: 1px solid #334155;
@@ -302,7 +845,7 @@ select option {
 }
 
 /* =========================================
-   SECCIÓN IA (ESTILOS ORIGINALES RESTAURADOS)
+   SECCIÃƒâ€œN IA (ESTILOS ORIGINALES RESTAURADOS)
    ========================================= */
 
 /* Orbes flotantes */
@@ -363,7 +906,7 @@ select option {
     transform: translateY(0);
 }
 
-/* Animaciones de flotación */
+/* Animaciones de flotaciÃƒÂ³n */
 .float-anim-1 {
     animation: float1 8s ease-in-out infinite;
 }
@@ -468,7 +1011,7 @@ select option {
     overflow: hidden;
 }
 
-/* ANIMACIONES DE GRÁFICAS */
+/* ANIMACIONES DE GRÃƒÂFICAS */
 @keyframes growBar {
     from {
         width: 0%;
@@ -476,7 +1019,7 @@ select option {
 }
 
 .animate-bar {
-    animation: growBar 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: growBar 3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes growBarVertical {
@@ -490,7 +1033,7 @@ select option {
 }
 
 .animate-bar-vertical {
-    animation: growBarVertical 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: growBarVertical 3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes spinIn {
@@ -515,12 +1058,31 @@ select option {
     }
 }
 
+@keyframes fadeScaleInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+        filter: blur(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+.animate-stagger {
+    opacity: 0;
+    animation: fadeScaleInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 .animate-item {
     animation: fadeInMove 0.5s ease-out forwards;
     opacity: 0;
 }
 
-/* TRANSICIONES PÁGINA */
+/* TRANSICIONES PÃƒÂGINA */
 .page-transition-container {
     transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 1;
@@ -558,9 +1120,9 @@ select option {
     top: 0;
     left: 0;
     height: 100%;
-    z-index: 60;
+    z-index: 800;
     transform: translateX(-100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
 }
 
@@ -571,21 +1133,29 @@ select option {
 #menu-toggle-btn {
     position: fixed;
     top: 20px;
-    left: 20px;
+    left: 10px;
     z-index: 70;
     background: transparent !important;
     backdrop-filter: none !important;
     border: none !important;
     box-shadow: none !important;
-    color: #22d3ee;
+    color: #ffffff;
     padding: 10px;
     cursor: pointer;
     transition: all 0.3s;
 }
 
 #menu-toggle-btn:hover {
-    color: #06b6d4;
+    color: #cbd5e1;
     transform: scale(1.05);
+}
+
+.light-theme #menu-toggle-btn {
+    color: #0f172a;
+}
+
+.light-theme #menu-toggle-btn:hover {
+    color: #334155;
 }
 
 /* TECH & 3D */
@@ -800,7 +1370,6 @@ select option {
     padding: 8px;
     font-weight: 600;
     letter-spacing: 0.05em;
-    border-bottom: 1px solid #334155;
     font-size: 11px;
 }
 
@@ -813,7 +1382,7 @@ select option {
 }
 
 .tech-table tr:hover td {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.06);
     color: white;
 }
 
@@ -917,6 +1486,11 @@ body.light-theme .tech-table td {
     color: #475569;
 }
 
+body.light-theme .tech-table tr:hover td {
+    background: rgba(0, 0, 0, 0.04) !important;
+    color: #0f172a !important;
+}
+
 /* FIX: Modal Content Text in Light Mode (Force Dark) */
 .light-theme #text-modal-content {
     color: #1e293b !important;
@@ -944,12 +1518,26 @@ body.light-theme .tech-table td {
     animation: growBar 3s ease-in-out forwards;
 }
 
+@keyframes growBarVertical {
+    from {
+        height: 0;
+    }
+    to {
+        height: var(--final-height);
+    }
+}
+
+.animate-bar-vertical {
+    height: 0;
+    animation: growBarVertical 3s ease-in-out forwards;
+}
+
 /* --- Header Layout Fixes --- */
 #menu-toggle-btn {
     position: absolute;
     top: 9px;
     /* Centering in h-16 (64px) -> (64-46)/2 = 9px */
-    left: 20px;
+    left: 10px;
     z-index: 60;
     color: #9ca3af;
     /* text-gray-400 */
@@ -979,15 +1567,15 @@ body.light-theme #menu-toggle-btn,
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
-    z-index: 9999 !important;
+    z-index: 70 !important;
 }
 
-/* Ocultar botón menú (hamburguesa) en la pestaña de Home */
+/* Ocultar botÃƒÂ³n menÃƒÂº (hamburguesa) en la pestaÃƒÂ±a de Home */
 body:has(#app-wrapper.hidden) #menu-toggle-btn {
     display: none !important;
 }
 
-/* 1.5. Corrección de Menús Desplegables en Modo Claro */
+/* 1.5. CorrecciÃƒÂ³n de MenÃƒÂºs Desplegables en Modo Claro */
 body.light-theme #filter-dropdown,
 body.light-theme #sort-dropdown {
     background-color: #ffffff !important;
@@ -1142,7 +1730,8 @@ body.light-theme.bg-\[\#0b1016\] {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); */
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     z-index: 50;
     background: transparent !important;
 }
@@ -1154,60 +1743,83 @@ body.light-theme.bg-\[\#0b1016\] {
 
 /* 3D Rotation Animations (ELIMINADAS) */
 
-/* --- ESTADO EXPANDIDO DEL ANILLO (RECTANGULAR INFO-CARD) --- */
+/* --- ESTADO EXPANDIDO DEL ANILLO (RECTANGULAR INFO-CARD REMOVIDA, AHORA FLOTANTE) --- */
 .ai-orb.expanded-orb {
-    width: 440px !important;
-    max-width: 90vw !important;
-    height: auto !important;
-    min-height: 250px;
-    max-height: 80vh !important;
-    border-radius: 12px;
     z-index: 100 !important;
-    padding: 24px;
-    background: rgba(15, 23, 42, 0.65);
-    /* Slate 900 opaco reducido a Glass */
-    border: 1px solid rgba(168, 85, 247, 0.6);
-    box-shadow: 0 0 40px rgba(168, 85, 247, 0.4);
-    backdrop-filter: blur(12px);
     cursor: default;
 
-    /* Anclado Fijo al Centro Absoluto */
+    /* Anclado Fijo al Centro Absoluto, arriba para dar espacio al texto flotante */
     transform: translate(-50%, -50%) !important;
     left: 50% !important;
-    top: 50% !important;
-
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
+    top: 35% !important;
 
     /* Detener rotacion/flotacion */
     animation: none !important;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    /* transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); */
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .ai-orb.expanded-orb:hover {
     transform: translate(-50%, -50%) scale(1.02) !important;
 }
 
-/* Ocultar el UI del Anillo normal (Border + Sombras css inline de Tailwind) al expandir*/
-.ai-orb.expanded-orb .ring-ui {
-    opacity: 0;
+/* Ocultar el tÃƒÂ­tulo flotante base cuando el anillo estÃƒÂ¡ expandido */
+.ai-orb.expanded-orb>span {
+    opacity: 0 !important;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+}
+
+/* Hacer que el Anillo pulse en lugar de ocultarse al expandir */
+.ai-orb.expanded-orb .ring-ui {
+    pointer-events: none;
+    border-color: rgba(192, 132, 252, 1) !important;
+    box-shadow: 0 0 30px rgba(192, 132, 252, 0.8), inset 0 0 30px rgba(192, 132, 252, 0.8) !important;
+    animation: pulseActiveRing 1.5s ease-in-out infinite;
+    opacity: 1 !important;
+}
+
+@keyframes pulseActiveRing {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(168, 85, 247, 0.5), inset 0 0 20px rgba(168, 85, 247, 0.5);
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 0.8;
+        box-shadow: 0 0 40px rgba(192, 132, 252, 1), inset 0 0 40px rgba(192, 132, 252, 1);
+        border-color: rgba(192, 132, 252, 1);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(168, 85, 247, 0.5), inset 0 0 20px rgba(168, 85, 247, 0.5);
+    }
 }
 
 /* Estilo para revelar el boton Cerrar y Contenido Textual */
 .orb-expanded-content {
+    position: absolute;
+    top: 130%;
+    /* Flotando debajo del anillo */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    max-width: 90vw;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease 0.3s;
-    /* Delay hasta que crezca la caja */
-    width: 100%;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    cursor: default;
 }
 
 .ai-orb.expanded-orb .orb-expanded-content {
     opacity: 1;
     visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    transition: opacity 0.4s ease 0.25s, transform 0.4s ease 0.25s;
 }
 
 .ai-orb.expanded-orb .click-zone {
@@ -1215,6 +1827,26 @@ body.light-theme.bg-\[\#0b1016\] {
 }
 
 /* 14. MASSIVE NEON HALO & ENERGY PARTICLES */
+/* --- BADGES PERSONALIZADOS (TEXT-BASED FALLBACK: MINIMALIST V22) --- */
+.custom-badge-card {
+    background-color: #111827 !important; /* bg-gray-900 */
+    border-radius: 9999px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border: none !important;
+    box-shadow: none !important;
+    transition: transform 0.4s ease;
+}
+
+.custom-badge-text {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    font-family: 'Inter', sans-serif !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+}
+
 .neon-halo {
     position: absolute !important;
     top: 50% !important;
@@ -1411,7 +2043,7 @@ body.light-theme #hero-dashboard .text-cyan-300 {
     /* Dark Blue */
 }
 
-/* Fix para el símbolo "+" en las estadísticas que usa text-white/50 */
+/* Fix para el sÃƒÂ­mbolo "+" en las estadÃƒÂ­sticas que usa text-white/50 */
 body.light-theme #hero-dashboard .counter-anim+span {
     color: #94a3b8 !important;
     /* slate-400 */
@@ -1540,18 +2172,63 @@ body.light-theme #hero-dashboard [class*="shadow-[0_0_15px_rgba(34,211,238,0.3)]
 }
 
 .modal-anim-entering {
-    animation: modalFadeScaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation: modalFadeScaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.modal-anim-exiting {
+    animation: modalFadeScaleOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes modalFadeScaleIn {
     from {
         opacity: 0;
-        transform: scale(0.98);
+        transform: scale(0.95);
     }
-
     to {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+@keyframes modalFadeScaleOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+/* Tooltip Transitions */
+.tooltip-anim-entering {
+    animation: tooltipFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.tooltip-anim-exiting {
+    animation: tooltipFadeOut 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes tooltipFadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95) translateY(5px);
     }
 }
 
@@ -1559,7 +2236,7 @@ body.light-theme #hero-dashboard [class*="shadow-[0_0_15px_rgba(34,211,238,0.3)]
 .media-transitioning {
     opacity: 0 !important;
     transition: opacity 0.2s ease-in !important;
-    /* Salida rápida */
+    /* Salida rÃƒÂ¡pida */
 }
 
 .media-visible {
@@ -1596,7 +2273,7 @@ body.light-theme #hero-dashboard [class*="shadow-[0_0_15px_rgba(34,211,238,0.3)]
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(34, 211, 238, 0.2);
     border: 1px solid rgba(34, 211, 238, 0.4);
     background-color: rgba(10, 15, 25, 0.85) !important;
-    /* Más oscuro y opaco para negro */
+    /* MÃƒÂ¡s oscuro y opaco para negro */
     backdrop-filter: blur(25px) saturate(180%);
     -webkit-backdrop-filter: blur(25px) saturate(180%);
     transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1613,7 +2290,7 @@ body.light-theme #hero-dashboard [class*="shadow-[0_0_15px_rgba(34,211,238,0.3)]
     color: #e5e7eb !important;
 }
 
-/* Adaptación a Modo Claro Premium */
+/* AdaptaciÃƒÂ³n a Modo Claro Premium */
 .light-theme #ai-notice-popup {
     background-color: rgba(255, 255, 255, 0.9) !important;
     border-color: rgba(14, 165, 233, 0.45);
@@ -1641,19 +2318,19 @@ body.light-theme #hero-dashboard [class*="shadow-[0_0_15px_rgba(34,211,238,0.3)]
 
 #ai-notice-popup.ai-popup-hidden {
     opacity: 0 !important;
-    transform: scale(0.9) translateY(20px) !important;
+    transform: translate(-50%, -50%) scale(0.9) translateY(20px) !important;
     pointer-events: none;
 }
 
 @keyframes ai-popup-entry {
     from {
         opacity: 0;
-        transform: scale(0.9) translateY(20px);
+        transform: translate(-50%, -50%) scale(0.9) translateY(20px);
     }
 
     to {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: translate(-50%, -50%) scale(1) translateY(0);
     }
 }
 
@@ -1694,4 +2371,548 @@ body.light-theme #hero-dashboard [class*="shadow-[0_0_15px_rgba(34,211,238,0.3)]
         opacity: 1;
         transform: scale(1);
     }
+}
+
+/* ANIMACIONES DINÃƒÂMICAS BIM.OS */
+@keyframes pulse-slow {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(34, 211, 238, 0.1);
+    }
+
+    50% {
+        transform: scale(1.03);
+        box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+    }
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 3s infinite ease-in-out;
+}
+
+#summary-popup {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.light-theme #summary-popup {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+    background: white !important;
+    border-color: #cbd5e1 !important;
+}
+
+/* --- SECTION TRANSITIONS --- */
+.view-fade-in {
+    animation: transitionFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes transitionFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- GLOBAL PAGE TRANSITIONS --- */
+.leading-tight { line-height: 1.25; }
+.leading-normal { line-height: 1.5; }
+.leading-relaxed { line-height: 1.625; }
+
+.page-fade-in {
+    animation: pageFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.page-fade-out {
+    animation: pageFadeOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pageFadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/* === ESTILOS ESPECÃƒÂFICOS PARA IA DOTS === */
+#menu-toggle-btn.ai-menu-dot-mode {
+    position: fixed !important;
+    top: 2rem !important;
+    /* Top-8 equivalent */
+    left: 2.5rem !important;
+    /* Left-10 equivalent */
+    width: 0.75rem !important;
+    /* Un poco mÃƒÂ¡s grande para el menÃƒÂº */
+    height: 0.75rem !important;
+    background-color: #a855f7 !important;
+    /* bg-purple-500 */
+    border-radius: 9999px !important;
+    padding: 0 !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 100 !important;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.8), 0 0 5px rgba(168, 85, 247, 0.4) !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Corrección de visibilidad para el menú IA en modo claro (fuerza fondo y sombra púrpura) */
+.light-theme #menu-toggle-btn.ai-menu-dot-mode {
+    background-color: #a855f7 !important;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.8), 0 0 5px rgba(168, 85, 247, 0.4) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+
+#menu-toggle-btn.ai-menu-dot-mode:hover {
+    background-color: #d8b4fe !important;
+    /* bg-purple-300 */
+    transform: scale(1.3) !important;
+    box-shadow: 0 0 20px rgba(168, 85, 247, 1) !important;
+}
+
+#menu-toggle-btn.ai-menu-dot-mode i,
+#menu-toggle-btn.ai-menu-dot-mode svg {
+    display: none !important;
+}
+
+/* Mejora global de glow para botones de IA */
+.ai-nav-dot {
+    background-color: rgba(168, 85, 247, 0.7) !important;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.6) !important;
+    transition: all 0.3s ease !important;
+}
+
+.ai-nav-dot:hover {
+    background-color: #d8b4fe !important;
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.9) !important;
+    transform: scale(1.25) !important;
+}
+
+/* Force light text in dark tooltips - ONLY in dark mode */
+body:not(.light-theme) .force-light-text,
+body:not(.light-theme) .force-light-text * {
+    color: #ffffff !important;
+}
+
+body:not(.light-theme) .force-light-text .text-gray-400,
+body:not(.light-theme) .force-light-text .text-gray-500,
+body:not(.light-theme) .force-light-text .footer {
+    color: #cbd5e1 !important;
+}
+
+
+/* Maintain bright cyan for HERRERA in all themes */
+#sidebar-name .text-cyan-400,
+.light-theme #sidebar-name .text-cyan-400 {
+    color: #22d3ee !important;
+}
+
+/* --- PREMIUM TRANSITION SYSTEM --- */
+.animate-fade-in {
+    animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+.animate-fade-out {
+    animation: fadeOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+.animate-stagger {
+    opacity: 0;
+    animation: staggerIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+}
+
+@keyframes staggerIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- PREMIUM PULSE SYSTEM (Homogenized) --- */
+.premium-pulse-container {
+    position: relative;
+    display: flex;
+    height: 1.25rem;
+    width: 1.25rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.premium-pulse-aura {
+    position: absolute;
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+    border-radius: 9999px;
+    opacity: 0.5;
+    animation: premium-ping 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.premium-pulse-dot {
+    position: relative;
+    display: inline-flex;
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 9999px;
+}
+
+/* Colores por defecto (Dark Mode) - Cyan Brillante */
+.pulse-cyan .premium-pulse-aura { background-color: #22d3ee; }
+.pulse-cyan .premium-pulse-dot { background-color: #22d3ee; }
+
+/* Light Theme Overrides - Azul Oscuro */
+.light-theme .pulse-cyan .premium-pulse-aura { background-color: #0369a1; }
+.light-theme .pulse-cyan .premium-pulse-dot { background-color: #0c4a6e; }
+
+
+
+/* ROI Toggles Minimalist */
+#btn-roi-list-v2, #btn-roi-grid-v2 {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* REGLA: Iconos Universales (Atrás, Adelante, Home, Descarga, Tema) */
+.universal-nav-icon {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #9ca3af !important; /* Gris Gray-400 (Más neutro que Slate) */
+    transition: all 0.3s ease;
+}
+
+.universal-nav-icon:hover {
+    color: #22d3ee !important; /* Cyan en hover para dark */
+}
+
+.light-theme .universal-nav-icon {
+    color: #4b5563 !important; /* Gris Gray-600 (Gris Oscurón solicitado) */
+}
+
+.light-theme .universal-nav-icon:hover {
+    color: #0369a1 !important; /* Sky-700 en hover para light */
+}
+
+.premium-pulse-dot {
+    position: relative;
+    display: inline-flex;
+    border-radius: 9999px;
+    height: 6px;
+    width: 6px;
+}
+
+/* Home System: puntos duplicados en tamaño */
+.home-nav-dots .premium-pulse-container {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.home-nav-dots .premium-pulse-dot {
+    height: 9px;
+    width: 9px;
+}
+
+@keyframes premium-ping {
+
+    75%,
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* Color Variants */
+.pulse-cyan .premium-pulse-aura {
+    background-color: #22d3ee;
+}
+
+.pulse-cyan .premium-pulse-dot {
+    background-color: #67e8f9;
+    box-shadow: 0 0 30px rgba(103, 232, 249, 1);
+}
+
+.pulse-purple .premium-pulse-aura {
+    background-color: #a855f7;
+}
+
+.pulse-purple .premium-pulse-dot {
+    background-color: #c084fc;
+    box-shadow: 0 0 30px rgba(192, 132, 252, 1);
+}
+
+.pulse-blue .premium-pulse-aura {
+    background-color: #3b82f6;
+}
+
+.pulse-blue .premium-pulse-dot {
+    background-color: #60a5fa;
+    box-shadow: 0 0 30px rgba(96, 165, 250, 1);
+}
+
+.pulse-green .premium-pulse-aura {
+    background-color: #22c55e;
+}
+
+.pulse-green .premium-pulse-dot {
+    background-color: #4ade80;
+    box-shadow: 0 0 30px rgba(74, 222, 128, 1);
+}
+
+/* Light Theme Adjustments */
+.light-theme .pulse-cyan .premium-pulse-aura {
+    background-color: #0369a1;
+}
+
+.light-theme .pulse-cyan .premium-pulse-dot {
+    background-color: #0c4a6e;
+}
+
+.light-theme .pulse-green .premium-pulse-aura {
+    background-color: #15803d;
+}
+
+.light-theme .pulse-green .premium-pulse-dot {
+    background-color: #14532d;
+}
+/* Contenedor de insignias con scroll automático */
+#global-edu-prev-badges-inner {
+    display: flex;
+    overflow-x: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+    white-space: nowrap;
+    cursor: grab;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    padding: 10px 40px;
+}
+
+#global-edu-prev-badges-inner:active {
+    cursor: grabbing;
+}
+
+#global-edu-prev-badges-inner::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+/* Flechas de Navegación para Certificados */
+.cert-nav-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.cert-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    background: rgba(15, 23, 42, 0.8) !important;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    z-index: 40;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.cert-nav-container:hover .cert-nav-btn {
+    opacity: 1;
+}
+
+.cert-nav-btn:hover {
+    background: rgba(34, 211, 238, 0.3) !important;
+    border-color: var(--accent-cyan);
+    transform: translateY(-50%) scale(1.15);
+    color: var(--accent-cyan);
+}
+
+.cert-nav-btn.left {
+    left: 5px;
+}
+
+.cert-nav-btn.right {
+    right: 5px;
+}
+
+
+/* ==========================================================================
+   EXCEPCIONES DE DISEÃ‘O - GALERÃ A DE PROYECTOS
+   ========================================================================== */
+/* Asegurar que los puntos de los TOP PROJECTS en la galerÃa siempre sean Cyan Brillante */
+#gallery-grid-container .pulse-cyan .premium-pulse-aura,
+body.light-theme #gallery-grid-container .pulse-cyan .premium-pulse-aura {
+    background-color: #22d3ee !important;
+}
+#gallery-grid-container .pulse-cyan .premium-pulse-dot,
+body.light-theme #gallery-grid-container .pulse-cyan .premium-pulse-dot {
+    background-color: #67e8f9 !important;
+    box-shadow: 0 0 30px rgba(103, 232, 249, 1) !important;
+}
+
+/* ROI GRAPHIC VIEW - PREMIUM CARDS */
+.roi-card {
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(74, 222, 128, 0.1);
+    border-radius: 12px;
+    padding: 0.65rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.roi-card:hover {
+    background: rgba(22, 101, 52, 0.1);
+    border-color: rgba(74, 222, 128, 0.4);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(74, 222, 128, 0.1);
+}
+
+.roi-card-icon-container {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(74, 222, 128, 0.1);
+    color: #4ade80;
+    transition: all 0.3s ease;
+}
+
+.roi-card:hover .roi-card-icon-container {
+    background: #166534;
+    color: #ffffff;
+    transform: rotate(-5deg) scale(1.1);
+}
+
+.roi-card-speedup {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 800;
+    font-size: 11px;
+    color: #4ade80;
+    text-shadow: 0 0 10px rgba(74, 222, 128, 0.3);
+}
+
+.roi-card-discipline {
+    font-size: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #94a3b8;
+    margin-bottom: 2px;
+}
+
+.roi-card-title {
+    font-size: 11px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.roi-card-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Light Theme Adapts */
+.light-theme .roi-card {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(22, 101, 52, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .roi-card:hover {
+    background: #ffffff;
+    border-color: rgba(22, 101, 52, 0.3);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .roi-card-title {
+    color: #0f172a;
+}
+
+.light-theme .roi-card-discipline {
+    color: #64748b;
+}
+
+.light-theme .roi-card-speedup {
+    color: #15803d;
+}
+
+.light-theme .roi-card-footer {
+    border-top-color: rgba(0, 0, 0, 0.05);
 }
