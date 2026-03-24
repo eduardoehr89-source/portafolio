@@ -7,10 +7,10 @@ Grupo,Nombre,Nivel,% Dominio,Clasificación,Capacidad,Descripción,Icono,Víncul
 2. Coordinación y CDE,BIMcollab,Bajo,25%,Secundario,Gestión de incidencias BCF y comunicación.,Gestión de incidencias,message-square,
 2. Coordinación y CDE,Dalux,Medio,50%,Principal,Supervisión de obra y realidad aumentada.,Incidencias y AR,smartphone,
 2. Coordinación y CDE,Navisworks,Bajo,25%,Secundario,Trabajo con interferencias y colisiones.,Clash Detection,crosshair,
-2. Coordinación y CDE,Solibri,Bajo,25%,Secundario,Validación técnica y detección de colisiones.,Validación y Coordinación,search,https://www.udemy.com/course/model-checking-for-bim-with-solibri/
+2. Coordinación y CDE,Solibri,-,-%,Secundario,Validación técnica y detección de colisiones.,Validación y Coordinación,search,https://www.udemy.com/course/model-checking-for-bim-with-solibri/
 2. Coordinación y CDE,Speckle,Medio,50%,Secundario,Intercambio de datos e interoperabilidad.,Interoperabilidad,box,
 3. IA y Automatización,Antigravity,Bajo,25%,Secundario,Optimización de flujos y desarrollo.,Programación y Optimiz.,code,
-3. IA y Automatización,Dynamo / Python,En proceso,25%,Secundario,Creación de scripts y automatización.,Scripting y Automatiz.,code,https://www.udemy.com/course/dynamo-y-designscript-para-revit-de-cero-a-experto-parte-1/
+3. IA y Automatización,Dynamo / Python,Bajo,25%,Secundario,Creación de scripts y automatización.,Scripting y Automatiz.,code,https://www.udemy.com/course/dynamo-y-designscript-para-revit-de-cero-a-experto-parte-1/
 3. IA y Automatización,Gemini AI,Medio,75%,Principal,"Generación de scripts, imágenes y asistentes.",Asistente Flujo Global,sparkles,
 3. IA y Automatización,NotebookLM,Alto,75%,Secundario,Análisis de documentos y normativas con IA.,Análisis Documental,book-open,
 4. Gestión y Análisis,Monday,Medio,75%,Secundario,Organización de tareas y cronogramas.,Gestión de tiempos,layout-list,
