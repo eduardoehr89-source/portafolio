@@ -1,7 +1,8 @@
 Categoría,Nombre,Institución,Periodo,Estado,ID / Credencial,URL Página,URL Archivo ,Ubicación,Archivos,Badge genérico,Titulo en badge genérico,Orden de badge
+Certificación,Professional Certification - Advanced,buildingSMART International,Presente,Programado - Abril 2025,-,,,Online,,,Professional Certification - Advanced,19
 Máster,AI Master Program ,butic The New School,Presente,En curso,N/A,https://www.credential.net/c455ea9f-59d7-44d6-9d15-c81eb34d5cfb#acc.xcuJq3KL,,"Madrid, España",AI Master Program_candidate_badge.png,NO,N/A,N/A
 Certificación,Dynamo,Udemy,Presente,En curso,N/A,https://www.udemy.com/course/dynamo-y-designscript-para-revit-de-cero-a-experto-parte-1/,,Online,,SI,Dynamo,N/A
-Certificación,Solibri,Udemy,Presente,En curso,N/A,https://www.udemy.com/course/model-checking-for-bim-with-solibri/,,Online,,SI,Solibri,N/A
+Certificación,Solibri,Udemy,-,-,N/A,https://www.udemy.com/course/model-checking-for-bim-with-solibri/,,Online,,SI,Solibri,N/A
 Certificación,IDS Course,BIMcollab Academy,Presente,Finalizado,N/A,,https://github.com/eduardoehr89-source/portafolio/blob/54cf5700a56f4f212c83882858029578215145d3/CV/certificaciones/IDS-course_certificate.png,Online,,SI,IDS,17
 Certificación,Working with Issue Management,BIMcollab Academy,Presente,Finalizado,N/A,,https://github.com/eduardoehr89-source/portafolio/blob/9dd3d4565b34196b3851c261de4c3237f583a4b7/CV/certificaciones/Working-with-issue-management_certificate.png,Online,Working-with-issue-management_certificate,SI,Issues,16
 Certificación,Getting Started with BIMcollab,BIMcollab Academy,Marzo 2026,Finalizado,69b7153e3c47e95ffb06adea,,https://github.com/eduardoehr89-source/portafolio/blob/b08e0916752bd500e5134c60405d99e28206cd32/CV/certificaciones/Getting-started-with-bimcollab_certificate.png,Online,Getting-started-with-bimcollab_certificate.pdf,SI,Started,12
