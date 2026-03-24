@@ -40,6 +40,10 @@
         content="Especialista en metodología BIM, modelado MEP, arquitectura y gestión de proyectos con +10 años de experiencia.">
     <meta property="og:image"
         content="https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/profile_optimized.jpg">
+
+    <!-- PDF Export Libraries (V3) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 <body class="flex justify-center bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
@@ -51,6 +55,11 @@
             <i data-lucide="menu" class="w-6 h-6"></i>
         </button>
     </div>
+
+    <!-- Botón de Exportación Directa HD (Bottom Right) -->
+    <button onclick="exportHD()" class="fixed bottom-6 right-6 z-[100] bg-green-600 hover:bg-green-500 text-white font-bold rounded-full py-3 px-6 shadow-2xl transition-transform hover:scale-105 cursor-pointer no-print flex items-center gap-2" title="Generar PDF 1:1">
+        <i class="fas fa-camera"></i> Guardar PDF Local (HD)
+    </button>
 
     <!-- Print Modal -->
     <div id="print-modal"
@@ -87,7 +96,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Columna CV -->
                 <div class="space-y-3">
-                    <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100 dark:border-gray-800 pb-1">CURRICULUM VITAE</p>
+                    <p
+                        class="text-[9px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100 dark:border-gray-800 pb-1">
+                        CURRICULUM VITAE</p>
                     <button onclick="downloadPdf('cv', 'light')"
                         class="w-full px-3 py-2 text-xs font-medium bg-transparent text-gray-700 dark:text-gray-300 rounded hover:bg-gray-100 dark:hover:bg-white/5 border border-gray-200 dark:border-white/10 transition-colors flex justify-center items-center gap-2">
                         <i class="fas fa-sun text-blue-500"></i> Claro
@@ -104,7 +115,9 @@
 
                 <!-- Columna Portafolio -->
                 <div class="space-y-3">
-                    <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100 dark:border-gray-800 pb-1">PORTAFOLIO RESUMIDO</p>
+                    <p
+                        class="text-[9px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100 dark:border-gray-800 pb-1">
+                        PORTAFOLIO RESUMIDO</p>
                     <button onclick="downloadPdf('portfolio', 'light')"
                         class="w-full px-3 py-2 text-xs font-medium bg-transparent text-gray-700 dark:text-gray-300 rounded hover:bg-gray-100 dark:hover:bg-white/5 border border-gray-200 dark:border-white/10 transition-colors flex justify-center items-center gap-2">
                         <i class="fas fa-sun text-cyan-500"></i> Claro
@@ -184,36 +197,45 @@
     </div>
 
     <!-- CV Main Container -->
-    <main class="cv-container flex rounded-xl overflow-hidden shadow-2xl">
+    <main id="cv-container" class="cv-container flex rounded-xl overflow-hidden shadow-2xl">
         <!-- Sidebar -->
-        <aside class="sidebar-color w-[32%] p-4 flex flex-col h-full relative z-10">
+        <aside class="sidebar-color w-[265px] p-4 flex flex-col h-full relative z-10">
             <!-- Cabecera con Imagen Expansiva (Altura fijada para alineación estructural) -->
             <header class="relative -mx-4 -mt-4 mb-0 h-64 overflow-hidden group">
                 <!-- Imagen de Fondo -->
                 <!-- Contenedor Base del Carrusel Temporal -->
                 <!-- Contenedores Duales para Carrusel Ultra-Suave -->
-                <div id="cv-profile-carousel-container" class="absolute inset-0 w-full h-full bg-[#0f1013] z-0 overflow-hidden group">
+                <div id="cv-profile-carousel-container"
+                    class="absolute inset-0 w-full h-full bg-[#0f1013] z-0 overflow-hidden group">
                     <!-- Imagen de fondo (preparada para la siguiente ronda) -->
-                    <img id="cv-profile-back" src="https://raw.githubusercontent.com/eduardoehr89-source/portafolio/f70bfc4c31c58274aaafa175d142f5a6f4145e46/CV/fotos%20de%20perfil/profile_optimized_02.jpg"
+                    <img id="cv-profile-back"
+                        src="https://raw.githubusercontent.com/eduardoehr89-source/portafolio/f70bfc4c31c58274aaafa175d142f5a6f4145e46/CV/fotos%20de%20perfil/profile_optimized_02.jpg"
                         alt=""
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-[10000ms] ease-out group-hover:scale-110 z-0">
-                    
+
                     <!-- Imagen frontal (visible actual cruzando Fade) -->
-                    <img id="cv-profile-front" src="https://raw.githubusercontent.com/eduardoehr89-source/portafolio/f70bfc4c31c58274aaafa175d142f5a6f4145e46/CV/fotos%20de%20perfil/profile_optimized_01.jpg"
+                    <img id="cv-profile-front"
+                        src="https://raw.githubusercontent.com/eduardoehr89-source/portafolio/f70bfc4c31c58274aaafa175d142f5a6f4145e46/CV/fotos%20de%20perfil/profile_optimized_01.jpg"
                         alt="Said Herrera"
                         class="absolute inset-0 w-full h-full object-cover transition-all duration-[2500ms] ease-in-out group-hover:scale-110 z-10 opacity-100">
 
                     <!-- Navegación Manual Minimalista -->
-                    <button id="cv-nav-prev" onclick="navigateProfile(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 z-50 p-2 text-white/30 hover:text-white transition-all opacity-0 group-hover:opacity-100 cursor-pointer" title="Anterior">
+                    <button id="cv-nav-prev" onclick="navigateProfile(-1)"
+                        class="absolute left-2 top-1/2 -translate-y-1/2 z-50 p-2 text-white/30 hover:text-white transition-all opacity-0 group-hover:opacity-100 cursor-pointer"
+                        title="Anterior">
                         <i data-lucide="chevron-left" class="w-6 h-6"></i>
                     </button>
-                    <button id="cv-nav-next" onclick="navigateProfile(1)" class="absolute right-2 top-1/2 -translate-y-1/2 z-50 p-2 text-white/30 hover:text-white transition-all opacity-0 group-hover:opacity-100 cursor-pointer" title="Siguiente">
+                    <button id="cv-nav-next" onclick="navigateProfile(1)"
+                        class="absolute right-2 top-1/2 -translate-y-1/2 z-50 p-2 text-white/30 hover:text-white transition-all opacity-0 group-hover:opacity-100 cursor-pointer"
+                        title="Siguiente">
                         <i data-lucide="chevron-right" class="w-6 h-6"></i>
                     </button>
                 </div>
-                
-                <!-- Overlay Gradiente iluminado (menos black list en header) -->
-                <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent z-20 pointer-events-none opacity-90"></div>
+
+                <!-- Overlay Gradiente iluminado (Zinc-900 para paridad) -->
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-[#18181b] via-transparent to-transparent z-20 pointer-events-none opacity-90">
+                </div>
 
                 <!-- Etiqueta CV -->
                 <div class="absolute top-4 right-4 z-10">
@@ -223,7 +245,9 @@
 
                 <!-- Contenido de Texto Superpuesto Cristalino -->
                 <div class="absolute bottom-0 left-0 right-0 p-4 text-center z-40">
-                    <h1 class="text-3xl font-light uppercase tracking-tighter text-white leading-none mb-1 drop-shadow-[0_4px_6px_rgba(0,0,0,1)] opacity-100">
+                    <h1
+                        style="color: white !important;"
+                        class="text-3xl font-light uppercase tracking-tighter text-white leading-none mb-1 drop-shadow-[0_4px_6px_rgba(0,0,0,1)] opacity-100">
                         SAID HERRERA
                     </h1>
                 </div>
@@ -231,12 +255,17 @@
 
             <!-- Textos trasladados desde la foto principal para visual más despejado -->
             <div class="flex flex-col items-center justify-center mt-3 mb-2 px-2 pointer-events-none text-center">
-                <h2 class="text-[0.65rem] font-black text-gray-300 [.light-theme_&]:text-slate-600 tracking-[0.15em] uppercase flex flex-col items-center leading-tight w-full">
+                <h2
+                    class="text-[0.65rem] font-black text-gray-300 [.light-theme_&]:text-slate-600 tracking-[0.15em] uppercase flex flex-col items-center leading-tight w-full">
                     <div class="w-full text-center">Modelador BIM Senior</div>
                     <div class="font-normal whitespace-nowrap mt-1 w-full text-center">Citizen Developer</div>
                 </h2>
-                <p id="contact-nacionalidad" class="text-[0.5rem] text-gray-400 [.light-theme_&]:text-slate-500 uppercase tracking-widest mt-2 mb-1 italic font-medium">MEXICANO</p>
-                <p id="contact-experiencia-line" class="text-[0.45rem] font-mono font-normal tracking-tighter uppercase leading-tight whitespace-nowrap" style="color: #3b82f6 !important;">
+                <p id="contact-nacionalidad"
+                    class="text-[0.5rem] text-gray-400 [.light-theme_&]:text-slate-500 uppercase tracking-widest mt-2 mb-1 italic font-medium">
+                    MEXICANO</p>
+                <p id="contact-experiencia-line"
+                    class="text-[0.55rem] font-mono font-normal tracking-tighter uppercase leading-tight whitespace-nowrap"
+                    style="color: #3b82f6 !important;">
                     10+ AÑOS EXP. | 20+ CIUDADES | 40+ PROYECTOS
                 </p>
             </div>
@@ -258,7 +287,9 @@
                     </p>
                     <p class="flex items-center gap-2">
                         <i class="fas fa-map-marker-alt w-4 text-center"></i>
-                        <span id="contact-location">Ciudad de M&eacute;xico, M&eacute;xico <span class="text-gray-500 font-normal italic ml-1 border-l border-gray-700 pl-2">// TRABAJO REMOTO</span></span>
+                        <span id="contact-location">Ciudad de M&eacute;xico, M&eacute;xico <span
+                                class="text-gray-500 font-normal italic ml-1 border-l border-gray-700 pl-2">// TRABAJO
+                                REMOTO</span></span>
                     </p>
                     <div class="flex flex-wrap gap-x-4 gap-y-1">
                         <p class="flex items-center gap-2">
@@ -269,8 +300,11 @@
                     </div>
                     <!-- QR LinkedIn Centered -->
                     <div class="flex flex-col items-center mt-6 mb-4 w-full">
-                        <div id="qrcode-container" class="w-24 h-24 bg-white rounded-lg flex items-center justify-center border border-gray-200 p-2 shadow-inner transition-transform hover:scale-105">
-                            <span class="text-[5px] text-gray-400 text-center px-1 uppercase font-mono leading-tight">Cargando QR...</span>
+                        <div id="qrcode-container"
+                            class="w-24 h-24 bg-white rounded-lg flex items-center justify-center border border-gray-200 p-2 shadow-inner transition-transform hover:scale-105">
+                            <span
+                                class="text-[5px] text-gray-400 text-center px-1 uppercase font-mono leading-tight">Cargando
+                                QR...</span>
                         </div>
                     </div>
                 </address>
@@ -292,7 +326,8 @@
 
             <section class="mb-2">
                 <h3 class="sidebar-section-title"><i data-lucide="layers"></i> Software Stack</h3>
-                <h4 class="text-[0.45rem] font-light text-gray-400 uppercase tracking-wider mb-1">Herramientas Principales</h4>
+                <h4 class="text-[0.45rem] font-light text-gray-400 uppercase tracking-wider mb-1">Herramientas
+                    Principales</h4>
                 <div id="software-main-container" class="space-y-0.5 mb-2">
                     <!-- Dinámico -->
                 </div>
@@ -303,22 +338,22 @@
                     <!-- Dinámico -->
                 </div>
             </section>
-            
-            <section class="mb-4 no-print">
+
+            <section class="mb-4">
                 <h3 class="sidebar-section-title"><i data-lucide="shield-check"></i> Normas y Estándares</h3>
                 <div id="normas-list" class="flex flex-wrap gap-1 w-full">
                     <!-- Dinámico -->
                 </div>
             </section>
 
-                <h3 class="sidebar-section-title"><i data-lucide="languages"></i> Idiomas</h3>
-                <div class="text-[0.65rem] text-gray-300 flex justify-between">
-                    <span><strong class="text-white">Español:</strong> Nativo</span>
-                    <span><strong class="text-white">Inglés:</strong> <a href="https://cert.efset.org/es/pfLEMW"
-                            target="_blank" class="text-white hover:text-cyan-400 transition-colors">A2 Básico <i
-                                class="fas fa-external-link-alt text-[0.45rem] text-gray-400"></i></a></span>
+            <h3 class="sidebar-section-title"><i data-lucide="languages"></i> Idiomas</h3>
+            <div class="text-[0.65rem] text-gray-300 flex justify-between">
+                <span><strong class="text-white">Español:</strong> Nativo</span>
+                <span><strong class="text-white">Inglés:</strong> <a href="https://cert.efset.org/es/pfLEMW"
+                        target="_blank" class="text-white hover:text-cyan-400 transition-colors">A2 Básico <i
+                            class="fas fa-external-link-alt text-[0.45rem] text-gray-400"></i></a></span>
 
-                </div>
+            </div>
             </section>
 
             <div class="h-px bg-white/10 my-4 opacity-50"></div>
@@ -361,10 +396,13 @@
                 </div>
 
                 <div class="mt-2">
-                    <p class="text-[0.6rem] text-gray-400 uppercase tracking-widest mb-2 border-b border-gray-400/20 pb-0.5">
-                        <b class="font-bold">Educación Previa</b> - Licencias y Certificaciones Destacadas</p>
-                    
-                    <div id="certifications-badges-container" class="flex justify-start gap-8 items-center mb-4 w-full px-4">
+                    <p
+                        class="text-[0.6rem] text-gray-400 uppercase tracking-widest mb-2 border-b border-gray-400/20 pb-0.5">
+                        <b class="font-bold">Educación Previa</b> - Licencias y Certificaciones Destacadas
+                    </p>
+
+                    <div id="certifications-badges-container"
+                        class="flex justify-start gap-8 items-center mb-4 w-full px-4">
                         <!-- Dinámico: Badges e insignias -->
                     </div>
 
@@ -381,7 +419,7 @@
     <div id="summary-cv-modal"
         class="fixed inset-0 z-[10001] hidden flex items-center justify-center bg-black/80 backdrop-blur-md animate-fade-in no-print h-full w-full">
         <div id="summary-cv-popup"
-            class="m-auto h-fit max-h-[95vh] bg-[#0f141a]/95 backdrop-blur-xl border border-white/10 w-[95%] max-w-[1400px] rounded-2xl overflow-hidden flex flex-col transform scale-95 transition-all duration-300 shadow-2xl">
+            class="m-auto h-fit max-h-[95vh] bg-[#0f141a]/95 backdrop-blur-xl border border-white/10 w-[95%] max-w-[1700px] rounded-2xl overflow-hidden flex flex-col transform scale-95 transition-all duration-300 shadow-2xl">
             <!-- Header Popup -->
             <div class="py-4 px-6 flex justify-between items-center">
                 <div class="flex items-center gap-3">
@@ -404,25 +442,22 @@
 
             <!-- Content Grid Unificado (8 Columnas) -->
             <div id="summary-cv-cards-container"
-                class="p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-9 lg-grid-cols-9 gap-0 items-start overflow-y-auto max-h-[70vh] thin-scroll">
+                class="p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-9 gap-2 items-start overflow-y-auto max-h-[70vh] thin-scroll">
                 <!-- Card 0: Vibe Coding (VIBE CODING) -->
                 <div
                     class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div
-                        class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
                         <div
                             class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
                             <i data-lucide="zap" class="w-4 h-4"></i>
                         </div>
                     </div>
-                    <div
-                        class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
                         <h4
                             class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
                             DESARROLLO</h4>
                     </div>
-                    <div
-                        class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
                         <p class="text-white font-bold text-[15px] leading-tight uppercase text-center">VIBE CODING
                         </p>
                     </div>
@@ -433,21 +468,18 @@
                 <!-- Card 1: Experiencia (EXPERIENCIA) -->
                 <div
                     class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div
-                        class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
                         <div
                             class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
                             <i data-lucide="history" class="w-4 h-4"></i>
                         </div>
                     </div>
-                    <div
-                        class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
                         <h4
                             class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
                             EXPERIENCIA</h4>
                     </div>
-                    <div
-                        class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
                         <p class="text-white font-bold text-[15px] leading-tight uppercase text-center">10+ A&Ntilde;OS
                         </p>
                     </div>
@@ -459,21 +491,18 @@
                 <!-- Card 2: Software Core (SOFTWARE CORE) -->
                 <div
                     class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div
-                        class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
                         <div
                             class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
                             <i data-lucide="code-2" class="w-4 h-4"></i>
                         </div>
                     </div>
-                    <div
-                        class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
                         <h4
                             class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
                             SOFTWARE PRINCIPAL</h4>
                     </div>
-                    <div
-                        class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
                         <a href="https://www.credential.net/6a2328e0-b4d5-4379-870a-885f476879ab#acc.8RMlPckA"
                             target="_blank" class="hover:opacity-80 transition-opacity">
                             <p class="text-white font-bold text-[15px] leading-tight uppercase text-center">REVIT <i
@@ -490,21 +519,18 @@
                 <!-- Card 3: Modelado (MODELADO) -->
                 <div
                     class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div
-                        class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
                         <div
                             class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
                             <i data-lucide="layers" class="w-4 h-4"></i>
                         </div>
                     </div>
-                    <div
-                        class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
                         <h4
                             class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
                             MODELADO</h4>
                     </div>
-                    <div
-                        class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
                         <p class="text-white font-bold text-[15px] leading-tight uppercase text-center">MULTIDISCIPLINA
                         </p>
                     </div>
@@ -516,21 +542,18 @@
                 <!-- Card 4: Standards (EST&Aacute;NDAR MAESTRO) -->
                 <div
                     class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div
-                        class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
                         <div
                             class="w-9 h-9 rounded-lg bg-cyan-600/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-cyan-600/20 transition-all duration-300 font-bold text-cyan-400">
                             <i data-lucide="file-check" class="w-4 h-4"></i>
                         </div>
                     </div>
-                    <div
-                        class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
                         <h4
                             class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
                             EST&Aacute;NDAR MAESTRO</h4>
                     </div>
-                    <div
-                        class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
                         <a href="https://qualification.buildingsmart.org/badges/badge.php?hash=7938aa1456a67a6861892d214196c7b7e6861bd7"
                             target="_blank" class="hover:opacity-80 transition-opacity">
                             <p
@@ -549,101 +572,86 @@
                 <!-- Card 5: Gemini (GEMINI) -->
                 <div
                     class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div
-                        class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
                         <div
                             class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
                             <i data-lucide="brain-circuit" class="w-4 h-4"></i>
                         </div>
                     </div>
-                    <div
-                        class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
                         <h4
                             class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
                             GEMINI</h4>
                     </div>
-                    <div
-                        class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
                         <p class="text-white font-bold text-[15px] leading-tight uppercase text-center">IA
                         </p>
                     </div>
-                    <p
-                        class="text-[9px] text-sky-800 font-bold uppercase font-mono mt-auto pt-1">
+                    <p class="text-[9px] text-sky-800 font-bold uppercase font-mono mt-auto pt-1">
                         Optimizaci&oacute;n de flujo global</p>
                 </div>
 
                 <!-- Card 6: Idioma (IDIOMA) -->
                 <div
                     class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div
-                        class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
                         <div
                             class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
                             <i data-lucide="languages" class="w-4 h-4"></i>
                         </div>
                     </div>
-                    <div
-                        class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
                         <h4
                             class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
                             IDIOMA</h4>
                     </div>
-                    <div
-                        class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
                         <a href="https://cert.efset.org/es/pfLEMW" target="_blank"
                             class="hover:text-cyan-400 transition-colors">
                             <p class="text-white font-bold text-[15px] leading-tight uppercase text-center">
                                 INGL&Eacute;S A2 <i class="fas fa-external-link-alt text-[10px] text-gray-400"></i></p>
                         </a>
                     </div>
-                    <p
-                        class="text-[9px] text-sky-800 font-bold uppercase font-mono mt-auto pt-1">
+                    <p class="text-[9px] text-sky-800 font-bold uppercase font-mono mt-auto pt-1">
                         B&Aacute;SICO</p>
                 </div>
 
                 <!-- Card 7: ROI (AHORRO EN TIEMPO) -->
                 <div
                     class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div
-                        class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
                         <div
                             class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
                             <i data-lucide="trending-up" class="w-4 h-4"></i>
                         </div>
                     </div>
-                    <div
-                        class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
                         <h4
                             class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
                             AHORRO EN TIEMPO</h4>
                     </div>
-                    <div
-                        class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
                         <p class="text-white font-bold text-[15px] leading-tight uppercase text-center">12X</p>
                     </div>
-                    <p
-                        class="text-[9px] text-sky-800 font-bold uppercase font-mono mt-auto pt-1">
+                    <p class="text-[9px] text-sky-800 font-bold uppercase font-mono mt-auto pt-1">
                         VELOCIDAD PROMEDIO</p>
                 </div>
 
                 <!-- Card 8: M�ster (M&Aacute;STER EN CURSO) -->
                 <div
                     class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div
-                        class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
                         <div
                             class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
                             <i data-lucide="graduation-cap" class="w-4 h-4"></i>
                         </div>
                     </div>
-                    <div
-                        class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
                         <h4
                             class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
                             M&Aacute;STER EN CURSO</h4>
                     </div>
-                    <div
-                        class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
+                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
                         <a href="https://www.credential.net/c455ea9f-59d7-44d6-9d15-c81eb34d5cfb#acc.rfPIGXZj"
                             target="_blank" class="hover:opacity-80 transition-opacity">
                             <p class="text-white font-bold text-[15px] leading-tight uppercase text-center">MBIA: BIM +
@@ -652,8 +660,7 @@
 
 
                     </div>
-                    <p
-                        class="text-[9px] text-sky-800 font-bold uppercase font-mono mt-auto pt-1">
+                    <p class="text-[9px] text-sky-800 font-bold uppercase font-mono mt-auto pt-1">
                         BUTIC<br>ESPA&Ntilde;A</p>
                 </div>
             </div>
@@ -664,7 +671,7 @@
                     <span
                         class="text-[10px] text-gray-500 [.light-theme_&]:text-slate-500 font-mono tracking-[0.25em] pl-[0.25em] uppercase font-bold text-center w-full">
                         SAID HERRERA // MODELADOR BIM SENIOR &amp; <span class="font-normal">CITIZEN DEVELOPER</span> //
-                        M&Eacute;XICO // <span class="text-gray-500 font-normal">TRABAJO REMOTO</span>
+                        M&Eacute;XICO
                     </span>
                 </div>
             </div>
@@ -744,16 +751,22 @@
     <div id="cert-modal"
         class="hidden fixed inset-0 z-[10002] flex items-center justify-center bg-black/60 backdrop-blur-md no-print opacity-0 transition-opacity duration-300"
         onclick="closeCertModal()">
-        <div id="cert-modal-content" class="relative max-w-[95%] max-h-[95%] flex flex-col items-center transform scale-95 opacity-0 transition-all duration-300" onclick="event.stopPropagation()">
+        <div id="cert-modal-content"
+            class="relative max-w-[95%] max-h-[95%] flex flex-col items-center transform scale-95 opacity-0 transition-all duration-300"
+            onclick="event.stopPropagation()">
             <!-- Botón de Cierre Mejorado -->
             <button onclick="closeCertModal()"
                 class="absolute -top-4 -right-4 z-10 bg-black/50 hover:bg-black text-white p-2 rounded-full border border-white/20 transition-all hover:scale-110 shadow-xl backdrop-blur-md">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
-            <div class="bg-white p-1.5 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden border border-white/10 group">
-                <img id="cert-modal-img" src="" alt="Certificado" class="max-w-full max-h-[85vh] object-contain rounded-lg">
+            <div
+                class="bg-white p-1.5 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden border border-white/10 group">
+                <img id="cert-modal-img" src="" alt="Certificado"
+                    class="max-w-full max-h-[85vh] object-contain rounded-lg">
             </div>
-            <p id="cert-modal-title" class="text-white font-mono text-[10px] mt-5 uppercase tracking-[0.3em] font-bold opacity-60 text-center drop-shadow-lg px-4 bg-black/20 py-1 rounded-full backdrop-blur-sm"></p>
+            <p id="cert-modal-title"
+                class="text-white font-mono text-[10px] mt-5 uppercase tracking-[0.3em] font-bold opacity-60 text-center drop-shadow-lg px-4 bg-black/20 py-1 rounded-full backdrop-blur-sm">
+            </p>
         </div>
     </div>
 

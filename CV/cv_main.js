@@ -50,7 +50,7 @@ function executeProfileTransition(direction) {
     // 2. Transición de fundido
     setTimeout(() => {
         frontImg.style.opacity = '0';
-        
+
         setTimeout(() => {
             frontImg.style.transition = 'none';
             frontImg.src = backImg.src;
@@ -62,7 +62,7 @@ function executeProfileTransition(direction) {
 }
 
 // Función global para navegación manual
-window.navigateProfile = function(direction) {
+window.navigateProfile = function (direction) {
     executeProfileTransition(direction);
     // Al navegar manualmente, reiniciamos el contador para que no salte de inmediato
     startProfileCarousel();
@@ -73,19 +73,19 @@ window.navigateProfile = function(direction) {
    ========================================= */
 const timestamp = `v_forced_${Date.now()}`;
 const CSV_URLS = {
-    experiencia: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/master/CV/Experiencia%20laboral_cv.csv?t=${timestamp}`,
-    formacion: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/master/CV/Formaci%C3%B3n%20acad%C3%A9mica_cv.csv?t=${timestamp}`,
-    software: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/master/Software_portafolio.csv?t=${timestamp}`,
-    habilidades: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/master/CV/Soft%20skills_cv.csv?t=${timestamp}`,
-    contacto: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/master/CV/Contacto_cv.csv?t=${timestamp}`,
-    perfil: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/master/CV/Perfil%20Profesional_cv.csv?t=${timestamp}`,
-    proyectos_global: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/master/Proyectos_portafolio.csv?t=${timestamp}`,
-    disciplinas_global: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/master/Disciplinas_portafolio.csv?t=${timestamp}`,
-    normas: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/master/Normativas%20y%20Est%C3%A1ndares_portafolio.csv?t=${timestamp}`,
-    summary: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/master/Resumen_portafolio.csv?t=${timestamp}`
+    experiencia: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Experiencia%20laboral_cv.csv?t=${timestamp}`,
+    formacion: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Formaci%C3%B3n%20acad%C3%A9mica_cv.csv?t=${timestamp}`,
+    software: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Software_portafolio.csv?t=${timestamp}`,
+    habilidades: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Soft%20skills_cv.csv?t=${timestamp}`,
+    contacto: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Contacto_cv.csv?t=${timestamp}`,
+    perfil: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Perfil%20Profesional_cv.csv?t=${timestamp}`,
+    proyectos_global: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/Proyectos_portafolio.csv?t=${timestamp}`,
+    disciplinas_global: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Disciplinas_portafolio.csv?t=${timestamp}`,
+    normas: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Normativas%20y%20Est%C3%A1ndares_portafolio.csv?t=${timestamp}`,
+    summary: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Resumen_portafolio.csv?t=${timestamp}`
 };
-const CLOUD_BADGE_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/master/CV/insignias/';
-const CLOUD_ASSET_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/master/';
+const CLOUD_BADGE_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/insignias/';
+const CLOUD_ASSET_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/';
 
 async function loadExternalData() {
     try {
@@ -242,7 +242,7 @@ function renderExperience(data) {
 
         const duration = calculateDuration(periodo);
         const urlEmpresa = getVal(job, 'URL', 'Link', 'URL Empresa', 'URL Página', 'URL Pagina');
-        
+
         // El usuario pide que CEMEX envíe a cemexmexico.com y se lea del CSV si es posible
         const mainUrl = (empresa.toUpperCase().includes('CEMEX')) ? 'https://www.cemexmexico.com/' : urlEmpresa;
 
@@ -264,7 +264,7 @@ function renderExperience(data) {
                 </div>
             </div>
             
-            ${mainUrl ? 
+            ${mainUrl ?
                 `<a href="${mainUrl}" target="_blank" class="text-[0.65rem] font-semibold text-gray-500 dark:text-gray-400 italic mb-2.5 hover:text-blue-500 dark:hover:text-blue-300 transition-colors flex items-center gap-1 group/emp-link">
                     ${empresa}
                     <i class="fas fa-external-link-alt text-[0.45rem] opacity-0 group-hover/emp-link:opacity-100 transition-opacity"></i>
@@ -273,12 +273,26 @@ function renderExperience(data) {
             }
 
             <div class="space-y-1.5">
-                ${descripcion.split('\n').filter(p => p.trim() !== '').map(p => `
-                    <div class="flex items-start gap-1.5">
-                        <span class="text-gray-400 dark:text-gray-500 text-[0.6rem] mt-0.5">•</span>
-                        <p class="text-[0.65rem] text-gray-600 dark:text-gray-300 text-justify leading-snug flex-1">${p.trim()}</p>
-                    </div>
-                `).join('')}
+                ${descripcion.split('\n').filter(p => p.trim() !== '').map(p => {
+                    let pText = p.trim();
+                    const highlights = [
+                        "Eficiencia Operativa y Ahorro en Oficina (BIM + IA + ISO 19650):",
+                        "Control de Calidad y Prevención de Sobrecostos en Obra (Speckle + Dalux):",
+                        "Inteligencia de Datos y Control de Costos (Speckle + Power BI):",
+                        "Aceleración de Procesos (IA + Dynamo):"
+                    ];
+                    highlights.forEach(h => {
+                        if (pText.includes(h)) {
+                            pText = pText.replace(h, `<span class="font-semibold text-gray-800 dark:text-gray-100">${h}</span>`);
+                        }
+                    });
+                    return `
+                        <div class="flex items-start gap-1.5">
+                            <span class="text-gray-400 dark:text-gray-500 text-[0.6rem] mt-0.5">•</span>
+                            <p class="text-[0.65rem] text-gray-600 dark:text-gray-300 text-justify leading-snug flex-1">${pText}</p>
+                        </div>
+                    `;
+                }).join('')}
             </div>
         `;
         container.appendChild(article);
@@ -305,10 +319,10 @@ function renderEducation(data, softwareData = []) {
     ];
 
     const educationRecords = data.filter(edu => {
-        const name = normalizeStr(getVal(edu, 'Nombre', 'Titulo'));
+        const name = normalizeStr(getVal(edu, 'Nombre', 'Titulo', 'Nombre del curso', 'Título'));
         const cat = normalizeStr(getVal(edu, 'Categoria', 'Categoría'));
         const st = normalizeStr(getVal(edu, 'Estado', 'estado') + ' ' + getVal(edu, 'periodo'));
-        
+
         // Filtro Nuclear para BCF en CV
         const rawJson = JSON.stringify(edu).toLowerCase();
         if (rawJson.includes('bcf') || rawJson.includes('bc manager') || name.includes('bcf')) return false;
@@ -317,31 +331,31 @@ function renderEducation(data, softwareData = []) {
         const isOngoing = st.includes('curso') || st.includes('cruso') || st.includes('presente');
         const isWhitelisted = whitelist.some(w => name.includes(w));
 
-        if (name.includes('cursobimcollabids') || name.includes('bimcollabids') || name.includes('gettingstarted') || 
+        if (name.includes('cursobimcollabids') || name.includes('bimcollabids') || name.includes('gettingstarted') ||
             name.includes('webviewer') || name.includes('zoom') || name.includes('smartproperties') || name.includes('issuemanagement') || name.includes('idscourse')) return false;
 
         // Permitir si es académico de alto nivel (Grados)
         // O si es un curso/especialización pero está en la whitelist
         if (isAcademic && !cat.includes('curso')) return true;
         if (isWhitelisted) return true;
-        if (isOngoing && isWhitelisted) return true; 
-        
+        if (isOngoing && isWhitelisted) return true;
+
         if (name.includes('dynamo') || name.includes('solibri')) return true;
 
         return false;
     });
 
     const certificationRecords = data.filter(edu => {
-        const name = normalizeStr(getVal(edu, 'Nombre', 'Titulo'));
+        const name = normalizeStr(getVal(edu, 'Nombre', 'Titulo', 'Nombre del curso', 'Título'));
         const estado = normalizeStr(getVal(edu, 'Estado', 'estado') + ' ' + getVal(edu, 'periodo'));
-        
+
         // Filtro Nuclear para BCF en CV (Badges)
         const rawJson = JSON.stringify(edu).toLowerCase();
         if (rawJson.includes('bcf') || rawJson.includes('bc manager') || name.includes('bcf')) return false;
 
-        if (name.includes('cursobimcollabids') || name.includes('bimcollabids') || name.includes('gettingstarted') || 
+        if (name.includes('cursobimcollabids') || name.includes('bimcollabids') || name.includes('gettingstarted') ||
             name.includes('webviewer') || name.includes('zoom') || name.includes('smartproperties') || name.includes('issuemanagement') || name.includes('idscourse')) return false;
-        
+
         return whitelist.some(w => name.includes(w)) && !estado.includes('curso') && !estado.includes('presente') && !name.includes('aimaster');
     });
 
@@ -395,8 +409,8 @@ function renderEducation(data, softwareData = []) {
         if (isOngoing && gridContainer) {
             let iconClass = 'fa-graduation-cap';
             const normalizedTitle = normalizeStr(titulo);
-            if (normalizedTitle.includes('dynamo')) iconClass = 'fa-laptop-code'; 
-            if (normalizedTitle.includes('solibri')) iconClass = 'fa-check-double';   
+            if (normalizedTitle.includes('dynamo')) iconClass = 'fa-laptop-code';
+            if (normalizedTitle.includes('solibri')) iconClass = 'fa-check-double';
 
             const urlPagina = getVal(edu, 'URL Página', 'URL Pagina');
             // Crear insignia circular personalizada para Dynamo/Solibri si no hay imagen
@@ -405,16 +419,16 @@ function renderEducation(data, softwareData = []) {
             if (!badgeFile && isCustom) {
                 const shortTitle = normalizedTitle.includes('dynamo') ? 'DYNAMO' : 'SOLIBRI';
                 customBadge = `
-                    <div class="relative w-[95px] h-[95px] rounded-full bg-[#1a202c] [.light-theme_&]:bg-gray-300 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                        <span class="text-[10px] font-black text-white tracking-[0.2em] uppercase text-center px-1 drop-shadow-[0_2px_2px_rgba(0,0,0,0.4)]">${shortTitle}</span>
+                    <div class="relative w-[95px] h-[95px] rounded-full bg-zinc-800 [.light-theme_&]:bg-zinc-200 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                        <span class="text-[10px] font-black text-white [.light-theme_&]:text-zinc-900 tracking-[0.2em] uppercase text-center px-1 drop-shadow-[0_2px_2px_rgba(0,0,0,0.4)]">${shortTitle}</span>
                     </div>`;
             }
 
             let badgeImg = badgeFile ? `
                 <div class="relative w-[120px] h-[120px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
-                    <svg viewBox="0 0 120 120" class="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
-                        <path id="curve-ongoing-${idx}" d="M 60, 60 m -54, 0 a 54,54 0 1,1 108,0 a 54,54 0 1,1 -108,0" fill="transparent" />
-                        <text class="text-[7.5px] font-bold fill-gray-400 [.light-theme_&]:fill-gray-800 font-mono uppercase tracking-[0.2em]">
+                    <svg viewBox="-20 -20 160 160" class="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
+                        <path id="curve-ongoing-${idx}" d="M 60, 60 m -70, 0 a 70, 70 0 1,1 140, 0 a 70, 70 0 1,1 -140, 0" fill="transparent" />
+                        <text class="text-[8.5px] font-black fill-gray-400 [.light-theme_&]:fill-gray-800 font-mono uppercase tracking-[0.2em]">
                             <textPath href="#curve-ongoing-${idx}" startOffset="50%" text-anchor="middle">${institucion}</textPath>
                         </text>
                     </svg>
@@ -422,16 +436,16 @@ function renderEducation(data, softwareData = []) {
                 </div>
             ` : (customBadge ? `
                 <div class="relative w-[120px] h-[120px] flex items-center justify-center shrink-0">
-                    <svg viewBox="0 0 120 120" class="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
-                        <path id="curve-ongoing-${idx}" d="M 60, 60 m -54, 0 a 54,54 0 1,1 108,0 a 54,54 0 1,1 -108,0" fill="transparent" />
-                        <text class="text-[7.5px] font-bold fill-gray-400 [.light-theme_&]:fill-gray-800 font-mono uppercase tracking-[0.2em]">
+                    <svg viewBox="-20 -20 160 160" class="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
+                        <path id="curve-ongoing-${idx}" d="M 60, 60 m -70, 0 a 70, 70 0 1,1 140, 0 a 70, 70 0 1,1 -140, 0" fill="transparent" />
+                        <text class="text-[8.5px] font-black fill-gray-400 [.light-theme_&]:fill-gray-800 font-mono uppercase tracking-[0.2em]">
                             <textPath href="#curve-ongoing-${idx}" startOffset="50%" text-anchor="middle">${institucion}</textPath>
                         </text>
                     </svg>
                     ${customBadge}
                 </div>
             ` : `<i class="fas ${iconClass} text-xl text-gray-400 dark:text-white group-hover:scale-110 transition-transform mt-0.5"></i>`);
-            
+
             // Si tiene URL de página, envolver en enlace
             if (urlPagina) {
                 badgeImg = `<a href="${urlPagina}" target="_blank" class="hover:scale-105 transition-transform inline-block">${badgeImg}</a>`;
@@ -444,13 +458,13 @@ function renderEducation(data, softwareData = []) {
                     ${badgeImg}
                     <div class="flex flex-col ${hideText ? 'hidden' : ''}">
                         <p class="text-[0.6rem] font-bold uppercase tracking-wider">${titulo}</p>
-                        ${urlPagina ? 
-                            `<a href="${urlPagina}" target="_blank" class="text-[0.55rem] text-gray-500 dark:text-gray-400 normal-case leading-tight hover:text-sky-900 dark:hover:text-cyan-400 transition-colors flex items-center gap-1 group/inst-link">
+                        ${urlPagina ?
+                    `<a href="${urlPagina}" target="_blank" class="text-[0.55rem] text-gray-500 dark:text-gray-400 normal-case leading-tight hover:text-sky-900 dark:hover:text-cyan-400 transition-colors flex items-center gap-1 group/inst-link">
                                 ${institucion}
                                 <i class="fas fa-external-link-alt text-[0.4rem] opacity-0 group-hover/inst-link:opacity-100 transition-opacity"></i>
                             </a>` :
-                            `<p class="text-[0.55rem] text-gray-500 dark:text-gray-400 normal-case leading-tight">${institucion}</p>`
-                        }
+                    `<p class="text-[0.55rem] text-gray-500 dark:text-gray-400 normal-case leading-tight">${institucion}</p>`
+                }
                         <p class="text-[0.5rem] text-gray-400 dark:text-gray-500 font-normal opacity-80 leading-none mt-0.5">${ubicacion}</p>
                     </div>
                 </div>
@@ -461,7 +475,7 @@ function renderEducation(data, softwareData = []) {
 
             const urlPagina = getVal(edu, 'URL Página', 'URL Pagina');
             const urlArchivo = getVal(edu, 'URL Archivo', 'Archivo', 'url archivo ', 'url archivo');
-            
+
             // Determinar si es una imagen para abrir en modal (SOLO para el certificado/archivo)
             const isImageCert = urlArchivo && (urlArchivo.toLowerCase().endsWith('.png') || urlArchivo.toLowerCase().endsWith('.jpg') || urlArchivo.toLowerCase().endsWith('.jpeg'));
 
@@ -469,25 +483,25 @@ function renderEducation(data, softwareData = []) {
             li.innerHTML = `
                 <div class="flex flex-col mb-1.5">
                     <div class="flex items-center justify-between">
-                        ${urlPagina ? 
-                            `<a href="${urlPagina}" target="_blank" class="text-[0.65rem] text-gray-800 dark:text-gray-200 font-bold hover:text-blue-500 dark:hover:text-blue-400 transition-colors flex items-center gap-1 group/inst-link">
+                        ${urlPagina ?
+                    `<a href="${urlPagina}" target="_blank" class="text-[0.65rem] text-gray-800 dark:text-gray-200 font-bold hover:text-blue-500 dark:hover:text-blue-400 transition-colors flex items-center gap-1 group/inst-link">
                                 ${institucion}
                                 <i class="fas fa-external-link-alt text-[0.4rem] opacity-0 group-hover/inst-link:opacity-100 transition-opacity"></i>
-                            </a>` : 
-                            `<strong class="text-[0.65rem] text-gray-800 dark:text-gray-200">${institucion}</strong>`
-                        }
+                            </a>` :
+                    `<strong class="text-[0.65rem] text-gray-800 dark:text-gray-200">${institucion}</strong>`
+                }
                         <span class="text-[0.55rem] text-gray-400 font-mono">${periodo}</span>
                     </div>
                     <div class="flex items-center justify-start gap-2">
-                        ${urlArchivo ? 
-                            `<a href="${isImageCert ? 'javascript:void(0)' : urlArchivo}" 
+                        ${urlArchivo ?
+                    `<a href="${isImageCert ? 'javascript:void(0)' : urlArchivo}" 
                                 ${isImageCert ? `onclick="openCertModal('${urlArchivo}', '${titulo}')"` : 'target="_blank"'}
                                 class="text-[0.65rem] text-gray-500 dark:text-gray-400 hover:underline italic flex items-center gap-1 group/edu-link truncate max-w-[70%]">
                                 ${titulo}
                                 <i class="fas ${isImageCert ? 'fa-search-plus' : 'fa-external-link-alt'} text-[0.4rem] opacity-0 group-hover/edu-link:opacity-100 transition-opacity"></i>
-                            </a>` : 
-                            `<span class="text-[0.65rem] text-gray-500 dark:text-gray-400 italic truncate max-w-[70%]">${titulo}</span>`
-                        }
+                            </a>` :
+                    `<span class="text-[0.65rem] text-gray-500 dark:text-gray-400 italic truncate max-w-[70%]">${titulo}</span>`
+                }
                         ${credencial && credencial !== 'N/A' ? `<span class="text-[0.5rem] text-gray-400 opacity-70 font-mono whitespace-nowrap shrink-0">ID: ${credencial}</span>` : ''}
                     </div>
                 </div>
@@ -510,10 +524,10 @@ function renderEducation(data, softwareData = []) {
         const sortedCerts = [...certificationRecords].sort((a, b) => {
             const nameA = normalizeStr(getVal(a, 'Nombre', 'Titulo'));
             const nameB = normalizeStr(getVal(b, 'Nombre', 'Titulo'));
-            
+
             const orderA = Object.keys(orderMap).find(k => nameA.includes(k)) ? orderMap[Object.keys(orderMap).find(k => nameA.includes(k))] : 99;
             const orderB = Object.keys(orderMap).find(k => nameB.includes(k)) ? orderMap[Object.keys(orderMap).find(k => nameB.includes(k))] : 99;
-            
+
             return orderA - orderB;
         });
 
@@ -534,7 +548,7 @@ function renderEducation(data, softwareData = []) {
                 const low = s.toLowerCase();
                 return low.endsWith('.png') || low.endsWith('.jpg') || low.endsWith('.svg') || low.includes('badge');
             });
-            
+
             // Forzar badge específico para Master Superior / Master Program
             if (!badgeFile && (normalizeStr(nombre).includes('master') || normalizeStr(nombre).includes('superior'))) {
                 badgeFile = 'BIM Master Program_certificate_badge.png';
@@ -567,25 +581,27 @@ function renderEducation(data, softwareData = []) {
             if (!badgeFile && normalizeStr(nombre).includes('bcfmanager')) {
                 badgeFile = 'BCF-manager-revit_certificate.png';
             }
-            
+
             let badgeHtml = '';
             if (badgeFile) {
                 // Badge con imagen + Texto Curvo (Ocultando para BIMcollab)
                 const isBimCollab = normalizeStr(nombre).includes('bimcollab') || normalizeStr(institucion).includes('bimcollab');
-                
+
                 // Forzar URLs exactas para casos críticos reportados por el usuario
                 let finalBadgeSrc = (badgeFile && (badgeFile.includes('http://') || badgeFile.includes('https://'))) ? badgeFile : `${CLOUD_BADGE_BASE}${encodeURIComponent(badgeFile)}?t=${timestamp}`;
-                
+
                 if (normalizeStr(nombre).includes('master') || normalizeStr(nombre).includes('superior')) {
                     finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/c6e71f8f5be8c62df3bb908336bbcb1930351217/CV/insignias/BIM%20Master%20Program_certificate_badge.png";
                 } else if (normalizeStr(nombre).includes('expert') || normalizeStr(nombre).includes('level3')) {
-                    finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/c6e71f8f5be8c62df3bb908336bbcb1930351217/CV/insignias/03_Expert_badge.png";
+                    finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/insignias/03_Expert_badge.png";
+                } else if (normalizeStr(nombre).includes('bootcamp') || normalizeStr(nombre).includes('boot camp') || normalizeStr(nombre).includes('boot')) {
+                    finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/insignias/04_BIM%20Boot%20Camp_badge_2.png";
                 }
 
                 const svgContent = isBimCollab ? '' : `
-                        <svg viewBox="0 0 120 120" class="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
-                            <path id="curve-cert-${idx}" d="M 60, 60 m -54, 0 a 54,54 0 1,1 108,0 a 54,54 0 1,1 -108,0" fill="transparent" />
-                            <text class="text-[8px] font-black fill-gray-400 [.light-theme_&]:fill-gray-800 font-mono uppercase tracking-[0.25em]">
+                        <svg viewBox="-20 -20 160 160" class="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
+                            <path id="curve-cert-${idx}" d="M 60, 60 m -70, 0 a 70, 70 0 1,1 140, 0 a 70, 70 0 1,1 -140, 0" fill="transparent" />
+                            <text class="text-[8.5px] font-black fill-gray-400 [.light-theme_&]:fill-gray-800 font-mono uppercase tracking-[0.20em]">
                                 <textPath href="#curve-cert-${idx}" startOffset="50%" text-anchor="middle">${institucion}</textPath>
                             </text>
                         </svg>`;
@@ -610,7 +626,7 @@ function renderEducation(data, softwareData = []) {
 
             // Determinar si es BIMcollab para el modal
             const isBimCollab = normalizeStr(nombre).includes('bimcollab') || normalizeStr(institucion).includes('bimcollab');
-            
+
             // Corregir URL de GitHub para el modal si es necesario
             let finalUrlForModal = urlArchivo;
             if (finalUrlForModal && finalUrlForModal.includes('github.com') && finalUrlForModal.includes('/blob/')) {
@@ -618,8 +634,8 @@ function renderEducation(data, softwareData = []) {
             }
 
             const isImageFilter = finalUrlForModal && (
-                finalUrlForModal.toLowerCase().includes('.png') || 
-                finalUrlForModal.toLowerCase().includes('.jpg') || 
+                finalUrlForModal.toLowerCase().includes('.png') ||
+                finalUrlForModal.toLowerCase().includes('.jpg') ||
                 finalUrlForModal.toLowerCase().includes('.jpeg')
             );
             const canOpenModal = isBimCollab && finalUrlForModal && isImageFilter;
@@ -651,7 +667,7 @@ function renderMiniFicha(nombre, institucion, id, estado = 'Finalizado') {
     let icon = 'fa-certificate';
     if (institucion.toLowerCase().includes('bimcollab')) icon = 'fa-compass';
     if (institucion.toLowerCase().includes('udemy')) icon = 'fa-play-circle';
-    
+
     return `
         <div class="relative group/cert cursor-pointer">
             <div class="w-10 h-10 rounded border border-cyan-500/30 dark:border-cyan-400/20 bg-cyan-500/5 dark:bg-cyan-400/5 flex flex-col items-center justify-center p-1 group-hover/cert:border-cyan-400 transition-colors shadow-sm">
@@ -727,14 +743,24 @@ function renderSoftware(data) {
         `;
     });
 
-        secondaryContainer.innerHTML = `
+    // --- FIX: Forzar llenado inmediato para visualización y PDF ---
+    setTimeout(() => {
+        mainContainer.querySelectorAll('.skill-progress').forEach(bar => {
+            const width = bar.getAttribute('data-width');
+            if (width) {
+                bar.style.width = width + '%';
+            }
+        });
+    }, 50);
+
+    secondaryContainer.innerHTML = `
             <div class="flex flex-wrap gap-1 w-full">
                 ${sortedSecundario.map(sw => {
-                    const nombre = getVal(sw, 'Nombre', 'Item', 'Software');
-                    const nivel = getVal(sw, 'Nivel');
-                    const desc = getVal(sw, 'Descripción', 'Descripcion', 'desc');
-                    const capacidad = getVal(sw, 'Capacidad');
-                    return `
+        const nombre = getVal(sw, 'Nombre', 'Item', 'Software');
+        const nivel = getVal(sw, 'Nivel');
+        const desc = getVal(sw, 'Descripción', 'Descripcion', 'desc');
+        const capacidad = getVal(sw, 'Capacidad');
+        return `
                         <div class="soft-skill-tag group relative cursor-help py-0.5 px-1.5 grow min-w-[50px]">
                             <span class="block px-1 text-center" title="${nombre}">${nombre}</span>
                             <div class="glass-tooltip">
@@ -743,7 +769,7 @@ function renderSoftware(data) {
                             </div>
                         </div>
                     `;
-                }).join('')}
+    }).join('')}
             </div>
         `;
 }
@@ -810,7 +836,7 @@ function renderProfile(data) {
         let cleanText = text.replace(/^"+|"+$/g, '').trim();
         const highlightedText = cleanText.replace(/Inteligencia Artificial/gi, '<strong>Inteligencia Artificial</strong>');
         el.innerHTML = `"${highlightedText}"`;
-        el.className = "italic block text-gray-600 dark:text-gray-400"; 
+        el.className = "italic block text-gray-600 dark:text-gray-400";
     }
 }
 
@@ -829,8 +855,19 @@ function renderNorms(data) {
     data.forEach(item => {
         const title = getVal(item, 'Título', 'Title');
         important.forEach(imp => {
-            // Coincidencia parcial para agrupar (ej: 'BEP' coincide con 'BEP Pre-appointment')
-            if (title.includes(imp) && !seenKeywords.has(imp)) {
+            const cleanTitle = title.toUpperCase().replace(/[^A-Z0-9]/g, '');
+            const cleanImp = imp.toUpperCase().replace(/[^A-Z0-9]/g, '');
+            
+            let match = false;
+            if (imp === 'ISO 7817 (LOIN)') {
+                match = cleanTitle.includes('7817') || cleanTitle.includes('LOIN');
+            } else if (imp === 'ISO 19650') {
+                match = cleanTitle.includes('19650');
+            } else {
+                match = cleanTitle.includes(cleanImp);
+            }
+
+            if (match && !seenKeywords.has(imp)) {
                 seenKeywords.add(imp);
                 filtered.push({
                     item,
@@ -845,13 +882,13 @@ function renderNorms(data) {
         return important.indexOf(a.displayTitle) - important.indexOf(b.displayTitle);
     });
 
-    container.innerHTML = filtered.map(({item, displayTitle}) => {
+    container.innerHTML = filtered.map(({ item, displayTitle }) => {
         const desc = getVal(item, 'Descripción', 'Descripcion');
-        
+
         return `
-            <div class="soft-skill-tag group relative cursor-help py-1 px-1.5 grow min-w-[65px]">
-                <span class="block px-1 text-center font-bold tracking-tight">${displayTitle}</span>
-                <div class="glass-tooltip !w-48">
+            <div class="soft-skill-tag group relative cursor-help py-1 px-1.5 grow min-w-[65px] print:flex !print:opacity-100 !print:visible">
+                <span class="block px-1 text-center tracking-tight !print:opacity-100 !print:visible">${displayTitle}</span>
+                <div class="glass-tooltip !w-48 no-print">
                     <strong class="text-blue-500 [.dark_&]:text-blue-400 block mb-1 text-[0.65rem]">Normativa BIM</strong>
                     <p class="mb-1 opacity-90 text-[0.6rem] leading-snug">${desc}</p>
                 </div>
@@ -873,7 +910,7 @@ function renderSidebarPortfolioLink() {
                 <p class="sidebar-subtext italic mb-1 leading-tight px-2">
                     Para explorar mi informacion profesional completa (Certificaciones, Galería, IA, Proyectos, ROI, etc.), visita mi ecosistema:
                 </p>
-                <a href="../index.html" class="flex items-center gap-2 group transition-all mb-1 no-print">
+                <a href="https://eduardoehr89-source.github.io/portafolio/index.html" target="_blank" class="flex items-center gap-2 group transition-all mb-1">
                     <span class="text-[0.65rem] font-bold text-blue-400 group-hover:text-blue-300 decoration-dotted underline-offsets-4 hover:underline uppercase tracking-widest leading-none flex items-center">
                         <div class="premium-pulse-container pulse-blue">
                             <span class="premium-pulse-aura"></span>
@@ -898,15 +935,15 @@ function calculateLeadershipStats(allProjects) {
     allProjects.forEach(p => {
         let key = getVal(p, 'id');
         if (!key) return;
-        
+
         const name = normalizeStr(getVal(p, 'nombre', 'proyecto'));
         if (name.includes("modulo covid")) key = "GROUP_COVID";
         else if (name.includes("central de mezclas")) key = "GROUP_MEZCLAS";
-        
+
         const actividad = normalizeStr(getVal(p, 'actividad principal', 'liderazgo', 'rol')).toLowerCase();
         // Regex robusto para detectar roles de liderazgo
         const isLeader = /(lider|coord|gestor|head|director|supervis|jefe)/.test(actividad);
-        
+
         if (!uniqueMap.has(key)) { uniqueMap.set(key, isLeader); }
         else if (isLeader) { uniqueMap.set(key, true); }
     });
@@ -1161,7 +1198,7 @@ function initTheme() {
             if (rawHref && (rawHref.includes('index.html') || rawHref === '../')) {
                 e.preventDefault();
                 body.classList.add('page-fade-out');
-                
+
                 // Construir URL con tema
                 const theme = getThemeParam();
                 const separator = rawHref.includes('?') ? '&' : '?';
@@ -1281,12 +1318,27 @@ function initPrintLogic() {
     window.closeModal = () => modal.classList.add('hidden');
     window.confirmPrint = () => {
         window.closeModal();
-        // Asegurar que las barras estén llenas para la impresión
+        
+        // Resetear la imagen de perfil a la primera (01) para la impresión
+        const frontImg = document.getElementById('cv-profile-front');
+        if (frontImg) {
+            frontImg.style.transition = 'none';
+            // Forzamos el SRC de la imagen 01
+            frontImg.src = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/f70bfc4c31c58274aaafa175d142f5a6f4145e46/CV/fotos%20de%20perfil/profile_optimized_01.jpg';
+            frontImg.style.opacity = '1';
+        }
+
+        // Asegurar que las barras estén llenas para la impresión según su data-width
         document.querySelectorAll('.skill-progress').forEach(b => {
             const w = b.getAttribute('data-width');
-            if (w) b.style.width = w + '%';
+            if (w) {
+                b.style.transition = 'none';
+                b.style.width = w + '%';
+            }
         });
-        setTimeout(() => window.print(), 500);
+        
+        // Esperar un poco más para que el navegador renderice la nueva imagen
+        setTimeout(() => window.print(), 800);
     };
 }
 
@@ -1400,6 +1452,8 @@ window.closeSummaryCV = () => {
     const modal = document.getElementById('summary-cv-modal');
     const popup = document.getElementById('summary-cv-popup');
 
+    if (!modal || !popup) return;
+
     popup.classList.remove('opacity-100', 'scale-100');
     popup.classList.add('opacity-0', 'scale-95');
 
@@ -1408,6 +1462,67 @@ window.closeSummaryCV = () => {
         modal.classList.remove('flex');
     }, 500);
 };
+
+/**
+ * Renderiza el modal de resumen dinámicamente desde CSV (GitHub)
+ */
+function renderSummaryModal(data) {
+    const containers = [
+        document.getElementById('summary-cards-container'),
+        document.getElementById('summary-cv-cards-container')
+    ];
+
+    containers.forEach(container => {
+        if (!container) return;
+
+        if (data && data.length > 0) {
+            container.innerHTML = data.map((item, i) => {
+                const title = getVal(item, 'Title', 'title');
+                const value = getVal(item, 'Value', 'value');
+                const desc = getVal(item, 'Description', 'description', 'desc');
+                const link = getVal(item, 'Link', 'link');
+
+                let icon = "box";
+                const cleanTitle = normalizeStr(title);
+                if (cleanTitle.includes('desarrollo') || cleanTitle.includes('vibe')) icon = "zap";
+                else if (cleanTitle.includes('experiencia')) icon = "history";
+                else if (cleanTitle.includes('software')) icon = "code-2";
+                else if (cleanTitle.includes('modelado')) icon = "layers";
+                else if (cleanTitle.includes('estandar')) icon = "file-check";
+                else if (cleanTitle.includes('gemini')) icon = "brain-circuit";
+                else if (cleanTitle.includes('idioma')) icon = "languages";
+                else if (cleanTitle.includes('roi') || cleanTitle.includes('ahorro')) icon = "trending-up";
+                else if (cleanTitle.includes('formacion') || cleanTitle.includes('master')) icon = "graduation-cap";
+
+                const valueHtml = link ? `
+                    <a href="${link}" target="_blank" class="hover:opacity-80 transition-opacity inline-flex items-center justify-center gap-1.5 w-full">
+                        <p class="text-white font-bold text-[12px] leading-tight uppercase text-center flex items-center justify-center gap-1.5">
+                            ${value} <i class="fas fa-external-link-alt text-[10px] text-cyan-400 shrink-0"></i>
+                        </p>
+                    </a>` : `
+                    <p class="text-white font-bold text-[12px] leading-tight uppercase text-center">${value}</p>`;
+
+                return `
+                    <div class="flex flex-col items-center text-center group transition-all duration-300 min-h-[140px] hover:scale-[1.02] cursor-default p-2 hover:bg-white/5 transition-all">
+                        <div class="w-full h-[35px] mb-2 flex items-center justify-center flex-shrink-0">
+                            <div class="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
+                                <i data-lucide="${icon}" class="w-3.5 h-3.5"></i>
+                            </div>
+                        </div>
+                        <div class="w-full h-[25px] mb-1 flex items-center justify-center flex-shrink-0">
+                            <h4 class="text-[8px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">${title}</h4>
+                        </div>
+                        <div class="w-full h-[40px] mb-1 flex items-center justify-center flex-shrink-0">
+                            ${valueHtml}
+                        </div>
+                        <p class="text-[8px] text-cyan-500/70 font-bold uppercase font-mono mt-auto pt-1">${desc}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+    });
+    if (window.lucide) window.lucide.createIcons();
+}
 
 // Helper para obtener el parámetro de tema actual
 function getThemeParam() {
@@ -1418,12 +1533,12 @@ window.goBack = function () {
     if (window.history.length > 1) {
         window.history.back();
     } else {
-        window.location.href = `../index.html?${getThemeParam()}`;
+        window.location.href = `https://eduardoehr89-source.github.io/portafolio/index.html?${getThemeParam()}`;
     }
 };
 window.goForward = function () { window.history.forward(); };
-window.goHome = function(view = null) {
-    let url = '../index.html';
+window.goHome = function (view = null) {
+    let url = 'https://eduardoehr89-source.github.io/portafolio/index.html';
     const params = [];
     if (view) params.push(`view=${view}`);
     const theme = getThemeParam();
@@ -1435,12 +1550,12 @@ window.goHome = function(view = null) {
 /* =========================================
    CERTIFICATE MODAL LOGIC
    ========================================= */
-window.openCertModal = function(url, title = "") {
+window.openCertModal = function (url, title = "") {
     const modal = document.getElementById('cert-modal');
     const content = document.getElementById('cert-modal-content');
     const modalImg = document.getElementById('cert-modal-img');
     const modalTitle = document.getElementById('cert-modal-title');
-    
+
     if (!modal || !modalImg || !content) return;
 
     // Convertir URL de GitHub Blob a Raw si es necesario
@@ -1451,10 +1566,10 @@ window.openCertModal = function(url, title = "") {
 
     modalImg.src = rawUrl;
     if (modalTitle) modalTitle.innerText = title;
-    
+
     // Preparar y mostrar con transición
     modal.classList.remove('hidden');
-    
+
     // Forzar reflow para que la transición funcione
     setTimeout(() => {
         modal.classList.remove('opacity-0');
@@ -1467,10 +1582,10 @@ window.openCertModal = function(url, title = "") {
     if (window.lucide) lucide.createIcons();
 };
 
-window.closeCertModal = function() {
+window.closeCertModal = function () {
     const modal = document.getElementById('cert-modal');
     const content = document.getElementById('cert-modal-content');
-    
+
     if (!modal || !content) return;
 
     // Animación de salida
@@ -1484,9 +1599,9 @@ window.closeCertModal = function() {
     }, 300);
 };
 
-// Navegación rápida
-window.switchView = function() {
-    window.location.href = `../Portafolio_Resumido/index.html?${getThemeParam()}`;
+// Navegación rápida (Hacia el Portafolio)
+window.switchView = function () {
+    window.location.href = `https://eduardoehr89-source.github.io/portafolio/index.html?${getThemeParam()}`;
 };
 
 /**
@@ -1500,7 +1615,7 @@ function renderSummaryModal(data) {
         const title = getVal(item, 'Title', 'title');
         const value = getVal(item, 'Value', 'value');
         const desc = getVal(item, 'Description', 'description', 'desc');
-        
+
         let icon = "box";
         const cleanTitle = normalizeStr(title);
         if (cleanTitle.includes('desarrollo') || cleanTitle.includes('vibe')) icon = "bolt";
@@ -1533,3 +1648,23 @@ function renderSummaryModal(data) {
         `;
     }).join('');
 }
+
+// ==========================================
+// EXPORTACIÓN PDF DIRECTA 1:1 (HTML2PDF)
+// ==========================================
+window.exportHD = () => {
+    const btn = document.querySelector('button[onclick="exportHD()"]');
+    if (btn) btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> PREPARANDO...';
+
+    // 1. Asegurar estado visual (Barras al 100%, etc)
+    document.querySelectorAll('.skill-progress').forEach(b => {
+        const w = b.getAttribute('data-width');
+        if (w) b.style.width = w + '%';
+    });
+
+    // 2. Disparar impresión nativa
+    setTimeout(() => {
+        window.print();
+        if (btn) btn.innerHTML = '<i class="fas fa-camera"></i> Guardar PDF Local (HD)';
+    }, 500);
+};
