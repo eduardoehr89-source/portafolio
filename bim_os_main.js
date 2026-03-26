@@ -2379,12 +2379,12 @@ function getThemeParam() {
 }
 
 window.goToCV = function () {
-    window.location.href = `CV/index.html?${getThemeParam()}`;
+    window.location.href = `01_Sitio_Web/CV/index.html?${getThemeParam()}`;
 };
 
 window.goToPortfolio = function () {
-    // Ruta directa (sin 01_Sitio_Web) para coincidir con GitHub
-    window.location.href = `./Portafolio_Resumido/index.html?${getThemeParam()}`;
+    // Ruta sincronizada con la carpeta 01_Sitio_Web
+    window.location.href = `./01_Sitio_Web/Portafolio_Resumido/index.html?${getThemeParam()}`;
 };
 
 window.goHome = function (isPopstate = false) {
