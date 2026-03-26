@@ -99,76 +99,77 @@
     <!-- DEBUG BANNER -->
     <!-- debug sync banner removed in v50.2 -->
 
-    <button id="menu-toggle-btn" onclick="toggleSidebar()">
-        <i data-lucide="menu" class="w-6 h-6"></i>
-    </button>
+    <!-- Menú (Top Left) -->
+    <div class="fixed left-5 z-[70] no-print" style="top: 0.6px !important;">
+        <button id="menu-toggle-btn" onclick="toggleSidebar()"
+            class="text-white hover:text-gray-300 bg-transparent border-none shadow-none p-2.5 transition-all hover:scale-105 cursor-pointer">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+    </div>
 
     <aside id="main-sidebar"
         class="w-72 flex-shrink-0 flex flex-col h-full shadow-2xl relative z-20 transition-all duration-300"
         style="min-height: 100vh !important;">
         <!-- Perfil Header con Imagen (Flujo Natural para evitar errores de renderizado) -->
-        <div id="sidebar-image-container"
-            style="width: 100%; height: 90px; overflow: hidden; flex-shrink: 0; position: relative;">
-            <img src="CV/profile_optimized.jpg" alt="Said Herrera"
-                style="width: 100%; height: 100%; object-fit: cover !important; display: block !important;">
-            <div id="sidebar-image-overlay"
-                style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, rgba(8, 12, 16, 0.6) 100%);">
+
+        <div class="p-6 pt-10 border-b border-gray-800/50 flex justify-between items-start relative z-10">
+            <div>
+                <h1 id="sidebar-name" class="font-light text-2xl text-white leading-tight mb-1">
+                    SAID<br><span class="text-cyan-400">HERRERA</span>
+                </h1>
+                <p id="home-slogan" class="text-[10px] text-gray-500 font-mono">
+                    MODELADOR BIM SENIOR &amp; <span class="font-normal">CITIZEN DEVELOPER</span> //
+                    MÉXICO
+                </p>
             </div>
+            <button onclick="toggleSidebar()"
+                class="text-gray-500 hover:text-white transition mt-1 p-1 hover:bg-white/10 rounded">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
         </div>
 
-        <div class="p-3 relative z-10">
-            <h1 id="sidebar-name" class="font-light text-xl text-white leading-tight mb-0.5"
-                style="white-space: nowrap !important;">SAID <span class="sidebar-name-highlight">HERRERA</span></h1>
-            <p id="home-slogan" class="text-[10px] text-gray-500 font-mono mb-0.5">MODELADOR BIM SENIOR &amp; CITIZEN
-                DEVELOPER // MÉXICO</p>
-        </div>
-
-        <nav class="flex-1 overflow-y-auto py-1 px-4 space-y-0.5 custom-scroll">
-            <p class="text-[9px] text-gray-500 font-mono tracking-widest uppercase mb-0 px-2">MEN&Uacute; PRINCIPAL</p>
-
+        <nav class="flex-1 overflow-y-auto py-6 px-4 space-y-3 custom-scroll">
+            <p class="text-[9px] text-gray-500 font-mono tracking-widest uppercase mb-1 px-2">MEN&Uacute; PRINCIPAL</p>
             <button id="nav-home"
-                class="nav-btn w-full flex items-center gap-4 px-4 py-1.5 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-cyan-900/10 hover:text-cyan-400 border border-transparent hover:border-cyan-500/30 transition group"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-3 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-cyan-900/10 hover:text-cyan-400 border border-transparent hover:border-cyan-500/30 transition group"
                 onclick="goHome()">
                 <i data-lucide="power" class="w-5 h-5 text-gray-500 group-hover:text-cyan-400"></i> SYSTEM_HOME
             </button>
-
             <button id="nav-education"
-                class="nav-btn w-full flex items-center gap-4 px-4 py-2.5 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-green-900/10 hover:text-green-400 border border-transparent hover:border-green-500/30 transition group"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-3 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-green-900/10 hover:text-green-400 border border-transparent hover:border-green-500/30 transition group"
                 onclick="switchView('education')">
                 <i data-lucide="graduation-cap" class="w-5 h-5 text-gray-500 group-hover:text-green-400"></i>
                 01_ACADEMIC_RECORDS
             </button>
-
             <button id="nav-ai"
-                class="nav-btn w-full flex items-center gap-4 px-4 py-2.5 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-purple-900/10 hover:text-purple-400 border border-transparent hover:border-purple-500/30 transition group"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-3 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-purple-900/10 hover:text-purple-400 border border-transparent hover:border-purple-500/30 transition group"
                 onclick="switchView('ai')">
                 <i data-lucide="sparkles" class="w-5 h-5 text-gray-500 group-hover:text-purple-400"></i>
                 02_AI_REVOLUTION
             </button>
-
             <button id="nav-cv"
-                class="nav-btn w-full flex items-center gap-4 px-4 py-2.5 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-blue-900/10 hover:text-blue-400 border border-transparent hover:border-blue-500/30 transition group"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-3 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-blue-900/10 hover:text-blue-400 border border-transparent hover:border-blue-500/30 transition group"
                 onclick="goToCV()">
                 <i data-lucide="file-user" class="w-5 h-5 text-gray-500 group-hover:text-blue-400"></i>
                 03_DIGITAL_CV
             </button>
 
             <button id="nav-global"
-                class="nav-btn w-full flex items-center gap-4 px-4 py-1.5 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-cyan-900/10 hover:text-cyan-400 border border-transparent hover:border-cyan-500/30 transition group"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-3 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-cyan-900/10 hover:text-cyan-400 border border-transparent hover:border-cyan-500/30 transition group"
                 onclick="switchView('global')">
                 <i data-lucide="layout-dashboard" class="w-5 h-5 text-gray-500 group-hover:text-cyan-400"></i>
                 04_EXECUTIVE_INSIGHTS
             </button>
 
             <button id="nav-projects"
-                class="nav-btn w-full flex items-center gap-4 px-4 py-1.5 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-cyan-900/10 hover:text-cyan-400 border border-transparent hover:border-cyan-500/30 transition group"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-3 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-cyan-900/10 hover:text-cyan-400 border border-transparent hover:border-cyan-500/30 transition group"
                 onclick="switchView('projects')">
                 <i data-lucide="folder-open" class="w-5 h-5 text-gray-500 group-hover:text-cyan-400"></i>
                 05_PROJECT_DATABASE
             </button>
 
             <button id="nav-portfolio"
-                class="nav-btn w-full flex items-center gap-4 px-4 py-1.5 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-cyan-900/10 hover:text-cyan-400 border border-transparent hover:border-cyan-500/30 transition group"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-3 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-cyan-900/10 hover:text-cyan-400 border border-transparent hover:border-cyan-500/30 transition group"
                 onclick="goToPortfolio()">
                 <i data-lucide="briefcase" class="w-5 h-5 text-gray-500 group-hover:text-cyan-400"></i>
                 06_PORTFOLIO
@@ -177,9 +178,9 @@
             <div class="h-px bg-gray-800 my-2 mx-4 opacity-50"></div>
 
             <button id="nav-downloads"
-                class="nav-btn w-full flex items-center gap-4 px-4 py-2.5 rounded-lg text-sm font-light font-mono text-gray-400 hover:bg-white/5 hover:text-white border border-transparent hover:border-white/10 transition group"
+                class="nav-btn w-full flex items-center gap-4 px-4 py-3 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-white/5 hover:text-white border border-transparent hover:border-white/10 transition group"
                 onclick="openPdfModal()">
-                <i data-lucide="download-cloud" class="w-5 h-5 text-gray-500 group-hover:text-white"></i>
+                <i data-lucide="arrow-down" class="w-5 h-5 text-gray-500 group-hover:text-white"></i>
                 DESCARGAS
             </button>
         </nav>
@@ -201,7 +202,7 @@
         <div id="view-global" class="w-full h-full overflow-y-auto thin-scroll p-6 relative z-10 hidden">
             <div class="max-w-7xl mx-auto flex flex-col gap-6 pb-20">
                 <div
-                    class="flex items-center justify-between mb-2 pb-4 pt-6 pl-16 pr-10 border-b border-gray-800/20 sticky top-0 bg-transparent backdrop-blur-md z-50">
+                    class="h-16 flex items-center justify-between border-b border-gray-800/20 sticky top-0 bg-transparent backdrop-blur-md z-50 pl-[76px] pr-10">
                     <div class="flex items-center gap-3">
                         <div class="p-2 rounded bg-cyan-400/20 border border-cyan-500/30">
                             <i data-lucide="layout-dashboard" class="text-cyan-400 w-5 h-5"></i>
@@ -223,13 +224,13 @@
 
                         <!-- Navegación Universal -->
                         <div class="flex items-center gap-1 shrink-0 ml-2">
-                            <button onclick="goBack()" class="p-1.5 universal-nav-icon" title="Atrás">
+                            <button onclick="goBack()" id="nav-back" class="p-1.5 universal-nav-icon" title="Atrás">
                                 <i data-lucide="arrow-left" class="w-4 h-4"></i>
                             </button>
                             <button onclick="goHome()" class="p-1.5 universal-nav-icon" title="Inicio (Home System)">
                                 <i data-lucide="home" class="w-4 h-4"></i>
                             </button>
-                            <button onclick="goForward()" class="p-1.5 universal-nav-icon" title="Adelante">
+                            <button onclick="goForward()" id="nav-forward" class="p-1.5 universal-nav-icon" title="Adelante">
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </button>
                             <button class="p-1.5 universal-nav-icon theme-nav-btn" onclick="toggleTheme()"
@@ -389,11 +390,11 @@
                         </div>
                     </div>
 
-                    <!-- SECCIN COLABORACIN -->
+                    <!-- SECCIÓN COLABORACIÓN -->
                     <div class="bento-col-4 bg-transparent pt-4 px-4 pb-0 w-full">
                         <div class="flex items-center gap-2 border-b border-gray-800/20 pb-2">
                             <i data-lucide="users" class="text-gray-500 w-4 h-4"></i>
-                            <span class="db-text-header font-bold">COLABORACIN</span>
+                            <span class="db-text-header font-bold">COLABORACIÓN</span>
                         </div>
                     </div>
 
@@ -417,8 +418,8 @@
                             <div class="flex flex-col items-center justify-start relative w-full pt-1">
                                 <div id="collab-center-avatar"
                                     class="relative z-20 bg-transparent border border-cyan-500/40 w-16 h-16 rounded-full flex items-center justify-center transition overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.2)] [.light-theme_&]:border-cyan-700/50">
-                                    <img src="https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/profile_optimized.jpg"
-                                        alt="Said Herrera" class="w-full h-full object-cover">
+                                    <img src="./01_Sitio_Web/CV/fotos de perfil/profile_optimized_01.jpg" alt="Said Herrera"
+                                        class="w-full h-full object-cover">
                                 </div>
                                 <span
                                     class="text-xs font-light text-cyan-400 [.light-theme_&]:text-cyan-700 mt-2 font-mono tracking-widest z-20 text-center leading-tight">SAID
@@ -464,7 +465,7 @@
         <section id="view-projects" class="w-full h-full flex flex-col relative z-10 hidden">
             <div
                 class="h-16 border-b border-gray-800/20 px-6 flex items-center justify-between shrink-0 bg-transparent backdrop-blur-md z-20">
-                <div class="flex items-center gap-3 pl-6">
+                <div class="flex items-center gap-3 pl-[38px]">
                     <h2 class="text-xl font-light text-white tracking-widest uppercase">02_PROJECT_DATABASE</h2>
                 </div>
                 <div class="flex items-center gap-2">
@@ -493,7 +494,7 @@
                     <div class="relative shrink-0">
                         <button id="btn-sort-toggle"
                             class="bg-transparent text-gray-500 text-xs font-mono flex items-center gap-1.5 transition shrink-0 hover:text-cyan-400"
-                            onclick="toggleSortMenu()">
+                            onclick="toggleSortMenu(event)">
                             <i data-lucide="arrow-up-down" class="w-3 h-3 text-gray-500"></i>
                             <span id="sort-order-label" class="whitespace-nowrap">RECIENTES (ID DESC)</span>
                         </button>
@@ -511,16 +512,16 @@
                             <button onclick="setSortOrder('name-desc', 'NOMBRE (Z-A)')"
                                 class="w-full text-left px-3 py-2 text-xs text-gray-300 hover:bg-white/5 rounded transition">NOMBRE
                                 (Z-A)</button>
-                            <button onclick="setSortOrder('loc', 'UBICACIN')"
-                                class="w-full text-left px-3 py-2 text-xs text-gray-300 hover:bg-white/5 rounded transition">UBICACIN</button>
-                            <button onclick="setSortOrder('year-desc', 'AO (REC-ANT)')"
-                                class="w-full text-left px-3 py-2 text-xs text-gray-300 hover:bg-white/5 rounded transition">AO
+                            <button onclick="setSortOrder('loc', 'UBICACIÓN')"
+                                class="w-full text-left px-3 py-2 text-xs text-gray-300 hover:bg-white/5 rounded transition">UBICACIÓN</button>
+                            <button onclick="setSortOrder('year-desc', 'AÑO (REC-ANT)')"
+                                class="w-full text-left px-3 py-2 text-xs text-gray-300 hover:bg-white/5 rounded transition">AÑO
                                 (REC-ANT)</button>
-                            <button onclick="setSortOrder('year-asc', 'AO (ANT-REC)')"
-                                class="w-full text-left px-3 py-2 text-xs text-gray-300 hover:bg-white/5 rounded transition">AO
+                            <button onclick="setSortOrder('year-asc', 'AÑO (ANT-REC)')"
+                                class="w-full text-left px-3 py-2 text-xs text-gray-300 hover:bg-white/5 rounded transition">AÑO
                                 (ANT-REC)</button>
-                            <button onclick="setSortOrder('type', 'TIPOLOGA')"
-                                class="w-full text-left px-3 py-2 text-xs text-gray-300 hover:bg-white/5 rounded transition">TIPOLOGA</button>
+                            <button onclick="setSortOrder('type', 'TIPOLOGÍA')"
+                                class="w-full text-left px-3 py-2 text-xs text-gray-300 hover:bg-white/5 rounded transition">TIPOLOGÍA</button>
                             <button onclick="setSortOrder('entorno', 'ENTORNO')"
                                 class="w-full text-left px-3 py-2 text-xs text-gray-300 hover:bg-white/5 rounded transition">ENTORNO</button>
                             <button onclick="setSortOrder('phase', 'FASE')"
@@ -531,7 +532,7 @@
 
                     <div class="relative shrink-0">
                         <div class="flex items-center gap-1">
-                            <button id="btn-filter-toggle" onclick="toggleFilterMenu()"
+                            <button id="btn-filter-toggle" onclick="toggleFilterMenu(event)"
                                 class="bg-transparent border-none text-gray-500 hover:text-cyan-400 text-xs font-mono flex items-center gap-1 transition-colors shrink-0">
                                 <i data-lucide="filter" class="w-3 h-3"></i> FILTROS
                             </button>
@@ -546,7 +547,7 @@
                             <select id="filter-loc"
                                 class="filter-select w-full bg-[#151b26] border-none rounded px-2 py-1 text-xs text-gray-300 relative"
                                 onchange="handleFilterChange()">
-                                <option value="all">UBICACIN: TODAS</option>
+                                <option value="all">UBICACIÓN: TODAS</option>
                             </select>
                             <select id="filter-type"
                                 class="filter-select w-full bg-[#151b26] border-none rounded px-2 py-1 text-xs text-gray-300 relative"
@@ -556,7 +557,7 @@
                             <select id="filter-year"
                                 class="filter-select w-full bg-[#151b26] border-none rounded px-2 py-1 text-xs text-gray-300 relative"
                                 onchange="handleFilterChange()">
-                                <option value="all">AO: TODOS</option>
+                                <option value="all">AÑO: TODOS</option>
                             </select>
                             <select id="filter-disc"
                                 class="filter-select w-full bg-[#151b26] border-none rounded px-2 py-1 text-xs text-gray-300 relative"
@@ -612,7 +613,7 @@
                         onclick="setProjectView('groups')"><i data-lucide="layers" class="w-4 h-4"></i></button>
                     <!-- Navegación Universal -->
                     <div class="flex items-center gap-1 shrink-0 ml-0.5">
-                        <button id="btn-back-to-groups" onclick="goBack()"
+                        <button id="nav-back" onclick="goBack()"
                             class="p-1.5 universal-nav-icon rounded transition-all" title="Atrás">
                             <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
                         </button>
@@ -620,7 +621,7 @@
                             title="Inicio (Home System)">
                             <i data-lucide="home" class="w-3.5 h-3.5"></i>
                         </button>
-                        <button id="btn-forward-nav" onclick="goForward()"
+                        <button id="nav-forward" onclick="goForward()"
                             class="p-1.5 universal-nav-icon rounded transition-all" title="Adelante">
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                         </button>
@@ -796,11 +797,11 @@
             <!-- Navegación Universal Flotante (Pequeños Puntos Integrados) -->
             <!-- Navegación Universal Flotante (Puntos con más vida y glow) -->
             <div class="fixed top-8 right-10 z-[60] flex items-center gap-4 shrink-0 pointer-events-auto">
-                <button onclick="goBack()" class="ai-nav-dot w-2.5 h-2.5 rounded-full" title="Atrás">
+                <button onclick="goBack()" id="nav-back" class="ai-nav-dot w-2.5 h-2.5 rounded-full" title="Atrás">
                 </button>
                 <button onclick="goHome()" class="ai-nav-dot w-2.5 h-2.5 rounded-full" title="Inicio (Home System)">
                 </button>
-                <button onclick="goForward()" class="ai-nav-dot w-2.5 h-2.5 rounded-full" title="Adelante">
+                <button onclick="goForward()" id="nav-forward" class="ai-nav-dot w-2.5 h-2.5 rounded-full" title="Adelante">
                 </button>
             </div>
 
@@ -821,7 +822,7 @@
             <div class="max-w-7xl mx-auto flex flex-col gap-8 pb-20">
                 <!-- Header -->
                 <div
-                    class="flex items-center justify-between mb-2 pb-4 pt-6 px-10 border-b border-gray-800/20 sticky top-0 bg-transparent backdrop-blur-md z-50">
+                    class="h-16 flex items-center justify-between pl-[76px] pr-20 border-b border-gray-800/20 sticky top-0 bg-transparent backdrop-blur-md z-50">
                     <div class="flex items-center gap-3">
                         <div class="p-2 rounded bg-green-900/20 border border-green-500/30">
                             <i data-lucide="graduation-cap" class="text-green-400 w-5 h-5"></i>
@@ -837,7 +838,7 @@
 
                     <!-- Navegación Universal -->
                     <div class="flex items-center gap-1 shrink-0 ml-1">
-                        <button onclick="goBack()"
+                        <button onclick="goBack()" id="nav-back"
                             class="p-1.5 text-gray-400 hover:text-cyan-400 rounded transition-all" title="Atrás">
                             <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
                         </button>
@@ -846,7 +847,7 @@
                             title="Inicio (Home System)">
                             <i data-lucide="home" class="w-3.5 h-3.5"></i>
                         </button>
-                        <button onclick="goForward()"
+                        <button onclick="goForward()" id="nav-forward"
                             class="p-1.5 text-gray-400 hover:text-cyan-400 rounded transition-all" title="Adelante">
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                         </button>
@@ -894,18 +895,18 @@
                                         CERTIFICACIONES</span>
                                 </div>
                                 <button id="btn-top-badges" onclick="window.toggleTopBadges()"
-                                    class="text-gray-400 hover:text-cyan-400 text-xs font-bold font-mono transition flex items-center gap-1 shrink-0 px-2 uppercase focus:outline-none"><i
+                                    class="text-cyan-400 hover:text-cyan-400 text-xs font-bold font-mono transition flex items-center gap-1 shrink-0 px-2 uppercase focus:outline-none"><i
                                         data-lucide="trophy" class="w-3 h-3"></i> TOP BADGES</button>
                             </div>
                             <!-- Toggle de Vista -->
                             <div id="edu-view-toggle" class="flex items-center gap-1 p-1 rounded-lg">
-                                <button onclick="window.switchEduView('gallery')" id="btn-view-gallery"
+                                <button onclick="window.switchEduView('gallery')" id="btn-edu-view-gallery"
                                     class="p-1.5 rounded-md transition-all duration-300 text-cyan-400 active-view cursor-pointer"
                                     title="Vista Galería">
                                     <i data-lucide="layout-grid" class="w-4 h-4"></i>
                                 </button>
-                                <button onclick="window.switchEduView('list')" id="btn-view-list"
-                                    class="p-1.5 rounded-md transition-all duration-300 text-gray-500 hover:text-gray-300 cursor-pointer"
+                                <button onclick="window.switchEduView('list')" id="btn-edu-view-list"
+                                    class="p-1.5 rounded-md transition-all duration-300 text-gray-400 hover:text-gray-300 cursor-pointer"
                                     title="Vista Lista">
                                     <i data-lucide="list" class="w-4 h-4"></i>
                                 </button>
@@ -1083,10 +1084,10 @@
             </div>
         </div>
 
-        <div class="absolute bottom-4 left-0 right-0 text-center pointer-events-none z-[100]"><span
-                class="text-[9px] font-mono text-gray-500 uppercase tracking-[0.2em] pl-[0.2em] font-bold">POWERED BY
-                GEMINI PRO
-                & ANTIGRAVITY</span></div>
+        <div class="absolute bottom-4 left-0 right-0 flex justify-center items-baseline pointer-events-none z-[100] gap-4 no-print">
+            <span class="text-[9px] font-mono text-gray-500 uppercase tracking-[0.2em] pl-[0.2em] font-bold">POWERED BY GEMINI PRO & ANTIGRAVITY</span>
+            <span class="opacity-40 font-mono text-[9px] tracking-normal lowercase whitespace-nowrap">// ÚLTIMA ACTUALIZACIÓN: 26 MAR 2026</span>
+        </div>
     </section>
 
     <!-- Text Modal (Reto / ROI) -->
@@ -1122,15 +1123,12 @@
                 <div class="space-y-3 mb-2">
                     <p
                         class="text-[11px] md:text-xs text-gray-300 [.light-theme_&]:text-slate-700 font-mono leading-relaxed border-l-2 border-cyan-500/30 pl-2">
-                        Est&aacute;s viendo mi <strong>selecci&oacute;n personal</strong>. Utiliza el bot&oacute;n
-                        superior 'TOP PROJECTS'
-                        para explorar mi base de DATOS completa.
+                        Est&aacute;s viendo mi <strong>selecci&oacute;n personal</strong>. Desactiva el bot&oacute;n 'TOP PROJECTS' para explorar todos mis proyectos.
                     </p>
                     <p
                         class="text-[11px] md:text-xs text-gray-300 [.light-theme_&]:text-slate-700 font-mono leading-relaxed border-l-2 border-purple-500/30 pl-2">
                         He utilizado <span class="text-white [.light-theme_&]:text-black font-bold">IA para generar o
-                            mejorar</span> algunas im&aacute;genes, bas&aacute;ndome siempre en mis modelos y
-                        proyecciones originales (renders, modelos y proyecciones).
+                            mejorar</span> algunas im&aacute;genes, bas&aacute;ndome siempre en los modelos, renders y planos originales.
                     </p>
                 </div>
             </div>
@@ -1218,11 +1216,11 @@
     <!-- PDF Selection Modal (Centro de Descargas) -->
     <div id="pdf-modal"
         class="hidden fixed inset-0 z-[10000] flex items-center justify-center bg-black/80 backdrop-blur-sm no-print">
-        <div class="bg-[#151b26] p-8 rounded-xl shadow-2xl max-w-[450px] w-full text-center border border-gray-700/50">
-            <div class="text-cyan-400 text-4xl mb-4"><i class="fas fa-file-pdf"></i></div>
+        <div class="bg-[#151b26] p-8 pb-4 rounded-xl shadow-2xl max-w-[450px] w-full text-center border border-gray-700/50">
+
             <h3 class="font-light tracking-wide text-lg text-white mb-1">CENTRO DE DESCARGAS</h3>
             <p class="text-[10px] text-gray-400 mb-6 uppercase tracking-[0.2em]">
-                Selecciona el documento y la versión temática
+                Selecciona el documento y la versión temática (FORMATO PDF)
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1233,14 +1231,14 @@
                         CURRICULUM VITAE</p>
                     <button onclick="downloadPdf('cv', 'light')"
                         class="w-full px-3 py-2 text-xs font-medium bg-transparent text-gray-300 rounded hover:bg-white/5 border border-gray-800 transition-colors flex justify-center items-center gap-2">
-                        <i class="fas fa-sun text-blue-400"></i> Claro
+                        <i class="fas fa-sun text-cyan-400"></i> Claro
                     </button>
                     <button onclick="downloadPdf('cv', 'dark')"
                         class="w-full px-3 py-2 text-xs font-medium bg-transparent text-gray-300 rounded hover:bg-white/5 border border-gray-800 transition-colors flex justify-center items-center gap-2">
-                        <i class="fas fa-moon text-blue-400"></i> Oscuro
+                        <i class="fas fa-moon text-cyan-400"></i> Oscuro
                     </button>
                     <button onclick="downloadPdf('cv', 'both')"
-                        class="w-full px-3 py-2 text-[10px] font-bold bg-blue-500/10 text-blue-400 rounded hover:bg-blue-500/20 border border-blue-500/20 transition-colors flex justify-center items-center gap-2">
+                        class="w-full px-3 py-2 text-[10px] font-bold bg-cyan-500/10 text-cyan-400 rounded hover:bg-cyan-500/20 border border-cyan-500/20 transition-colors flex justify-center items-center gap-2">
                         <i class="fas fa-layer-group"></i> Ambos
                     </button>
                 </div>
@@ -1252,14 +1250,14 @@
                         PORTAFOLIO RESUMIDO</p>
                     <button onclick="downloadPdf('portfolio', 'light')"
                         class="w-full px-3 py-2 text-xs font-medium bg-transparent text-gray-300 rounded hover:bg-white/5 border border-gray-800 transition-colors flex justify-center items-center gap-2">
-                        <i class="fas fa-sun text-cyan-400"></i> Claro
+                        <i class="fas fa-sun text-blue-400"></i> Claro
                     </button>
                     <button onclick="downloadPdf('portfolio', 'dark')"
                         class="w-full px-3 py-2 text-xs font-medium bg-transparent text-gray-300 rounded hover:bg-white/5 border border-gray-800 transition-colors flex justify-center items-center gap-2">
-                        <i class="fas fa-moon text-cyan-400"></i> Oscuro
+                        <i class="fas fa-moon text-blue-400"></i> Oscuro
                     </button>
                     <button onclick="downloadPdf('portfolio', 'both')"
-                        class="w-full px-3 py-2 text-[10px] font-bold bg-cyan-500/10 text-cyan-400 rounded hover:bg-cyan-500/20 border border-cyan-500/20 transition-colors flex justify-center items-center gap-2">
+                        class="w-full px-3 py-2 text-[10px] font-bold bg-blue-500/10 text-blue-400 rounded hover:bg-blue-500/20 border border-blue-500/20 transition-colors flex justify-center items-center gap-2">
                         <i class="fas fa-layer-group"></i> Ambos
                     </button>
                 </div>
@@ -1268,15 +1266,15 @@
             <div class="mt-6">
                 <button onclick="downloadPdf('all', 'all')"
                     class="w-full px-4 py-3 text-xs font-bold bg-white/10 text-white rounded-lg hover:bg-white/20 border border-white/20 transition-all flex justify-center items-center gap-3 shadow-lg">
-                    <i class="fas fa-cloud-download-alt text-cyan-400 text-base"></i>
+                    <i class="fas fa-arrow-down text-cyan-400 text-base"></i>
                     DESCARGAR TODO (4 ARCHIVOS)
                 </button>
             </div>
 
-            <div class="w-full h-px bg-gray-800 my-6"></div>
+            <div class="w-full h-px bg-gray-800 mt-6 mb-2"></div>
             <button onclick="closePdfModal()"
-                class="w-full px-4 py-2 text-xs font-light text-gray-500 hover:text-gray-300 transition-colors uppercase tracking-[0.3em]">
-                Cerrar Panel
+                class="w-full px-4 py-2 text-sm font-bold text-gray-500 hover:text-gray-300 transition-colors uppercase tracking-[0.3em]">
+                <i class="fas fa-times"></i>
             </button>
         </div>
     </div>
@@ -1305,7 +1303,7 @@
     </div>
 
     <script src="db_imagenes.js"></script>
-    <script src="bim_os_main.js?v=50.60"></script>
+    <script src="bim_os_main.js?v=50.99"></script>
     <script>
         window.toggleTheme = function () {
             const isLight = document.body.classList.toggle('light-theme');

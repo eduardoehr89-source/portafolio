@@ -211,7 +211,7 @@ function renderSummaryModal(data) {
 }
 
 /**
- * Control del Modal de Resumen (Portfolio / Home)
+ * Control del Modal de Resumen (Resumen Ejecutivo en Dashboard)
  */
 window.openSummary = () => {
     const overlay = document.getElementById('summary-popup-overlay');
@@ -281,11 +281,11 @@ function renderHome() {
         const nameParts = nombre.split(' ');
         const first = nameParts[0] || 'SAID';
         const rest = nameParts.slice(1).join(' ') || 'HERRERA';
-        sidebarName.innerHTML = `<span class="text-xl font-light">${first} <span class="sidebar-name-highlight">${rest}</span></span>`;
+        sidebarName.innerHTML = `${first}<br><span class="text-cyan-400">${rest}</span>`;
     }
-    // Forzar el nuevo eslogan profesional (Corregido: MÉXICO)
-    const finalSlogan = "MODELADOR BIM SENIOR & CITIZEN DEVELOPER // MÉXICO";
-    if (homeSlogan) homeSlogan.textContent = finalSlogan;
+    // Forzar el nuevo eslogan profesional (Homologado con CV)
+    const finalSlogan = `MODELADOR BIM SENIOR & <span class="font-normal">CITIZEN DEVELOPER</span> // MÉXICO`;
+    if (homeSlogan) homeSlogan.innerHTML = finalSlogan;
 
     // Actualizar Contadores
     const statProjects = document.getElementById('stat-projects');
@@ -683,7 +683,7 @@ function renderGlobalAnalytics(data, animateOnly = false) {
                 <i data-lucide="${icon}" class="w-2.5 h-2.5 text-gray-500 group-hover:text-cyan-400 transition shrink-0 mt-0.5"></i>
                 <span class="db-text-body text-[10px] leading-[1.1] break-words" title="${d.k}">${d.k}</span>
             </div>
-            <div class="flex-1 h-1.5 bg-[#0f141a] rounded-full overflow-hidden border border-gray-800/50 relative mx-2">
+            <div class="flex-1 h-[4.5px] bg-[#0f141a] rounded-full overflow-hidden border border-gray-800/50 relative mx-2">
                 <div class="h-full bg-cyan-500 rounded-full animate-bar" style="--final-width: ${percentage}%"></div>
             </div>
             <span class="db-text-body text-gray-400 w-8 text-right text-[10px] shrink-0 font-bold"><span class="counter-anim" data-target="${percentage}">0</span>%</span>
@@ -768,7 +768,7 @@ function renderGlobalDisciplines(allProjects, refDisciplines, animateOnly = fals
                 <i data-lucide="${stat.icon}" class="w-2.5 h-2.5 text-gray-500 group-hover:text-cyan-400 transition shrink-0 mt-0.5"></i>
                 <span class="db-text-body text-[10px] leading-[1.1] break-words" title="${name}">${name}</span>
             </div>
-            <div class="flex-1 h-1.5 bg-[#0f141a] rounded-full overflow-hidden border border-gray-800/50 relative mx-2">
+            <div class="flex-1 h-[4.5px] bg-[#0f141a] rounded-full overflow-hidden border border-gray-800/50 relative mx-2">
                 <div class="h-full bg-cyan-500 rounded-full animate-bar" style="--final-width: ${percentage}%"></div>
             </div>
             <span class="db-text-body text-gray-400 w-8 text-right text-[10px] shrink-0 font-bold"><span class="counter-anim" data-target="${percentage}">0</span>%</span>
@@ -832,7 +832,7 @@ function renderGlobalPhases(allProjects, animateOnly = false) {
                 <i data-lucide="${icon}" class="text-gray-500 group-hover:text-cyan-400 transition shrink-0 mt-0.5 w-2.5 h-2.5"></i>
                 <span class="db-text-body text-[10px] text-gray-300 leading-[1.1] break-words pr-1">${s.name}</span>
             </div>
-            <div class="flex-1 h-1.5 bg-[#0f141a] rounded-full overflow-hidden border border-gray-800/50 relative mx-2">
+            <div class="flex-1 h-[4.5px] bg-[#0f141a] rounded-full overflow-hidden border border-gray-800/50 relative mx-2">
                 <div class="h-full bg-cyan-500 rounded-full animate-bar" style="--final-width: ${pct}%"></div>
             </div>
             <span class="db-text-body w-8 text-right text-gray-400 text-[10px] shrink-0 font-bold"><span class="counter-anim" data-target="${pct}">0</span>%</span>
@@ -909,14 +909,14 @@ function renderGlobalMethodology(allProjects, animateOnly = false) {
         <div class="flex flex-row h-[120px] w-full items-end justify-center gap-12 pb-2">
             <div class="flex flex-col items-center h-full justify-end">
                 <div class="text-[10px] font-mono font-bold text-gray-400 mb-1 leading-none"><span class="counter-anim" data-target="${pctOpen}">0</span>%</div>
-                <div class="w-1.5 h-20 bg-[#0f141a] border border-gray-800/50 rounded-full overflow-hidden flex flex-col justify-end">
+                <div class="w-[4.5px] h-20 bg-[#0f141a] border border-gray-800/50 rounded-full overflow-hidden flex flex-col justify-end">
                     <div class="w-full bg-cyan-500 animate-bar-vertical" style="--final-height: ${pctOpen}%"></div>
                 </div>
                 <span class="text-[10px] font-mono text-gray-300 mt-2 uppercase font-normal tracking-tight">OPEN BIM</span>
             </div>
             <div class="flex flex-col items-center h-full justify-end">
                 <div class="text-[10px] font-mono font-bold text-gray-400 mb-1 leading-none"><span class="counter-anim" data-target="${pctClosed}">0</span>%</div>
-                <div class="w-1.5 h-20 bg-[#0f141a] border border-gray-800/50 rounded-full overflow-hidden flex flex-col justify-end">
+                <div class="w-[4.5px] h-20 bg-[#0f141a] border border-gray-800/50 rounded-full overflow-hidden flex flex-col justify-end">
                     <div class="w-full bg-cyan-500 animate-bar-vertical" style="--final-height: ${pctClosed}%"></div>
                 </div>
                 <span class="text-[10px] font-mono text-gray-300 mt-2 uppercase font-normal tracking-tight">CLOSED BIM</span>
@@ -965,14 +965,14 @@ function renderGlobalEnvironment(allProjects, animateOnly = false) {
         <div class="flex flex-row h-[120px] w-full items-end justify-center gap-12 pb-2">
             <div class="flex flex-col items-center h-full justify-end">
                 <div class="text-[10px] font-mono font-bold text-gray-400 mb-1 leading-none"><span class="counter-anim" data-target="${pctOficina}">0</span>%</div>
-                <div class="w-1.5 h-20 bg-[#0f141a] border border-gray-800/50 rounded-full overflow-hidden flex flex-col justify-end">
+                <div class="w-[4.5px] h-20 bg-[#0f141a] border border-gray-800/50 rounded-full overflow-hidden flex flex-col justify-end">
                     <div class="w-full bg-cyan-500 animate-bar-vertical" style="--final-height: ${pctOficina}%"></div>
                 </div>
                 <span class="text-[10px] font-mono text-gray-300 mt-2 uppercase font-normal tracking-tight">EN OFICINA</span>
             </div>
             <div class="flex flex-col items-center h-full justify-end">
                 <div class="text-[10px] font-mono font-bold text-gray-400 mb-1 leading-none"><span class="counter-anim" data-target="${pctObra}">0</span>%</div>
-                <div class="w-1.5 h-20 bg-[#0f141a] border border-gray-800/50 rounded-full overflow-hidden flex flex-col justify-end">
+                <div class="w-[4.5px] h-20 bg-[#0f141a] border border-gray-800/50 rounded-full overflow-hidden flex flex-col justify-end">
                     <div class="w-full bg-cyan-500 animate-bar-vertical" style="--final-height: ${pctObra}%"></div>
                 </div>
                 <span class="text-[10px] font-mono text-gray-300 mt-2 uppercase font-normal tracking-tight">EN OBRA</span>
@@ -1047,6 +1047,8 @@ function renderSoftware(data) {
 
         grouped[grupoName].forEach((s) => {
             const name = getVal(s, 'nombre', 'software');
+            if (normalizeStr(name).includes('solibri')) return; // Solibri pausado por usuario
+            
             const icon = resolveIcon(s, 'box');
             const desc = getVal(s, 'desc', 'descripcion', 'descripción');
             const nivel = getVal(s, 'nivel');
@@ -1205,8 +1207,10 @@ function renderEducationView(mbiaData, cvData) {
 
     const generateBadgeHtml = (edu, idx, showTooltip = true) => {
         if (!edu) return null;
-        const eduKeys = Object.keys(edu || {});
         const nombre = getVal(edu, 'Nombre', 'Titulo', 'titulo');
+        if (normalizeStr(nombre).includes('solibri')) return null; // Solibri pausado por usuario
+        
+        const eduKeys = Object.keys(edu || {});
         let institucion = getVal(edu, 'Institucion', 'Institución', 'institucion');
         
         // Abreviar U.A.N.L. para el texto curvo del badge
@@ -1283,7 +1287,7 @@ function renderEducationView(mbiaData, cvData) {
         
         // --- FALLBACKS MANUALES POR NOMBRE ---
         if (lowNombre.includes('boot camp')) {
-             badgeFile = '04_BIM Boot Camp_badge_2.png';
+             fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/7c4b2c7eb8c6fa7c275af16fd9a8f61fffb9847e/CV/insignias/04_BIM%20Boot%20Camp_badge_2.png";
         } else if (lowNombre.includes('workshop')) {
             // URL específica proporcionada por el usuario para Butic Workshop
             fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/c6e71f8f5be8c62df3bb908336bbcb1930351217/CV/insignias/Unreal%20Engine%20Workshop_certificate_badge.png";
@@ -1329,7 +1333,8 @@ function renderEducationView(mbiaData, cvData) {
         let customBadge = '';
         // Solo generamos customBadge si es SI (excluyendo a BUTIC por orden del usuario) o BimCollab.
         const isButicAny = lowInst.includes('butic') || lowNombre.includes('butic');
-        const isCustomTextFormat = (isGenericCSV || isBimCollabAny) && !isButicAny; 
+        const isBsiAdvanced = (lowNombre.includes('buildingsmart') || lowInst.includes('buildingsmart')) && lowNombre.includes('advanced');
+        const isCustomTextFormat = (isGenericCSV || isBimCollabAny || isBsiAdvanced) && !isButicAny; 
         
         if (isCustomTextFormat) {
             badgeFile = null;
@@ -1347,7 +1352,10 @@ function renderEducationView(mbiaData, cvData) {
             else if (lowNombre.includes('d4 reality') || lowInst.includes('d4 reality')) shortTitle = 'D4 REALITY';
             else if (lowNombre.includes('workshop')) shortTitle = 'WORKSHOP';
             else if (lowInst.includes('tecnologico')) shortTitle = 'REVIT AVANZ';
-            else if (lowNombre.includes('buildingsmart') || lowInst.includes('buildingsmart')) shortTitle = 'BSI';
+            else if (lowNombre.includes('buildingsmart') || lowInst.includes('buildingsmart')) {
+                if (lowNombre.includes('advanced')) shortTitle = 'BSI ADVANCED';
+                else shortTitle = 'BSI';
+            }
             else if (lowNombre.includes('univer') || lowInst.includes('univer')) {
                 if (lowNombre.includes('arquitecto')) shortTitle = 'ARQUITECTO';
                 else shortTitle = 'UNIVERSIDAD';
@@ -1372,7 +1380,7 @@ function renderEducationView(mbiaData, cvData) {
 
             customBadge = `
                 <div class="relative w-[85px] h-[85px] md:w-[95px] md:h-[95px] rounded-full flex items-center justify-center group-hover/cert:scale-110 transition-transform duration-500 z-10 custom-badge-card" style="display: flex !important;">
-                    <span class="text-[9px] md:text-[10px] font-bold tracking-[0.05em] uppercase text-center px-1 custom-badge-text leading-tight break-words">${shortTitle.split(' ').join('<br>')}</span>
+                    <span class="text-[9px] md:text-[10px] font-bold tracking-[0.05em] uppercase text-center px-1 leading-none break-words custom-badge-text" style="display: flex; flex-direction: column; align-items: center; justify-content: center; transform: translateY(-2px);">${shortTitle.split(' ').join('<br>')}</span>
                 </div>`;
         }
 
@@ -1419,7 +1427,8 @@ function renderEducationView(mbiaData, cvData) {
 
     const ongoing = cvData.filter(e => {
         const st = normalizeStr(getVal(e, 'Estado', 'estado') || '');
-        return st.includes('curso') || st.includes('cruso');
+        // Incluir "En curso" y también cursos programados para que la insignia "Advanced" aparezca arriba
+        return st.includes('curso') || st.includes('cruso') || st.includes('programado');
     });
 
     let origPast = cvData.filter(e => {
@@ -1445,8 +1454,25 @@ function renderEducationView(mbiaData, cvData) {
     }
 
     const master = ongoing.find(e => normalizeStr(getVal(e, 'titulo', 'nombre')).match(/(master|mbia)/));
+    let bsiAdvanced = ongoing.find(e => {
+        const title = normalizeStr(getVal(e, 'titulo', 'nombre'));
+        return (title.includes('buildingsmart') || title.includes('professional')) && title.includes('advanced');
+    });
+
+    // FALLBACK: Si no se encuentra en los datos (por problemas de sincronización/CORS), lo creamos manualmente
+    if (!bsiAdvanced) {
+        console.warn('BSI Advanced no encontrado en datos, usando fallback manual');
+        bsiAdvanced = {
+            'Nombre': 'Professional Certification - Advanced',
+            'Institucion': 'buildingSMART International',
+            'Estado': 'Programado - Abril 2025',
+            'URL Archivo': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/insignias/badge_generic.png',
+            'color_badge': '#262626', // NEUTRAL GREY FORCE
+            'Titulo en badge genérico': 'ADVANCED'
+        };
+    }
+
     const dynamo = ongoing.find(e => normalizeStr(getVal(e, 'titulo', 'nombre')).includes('dynamo'));
-    const solibri = ongoing.find(e => normalizeStr(getVal(e, 'titulo', 'nombre')).includes('solibri'));
 
     // Actualizar el contador en el título de Educación Previa
     const pastHeader = document.getElementById('edu-prev-header-title');
@@ -1468,7 +1494,7 @@ function renderEducationView(mbiaData, cvData) {
         <div class="flex flex-col xl:flex-row gap-4 w-full">
             <!-- Bloque 1: Máster y Pilares -->
             <div class="flex-1 edu-premium-card rounded-xl p-5 flex flex-col lg:flex-row items-center group/main transition-all duration-500">
-                <div class="flex flex-col sm:flex-row items-center gap-6 w-full lg:w-auto lg:pr-8 border-b lg:border-b-0 lg:border-r border-gray-800/15 pb-6 lg:pb-0 shrink-0">
+                <div class="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto lg:pr-4 border-b lg:border-b-0 lg:border-r border-gray-800/15 pb-6 lg:pb-0 shrink-0">
                     ${generateBadgeHtml(master, 'master-main', false)}
                     <div class="flex flex-col gap-1 items-center lg:items-start text-center lg:text-left">
                         <span class="text-[9px] font-mono text-cyan-400 uppercase tracking-[0.2em] font-bold mb-1">${getVal(master, 'nivel', 'categoría', 'categoria')}</span>
@@ -1478,14 +1504,14 @@ function renderEducationView(mbiaData, cvData) {
                         </div>
                     </div>
                 </div>
-                <div class="flex-1 w-full lg:pl-8 pt-6 lg:pt-0">
-                    <div class="flex items-center justify-between gap-1 sm:gap-2 w-full px-1">
+                <div class="flex-1 lg:pl-10 pt-6 lg:pt-0">
+                    <div class="flex items-center justify-around w-full gap-4 px-2">
                         ${pilaresFiltrados.map(p => {
                             const title = getVal(p, 'pilar', 'titulo', 'materia');
                             const icon = resolveIcon(p, 'graduation-cap');
                             const text = (getVal(p, 'acción técnica', 'accion tecnica') || '').replace(/\n/g, '<br>').replace(/"/g, '&quot;');
                             const tools = (getVal(p, 'herramientas clave') || '').replace(/"/g, '&quot;');
-                            return `<div class="relative cursor-help flex flex-col items-center justify-center text-center gap-1 group/pilar flex-1 min-w-0"
+                            return `<div class="relative cursor-help flex flex-col items-center justify-center text-center gap-1 group/pilar flex-1 min-w-0 max-w-[120px]"
                                      data-tooltip-title="${title}" data-tooltip-text="${text}" data-tooltip-footer="HERRAMIENTAS CLAVE: ${tools}"
                                      data-tooltip-size="compact"
                                      onmouseenter="window.showRoiTooltip(event)" onmouseleave="window.hideRoiTooltip()" onmousemove="window.moveRoiTooltip(event)">
@@ -1501,10 +1527,11 @@ function renderEducationView(mbiaData, cvData) {
                 </div>
             </div>
 
-            <!-- Bloque 2: Herramientas Adicionales (Dynamo, Solibri) -->
+            <!-- Bloque 2: Herramientas Adicionales (BSI Advanced, Dynamo) -->
             <div class="shrink-0 flex items-center justify-center min-w-fit px-4 border-l border-gray-800/15">
-                <div class="flex justify-center items-center gap-4 flex-nowrap">
-                    ${[dynamo, solibri].filter(Boolean).map((e, idx) => generateBadgeHtml(e, 'ext'+idx, false)).join('')}
+                <div class="flex justify-center items-center gap-6 flex-nowrap">
+                    ${bsiAdvanced ? generateBadgeHtml(bsiAdvanced, 'bsi-adv', false) : '<!-- BSI Advanced missing -->'}
+                    ${dynamo ? generateBadgeHtml(dynamo, 'dyn-main', false) : ''}
                 </div>
             </div>
         </div>`;
@@ -1515,8 +1542,13 @@ function renderEducationView(mbiaData, cvData) {
 
     if (extraOngoingContainer) extraOngoingContainer.innerHTML = '';
 
+    // Determinar qué vista está activa mirando los botones de toggle
+    const btnGallery = document.getElementById('btn-edu-view-gallery');
+    const isListActive = btnGallery && !btnGallery.classList.contains('active-view');
+
     if (prevBadgesContainer) {
-        prevBadgesContainer.classList.remove('hidden'); // Asegurar visible por defecto
+        if (isListActive) prevBadgesContainer.classList.add('hidden');
+        else prevBadgesContainer.classList.remove('hidden');
         const sortedPastCerts = [...past].sort((a, b) => {
             const orderA = parseInt(getVal(a, 'Orden de badge', 'orden', 'posicion') || 999);
             const orderB = parseInt(getVal(b, 'Orden de badge', 'orden', 'posicion') || 999);
@@ -1544,7 +1576,7 @@ function renderEducationView(mbiaData, cvData) {
     }
 
     if (listContainer) {
-        listContainer.className = "w-full space-y-1 ml-0 list-none hidden"; 
+        listContainer.className = isListActive ? "w-full space-y-1 ml-0 list-none" : "w-full space-y-1 ml-0 list-none hidden";
 
         const headerHtml = `
             <li class="grid grid-cols-[450px_140px_100px_100px_1fr] gap-4 px-4 py-2 mb-2 text-gray-300 [.light-theme_&]:text-black text-[10px] items-center font-bold tracking-widest uppercase">
@@ -1555,7 +1587,13 @@ function renderEducationView(mbiaData, cvData) {
                 <span></span>
             </li>`;
 
-        const itemsHtml = past.map(edu => {
+        const filteredPast = past.filter(edu => {
+            const p = (getVal(edu, 'periodo', 'Periodo') || '').trim();
+            // Solo omitir si el texto es exactamente "Presente" o un único guion "-"
+            return p !== 'Presente' && p !== '-';
+        });
+
+        const itemsHtml = filteredPast.map(edu => {
             const nombre = getVal(edu, 'Nombre', 'Titulo', 'titulo');
             const institucion = getVal(edu, 'Institucion', 'Institución', 'institucion');
             const periodo = getVal(edu, 'periodo', 'Periodo');
@@ -2287,8 +2325,7 @@ function initEventListeners() {
         }
     });
 
-    document.getElementById('btn-filter-toggle')?.addEventListener('click', (e) => { e.stopPropagation(); toggleFilterMenu(); });
-    document.getElementById('btn-sort-toggle')?.addEventListener('click', (e) => { e.stopPropagation(); toggleSortMenu(); });
+    // Listeners controlados vía onclick con stopPropagation para mayor fiabilidad
 
     checkMobileAccess();
 }
@@ -2331,34 +2368,13 @@ window.toggleSidebar = function () {
 };
 
 window.goBack = function () {
-    const fromParam = new URLSearchParams(window.location.search).get('from');
-    
-    // Si venimos explícitamente de Portfolio o CV por parámetro
-    if (fromParam === 'portfolio') {
-        window.goToPortfolio();
-        return;
-    }
-    if (fromParam === 'cv') {
-        window.goToCV();
-        return;
-    }
-
-    // Si el historial tiene estados de vista cargados
-    if (window.history.state && window.history.state.view && window.history.state.view !== 'home') {
-        window.history.back();
-    } else {
-        // Si no hay historial interno coherente, intentamos detectar por referrer
-        const ref = document.referrer;
-        if (ref.includes('Portafolio_Resumido')) {
-            window.goToPortfolio();
-        } else if (ref.includes('CV')) {
-            window.goToCV();
-        } else {
-            window.goHome();
-        }
-    }
+    // Las flechas ahora son puramente para historial
+    window.history.back();
 };
-window.goForward = function () { window.history.forward(); };
+
+window.goForward = function () { 
+    window.history.forward(); 
+};
 
 // Helper para obtener el parámetro de tema actual
 function getThemeParam() {
@@ -2370,7 +2386,8 @@ window.goToCV = function () {
 };
 
 window.goToPortfolio = function () {
-    window.location.href = `Portafolio_Resumido/index.html?${getThemeParam()}`;
+    // Ruta actualizada tras movimiento del usuario a 01_Sitio_Web
+    window.location.href = `./01_Sitio_Web/Portafolio_Resumido/index.html?${getThemeParam()}`;
 };
 
 window.goHome = function (isPopstate = false) {
@@ -2394,6 +2411,7 @@ window.goHome = function (isPopstate = false) {
     }
     if (appWrapper) appWrapper.classList.add('fade-scale-out');
     window.setSidebarState(false);
+    if (window.closeGallery) window.closeGallery();
     setTimeout(() => {
         if (appWrapper) { appWrapper.classList.add('hidden'); appWrapper.classList.remove('fade-scale-out'); }
         hero.classList.remove('hidden');
@@ -2403,9 +2421,76 @@ window.goHome = function (isPopstate = false) {
     }, 400);
 
     if (!isPopstate) {
-        history.pushState({ view: 'home' }, '', '#home');
+        const nextPsid = 'psid_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+        history.pushState({ view: 'home', _psid_: nextPsid }, '', '#home');
+    }
+
+    // ACTUALIZAR VISUALES DE NAVEGACIÓN (Smart State)
+    if (typeof trackPortfolioHistory === 'function') {
+        trackPortfolioHistory();
     }
 };
+
+// --- LÓGICA DE RASTREO DE HISTORIAL PARA ESTADO VISUAL DE BOTONES (V4 - SESSION IDs) ---
+function ensurePsid() {
+    let state = window.history.state || {};
+    if (!state._psid_) {
+        state._psid_ = 'psid_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+        window.history.replaceState(state, '');
+    }
+    return state._psid_;
+}
+
+function trackPortfolioHistory() {
+    try {
+        let historyData = JSON.parse(sessionStorage.getItem('portfolio_history') || '{"stack":[], "index":-1}');
+        const currentPsid = ensurePsid();
+
+        // Buscar si el ID de esta entrada de historial ya existe en nuestro stack
+        const existingIndex = historyData.stack.findIndex(item => item.id === currentPsid);
+
+        if (existingIndex !== -1) {
+            // Si ya existe (Back/Forward real), saltamos a esa posición del índice
+            historyData.index = existingIndex;
+        } else {
+            // Es una navegación nueva: truncamos lo que haya después del índice actual y añadimos
+            historyData.stack = historyData.stack.slice(0, historyData.index + 1);
+            historyData.stack.push({ id: currentPsid, url: window.location.href });
+            historyData.index = historyData.stack.length - 1;
+        }
+        
+        sessionStorage.setItem('portfolio_history', JSON.stringify(historyData));
+        updateNavigationVisuals(historyData);
+    } catch (e) {
+        console.error("Error tracking history V4:", e);
+    }
+}
+
+function updateNavigationVisuals(data) {
+    const backButtons = document.querySelectorAll('#nav-back, [id="nav-back"]');
+    const forwardButtons = document.querySelectorAll('#nav-forward, [id="nav-forward"]');
+    
+    const canGoBack = data.index > 0;
+    const canGoForward = data.index < data.stack.length - 1;
+
+    backButtons.forEach(btn => {
+        btn.style.opacity = canGoBack ? '1' : '0.2';
+        btn.style.pointerEvents = canGoBack ? 'auto' : 'none';
+        btn.style.cursor = canGoBack ? 'pointer' : 'default';
+        btn.disabled = !canGoBack;
+    });
+
+    forwardButtons.forEach(btn => {
+        btn.style.opacity = canGoForward ? '1' : '0.2';
+        btn.style.pointerEvents = canGoForward ? 'auto' : 'none';
+        btn.style.cursor = canGoForward ? 'pointer' : 'default';
+        btn.disabled = !canGoForward;
+    });
+}
+
+// Ejecutar al cargar y al cambiar estado (popstate)
+window.addEventListener('load', trackPortfolioHistory);
+window.addEventListener('popstate', trackPortfolioHistory);
 window.showHome = window.goHome;
 
 window.switchView = function (viewName, fromHome = false, immediate = false, isPopstate = false) {
@@ -2431,6 +2516,9 @@ window.switchView = function (viewName, fromHome = false, immediate = false, isP
 
         // Actualizar estado activo en sidebar
         window.updateSidebarActive(`nav-${viewName}`);
+
+        // [NUEVO] Cerrar cualquier galería activa al cambiar de sección
+        if (window.closeGallery) window.closeGallery();
 
         // [FIX] Forzar cierre de tooltips globales al cambiar de sección para evitar artefactos huérfanos
         if (typeof window.hideGlobalTooltip === 'function') {
@@ -2496,7 +2584,8 @@ window.switchView = function (viewName, fromHome = false, immediate = false, isP
         window.setSidebarState(false);
 
         if (!isPopstate) {
-            history.pushState({ view: viewName }, '', '#' + viewName);
+            const nextPsid = 'psid_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+            history.pushState({ view: viewName, _psid_: nextPsid }, '', '#' + viewName);
         }
     };
 
@@ -2559,6 +2648,11 @@ window.switchView = function (viewName, fromHome = false, immediate = false, isP
             renderGlobalDisciplines(projectsData, disciplinesData, true);
             renderROI(roiData, true);
         }
+    }
+
+    // ACTUALIZAR VISUALES DE NAVEGACIÓN (Smart State)
+    if (typeof trackPortfolioHistory === 'function') {
+        trackPortfolioHistory();
     }
 };
 
@@ -2740,7 +2834,8 @@ window.toggleTop5 = function () {
     
     runFilter();
 };
-window.toggleFilterMenu = function () {
+window.toggleFilterMenu = function (e) {
+    e?.stopPropagation();
     const filterBtn = document.getElementById('btn-filter-toggle');
     document.getElementById('sort-dropdown').classList.add('hidden');
     const isHidden = document.getElementById('filter-dropdown').classList.toggle('hidden');
@@ -2760,7 +2855,8 @@ window.toggleFilterMenu = function () {
     }
 };
 
-window.toggleSortMenu = function () {
+window.toggleSortMenu = function (e) {
+    e?.stopPropagation();
     const sortBtn = document.getElementById('btn-sort-toggle');
     document.getElementById('filter-dropdown').classList.add('hidden');
     const isHidden = document.getElementById('sort-dropdown').classList.toggle('hidden');
@@ -2862,7 +2958,7 @@ window.runFilter = function () {
         const checkMatch = (val, filter) => {
             if (filter === 'all') return true;
             if (!val) return false;
-            const tags = val.split(/[;,]/).map(t => t.trim().toUpperCase());
+            const tags = val.split(/[;,]/).map(t => t.trim().toUpperCase()).filter(Boolean);
             // Si el filtro es CONFIDENCIAL, cualquier tag que contenga CONFIDENCIAL es un match
             if (filter === 'CONFIDENCIAL') return tags.some(t => t.includes('CONFIDENCIAL'));
             return tags.includes(filter.toUpperCase());
@@ -3033,6 +3129,7 @@ window.clearAllProjectFilters = function () {
 };
 
 window.setProjectView = function (mode, groupBy = null, isPopstate = false) {
+    if (window.closeGallery) window.closeGallery();
     currentViewMode = mode;
 
     if (groupBy) {
@@ -3914,6 +4011,12 @@ let currentGalleryView = 'default';
 window.setGalleryViewMode = function (mode) {
     currentGalleryView = mode;
 
+    // Pausar video si salimos de la vista individual (default) para evitar audio en segundo plano
+    const videoEl = document.getElementById('modal-video-element');
+    if (videoEl && mode !== 'default') {
+        videoEl.pause();
+    }
+
     // Actualizar estados visuales de los botones
     const btns = ['default', 'list', 'grid'];
     btns.forEach(b => {
@@ -3991,6 +4094,12 @@ window.closeAINotice = function () {
 };
 
 window.closeGallery = () => {
+    // [NUEVO] Limpiar cualquier timeout de carga de contenido pendiente
+    if (window.updateModalTimeout) {
+        clearTimeout(window.updateModalTimeout);
+        window.updateModalTimeout = null;
+    }
+
     const modal = document.getElementById('gallery-modal');
     if (!modal) return;
     
@@ -4007,6 +4116,8 @@ window.closeGallery = () => {
     if (videoEl) {
         videoEl.pause();
         videoEl.src = '';
+        videoEl.load(); // Forzar descarga de buffers
+        videoEl.classList.add('hidden');
     }
 
     // Limpiar medios para el próximo uso
@@ -4065,7 +4176,7 @@ function updateModalContent() {
         locationDisplay = "Múltiples Sedes";
     }
 
-    const mediaContainer = document.getElementById('gallery-backdrop');
+    const mediaContainer = document.getElementById('modal-media-container');
     let videoEl = document.getElementById('modal-video-element');
     const counterEl = document.getElementById('modal-image-counter');
 
@@ -4094,7 +4205,16 @@ function updateModalContent() {
         if (videoEl) videoEl.classList.add('media-transitioning');
     }
 
-    setTimeout(() => {
+    // [NUEVO] Limpiar timeout previo si existe
+    if (window.updateModalTimeout) clearTimeout(window.updateModalTimeout);
+
+    window.updateModalTimeout = setTimeout(() => {
+        const modal = document.getElementById('gallery-modal');
+        // No proceder si el modal se cerró mientras esperábamos
+        if (modal && (modal.classList.contains('hidden') || modal.classList.contains('modal-anim-exiting'))) {
+            return;
+        }
+
         if (!videoEl) {
             videoEl = document.createElement('video');
             videoEl.id = 'modal-video-element';
@@ -4103,7 +4223,7 @@ function updateModalContent() {
             mediaContainer.appendChild(videoEl);
         }
 
-        if (isVideo) {
+        if (isVideo && currentGalleryView === 'default') {
             if (imgTag) imgTag.classList.add('hidden');
             if (confTag) confTag.classList.add('hidden');
             videoEl.classList.remove('hidden');
@@ -4111,10 +4231,11 @@ function updateModalContent() {
                 videoEl.src = currentSrc;
                 videoEl.load();
             }
-            videoEl.play().catch(e => console.log("Auto-play prevented:", e));
+            videoEl.play().catch(e => console.log("Auto-play prevented (User interacting?):", e));
         } else {
             videoEl.classList.add('hidden');
             videoEl.pause();
+            videoEl.src = ""; // v50.52 - Limpiar src si no es video o no estamos en modo default para evitar leaks
 
             if (currentSrc && currentSrc !== 'undefined') {
                 confTag.classList.add('hidden');
@@ -4495,6 +4616,17 @@ function initParticles() {
 
 // Exponer funciones necesarias para el HTML (onclick handlers)
 
+window.goToCV = function () {
+    const theme = document.body.classList.contains('light-theme') ? 'theme=light' : 'theme=dark';
+    window.location.href = './01_Sitio_Web/CV/index.html?' + theme;
+};
+
+window.goToPortfolio = function () {
+    // Ruta actualizada tras movimiento del usuario a 01_Sitio_Web
+    const theme = document.body.classList.contains('light-theme') ? 'theme=light' : 'theme=dark';
+    window.location.href = './01_Sitio_Web/Portafolio_Resumido/index.html?' + theme;
+};
+
 window.goToProjectsHome = window.goToProjectsHome;
 
 // ==========================================================================
@@ -4688,30 +4820,30 @@ window.initCertAutoScroll = function(containerId) {
 window.switchEduView = function(view) {
     const gallery = document.getElementById('global-edu-prev-badges');
     const list = document.getElementById('global-edu-list');
-    const btnGallery = document.getElementById('btn-view-gallery');
-    const btnList = document.getElementById('btn-view-list');
+    const btnGallery = document.getElementById('btn-edu-view-gallery');
+    const btnList = document.getElementById('btn-edu-view-list');
 
     if (view === 'gallery') {
         if (gallery) gallery.classList.remove('hidden');
         if (list) list.classList.add('hidden');
         if (btnGallery) {
-            btnGallery.classList.add('text-cyan-400', '[.light-theme_&]:text-sky-900', 'active-view');
-            btnGallery.classList.remove('text-gray-400');
+            btnGallery.classList.add('text-cyan-400', 'active-view');
+            btnGallery.classList.remove('text-gray-400', 'text-gray-500');
         }
         if (btnList) {
-            btnList.classList.remove('text-cyan-400', '[.light-theme_&]:text-sky-900', 'active-view');
+            btnList.classList.remove('text-cyan-400', 'active-view');
             btnList.classList.add('text-gray-400');
         }
     } else {
         if (gallery) gallery.classList.add('hidden');
         if (list) list.classList.remove('hidden');
         if (btnGallery) {
-            btnGallery.classList.remove('text-cyan-400', '[.light-theme_&]:text-sky-900', 'active-view');
+            btnGallery.classList.remove('text-cyan-400', 'active-view');
             btnGallery.classList.add('text-gray-400');
         }
         if (btnList) {
-            btnList.classList.add('text-cyan-400', '[.light-theme_&]:text-sky-900', 'active-view');
-            btnList.classList.remove('text-gray-400');
+            btnList.classList.add('text-cyan-400', 'active-view');
+            btnList.classList.remove('text-gray-400', 'text-gray-500');
         }
     }
     if (window.lucide) window.lucide.createIcons();
@@ -4731,13 +4863,13 @@ window.closePdfModal = () => {
 window.downloadPdf = async (doc, type) => {
     const documents = {
         'cv': {
-            'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/CV%20-%20Said%20Herrera_light.pdf',
-            'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/CV%20-%20Said%20Herrera_dark.pdf',
+            'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/descargables/CV%20-%20Said%20Herrera_light%20mode.pdf',
+            'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/descargables/CV%20-%20Said%20Herrera_dark%20mode.pdf',
             'filename': 'CV_Said_Herrera'
         },
         'portfolio': {
-            'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Portafolio_Resumido.pdf',
-            'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Portafolio_Resumido.pdf',
+            'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/descargables/Portafolio%20-%20Said%20Herrera_light%20mode.pdf',
+            'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/descargables/Portafolio%20-%20Said%20Herrera_dark%20mode.pdf',
             'filename': 'Portafolio_Said_Herrera'
         }
     };
