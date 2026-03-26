@@ -248,7 +248,7 @@ function renderStatsDisciplines(projects) {
     const refDisciplines = [
         { name: "ARQUITECTURA", icon: "palmtree" },
         { name: "ESTRUCTURAS", icon: "drafting-compass" },
-        { name: "MEP", icon: "workflow" },
+        { name: "MEP (Fabrication)", icon: "workflow" },
         { name: "Multidisciplina", icon: "users-round" },
         { name: "Docs y Cuant.", icon: "file-text" }
     ];
@@ -282,7 +282,10 @@ function renderStatsDisciplines(projects) {
     });
 
     // 3. Ordenar y tomar TOP 5
-    stats.sort((a, b) => b.count - a.count);
+    stats.sort((a, b) => {
+        if (b.count !== a.count) return b.count - a.count;
+        return a.name.localeCompare(b.name);
+    });
     const top5Stats = stats.slice(0, 5);
     const totalCount = top5Stats.reduce((acc, curr) => acc + curr.count, 0) || 1;
 
@@ -728,8 +731,14 @@ function getThemeParam() {
     return document.body.classList.contains('light-theme') ? 'theme=light' : 'theme=dark';
 }
 // Funciones de Navegación Universal
-window.goBack = function () { window.history.back(); };
-window.goForward = function () { window.history.forward(); };
+window.goBack = function () { 
+    window.history.back();
+};
+
+window.goForward = function () { 
+    window.history.forward(); 
+};
+
 window.goHome = function(view = null) {
     let url = '../../index.html';
     const params = [];
@@ -739,6 +748,64 @@ window.goHome = function(view = null) {
     if (params.length > 0) url += '?' + params.join('&');
     window.location.href = url;
 };
+
+// --- LÓGICA DE RASTREO DE HISTORIAL PARA ESTADO VISUAL DE BOTONES (V4 - SESSION IDs) ---
+function ensurePsid() {
+    let state = window.history.state || {};
+    if (!state._psid_) {
+        state._psid_ = 'psid_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+        window.history.replaceState(state, '');
+    }
+    return state._psid_;
+}
+
+function trackPortfolioHistory() {
+    try {
+        let historyData = JSON.parse(sessionStorage.getItem('portfolio_history') || '{"stack":[], "index":-1}');
+        const currentPsid = ensurePsid();
+
+        const existingIndex = historyData.stack.findIndex(item => item.id === currentPsid);
+
+        if (existingIndex !== -1) {
+            historyData.index = existingIndex;
+        } else {
+            historyData.stack = historyData.stack.slice(0, historyData.index + 1);
+            historyData.stack.push({ id: currentPsid, url: window.location.href });
+            historyData.index = historyData.stack.length - 1;
+        }
+        
+        sessionStorage.setItem('portfolio_history', JSON.stringify(historyData));
+        updateNavigationVisuals(historyData);
+    } catch (e) {
+        console.error("Error tracking history V4:", e);
+    }
+}
+
+function updateNavigationVisuals(data) {
+    const backButtons = document.querySelectorAll('#nav-back, [id="nav-back"]');
+    const forwardButtons = document.querySelectorAll('#nav-forward, [id="nav-forward"]');
+    
+    const canGoBack = data.index > 0;
+    const canGoForward = data.index < data.stack.length - 1;
+
+    backButtons.forEach(btn => {
+        btn.style.opacity = canGoBack ? '1' : '0.2';
+        btn.style.pointerEvents = canGoBack ? 'auto' : 'none';
+        btn.style.cursor = canGoBack ? 'pointer' : 'default';
+        btn.disabled = !canGoBack;
+    });
+
+    forwardButtons.forEach(btn => {
+        btn.style.opacity = canGoForward ? '1' : '0.2';
+        btn.style.pointerEvents = canGoForward ? 'auto' : 'none';
+        btn.style.cursor = canGoForward ? 'pointer' : 'default';
+        btn.disabled = !canGoForward;
+    });
+}
+
+// Ejecutar al cargar y al cambiar estado (popstate)
+window.addEventListener('load', trackPortfolioHistory);
+window.addEventListener('popstate', trackPortfolioHistory);
 
 // Navegación rápida (Hacia el Digital CV)
 window.switchView = function () {
