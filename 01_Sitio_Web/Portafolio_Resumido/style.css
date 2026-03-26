@@ -1,0 +1,566 @@
+/* Custom Print & Layout Styles for Portafolio Resumido */
+
+:root {
+    --a4-width: 210mm;
+    --a4-height: auto;
+    --bg-page: #ffffff;
+    --bg-sidebar: #ffffff;
+    --bg-outside: #09090b;
+    /* Zinc 950 constante igual al CV */
+    --bar-bg: #f1f5f9;
+    --text-main: #1e293b;
+    --text-muted: #475569; /* Slate 600 - Gris único para modo claro */
+    --text-accent: #3b82f6; /* Azul único */
+    --border-color: #f1f5f9;
+    --section-bg: transparent;
+    --tag-bg: #eff6ff;
+    --tag-text: #2563eb;
+    --tag-border: #dbeafe;
+    /* Mapa Colores (Modo Claro) */
+    --map-fill: #f1f5f9; /* Slate 100 - Muy claro pero distinguible de blanco */
+    --map-stroke: #cbd5e1; /* Slate 300 - Fronteras visibles */
+}
+
+html.dark {
+    --bg-page: #18181b;
+    --bg-sidebar: #18181b;
+    --bg-outside: #09090b;
+    /* gray-900/Zinc 950 para modo oscuro */
+    --text-main: #ffffff;
+    --text-muted: #94a3b8; /* Slate 400 - Gris único para modo oscuro */
+    --text-accent: #3b82f6; /* Azul único */
+    --border-color: rgba(255, 255, 255, 0.08);
+    --section-bg: rgba(255, 255, 255, 0.03);
+    --tag-bg: rgba(59, 130, 246, 0.1);
+    --tag-text: #60a5fa;
+    --tag-border: rgba(59, 130, 246, 0.2);
+    --bar-bg: rgba(255, 255, 255, 0.1);
+    /* Mapa Colores (Modo Oscuro) */
+    --map-fill: #1e293b; /* Slate 800 - Contrastado con fondo oscuro */
+    --map-stroke: rgba(255, 255, 255, 0.08); /* Fronteras más oscuras y discretas */
+}
+
+/* === Theme Toggle Icons === */
+/* En modo CLARO (por defecto o sin clase .dark en html) mostramos la LUNA */
+.light-icon-hide {
+    display: none !important;
+}
+
+.light-icon-show {
+    display: block !important;
+}
+
+/* En modo OSCURO (con clase .dark en html) mostramos el SOL */
+.dark .light-icon-hide {
+    display: block !important;
+}
+
+.dark .light-icon-show {
+    display: none !important;
+}
+
+
+body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background-color: #09090b;
+    background-image: linear-gradient(135deg, #09090b 0%, #18181b 50%, #27272a 100%);
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    margin: 0;
+    min-height: 100vh;
+    overflow-y: scroll !important; /* Forza el espacio del scrollbar para evitar saltos laterales */
+}
+
+.sidebar-area {
+    background-color: var(--bg-sidebar);
+    transition: background-color 0.3s ease;
+}
+
+
+.a4-page {
+    width: var(--a4-width);
+    height: auto;
+    min-width: var(--a4-width);
+    min-height: auto;
+    padding-bottom: 0.5rem;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    /* Redondeado igual al CV */
+    overflow: hidden;
+    /* Importante para que el sidebar no sobresalga del redondeado */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.dark .a4-page {
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.custom-res-header {
+    height: auto !important;
+    padding-top: 15px !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    padding-bottom: 10px !important;
+}
+
+@page {
+    size: A4;
+    margin: 0;
+}
+
+@media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    body {
+        background-color: var(--bg-page) !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        height: 100% !important;
+        overflow: hidden !important;
+    }
+
+    .a4-page {
+        box-shadow: none !important;
+        margin: 0 !important;
+        border: none !important;
+        width: 210mm !important; /* Ancho exacto A4 */
+        height: 297mm !important; /* Alto exacto A4 */
+        zoom: 1 !important;
+        background-color: var(--bg-page) !important;
+        color: var(--text-main) !important;
+        overflow: hidden !important;
+        border-radius: 0 !important;
+        padding: 0.5cm !important; /* Márgenes de 0.5cm según última solicitud */
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* Reducción agresiva para garantizar página única */
+    .custom-res-header {
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+        margin-bottom: 0 !important;
+    }
+
+    .main-stats-grid {
+        padding-top: 0.25rem !important;
+        gap: 0.15rem !important;
+    }
+
+    .project-card {
+        gap: 2px !important;
+        padding-bottom: 4px !important;
+    }
+
+    .sidebar-area {
+        padding: 0.35rem !important;
+        padding-right: 1.5rem !important; /* Espacio para respirar */
+        margin: 0 !important;
+        gap: 0.2rem !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.15) !important; /* Gris suave en fondo oscuro */
+    }
+
+    .map-wrapper {
+        height: 160px !important;
+        margin-top: 0.1rem !important;
+        margin-bottom: 0.1rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important; /* Restringir para no tapar el header */
+    }
+
+    .map-wrapper svg {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: contain !important;
+    }
+
+    /* Compactar métricas y títulos para compensar */
+    .metric-card {
+        padding: 0.3rem !important;
+        margin-bottom: 1px !important;
+    }
+
+    .section-title {
+        margin-top: 0.25rem !important;
+        margin-bottom: 0.2rem !important;
+    }
+
+    .main-stats-grid {
+        padding-top: 0.1rem !important;
+        gap: 1.5rem !important; /* Separación clara entre paneles */
+    }
+
+    .no-print {
+        display: none !important;
+    }
+}
+
+.section-title {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-main);
+    line-height: 1;
+}
+
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--section-bg);
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-accent);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.tag {
+    font-size: 8px;
+    font-weight: 600;
+    background-color: var(--tag-bg);
+    color: var(--tag-text);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--tag-border);
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    break-inside: avoid;
+}
+
+.project-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-color: var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.project-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-title {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--text-main);
+    text-transform: uppercase;
+}
+
+.project-meta {
+    font-size: 7px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-muted);
+    display: flex;
+    gap: 8px;
+}
+
+.project-reto {
+    font-size: 8px;
+    color: var(--text-muted);
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Floating Controls (Igual al CV) */
+.floating-controls {
+    transition: opacity 0.3s ease;
+}
+
+.dark-icon-hide {
+    display: none;
+}
+
+.dark .dark-icon-hide {
+    display: block;
+}
+
+.dark .dark-icon-show {
+    display: none;
+}
+
+
+/* --- PREMIUM PULSE SYSTEM (Homogenized with CV) --- */
+.premium-pulse-container {
+    position: relative;
+    display: flex;
+    height: 1.25rem;
+    width: 1.25rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.premium-pulse-aura {
+    position: absolute;
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+    border-radius: 9999px;
+    opacity: 0.5;
+    animation: premium-ping 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.premium-pulse-dot {
+    position: relative;
+    display: inline-flex;
+    border-radius: 9999px;
+    height: 6px;
+    width: 6px;
+}
+
+@keyframes premium-ping {
+    75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* Color Variants */
+.pulse-cyan .premium-pulse-aura {
+    background-color: #22d3ee;
+}
+
+.pulse-cyan .premium-pulse-dot {
+    background-color: #67e8f9;
+    box-shadow: 0 0 30px rgba(103, 232, 249, 1);
+}
+
+.pulse-purple .premium-pulse-aura {
+    background-color: #a855f7;
+}
+
+.pulse-purple .premium-pulse-dot {
+    background-color: #c084fc;
+    box-shadow: 0 0 30px rgba(192, 132, 252, 1);
+}
+
+.pulse-blue .premium-pulse-aura {
+    background-color: #3b82f6;
+}
+
+.pulse-blue .premium-pulse-dot {
+    background-color: #60a5fa;
+    box-shadow: 0 0 30px rgba(96, 165, 250, 1);
+}
+
+.pulse-green .premium-pulse-aura {
+    background-color: #22c55e;
+}
+
+.pulse-green .premium-pulse-dot {
+    background-color: #4ade80;
+    box-shadow: 0 0 30px rgba(74, 222, 128, 1);
+}
+
+.shadow-glow {
+    filter: drop-shadow(0 0 2px #3b82f6);
+}
+
+/* Light Theme Adjustments */
+html:not(.dark) .pulse-cyan .premium-pulse-dot {
+    background-color: #0369a1;
+}
+
+html:not(.dark) .pulse-cyan .premium-pulse-aura {
+    background-color: rgba(3, 105, 161, 0.3);
+}
+
+html:not(.dark) .pulse-blue .premium-pulse-dot {
+    background-color: #1e40af;
+}
+
+html:not(.dark) .pulse-blue .premium-pulse-aura {
+    background-color: rgba(30, 64, 175, 0.3);
+}
+
+/* ESTILOS MAPA D3.JS */
+.map-wrapper { 
+    position: relative; 
+    width: 100%; 
+    height: 160px; /* Reducido 20px según solicitud */
+    background: transparent; 
+    border-radius: 12px; 
+    overflow: hidden; 
+    border: none; 
+}
+.country { 
+    fill: var(--map-fill); 
+    stroke: var(--map-stroke); 
+    stroke-width: 0.5px; /* Ligeramente más grueso para visibilidad */
+    transition: fill 0.3s ease, stroke 0.3s ease;
+}
+.city-marker { 
+    transition: r 0.3s ease; 
+}
+
+.map-tooltip {
+    position: fixed;
+    padding: 3px 8px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #ffffff;
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    pointer-events: none;
+    z-index: 10000;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+html:not(.dark) .map-tooltip {
+    background: rgba(255, 255, 255, 0.98) !important;
+    color: #000000 !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.shadow-glow { 
+    filter: drop-shadow(0 0 3px currentColor); 
+}
+
+/* ROI Tooltip for Projects Grid */
+.roi-tooltip {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+html:not(.dark) .roi-tooltip {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    color: #374151 !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+
+.roi-tooltip .tooltip-title {
+    color: #ffffff;
+}
+
+html:not(.dark) .roi-tooltip .tooltip-title {
+    color: #000000 !important;
+    border-bottom-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* --- ANIMACIONES DE GRÁFICAS --- */
+@keyframes growBar {
+    from { width: 0%; }
+}
+
+.animate-bar {
+    width: var(--final-width, 100%);
+    animation: growBar 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes growBarVertical {
+    from { height: 0%; }
+}
+
+.animate-bar-vertical {
+    animation: growBarVertical 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    height: var(--final-height);
+}
+
+/* Animación de fade-in para items */
+.animate-item {
+    opacity: 0;
+    animation: fadeInItem 0.5s ease forwards;
+}
+
+@keyframes fadeInItem {
+    to { opacity: 1; }
+}
+
+/* === MODALS (Replicados del CV) === */
+#summary-cv-popup {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+html:not(.dark) #summary-cv-popup {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    background-color: #ffffff !important;
+}
+
+@media (min-width: 1280px) {
+    #summary-cv-popup .lg-grid-cols-9 {
+        grid-template-columns: repeat(9, minmax(0, 1fr)) !important;
+    }
+}
+
+.thin-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+
+.thin-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.thin-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+/* Soporte para animaciones de entrada del popup */
+#summary-cv-popup.scale-95 {
+    transform: scale(0.95);
+    opacity: 0;
+}
+
+/* Sidebar Styles (Consistency with CV) */
+aside#main-sidebar {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+#sidebar-overlay {
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+#summary-cv-popup.scale-100 {
+    transform: scale(1);
+    opacity: 1;
+}
