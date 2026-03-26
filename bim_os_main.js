@@ -24,6 +24,7 @@ const URL_HOME = `https://raw.githubusercontent.com/eduardoehr89-source/portafol
 const URL_SUMMARY_LOCAL = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Resumen_portafolio.csv?t=${timestamp}`;
 
 const TOP_PROJECTS_LIST = [
+    { name: "Estadio BBVA", loc: "Monterrey" },
     { name: "Barrio Santa Lucía", loc: "Monterrey" },
     { name: "Tren Ligero", loc: "Campeche" },
     { name: "Puentes Periféricos", loc: "Edo. Méx" },
@@ -2227,7 +2228,12 @@ function processProjects(data) {
         return {
             originalIndex: i,
             id: pid,
-            nombre: getVal(d, 'nombre'),
+            nombre: (() => {
+                const raw = getVal(d, 'nombre');
+                if (!raw) return "";
+                // v1117: Limpieza robusta de prefijos (01_, P01, 1., etc.)
+                return raw.replace(/^[a-zA-Z]*\d+[\s._-]*/, "").replace(/[_-]/g, " ").replace(/\s+/g, " ").trim();
+            })(),
             disciplina: getVal(d, 'disciplina modelada') || getVal(d, 'disciplinas'), // Alias needed for filters
             disciplinas: getVal(d, 'disciplina modelada') || getVal(d, 'disciplinas'),
             tipologia: getVal(d, 'tipologia'),
@@ -4183,7 +4189,8 @@ function updateModalContent() {
     // Extraer nombre del espacio
     let spaceName = "";
     if (currentSrc && !currentSrc.includes('undefined')) {
-        const filename = currentSrc.split('/').pop();
+        const rawFn = currentSrc.split('/').pop();
+        const filename = decodeURIComponent(rawFn);
         spaceName = filename.split('.')[0].replace(/_/g, ' ');
     }
     let spaceNameHtml = (spaceName && currentGalleryView === 'default') ? `<span class="ml-2 text-cyan-400 [.light-theme_&]:text-[#0284c7]">| ${spaceName}</span>` : "";
@@ -4347,7 +4354,8 @@ function renderGalleryListView(p) {
     container.innerHTML = counterHtml + `<div class="overflow-y-auto h-full p-2 custom-scrollbar flex-1 w-full">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-1 w-full pb-2">` +
         p.imagenes.map((src, idx) => {
-            const filename = src.split('/').pop() || 'Recurso';
+            const filenameRaw = decodeURIComponent(src.split('/').pop()) || 'Recurso';
+            const filename = filenameRaw.replace(/\.[^/.]+$/, "").replace(/_/g, ' ');
             const isVideo = src.toLowerCase().endsWith('.mp4') || src.toLowerCase().endsWith('.webm');
             const icon = isVideo ? 'video' : 'image';
             const iconColor = isVideo ? 'text-purple-400 group-hover:text-purple-300 [.light-theme_&]:text-purple-700' : 'text-cyan-400 group-hover:text-cyan-300 [.light-theme_&]:text-sky-700';
@@ -4384,7 +4392,7 @@ function renderGalleryGridView(p) {
         counterHtml +
         p.imagenes.map((src, idx) => {
             const isVideo = src.toLowerCase().endsWith('.mp4') || src.toLowerCase().endsWith('.webm');
-            const filename = src.split('/').pop() || '';
+            const filename = decodeURIComponent(src.split('/').pop()) || '';
             const spaceName = filename.split('.')[0].replace(/_/g, ' ') || '';
 
             if (isVideo) {
