@@ -773,7 +773,7 @@ function renderSoftware(data) {
                 </div>
                 <div class="glass-tooltip">
                     <strong class="text-blue-500 [.dark_&]:text-blue-400 block mb-1 text-[0.6rem]">Nivel: ${nivel}</strong>
-                    <p class="mb-1 opacity-90">${capacidad}</p>
+                    <p class="mb-1 opacity-90">${capacidad}${nombre.toLowerCase() === 'revit' ? '. Incluye MEP Fabrication' : ''}</p>
                 </div>
             </div>
         `;
@@ -1499,13 +1499,13 @@ function getThemeParam() {
 }
 
 window.goBack = function () {
-    if (window.history.length > 1) {
-        window.history.back();
-    } else {
-        window.location.href = `../../index.html?${getThemeParam()}`;
-    }
+    window.history.back();
 };
-window.goForward = function () { window.history.forward(); };
+
+window.goForward = function () { 
+    window.history.forward(); 
+};
+
 window.goHome = function (view = null) {
     let url = '../../index.html';
     const params = [];
@@ -1515,6 +1515,64 @@ window.goHome = function (view = null) {
     if (params.length > 0) url += '?' + params.join('&');
     window.location.href = url;
 };
+
+// --- LÓGICA DE RASTREO DE HISTORIAL PARA ESTADO VISUAL DE BOTONES (V4 - SESSION IDs) ---
+function ensurePsid() {
+    let state = window.history.state || {};
+    if (!state._psid_) {
+        state._psid_ = 'psid_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+        window.history.replaceState(state, '');
+    }
+    return state._psid_;
+}
+
+function trackPortfolioHistory() {
+    try {
+        let historyData = JSON.parse(sessionStorage.getItem('portfolio_history') || '{"stack":[], "index":-1}');
+        const currentPsid = ensurePsid();
+
+        const existingIndex = historyData.stack.findIndex(item => item.id === currentPsid);
+
+        if (existingIndex !== -1) {
+            historyData.index = existingIndex;
+        } else {
+            historyData.stack = historyData.stack.slice(0, historyData.index + 1);
+            historyData.stack.push({ id: currentPsid, url: window.location.href });
+            historyData.index = historyData.stack.length - 1;
+        }
+        
+        sessionStorage.setItem('portfolio_history', JSON.stringify(historyData));
+        updateNavigationVisuals(historyData);
+    } catch (e) {
+        console.error("Error tracking history V4:", e);
+    }
+}
+
+function updateNavigationVisuals(data) {
+    const backButtons = document.querySelectorAll('#nav-back, [id="nav-back"]');
+    const forwardButtons = document.querySelectorAll('#nav-forward, [id="nav-forward"]');
+    
+    const canGoBack = data.index > 0;
+    const canGoForward = data.index < data.stack.length - 1;
+
+    backButtons.forEach(btn => {
+        btn.style.opacity = canGoBack ? '1' : '0.2';
+        btn.style.pointerEvents = canGoBack ? 'auto' : 'none';
+        btn.style.cursor = canGoBack ? 'pointer' : 'default';
+        btn.disabled = !canGoBack;
+    });
+
+    forwardButtons.forEach(btn => {
+        btn.style.opacity = canGoForward ? '1' : '0.2';
+        btn.style.pointerEvents = canGoForward ? 'auto' : 'none';
+        btn.style.cursor = canGoForward ? 'pointer' : 'default';
+        btn.disabled = !canGoForward;
+    });
+}
+
+// Ejecutar al cargar y al cambiar estado (popstate)
+window.addEventListener('load', trackPortfolioHistory);
+window.addEventListener('popstate', trackPortfolioHistory);
 
 /* =========================================
    CERTIFICATE MODAL LOGIC
