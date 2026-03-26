@@ -24,7 +24,6 @@ const URL_HOME = `https://raw.githubusercontent.com/eduardoehr89-source/portafol
 const URL_SUMMARY_LOCAL = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Resumen_portafolio.csv?t=${timestamp}`;
 
 const TOP_PROJECTS_LIST = [
-    { name: "Estadio BBVA", loc: "Monterrey" },
     { name: "Barrio Santa Lucía", loc: "Monterrey" },
     { name: "Tren Ligero", loc: "Campeche" },
     { name: "Puentes Periféricos", loc: "Edo. Méx" },
