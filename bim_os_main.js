@@ -2383,8 +2383,8 @@ window.goToCV = function () {
 };
 
 window.goToPortfolio = function () {
-    // Ruta actualizada tras movimiento del usuario a 01_Sitio_Web
-    window.location.href = `./01_Sitio_Web/Portafolio_Resumido/index.html?${getThemeParam()}`;
+    // Ruta directa (sin 01_Sitio_Web) para coincidir con GitHub
+    window.location.href = `./Portafolio_Resumido/index.html?${getThemeParam()}`;
 };
 
 window.goHome = function (isPopstate = false) {
