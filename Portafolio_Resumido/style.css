@@ -110,24 +110,99 @@ body {
     padding-bottom: 10px !important;
 }
 
+@page {
+    size: A4;
+    margin: 0;
+}
+
 @media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
     body {
-        background: none;
-        padding: 0;
-        margin: 0;
+        background-color: var(--bg-page) !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        height: 100% !important;
+        overflow: hidden !important;
     }
 
     .a4-page {
-        box-shadow: none;
-        margin: 0;
-        border: none;
-        width: 100%;
-        height: 100%;
-        background-color: white !important;
-        color: #1e293b !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        border: none !important;
+        width: 210mm !important; /* Ancho exacto A4 */
+        height: 297mm !important; /* Alto exacto A4 */
+        zoom: 1 !important;
+        background-color: var(--bg-page) !important;
+        color: var(--text-main) !important;
+        overflow: hidden !important;
+        border-radius: 0 !important;
+        padding: 0.5cm !important; /* Márgenes de 0.5cm según última solicitud */
+        display: flex !important;
+        flex-direction: column !important;
     }
 
-.no-print {
+    /* Reducción agresiva para garantizar página única */
+    .custom-res-header {
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+        margin-bottom: 0 !important;
+    }
+
+    .main-stats-grid {
+        padding-top: 0.25rem !important;
+        gap: 0.15rem !important;
+    }
+
+    .project-card {
+        gap: 2px !important;
+        padding-bottom: 4px !important;
+    }
+
+    .sidebar-area {
+        padding: 0.35rem !important;
+        padding-right: 1.5rem !important; /* Espacio para respirar */
+        margin: 0 !important;
+        gap: 0.2rem !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.15) !important; /* Gris suave en fondo oscuro */
+    }
+
+    .map-wrapper {
+        height: 160px !important;
+        margin-top: 0.1rem !important;
+        margin-bottom: 0.1rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important; /* Restringir para no tapar el header */
+    }
+
+    .map-wrapper svg {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: contain !important;
+    }
+
+    /* Compactar métricas y títulos para compensar */
+    .metric-card {
+        padding: 0.3rem !important;
+        margin-bottom: 1px !important;
+    }
+
+    .section-title {
+        margin-top: 0.25rem !important;
+        margin-bottom: 0.2rem !important;
+    }
+
+    .main-stats-grid {
+        padding-top: 0.1rem !important;
+        gap: 1.5rem !important; /* Separación clara entre paneles */
+    }
+
+    .no-print {
         display: none !important;
     }
 }
@@ -241,90 +316,80 @@ body {
 }
 
 
-/* Premium Pulse System */
+/* --- PREMIUM PULSE SYSTEM (Homogenized with CV) --- */
 .premium-pulse-container {
     position: relative;
-    width: 20px;
-    height: 20px;
     display: flex;
+    height: 1.25rem;
+    width: 1.25rem;
     align-items: center;
     justify-content: center;
-    pointer-events: none;
 }
 
 .premium-pulse-aura {
     position: absolute;
-    width: 100%;
+    display: inline-flex;
     height: 100%;
-    border-radius: 50%;
+    width: 100%;
+    border-radius: 9999px;
+    opacity: 0.5;
     animation: premium-ping 3s cubic-bezier(0, 0, 0.2, 1) infinite;
-    opacity: 0;
 }
 
 .premium-pulse-dot {
     position: relative;
-    width: 6px;
+    display: inline-flex;
+    border-radius: 9999px;
     height: 6px;
-    border-radius: 50%;
-    z-index: 1;
+    width: 6px;
 }
 
-/* Variantes de Color */
-.pulse-cyan .premium-pulse-dot {
-    background-color: #00e5ff;
-    box-shadow: 0 0 15px #00e5ff;
+@keyframes premium-ping {
+    75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
 
+/* Color Variants */
 .pulse-cyan .premium-pulse-aura {
-    background-color: rgba(0, 229, 255, 0.4);
+    background-color: #22d3ee;
 }
 
-.pulse-purple .premium-pulse-dot {
-    background-color: #a855f7;
-    box-shadow: 0 0 15px #a855f7;
+.pulse-cyan .premium-pulse-dot {
+    background-color: #67e8f9;
+    box-shadow: 0 0 30px rgba(103, 232, 249, 1);
 }
 
 .pulse-purple .premium-pulse-aura {
-    background-color: rgba(168, 85, 247, 0.4);
+    background-color: #a855f7;
 }
 
-.pulse-blue .premium-pulse-dot {
-    background-color: #3b82f6;
-    box-shadow: 0 0 15px #3b82f6;
+.pulse-purple .premium-pulse-dot {
+    background-color: #c084fc;
+    box-shadow: 0 0 30px rgba(192, 132, 252, 1);
 }
 
 .pulse-blue .premium-pulse-aura {
-    background-color: rgba(59, 130, 246, 0.4);
+    background-color: #3b82f6;
 }
 
-.pulse-green .premium-pulse-dot {
-    background-color: #22c55e;
-    box-shadow: 0 0 15px #22c55e;
+.pulse-blue .premium-pulse-dot {
+    background-color: #60a5fa;
+    box-shadow: 0 0 30px rgba(96, 165, 250, 1);
 }
 
 .pulse-green .premium-pulse-aura {
-    background-color: rgba(34, 197, 94, 0.4);
+    background-color: #22c55e;
+}
+
+.pulse-green .premium-pulse-dot {
+    background-color: #4ade80;
+    box-shadow: 0 0 30px rgba(74, 222, 128, 1);
 }
 
 .shadow-glow {
     filter: drop-shadow(0 0 2px #3b82f6);
-}
-
-@keyframes premium-ping {
-    0% {
-        transform: scale(0.2);
-        opacity: 0.8;
-    }
-
-    80% {
-        transform: scale(1.2);
-        opacity: 0;
-    }
-
-    100% {
-        transform: scale(1.2);
-        opacity: 0;
-    }
 }
 
 /* Light Theme Adjustments */
@@ -490,9 +555,9 @@ aside#main-sidebar {
 }
 
 #sidebar-overlay {
-    background-color: rgba(0, 0, 0, 0.4) !important;
-    backdrop-filter: blur(4px) !important;
-    -webkit-backdrop-filter: blur(4px) !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
 }
 
 #summary-cv-popup.scale-100 {

@@ -7,8 +7,8 @@ const timestamp = `v_forced_${Date.now()}`;
 const URL_PROJECTS = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Proyectos_portafolio.csv?t=${timestamp}`;
 const URL_EDUCATION = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Formaci%C3%B3n%20acad%C3%A9mica_cv.csv?t=${timestamp}`;
 const URL_ROI_PROY = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/ROI_Scripts_portafolio%20resumido.txt?t=${timestamp}`;
-const CLOUD_ASSET_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/';
-const CLOUD_BADGE_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/insignias/';
+const CLOUD_ASSET_BASE = '../../';
+const CLOUD_BADGE_BASE = '../../CV/insignias/';
 const URL_SUMMARY = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Resumen_portafolio.csv?t=${timestamp}`;
 
 const TOP_PROJECTS_NAMES = [
@@ -225,34 +225,69 @@ function renderStatsDisciplines(projects) {
     const container = document.getElementById('stats-disciplines-container');
     if (!container) return;
 
-    const discCounts = {};
-    const uniqueIds = new Set();
-
+    // 1. Agrupar proyectos (Lógica idéntica a bim_os_main.js)
+    const uniqueMap = new Map();
     projects.forEach(p => {
-        const id = getVal(p, 'id');
-        if (id && !uniqueIds.has(id)) {
-            uniqueIds.add(id);
-            const discs = getVal(p, 'disciplina modelada', 'disciplinas').split(/[,;]/);
-            discs.forEach(d => {
-                let cleanD = d.trim().toUpperCase();
-                if (cleanD.includes("DOC") || cleanD.includes("CUAN")) cleanD = "DOCS Y CUANT.";
-                if (cleanD.includes("MEP") || cleanD.includes("INSTA")) cleanD = "MEP";
-                if (cleanD.length > 3) {
-                    discCounts[cleanD] = (discCounts[cleanD] || 0) + 1;
-                }
-            });
+        let key = getVal(p, 'id');
+        const name = normalizeStr(getVal(p, 'nombre'));
+
+        if (name.includes("modulo covid")) key = "GROUP_COVID";
+        else if (name.includes("central de mezclas")) key = "GROUP_MEZCLAS";
+
+        if (uniqueMap.has(key)) {
+            const existing = uniqueMap.get(key);
+            uniqueMap.set(key, existing + " " + getVal(p, 'disciplina modelada', 'disciplinas'));
+        } else {
+            uniqueMap.set(key, getVal(p, 'disciplina modelada', 'disciplinas'));
         }
     });
 
-    const stats = Object.entries(discCounts)
-        .map(([name, count]) => ({ name, count }))
-        .sort((a, b) => b.count - a.count)
-        .slice(0, 5);
+    const effectiveProjects = Array.from(uniqueMap.values());
 
-    const total = stats.reduce((acc, curr) => acc + curr.count, 0);
+    // 2. Lista de Referencia (Homologada con EXECUTIVE_INSIGHTS)
+    const refDisciplines = [
+        { name: "ARQUITECTURA", icon: "palmtree" },
+        { name: "ESTRUCTURAS", icon: "drafting-compass" },
+        { name: "MEP", icon: "workflow" },
+        { name: "Multidisciplina", icon: "users-round" },
+        { name: "Docs y Cuant.", icon: "file-text" }
+    ];
 
-    container.innerHTML = stats.map((s, i) => {
-        const pct = Math.round((s.count / total) * 100);
+    const stats = refDisciplines.map(ref => {
+        const refName = ref.name;
+        const refNameClean = normalizeStr(refName);
+        let count = 0;
+
+        effectiveProjects.forEach(pDiscsRaw => {
+            const pDiscs = normalizeStr(pDiscsRaw);
+
+            if (refNameClean.includes("doc") && refNameClean.includes("cuan")) {
+                if (pDiscs.includes("doc") || pDiscs.includes("cuan")) count++;
+            }
+            else if (refNameClean.includes('mep')) {
+                if (pDiscs.includes('mep') || pDiscs.includes('hidro') || pDiscs.includes('elec') || pDiscs.includes('insta')) count++;
+            }
+            else if (refNameClean.includes('arquitectura') && (pDiscs.includes('arquitectura') || pDiscs.includes('general'))) {
+                count++;
+            }
+            else if (refNameClean.includes('estructura')) {
+                if (pDiscs.includes('estructura')) count++;
+            }
+            else if (pDiscs.includes(refNameClean)) {
+                count++;
+            }
+        });
+
+        return { name: refName, count: count };
+    });
+
+    // 3. Ordenar y tomar TOP 5
+    stats.sort((a, b) => b.count - a.count);
+    const top5Stats = stats.slice(0, 5);
+    const totalCount = top5Stats.reduce((acc, curr) => acc + curr.count, 0) || 1;
+
+    container.innerHTML = top5Stats.map((s, i) => {
+        const pct = Math.round((s.count / totalCount) * 100);
         return `
             <div class="flex items-center gap-2 text-[8px] font-mono animate-item mb-1.5" style="animation-delay: ${i * 0.1}s">
                 <div class="flex items-center w-24 shrink-0">
@@ -351,7 +386,7 @@ function renderProjects(projects, roiData) {
         return `
             <div class="project-card pb-4 h-full flex flex-col">
                 <div class="relative overflow-hidden rounded-lg group mb-2 shrink-0">
-                    <a href="../index.html?view=projects&project=${id}" target="_blank" class="block cursor-pointer">
+                    <a href="../../index.html?view=projects&project=${id}" target="_blank" class="block cursor-pointer">
                         <img src="${imgPath}" alt="${name}" 
                              class="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-110"
                              onerror="this.src='https://via.placeholder.com/400x225?text=IMAGEN+NO+ENCONTRADA'">
@@ -391,10 +426,10 @@ function renderProjects(projects, roiData) {
                             <div class="group relative flex items-center justify-center gap-1 px-1 py-0.5 rounded bg-[var(--tag-bg)] text-[var(--text-accent)] border border-[var(--tag-border)] cursor-help w-full whitespace-nowrap">
                                 <i data-lucide="timer" class="w-2.5 h-2.5 shrink-0"></i>
                                 <span>ROI: ${proyRoi.roi}</span>
-                                                                 <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-56 p-2 roi-tooltip rounded shadow-xl text-[8px] opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-50 normal-case font-sans leading-snug font-normal">
-                                    <div class="font-bold border-b border-white/10 dark:border-white/10 pb-1 mb-1 tooltip-title uppercase tracking-tighter">OPTIMIZACIÓN TÉCNICA</div>
-                                    <div class="mb-1 italic font-normal">"${proyRoi.justificacion}"</div>
-                                    <div class="text-[7px] font-normal opacity-80">Ahorro estimado: <span class="font-bold text-[var(--text-accent)] dark:text-blue-400 html:not(.dark):text-blue-700">${proyRoi.ahorro}</span></div>
+                                <div class="absolute bottom-full right-0 mb-3 w-[280px] p-4 roi-tooltip rounded-xl shadow-2xl text-[9px] opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-50 normal-case font-sans leading-relaxed font-normal bg-[#0f141a]/95 backdrop-blur-md border border-white/10 text-white whitespace-normal break-words text-center">
+                                    <div class="font-bold border-b border-white/10 pb-2 mb-3 tooltip-title uppercase tracking-widest text-blue-400">OPTIMIZACIÓN TÉCNICA</div>
+                                    <div class="mb-3 italic opacity-90 leading-normal">"${proyRoi.justificacion}"</div>
+                                    <div class="text-[8px] font-medium pt-2 border-t border-white/10">Ahorro estimado desde Automatización: <span class="font-bold text-blue-400">${proyRoi.ahorro}</span></div>
                                 </div>
                             </div>
                         ` : `
@@ -553,10 +588,10 @@ function renderProjectsMap(projects) {
     svgSelect.selectAll("*").remove();
 
     const w = container.clientWidth; 
-    const h = 160; 
+    const h = container.clientHeight || 160; 
     
     const svg = svgSelect.attr("width", w).attr("height", h);
-    const proj = d3.geoMercator().center([-97, 23.5]).scale(w * 1.25).translate([w/2, h/2]);
+    const proj = d3.geoMercator().center([-89, 30]).scale(w * 0.9).translate([w/2, h * 0.5]);
     const path = d3.geoPath().projection(proj); 
     const g = svg.append("g");
 
@@ -696,13 +731,18 @@ function getThemeParam() {
 window.goBack = function () { window.history.back(); };
 window.goForward = function () { window.history.forward(); };
 window.goHome = function(view = null) {
-    let url = '../index.html';
+    let url = '../../index.html';
     const params = [];
     if (view) params.push(`view=${view}`);
     const theme = getThemeParam();
     if (theme) params.push(theme);
     if (params.length > 0) url += '?' + params.join('&');
     window.location.href = url;
+};
+
+// Navegación rápida (Hacia el Digital CV)
+window.switchView = function () {
+    window.location.href = `../CV/index.html?${getThemeParam()}`;
 };
 
 /* =========================================
@@ -746,13 +786,13 @@ window.closePdfModal = () => {
 window.downloadPdf = async (doc, type) => {
     const documents = {
         'cv': {
-            'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/CV%20-%20Said%20Herrera_light.pdf',
-            'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/CV%20-%20Said%20Herrera_dark.pdf',
+            'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/descargables/CV%20-%20Said%20Herrera_light%20mode.pdf',
+            'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/descargables/CV%20-%20Said%20Herrera_dark%20mode.pdf',
             'filename': 'CV_Said_Herrera'
         },
         'portfolio': {
-            'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Portafolio_Resumido.pdf',
-            'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Portafolio_Resumido.pdf',
+            'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/descargables/Portafolio%20-%20Said%20Herrera_light%20mode.pdf',
+            'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/descargables/Portafolio%20-%20Said%20Herrera_dark%20mode.pdf',
             'filename': 'Portafolio_Said_Herrera'
         }
     };

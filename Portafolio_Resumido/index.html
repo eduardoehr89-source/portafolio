@@ -38,7 +38,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css?v=50.54">
+    <link rel="stylesheet" href="style.css?v=50.99">
 </head>
 
 <body class="flex justify-center transition-colors duration-300">
@@ -64,7 +64,7 @@
                         class="text-cyan-400">HERRERA</span></h1>
                 <p class="text-[10px] text-gray-500 font-mono">MODELADOR BIM SENIOR &amp; <span
                         class="font-normal">CITIZEN DEVELOPER</span> //
-                    M&Eacute;XICO <span class="opacity-40">//</span> <span class="opacity-70">REMOTO</span></p>
+                    M&Eacute;XICO</p>
             </div>
             <button onclick="toggleSidebarCV()"
                 class="text-gray-500 hover:text-white transition mt-1 p-1 hover:bg-white/10 rounded">
@@ -112,7 +112,7 @@
 
             <button onclick="openPdfModal()"
                 class="nav-btn w-full flex items-center gap-4 px-4 py-3 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-white/5 hover:text-white border border-transparent hover:border-white/20 transition group">
-                <i data-lucide="download-cloud" class="w-5 h-5 text-gray-500 group-hover:text-white"></i>
+                <i data-lucide="arrow-down" class="w-5 h-5 text-gray-500 group-hover:text-white"></i>
                 DESCARGAS
             </button>
         </nav>
@@ -134,7 +134,7 @@
             <div class="flex flex-col items-center gap-1 text-white">
                 <button onclick="openPdfModal()" title="Descargar PDF"
                     class="p-2 text-white hover:text-blue-400 transition-all hover:scale-110">
-                    <i class="fas fa-file-pdf text-lg"></i>
+                    <i class="fas fa-arrow-down text-lg"></i>
                 </button>
                 <button onclick="toggleTheme()" id="theme-toggle-btn" title="Cambiar Tema"
                     class="p-2 text-white hover:text-blue-400 transition-all hover:scale-110">
@@ -169,35 +169,36 @@
     <div class="a4-page shadow-2xl relative overflow-hidden flex flex-col mx-auto transition-all duration-300">
 
         <!-- Header -->
-        <header class="custom-res-header p-6 pb-2 flex justify-between items-end border-b-2 border-blue-500">
+        <header class="custom-res-header p-6 pb-2 flex justify-between items-end mb-8" style="border-bottom: none !important;">
             <div>
                 <h1
-                    class="text-2xl font-light uppercase tracking-tighter text-[var(--text-main)] leading-none mb-1 transition-colors">
-                    SAID HERRERA
+                    class="text-2xl font-light uppercase tracking-tighter text-[var(--text-main)] leading-none mb-2 transition-colors">
+                    SAID HERRERA <span class="text-blue-600 dark:text-blue-400 font-normal ml-1">// PORTAFOLIO</span>
                 </h1>
                 <p
-                    class="text-xs font-mono text-blue-600 dark:text-blue-400 font-bold tracking-widest uppercase transition-colors">
+                    class="text-xs font-mono text-gray-500 dark:text-gray-400 font-normal tracking-widest uppercase transition-colors"
+                    style="display: inline-block !important; border-bottom: none !important; padding-bottom: 0px !important;">
                     Modelador BIM Senior & <span class="font-light">Citizen Developer</span></p>
             </div>
-            <div class="text-right flex flex-col items-end">
-                <span
-                    class="text-[10px] font-bold tracking-[0.3em] text-blue-600 dark:text-blue-400 uppercase font-mono mb-2 opacity-80">PORTAFOLIO</span>
-                <div class="text-[10px] space-y-0.5 text-gray-500 font-medium">
-                    <p><a href="mailto:eduardoehr89@gmail.com"
-                            class="hover:text-blue-500 transition-colors inline-flex items-center gap-1">
-                            eduardoehr89@gmail.com <i data-lucide="external-link" class="w-2 h-2 opacity-50"></i>
-                        </a></p>
+            <div class="text-right flex flex-col items-end relative z-50">
+                <div class="text-[10px] space-y-1 text-gray-500 font-medium">
+                    <p class="inline-flex items-center gap-2 transition-colors">
+                        <i class="fas fa-envelope opacity-70"></i> eduardoehr89@gmail.com
+                    </p>
                     <p><a href="https://wa.me/528120109796" target="_blank"
-                            class="hover:text-blue-500 transition-colors inline-flex items-center gap-1">
-                            +52 81 2010 9796 <i data-lucide="external-link" class="w-2 h-2 opacity-50"></i>
+                            class="hover:text-blue-500 transition-colors inline-flex items-center gap-2">
+                            <i class="fas fa-phone-alt opacity-70"></i> +52 81 2010 9796 
+                            <i data-lucide="external-link" class="w-2 h-2 opacity-30"></i>
                         </a></p>
-                    <p>Ciudad de México, México</p>
+                    <p class="inline-flex items-center gap-2">
+                        <i class="fas fa-map-marker-alt opacity-70"></i> Ciudad de México, México
+                    </p>
                 </div>
             </div>
         </header>
 
         <!-- Main Grid Area -->
-        <div class="flex-1 px-6 pt-2 pb-2 grid grid-cols-12 gap-4 content-start mb-0">
+        <div class="flex-1 px-6 pt-2 pb-2 grid grid-cols-12 gap-4 content-start mb-0 main-stats-grid">
 
             <!-- Sidebar / Stats -->
             <div
@@ -225,8 +226,8 @@
                             <span class="stat-label">Años de Exp.</span>
                         </div>
                         <div class="stat-card">
-                            <span class="stat-value">12X</span>
-                            <span class="stat-label">ROI en Tiempo</span>
+                            <span class="stat-value">20x</span>
+                            <span class="stat-label">ROI en Tiempo <small class="text-[7px] opacity-60 lowercase font-light">(promedio)</small></span>
                         </div>
                         <div class="stat-card">
                             <div class="flex items-center justify-between w-full">
@@ -244,6 +245,15 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3 class="section-title flex items-center gap-2 whitespace-nowrap">
+                        <i data-lucide="pie-chart" class="w-3 h-3 text-[var(--text-accent)]"></i> Fases del Proyecto
+                    </h3>
+                    <div id="stats-phases-container" class="space-y-1 mt-4">
+                        <!-- Inyectado por JS -->
                     </div>
                 </section>
 
@@ -267,16 +277,6 @@
 
                 <section>
                     <h3 class="section-title flex items-center gap-2 whitespace-nowrap">
-                        <i data-lucide="layout-grid" class="w-3 h-3 text-[var(--text-accent)]"></i> Metodología Proyecto
-                    </h3>
-                    <div id="stats-methodology-container" class="mt-4">
-                        <!-- Inyectado por JS -->
-                    </div>
-                </section>
-
-
-                <section>
-                    <h3 class="section-title flex items-center gap-2 whitespace-nowrap">
                         <i data-lucide="map-pin" class="w-3 h-3 text-[var(--text-accent)]"></i> Mi Entorno
                     </h3>
                     <div id="stats-environment-container" class="mt-4">
@@ -286,9 +286,9 @@
 
                 <section>
                     <h3 class="section-title flex items-center gap-2 whitespace-nowrap">
-                        <i data-lucide="pie-chart" class="w-3 h-3 text-[var(--text-accent)]"></i> Fases del Proyecto
+                        <i data-lucide="layout-grid" class="w-3 h-3 text-[var(--text-accent)]"></i> Metodología Proyecto
                     </h3>
-                    <div id="stats-phases-container" class="space-y-1 mt-4">
+                    <div id="stats-methodology-container" class="mt-4">
                         <!-- Inyectado por JS -->
                     </div>
                 </section>
@@ -302,15 +302,15 @@
                             Para explorar mi informacion profesional completa (Certificaciones, Galería, IA, Proyectos, ROI, etc.),
                             visita mi ecosistema:
                         </p>
-                        <button onclick="goHome()" class="flex items-center gap-2 group transition-all no-print bg-transparent border-none p-0 cursor-pointer">
+                        <a href="../../index.html" class="flex items-center gap-2 group transition-all bg-transparent border-none p-0 cursor-pointer no-underline">
                             <span
                                 class="text-[0.65rem] font-bold text-blue-400 group-hover:text-blue-300 decoration-dotted underline-offsets-4 hover:underline uppercase tracking-widest leading-none flex items-center">
-                                <div class="premium-pulse-container pulse-blue">
+                                <div class="premium-pulse-container pulse-blue no-print">
                                     <div class="premium-pulse-aura"></div>
                                     <div class="premium-pulse-dot"></div>
                                 </div> BIM.OS <i class="fas fa-external-link-alt text-[0.45rem] ml-0.5 opacity-60"></i>
                             </span>
-                        </button>
+                        </a>
                     </div>
                 </section>
 
@@ -340,11 +340,11 @@
     <div id="pdf-modal"
         class="hidden fixed inset-0 z-[10000] flex items-center justify-center bg-black/60 backdrop-blur-sm no-print">
         <div
-            class="bg-white dark:bg-[#0f141a] p-8 rounded-xl shadow-2xl max-w-[450px] w-full text-center border border-gray-200 dark:border-gray-800">
-            <div class="text-blue-500 text-4xl mb-4"><i class="fas fa-file-pdf"></i></div>
+            class="bg-white dark:bg-[#0f141a] p-8 pb-4 rounded-xl shadow-2xl max-w-[450px] w-full text-center border border-gray-200 dark:border-gray-800">
+
             <h3 class="font-light tracking-wide text-lg text-gray-800 dark:text-gray-200 mb-1">CENTRO DE DESCARGAS</h3>
             <p class="text-[10px] text-gray-500 mb-6 uppercase tracking-[0.2em]">
-                Selecciona el documento y la versión temática
+                Selecciona el documento y la versión temática (FORMATO PDF)
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -353,31 +353,31 @@
                     <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100 dark:border-gray-800 pb-1">CURRICULUM VITAE</p>
                     <button onclick="downloadPdf('cv', 'light')"
                         class="w-full px-3 py-2 text-xs font-medium bg-transparent text-gray-700 dark:text-gray-300 rounded hover:bg-gray-100 dark:hover:bg-white/5 border border-gray-200 dark:border-white/10 transition-colors flex justify-center items-center gap-2">
-                        <i class="fas fa-sun text-blue-500"></i> Claro
+                        <i class="fas fa-sun text-cyan-500"></i> Claro
                     </button>
                     <button onclick="downloadPdf('cv', 'dark')"
                         class="w-full px-3 py-2 text-xs font-medium bg-transparent text-gray-700 dark:text-gray-300 rounded hover:bg-gray-100 dark:hover:bg-white/5 border border-gray-200 dark:border-white/10 transition-colors flex justify-center items-center gap-2">
-                        <i class="fas fa-moon text-blue-500"></i> Oscuro
+                        <i class="fas fa-moon text-cyan-500"></i> Oscuro
                     </button>
                     <button onclick="downloadPdf('cv', 'both')"
-                        class="w-full px-3 py-2 text-[10px] font-bold bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded hover:bg-blue-500/20 border border-blue-500/20 transition-colors flex justify-center items-center gap-2">
+                        class="w-full px-3 py-2 text-[10px] font-bold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 rounded hover:bg-cyan-500/20 border border-cyan-500/20 transition-colors flex justify-center items-center gap-2">
                         <i class="fas fa-layer-group"></i> Ambos
                     </button>
                 </div>
 
                 <!-- Columna Portafolio -->
                 <div class="space-y-3">
-                    <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100 dark:border-gray-800 pb-1">PORTAFOLIO RESUMIDO</p>
+                    <p class="text-[9px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100 dark:border-gray-800 pb-1">PORTAFOLIO</p>
                     <button onclick="downloadPdf('portfolio', 'light')"
                         class="w-full px-3 py-2 text-xs font-medium bg-transparent text-gray-700 dark:text-gray-300 rounded hover:bg-gray-100 dark:hover:bg-white/5 border border-gray-200 dark:border-white/10 transition-colors flex justify-center items-center gap-2">
-                        <i class="fas fa-sun text-cyan-500"></i> Claro
+                        <i class="fas fa-sun text-blue-500"></i> Claro
                     </button>
                     <button onclick="downloadPdf('portfolio', 'dark')"
                         class="w-full px-3 py-2 text-xs font-medium bg-transparent text-gray-700 dark:text-gray-300 rounded hover:bg-gray-100 dark:hover:bg-white/5 border border-gray-200 dark:border-white/10 transition-colors flex justify-center items-center gap-2">
-                        <i class="fas fa-moon text-cyan-500"></i> Oscuro
+                        <i class="fas fa-moon text-blue-500"></i> Oscuro
                     </button>
                     <button onclick="downloadPdf('portfolio', 'both')"
-                        class="w-full px-3 py-2 text-[10px] font-bold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 rounded hover:bg-cyan-500/20 border border-cyan-500/20 transition-colors flex justify-center items-center gap-2">
+                        class="w-full px-3 py-2 text-[10px] font-bold bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded hover:bg-blue-500/20 border border-blue-500/20 transition-colors flex justify-center items-center gap-2">
                         <i class="fas fa-layer-group"></i> Ambos
                     </button>
                 </div>
@@ -386,15 +386,15 @@
             <div class="mt-6">
                 <button onclick="downloadPdf('all', 'all')"
                     class="w-full px-4 py-3 text-xs font-bold bg-gray-50 dark:bg-white/5 text-gray-700 dark:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 border border-gray-200 dark:border-white/20 transition-all flex justify-center items-center gap-3 shadow-lg">
-                    <i class="fas fa-cloud-download-alt text-blue-500 dark:text-cyan-400 text-base"></i>
+                    <i class="fas fa-arrow-down text-cyan-500 dark:text-cyan-400 text-base"></i>
                     DESCARGAR TODO (4 ARCHIVOS)
                 </button>
             </div>
 
-            <div class="w-full h-px bg-gray-200 dark:bg-gray-800 my-6"></div>
+            <div class="w-full h-px bg-gray-200 dark:bg-gray-800 mt-6 mb-2"></div>
             <button onclick="closePdfModal()"
-                class="w-full px-4 py-2 text-xs font-light text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors uppercase tracking-[0.3em]">
-                Cerrar Panel
+                class="w-full px-4 py-2 text-sm font-bold text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors uppercase tracking-[0.3em]">
+                <i class="fas fa-times"></i>
             </button>
         </div>
     </div>
@@ -438,7 +438,7 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://d3js.org/topojson.v3.min.js"></script>
     <script src="../../db_imagenes.js"></script>
-    <script src="res_main.js?v=50.54"></script>
+    <script src="res_main.js?v=50.99"></script>
     <script>
         function toggleSidebarCV() {
             const sidebar = document.getElementById('main-sidebar');
