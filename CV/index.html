@@ -30,7 +30,7 @@
     </script>
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="style.css?v=50.54">
+    <link rel="stylesheet" href="style.css?v=50.99">
 
     <!-- Open Graph / LinkedIn -->
     <meta property="og:type" content="website">
@@ -56,10 +56,6 @@
         </button>
     </div>
 
-    <!-- Botón de Exportación Directa HD (Bottom Right) -->
-    <button onclick="exportHD()" class="fixed bottom-6 right-6 z-[100] bg-green-600 hover:bg-green-500 text-white font-bold rounded-full py-3 px-6 shadow-2xl transition-transform hover:scale-105 cursor-pointer no-print flex items-center gap-2" title="Generar PDF 1:1">
-        <i class="fas fa-camera"></i> Guardar PDF Local (HD)
-    </button>
 
     <!-- Print Modal -->
     <div id="print-modal"
@@ -86,11 +82,11 @@
     <div id="pdf-modal"
         class="hidden fixed inset-0 z-[10000] flex items-center justify-center bg-black/60 backdrop-blur-sm no-print">
         <div
-            class="bg-white dark:bg-[#0f141a] p-8 rounded-xl shadow-2xl max-w-[450px] w-full text-center border border-gray-200 dark:border-gray-800">
-            <div class="text-blue-500 text-4xl mb-4"><i class="fas fa-file-pdf"></i></div>
+            class="bg-white dark:bg-[#0f141a] p-8 pb-4 rounded-xl shadow-2xl max-w-[450px] w-full text-center border border-gray-200 dark:border-gray-800">
+
             <h3 class="font-light tracking-wide text-lg text-gray-800 dark:text-gray-200 mb-1">CENTRO DE DESCARGAS</h3>
             <p class="text-[10px] text-gray-500 mb-6 uppercase tracking-[0.2em]">
-                Selecciona el documento y la versión temática
+                Selecciona el documento y la versión temática (FORMATO PDF)
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -101,14 +97,14 @@
                         CURRICULUM VITAE</p>
                     <button onclick="downloadPdf('cv', 'light')"
                         class="w-full px-3 py-2 text-xs font-medium bg-transparent text-gray-700 dark:text-gray-300 rounded hover:bg-gray-100 dark:hover:bg-white/5 border border-gray-200 dark:border-white/10 transition-colors flex justify-center items-center gap-2">
-                        <i class="fas fa-sun text-blue-500"></i> Claro
+                        <i class="fas fa-sun text-cyan-500"></i> Claro
                     </button>
                     <button onclick="downloadPdf('cv', 'dark')"
                         class="w-full px-3 py-2 text-xs font-medium bg-transparent text-gray-700 dark:text-gray-300 rounded hover:bg-gray-100 dark:hover:bg-white/5 border border-gray-200 dark:border-white/10 transition-colors flex justify-center items-center gap-2">
-                        <i class="fas fa-moon text-blue-500"></i> Oscuro
+                        <i class="fas fa-moon text-cyan-500"></i> Oscuro
                     </button>
                     <button onclick="downloadPdf('cv', 'both')"
-                        class="w-full px-3 py-2 text-[10px] font-bold bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded hover:bg-blue-500/20 border border-blue-500/20 transition-colors flex justify-center items-center gap-2">
+                        class="w-full px-3 py-2 text-[10px] font-bold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 rounded hover:bg-cyan-500/20 border border-cyan-500/20 transition-colors flex justify-center items-center gap-2">
                         <i class="fas fa-layer-group"></i> Ambos
                     </button>
                 </div>
@@ -117,17 +113,17 @@
                 <div class="space-y-3">
                     <p
                         class="text-[9px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100 dark:border-gray-800 pb-1">
-                        PORTAFOLIO RESUMIDO</p>
+                        PORTAFOLIO</p>
                     <button onclick="downloadPdf('portfolio', 'light')"
                         class="w-full px-3 py-2 text-xs font-medium bg-transparent text-gray-700 dark:text-gray-300 rounded hover:bg-gray-100 dark:hover:bg-white/5 border border-gray-200 dark:border-white/10 transition-colors flex justify-center items-center gap-2">
-                        <i class="fas fa-sun text-cyan-500"></i> Claro
+                        <i class="fas fa-sun text-blue-500"></i> Claro
                     </button>
                     <button onclick="downloadPdf('portfolio', 'dark')"
                         class="w-full px-3 py-2 text-xs font-medium bg-transparent text-gray-700 dark:text-gray-300 rounded hover:bg-gray-100 dark:hover:bg-white/5 border border-gray-200 dark:border-white/10 transition-colors flex justify-center items-center gap-2">
-                        <i class="fas fa-moon text-cyan-500"></i> Oscuro
+                        <i class="fas fa-moon text-blue-500"></i> Oscuro
                     </button>
                     <button onclick="downloadPdf('portfolio', 'both')"
-                        class="w-full px-3 py-2 text-[10px] font-bold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 rounded hover:bg-cyan-500/20 border border-cyan-500/20 transition-colors flex justify-center items-center gap-2">
+                        class="w-full px-3 py-2 text-[10px] font-bold bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded hover:bg-blue-500/20 border border-blue-500/20 transition-colors flex justify-center items-center gap-2">
                         <i class="fas fa-layer-group"></i> Ambos
                     </button>
                 </div>
@@ -136,15 +132,15 @@
             <div class="mt-6">
                 <button onclick="downloadPdf('all', 'all')"
                     class="w-full px-4 py-3 text-xs font-bold bg-gray-50 dark:bg-white/5 text-gray-700 dark:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 border border-gray-200 dark:border-white/20 transition-all flex justify-center items-center gap-3 shadow-lg">
-                    <i class="fas fa-cloud-download-alt text-blue-500 dark:text-cyan-400 text-base"></i>
+                    <i class="fas fa-arrow-down text-cyan-500 dark:text-cyan-400 text-base"></i>
                     DESCARGAR TODO (4 ARCHIVOS)
                 </button>
             </div>
 
-            <div class="w-full h-px bg-gray-200 dark:bg-gray-800 my-6"></div>
+            <div class="w-full h-px bg-gray-200 dark:bg-gray-800 mt-6 mb-2"></div>
             <button onclick="closePdfModal()"
-                class="w-full px-4 py-2 text-xs font-light text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors uppercase tracking-[0.3em]">
-                Cerrar Panel
+                class="w-full px-4 py-2 text-sm font-bold text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors uppercase tracking-[0.3em]">
+                <i class="fas fa-times"></i>
             </button>
         </div>
     </div>
@@ -164,11 +160,11 @@
             <!-- Botones de Utilidad (PDF + Tema) -->
             <div class="flex flex-col items-center gap-1 text-white">
                 <button onclick="openPdfModal()" title="Descargar PDF"
-                    class="p-2 text-white hover:text-blue-400 transition-all hover:scale-110">
-                    <i class="fas fa-file-pdf text-lg"></i>
+                    class="p-2 text-white hover:text-cyan-400 transition-all hover:scale-110">
+                    <i class="fas fa-arrow-down text-lg"></i>
                 </button>
                 <button id="theme-toggle" title="Cambiar Tema"
-                    class="p-2 text-white hover:text-blue-400 transition-all hover:scale-110">
+                    class="p-2 text-white hover:text-cyan-400 transition-all hover:scale-110">
                     <i data-lucide="sun" class="w-5 h-5 light-icon-hide"></i>
                     <i data-lucide="moon" class="w-5 h-5 light-icon-show"></i>
                 </button>
@@ -199,7 +195,7 @@
     <!-- CV Main Container -->
     <main id="cv-container" class="cv-container flex rounded-xl overflow-hidden shadow-2xl">
         <!-- Sidebar -->
-        <aside class="sidebar-color w-[265px] p-4 flex flex-col h-full relative z-10">
+        <aside class="sidebar-color w-[265px] p-4 flex flex-col h-full relative z-30">
             <!-- Cabecera con Imagen Expansiva (Altura fijada para alineación estructural) -->
             <header class="relative -mx-4 -mt-4 mb-0 h-64 overflow-hidden group">
                 <!-- Imagen de Fondo -->
@@ -209,13 +205,13 @@
                     class="absolute inset-0 w-full h-full bg-[#0f1013] z-0 overflow-hidden group">
                     <!-- Imagen de fondo (preparada para la siguiente ronda) -->
                     <img id="cv-profile-back"
-                        src="https://raw.githubusercontent.com/eduardoehr89-source/portafolio/f70bfc4c31c58274aaafa175d142f5a6f4145e46/CV/fotos%20de%20perfil/profile_optimized_02.jpg"
+                        src="fotos de perfil/profile_optimized_02.jpg"
                         alt=""
                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-[10000ms] ease-out group-hover:scale-110 z-0">
 
                     <!-- Imagen frontal (visible actual cruzando Fade) -->
                     <img id="cv-profile-front"
-                        src="https://raw.githubusercontent.com/eduardoehr89-source/portafolio/f70bfc4c31c58274aaafa175d142f5a6f4145e46/CV/fotos%20de%20perfil/profile_optimized_01.jpg"
+                        src="fotos de perfil/profile_optimized_01.jpg"
                         alt="Said Herrera"
                         class="absolute inset-0 w-full h-full object-cover transition-all duration-[2500ms] ease-in-out group-hover:scale-110 z-10 opacity-100">
 
@@ -277,8 +273,7 @@
                 <address class="text-[0.65rem] space-y-1 not-italic text-gray-300">
                     <p class="flex items-center gap-2">
                         <i class="fas fa-envelope w-4 text-center"></i>
-                        <a id="contact-email" href="mailto:eduardoehr89@gmail.com"
-                            class="hover:text-white transition-colors">eduardoehr89@gmail.com</a>
+                        <span id="contact-email">eduardoehr89@gmail.com</span>
                     </p>
                     <p class="flex items-center gap-2">
                         <i class="fab fa-whatsapp w-4 text-center"></i>
@@ -443,226 +438,7 @@
             <!-- Content Grid Unificado (8 Columnas) -->
             <div id="summary-cv-cards-container"
                 class="p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-9 gap-2 items-start overflow-y-auto max-h-[70vh] thin-scroll">
-                <!-- Card 0: Vibe Coding (VIBE CODING) -->
-                <div
-                    class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
-                        <div
-                            class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
-                            <i data-lucide="zap" class="w-4 h-4"></i>
-                        </div>
-                    </div>
-                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
-                        <h4
-                            class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
-                            DESARROLLO</h4>
-                    </div>
-                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
-                        <p class="text-white font-bold text-[15px] leading-tight uppercase text-center">VIBE CODING
-                        </p>
-                    </div>
-                    <p
-                        class="text-[9px] text-cyan-500/70 [.light-theme_&]:text-cyan-800 font-bold uppercase font-mono mt-auto pt-1">
-                        IA + AGENTIC CODING<br>(ANTIGRAVITY)</p>
-                </div>
-                <!-- Card 1: Experiencia (EXPERIENCIA) -->
-                <div
-                    class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
-                        <div
-                            class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
-                            <i data-lucide="history" class="w-4 h-4"></i>
-                        </div>
-                    </div>
-                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
-                        <h4
-                            class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
-                            EXPERIENCIA</h4>
-                    </div>
-                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
-                        <p class="text-white font-bold text-[15px] leading-tight uppercase text-center">10+ A&Ntilde;OS
-                        </p>
-                    </div>
-                    <p
-                        class="text-[9px] text-cyan-500/70 [.light-theme_&]:text-cyan-800 font-bold uppercase font-mono mt-auto pt-1">
-                        M&Eacute;XICO, USA Y JAMAICA | 20+ CIUDADES | 40+ PROYECTOS</p>
-                </div>
-
-                <!-- Card 2: Software Core (SOFTWARE CORE) -->
-                <div
-                    class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
-                        <div
-                            class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
-                            <i data-lucide="code-2" class="w-4 h-4"></i>
-                        </div>
-                    </div>
-                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
-                        <h4
-                            class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
-                            SOFTWARE PRINCIPAL</h4>
-                    </div>
-                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
-                        <a href="https://www.credential.net/6a2328e0-b4d5-4379-870a-885f476879ab#acc.8RMlPckA"
-                            target="_blank" class="hover:opacity-80 transition-opacity">
-                            <p class="text-white font-bold text-[15px] leading-tight uppercase text-center">REVIT <i
-                                    class="fas fa-external-link-alt text-[10px] text-gray-400"></i></p>
-                        </a>
-
-
-                    </div>
-                    <p
-                        class="text-[9px] text-cyan-500/70 [.light-theme_&]:text-cyan-800 font-bold uppercase font-mono mt-auto pt-1">
-                        MODELADO BIM</p>
-                </div>
-
-                <!-- Card 3: Modelado (MODELADO) -->
-                <div
-                    class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
-                        <div
-                            class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
-                            <i data-lucide="layers" class="w-4 h-4"></i>
-                        </div>
-                    </div>
-                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
-                        <h4
-                            class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
-                            MODELADO</h4>
-                    </div>
-                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
-                        <p class="text-white font-bold text-[15px] leading-tight uppercase text-center">MULTIDISCIPLINA
-                        </p>
-                    </div>
-                    <p
-                        class="text-[9px] text-cyan-500/70 [.light-theme_&]:text-cyan-800 font-bold uppercase font-mono mt-auto pt-1">
-                        COORDINACI&Oacute;N BIM</p>
-                </div>
-
-                <!-- Card 4: Standards (EST&Aacute;NDAR MAESTRO) -->
-                <div
-                    class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
-                        <div
-                            class="w-9 h-9 rounded-lg bg-cyan-600/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-cyan-600/20 transition-all duration-300 font-bold text-cyan-400">
-                            <i data-lucide="file-check" class="w-4 h-4"></i>
-                        </div>
-                    </div>
-                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
-                        <h4
-                            class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
-                            EST&Aacute;NDAR MAESTRO</h4>
-                    </div>
-                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
-                        <a href="https://qualification.buildingsmart.org/badges/badge.php?hash=7938aa1456a67a6861892d214196c7b7e6861bd7"
-                            target="_blank" class="hover:opacity-80 transition-opacity">
-                            <p
-                                class="text-white font-bold text-[15px] leading-tight uppercase text-center whitespace-nowrap">
-                                BUILDINGSMART <i class="fas fa-external-link-alt text-[10px] text-gray-400"></i></p>
-                        </a>
-
-
-                    </div>
-                    <p
-                        class="text-[9px] text-cyan-500/70 [.light-theme_&]:text-cyan-800 font-bold uppercase font-mono mt-auto pt-1">
-                        ISO 19650</p>
-
-                </div>
-
-                <!-- Card 5: Gemini (GEMINI) -->
-                <div
-                    class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
-                        <div
-                            class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
-                            <i data-lucide="brain-circuit" class="w-4 h-4"></i>
-                        </div>
-                    </div>
-                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
-                        <h4
-                            class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
-                            GEMINI</h4>
-                    </div>
-                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
-                        <p class="text-white font-bold text-[15px] leading-tight uppercase text-center">IA
-                        </p>
-                    </div>
-                    <p class="text-[9px] text-sky-800 font-bold uppercase font-mono mt-auto pt-1">
-                        Optimizaci&oacute;n de flujo global</p>
-                </div>
-
-                <!-- Card 6: Idioma (IDIOMA) -->
-                <div
-                    class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
-                        <div
-                            class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
-                            <i data-lucide="languages" class="w-4 h-4"></i>
-                        </div>
-                    </div>
-                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
-                        <h4
-                            class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
-                            IDIOMA</h4>
-                    </div>
-                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
-                        <a href="https://cert.efset.org/es/pfLEMW" target="_blank"
-                            class="hover:text-cyan-400 transition-colors">
-                            <p class="text-white font-bold text-[15px] leading-tight uppercase text-center">
-                                INGL&Eacute;S A2 <i class="fas fa-external-link-alt text-[10px] text-gray-400"></i></p>
-                        </a>
-                    </div>
-                    <p class="text-[9px] text-sky-800 font-bold uppercase font-mono mt-auto pt-1">
-                        B&Aacute;SICO</p>
-                </div>
-
-                <!-- Card 7: ROI (AHORRO EN TIEMPO) -->
-                <div
-                    class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
-                        <div
-                            class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
-                            <i data-lucide="trending-up" class="w-4 h-4"></i>
-                        </div>
-                    </div>
-                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
-                        <h4
-                            class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
-                            AHORRO EN TIEMPO</h4>
-                    </div>
-                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
-                        <p class="text-white font-bold text-[15px] leading-tight uppercase text-center">12X</p>
-                    </div>
-                    <p class="text-[9px] text-sky-800 font-bold uppercase font-mono mt-auto pt-1">
-                        VELOCIDAD PROMEDIO</p>
-                </div>
-
-                <!-- Card 8: M�ster (M&Aacute;STER EN CURSO) -->
-                <div
-                    class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                    <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
-                        <div
-                            class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
-                            <i data-lucide="graduation-cap" class="w-4 h-4"></i>
-                        </div>
-                    </div>
-                    <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
-                        <h4
-                            class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">
-                            M&Aacute;STER EN CURSO</h4>
-                    </div>
-                    <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
-                        <a href="https://www.credential.net/c455ea9f-59d7-44d6-9d15-c81eb34d5cfb#acc.rfPIGXZj"
-                            target="_blank" class="hover:opacity-80 transition-opacity">
-                            <p class="text-white font-bold text-[15px] leading-tight uppercase text-center">MBIA: BIM +
-                                IA <i class="fas fa-external-link-alt text-[10px] text-gray-400"></i></p>
-                        </a>
-
-
-                    </div>
-                    <p class="text-[9px] text-sky-800 font-bold uppercase font-mono mt-auto pt-1">
-                        BUTIC<br>ESPA&Ntilde;A</p>
-                </div>
+                <!-- El contenido se genera dinámicamente desde el CSV -->
             </div>
 
             <!-- Footer Popup Personalizado -->
@@ -692,7 +468,7 @@
                         class="text-cyan-400">HERRERA</span></h1>
                 <p class="text-[10px] text-gray-500 font-mono">MODELADOR BIM SENIOR &amp; <span
                         class="font-normal">CITIZEN DEVELOPER</span> //
-                    M&Eacute;XICO <span class="opacity-40">//</span> <span class="opacity-70">REMOTO</span></p>
+                    M&Eacute;XICO</p>
             </div>
             <button onclick="toggleSidebarCV()"
                 class="text-gray-500 hover:text-white transition mt-1 p-1 hover:bg-white/10 rounded">
@@ -741,7 +517,7 @@
 
             <button onclick="openPdfModal()"
                 class="nav-btn w-full flex items-center gap-4 px-4 py-3 rounded-lg text-sm font-light font-mono text-gray-500 hover:bg-white/5 hover:text-white border border-transparent hover:border-white/20 transition group">
-                <i data-lucide="download-cloud" class="w-5 h-5 text-gray-500 group-hover:text-white"></i>
+                <i data-lucide="arrow-down" class="w-5 h-5 text-gray-500 group-hover:text-white"></i>
                 DESCARGAS
             </button>
         </nav>
@@ -771,7 +547,7 @@
     </div>
 
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="cv_main.js?v=50.54"></script>
+    <script src="cv_main.js?v=50.99"></script>
     <script>
         function toggleSidebarCV() {
             const sidebar = document.getElementById('main-sidebar');

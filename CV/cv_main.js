@@ -315,7 +315,9 @@ function renderEducation(data, softwareData = []) {
         'aimaster',
         'mastersuperior',
         'plannerly',
-        'bimcollab'
+        'bimcollab',
+        'dynamo',
+        'advanced'
     ];
 
     const educationRecords = data.filter(edu => {
@@ -328,8 +330,9 @@ function renderEducation(data, softwareData = []) {
         if (rawJson.includes('bcf') || rawJson.includes('bc manager') || name.includes('bcf')) return false;
 
         const isAcademic = cat.includes('master') || cat.includes('licenciatura') || cat.includes('ingenieria') || cat.includes('grado') || cat.includes('academico') || cat.includes('diploma');
-        const isOngoing = st.includes('curso') || st.includes('cruso') || st.includes('presente');
-        const isWhitelisted = whitelist.some(w => name.includes(w));
+        const isOngoing = st.includes('curso') || st.includes('cruso') || st.includes('presente') || st.includes('programado');
+        const institucion = normalizeStr(getVal(edu, 'Institucion', 'Institución', 'institucion'));
+        const isWhitelisted = whitelist.some(w => name.includes(w)) || institucion.includes('buildingsmart');
 
         if (name.includes('cursobimcollabids') || name.includes('bimcollabids') || name.includes('gettingstarted') ||
             name.includes('webviewer') || name.includes('zoom') || name.includes('smartproperties') || name.includes('issuemanagement') || name.includes('idscourse')) return false;
@@ -340,9 +343,22 @@ function renderEducation(data, softwareData = []) {
         if (isWhitelisted) return true;
         if (isOngoing && isWhitelisted) return true;
 
-        if (name.includes('dynamo') || name.includes('solibri')) return true;
+        if (name.includes('solibri')) return false; // Solibri pausado por usuario
 
         return false;
+    }).sort((a, b) => {
+        const nameA = normalizeStr(getVal(a, 'Nombre', 'Titulo'));
+        const nameB = normalizeStr(getVal(b, 'Nombre', 'Titulo'));
+        
+        // Prioridad estratégica: Butic (1) > buildingSMART (2) > Dynamo/Otros (3)
+        const getPriority = (name) => {
+            if (name.includes('aimaster') || name.includes('butic')) return 1;
+            if (name.includes('buildingsmart') || name.includes('advanced')) return 2;
+            if (name.includes('dynamo')) return 3;
+            return 99;
+        };
+        
+        return getPriority(nameA) - getPriority(nameB);
     });
 
     const certificationRecords = data.filter(edu => {
@@ -413,14 +429,26 @@ function renderEducation(data, softwareData = []) {
             if (normalizedTitle.includes('solibri')) iconClass = 'fa-check-double';
 
             const urlPagina = getVal(edu, 'URL Página', 'URL Pagina');
-            // Crear insignia circular personalizada para Dynamo/Solibri si no hay imagen
+            const isGenericCSV = (getVal(edu, 'Badge genérico', 'generico') || '').toUpperCase() === 'SI';
+            const titleCSV = getVal(edu, 'Titulo en badge genérico', 'titulo generico');
+
+            // Crear insignia circular personalizada si no hay imagen oficial o si se marca como genérico
             let customBadge = '';
-            const isCustom = normalizedTitle.includes('dynamo') || normalizedTitle.includes('solibri');
-            if (!badgeFile && isCustom) {
-                const shortTitle = normalizedTitle.includes('dynamo') ? 'DYNAMO' : 'SOLIBRI';
+            if (isGenericCSV || (!badgeFile && (normalizedTitle.includes('dynamo') || normalizedTitle.includes('solibri') || normalizedTitle.includes('advanced')))) {
+                let shortTitle = 'CERT';
+                if (titleCSV && titleCSV !== 'N/A' && titleCSV !== '') {
+                    shortTitle = titleCSV.trim();
+                } else if (normalizedTitle.includes('dynamo')) {
+                    shortTitle = 'DYNAMO';
+                } else if (normalizedTitle.includes('solibri')) {
+                    shortTitle = 'SOLIBRI';
+                } else if (normalizedTitle.includes('advanced')) {
+                    shortTitle = 'ADVANCED';
+                }
+
                 customBadge = `
-                    <div class="relative w-[95px] h-[95px] rounded-full bg-zinc-800 [.light-theme_&]:bg-zinc-200 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                        <span class="text-[10px] font-black text-white [.light-theme_&]:text-zinc-900 tracking-[0.2em] uppercase text-center px-1 drop-shadow-[0_2px_2px_rgba(0,0,0,0.4)]">${shortTitle}</span>
+                    <div class="relative w-[95px] h-[95px] rounded-full bg-zinc-800 [.light-theme_&]:bg-zinc-200 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                        <span class="text-[10px] font-black text-white [.light-theme_&]:text-zinc-900 tracking-[0.1em] uppercase text-center px-2 leading-tight break-words">${shortTitle.split(' ').join('<br>')}</span>
                     </div>`;
             }
 
@@ -452,7 +480,7 @@ function renderEducation(data, softwareData = []) {
             }
 
             const isAIMaster = titulo.toLowerCase().includes('ai master');
-            const hideText = isAIMaster || isCustom;
+            const hideText = isAIMaster || isGenericCSV || customBadge !== '';
             gridContainer.innerHTML += `
                 <div class="future-study group flex flex-row items-center gap-3">
                     ${badgeImg}
@@ -521,7 +549,15 @@ function renderEducation(data, softwareData = []) {
             'plannerly': 3
         };
 
-        const sortedCerts = [...certificationRecords].sort((a, b) => {
+        const sortedCerts = [...certificationRecords].filter(cert => {
+            const lowName = normalizeStr(getVal(cert, 'Nombre', 'Titulo'));
+            // Filtrar curso Level 2 de Plannerly reportado como dañado/sin badge
+            if (lowName.includes('plannerly') && lowName.includes('level2')) return false;
+            // Filtrar SOLO el hash específico del certificado de tutor fallido (a8d80c58d614ffe0)
+            const certStr = JSON.stringify(cert).toLowerCase();
+            if (certStr.includes('a8d80c58d614ffe0')) return false;
+            return true;
+        }).sort((a, b) => {
             const nameA = normalizeStr(getVal(a, 'Nombre', 'Titulo'));
             const nameB = normalizeStr(getVal(b, 'Nombre', 'Titulo'));
 
@@ -760,6 +796,9 @@ function renderSoftware(data) {
         const nivel = getVal(sw, 'Nivel');
         const desc = getVal(sw, 'Descripción', 'Descripcion', 'desc');
         const capacidad = getVal(sw, 'Capacidad');
+
+        if (normalizeStr(nombre).includes('solibri')) return ''; // Solibri pausado por usuario
+
         return `
                         <div class="soft-skill-tag group relative cursor-help py-0.5 px-1.5 grow min-w-[50px]">
                             <span class="block px-1 text-center" title="${nombre}">${nombre}</span>
@@ -788,8 +827,8 @@ function renderContact(data) {
         const detalle = getVal(row, 'Detalle');
 
         if (campo.includes('correo') && emailEl) {
-            emailEl.innerHTML = `${detalle} <i class="fas fa-external-link-alt text-[0.45rem] text-gray-400 ml-1"></i>`;
-            emailEl.href = `mailto:${detalle}`;
+            emailEl.innerHTML = detalle;
+            if (emailEl.tagName === 'A') emailEl.removeAttribute('href');
         }
         if (campo.includes('telefono') && phoneEl) {
             const cleanPhone = detalle.replace(/\D/g, '');
@@ -1215,21 +1254,7 @@ function initTheme() {
 /* =========================================
    RESUMEN (RESUMEN EJECUTIVO CV)
    ========================================= */
-window.openSummaryCV = () => {
-    const modal = document.getElementById('summary-cv-modal');
-    const popup = document.getElementById('summary-cv-popup');
-    if (!modal || !popup) return;
 
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-
-    if (window.lucide) lucide.createIcons();
-
-    setTimeout(() => {
-        popup.classList.remove('opacity-0', 'scale-95');
-        popup.classList.add('opacity-100', 'scale-100');
-    }, 10);
-};
 
 window.closeSummaryCV = () => {
     const modal = document.getElementById('summary-cv-modal');
@@ -1360,13 +1385,13 @@ window.closePdfModal = () => {
 window.downloadPdf = async (doc, type) => {
     const documents = {
         'cv': {
-            'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/CV%20-%20Said%20Herrera_light.pdf',
-            'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/CV%20-%20Said%20Herrera_dark.pdf',
+            'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/descargables/CV%20-%20Said%20Herrera_light%20mode.pdf',
+            'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/descargables/CV%20-%20Said%20Herrera_dark%20mode.pdf',
             'filename': 'CV_Said_Herrera'
         },
         'portfolio': {
-            'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Portafolio_Resumido.pdf',
-            'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Portafolio_Resumido.pdf',
+            'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/descargables/Portafolio%20-%20Said%20Herrera_light%20mode.pdf',
+            'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/descargables/Portafolio%20-%20Said%20Herrera_dark%20mode.pdf',
             'filename': 'Portafolio_Said_Herrera'
         }
     };
@@ -1466,63 +1491,7 @@ window.closeSummaryCV = () => {
 /**
  * Renderiza el modal de resumen dinámicamente desde CSV (GitHub)
  */
-function renderSummaryModal(data) {
-    const containers = [
-        document.getElementById('summary-cards-container'),
-        document.getElementById('summary-cv-cards-container')
-    ];
 
-    containers.forEach(container => {
-        if (!container) return;
-
-        if (data && data.length > 0) {
-            container.innerHTML = data.map((item, i) => {
-                const title = getVal(item, 'Title', 'title');
-                const value = getVal(item, 'Value', 'value');
-                const desc = getVal(item, 'Description', 'description', 'desc');
-                const link = getVal(item, 'Link', 'link');
-
-                let icon = "box";
-                const cleanTitle = normalizeStr(title);
-                if (cleanTitle.includes('desarrollo') || cleanTitle.includes('vibe')) icon = "zap";
-                else if (cleanTitle.includes('experiencia')) icon = "history";
-                else if (cleanTitle.includes('software')) icon = "code-2";
-                else if (cleanTitle.includes('modelado')) icon = "layers";
-                else if (cleanTitle.includes('estandar')) icon = "file-check";
-                else if (cleanTitle.includes('gemini')) icon = "brain-circuit";
-                else if (cleanTitle.includes('idioma')) icon = "languages";
-                else if (cleanTitle.includes('roi') || cleanTitle.includes('ahorro')) icon = "trending-up";
-                else if (cleanTitle.includes('formacion') || cleanTitle.includes('master')) icon = "graduation-cap";
-
-                const valueHtml = link ? `
-                    <a href="${link}" target="_blank" class="hover:opacity-80 transition-opacity inline-flex items-center justify-center gap-1.5 w-full">
-                        <p class="text-white font-bold text-[12px] leading-tight uppercase text-center flex items-center justify-center gap-1.5">
-                            ${value} <i class="fas fa-external-link-alt text-[10px] text-cyan-400 shrink-0"></i>
-                        </p>
-                    </a>` : `
-                    <p class="text-white font-bold text-[12px] leading-tight uppercase text-center">${value}</p>`;
-
-                return `
-                    <div class="flex flex-col items-center text-center group transition-all duration-300 min-h-[140px] hover:scale-[1.02] cursor-default p-2 hover:bg-white/5 transition-all">
-                        <div class="w-full h-[35px] mb-2 flex items-center justify-center flex-shrink-0">
-                            <div class="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
-                                <i data-lucide="${icon}" class="w-3.5 h-3.5"></i>
-                            </div>
-                        </div>
-                        <div class="w-full h-[25px] mb-1 flex items-center justify-center flex-shrink-0">
-                            <h4 class="text-[8px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">${title}</h4>
-                        </div>
-                        <div class="w-full h-[40px] mb-1 flex items-center justify-center flex-shrink-0">
-                            ${valueHtml}
-                        </div>
-                        <p class="text-[8px] text-cyan-500/70 font-bold uppercase font-mono mt-auto pt-1">${desc}</p>
-                    </div>
-                `;
-            }).join('');
-        }
-    });
-    if (window.lucide) window.lucide.createIcons();
-}
 
 // Helper para obtener el parámetro de tema actual
 function getThemeParam() {
@@ -1533,12 +1502,12 @@ window.goBack = function () {
     if (window.history.length > 1) {
         window.history.back();
     } else {
-        window.location.href = `https://eduardoehr89-source.github.io/portafolio/index.html?${getThemeParam()}`;
+        window.location.href = `../../index.html?${getThemeParam()}`;
     }
 };
 window.goForward = function () { window.history.forward(); };
 window.goHome = function (view = null) {
-    let url = 'https://eduardoehr89-source.github.io/portafolio/index.html';
+    let url = '../../index.html';
     const params = [];
     if (view) params.push(`view=${view}`);
     const theme = getThemeParam();
@@ -1601,7 +1570,7 @@ window.closeCertModal = function () {
 
 // Navegación rápida (Hacia el Portafolio)
 window.switchView = function () {
-    window.location.href = `https://eduardoehr89-source.github.io/portafolio/index.html?${getThemeParam()}`;
+    window.location.href = `../Portafolio_Resumido/index.html?${getThemeParam()}`;
 };
 
 /**
@@ -1615,38 +1584,48 @@ function renderSummaryModal(data) {
         const title = getVal(item, 'Title', 'title');
         const value = getVal(item, 'Value', 'value');
         const desc = getVal(item, 'Description', 'description', 'desc');
-
+        const link = getVal(item, 'Link', 'link');
+        
+        // Mapeo básico de iconos según título o índice
         let icon = "box";
         const cleanTitle = normalizeStr(title);
-        if (cleanTitle.includes('desarrollo') || cleanTitle.includes('vibe')) icon = "bolt";
+        if (cleanTitle.includes('desarrollo') || cleanTitle.includes('vibe')) icon = "zap";
         else if (cleanTitle.includes('experiencia')) icon = "history";
-        else if (cleanTitle.includes('software')) icon = "code";
-        else if (cleanTitle.includes('modelado')) icon = "layer-group";
-        else if (cleanTitle.includes('estandar')) icon = "clipboard-check";
-        else if (cleanTitle.includes('gemini')) icon = "brain";
-        else if (cleanTitle.includes('idioma')) icon = "language";
-        else if (cleanTitle.includes('roi') || cleanTitle.includes('ahorro')) icon = "chart-line";
+        else if (cleanTitle.includes('software')) icon = "code-2";
+        else if (cleanTitle.includes('modelado')) icon = "layers";
+        else if (cleanTitle.includes('estandar')) icon = "file-check";
+        else if (cleanTitle.includes('gemini')) icon = "brain-circuit";
+        else if (cleanTitle.includes('idioma')) icon = "languages";
+        else if (cleanTitle.includes('roi') || cleanTitle.includes('ahorro')) icon = "trending-up";
         else if (cleanTitle.includes('formacion') || cleanTitle.includes('master')) icon = "graduation-cap";
 
-        const iconClass = `fas fa-${icon}`;
+        const valueHtml = link ? `
+            <a href="${link}" target="_blank" class="hover:opacity-80 transition-opacity inline-flex items-center justify-center gap-1.5 w-full">
+                <p class="text-white font-bold text-[12px] leading-tight uppercase text-center flex items-center justify-center gap-1.5">
+                     ${value} <i class="fas fa-external-link-alt text-[12px] text-cyan-400 shrink-0"></i>
+                </p>
+            </a>` : `
+            <p class="text-white font-bold text-[12px] leading-tight uppercase text-center">${value}</p>`;
 
         return `
-            <div class="flex flex-col items-center text-center group transition-all duration-300 min-h-[170px] hover:scale-[1.02] cursor-default p-3 hover:bg-white/5 transition-all">
-                <div class="w-full h-[40px] mb-3 flex items-center justify-center flex-shrink-0">
-                    <div class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
-                        <i class="${iconClass} text-sm"></i>
+            <div class="flex flex-col items-center text-center group transition-all duration-300 min-h-[140px] hover:scale-[1.02] cursor-default p-2 hover:bg-white/5 transition-all">
+                <div class="w-full h-[35px] mb-2 flex items-center justify-center flex-shrink-0">
+                    <div class="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/20 transition-all duration-300 font-bold text-cyan-400">
+                        <i data-lucide="${icon}" class="w-3.5 h-3.5"></i>
                     </div>
                 </div>
-                <div class="w-full h-[30px] mb-1 flex items-center justify-center flex-shrink-0">
-                    <h4 class="text-[9px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">${title}</h4>
+                <div class="w-full h-[25px] mb-1 flex items-center justify-center flex-shrink-0">
+                    <h4 class="text-[8px] font-bold text-gray-500 font-mono tracking-widest uppercase text-center m-0 p-0 leading-none">${title}</h4>
                 </div>
-                <div class="w-full h-[45px] mb-2 flex items-center justify-center flex-shrink-0">
-                    <p class="text-white [.light-theme_&]:text-gray-800 font-bold text-[15px] leading-tight uppercase text-center">${value}</p>
+                <div class="w-full h-[40px] mb-1 flex items-center justify-center flex-shrink-0">
+                    ${valueHtml}
                 </div>
-                <p class="text-[9px] text-cyan-500/70 font-bold uppercase font-mono mt-auto pt-1">${desc}</p>
+                <p class="text-[8px] text-cyan-500/70 font-bold uppercase font-mono mt-auto pt-1">${desc}</p>
             </div>
         `;
     }).join('');
+
+    if (window.lucide) window.lucide.createIcons();
 }
 
 // ==========================================

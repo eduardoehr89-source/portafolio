@@ -107,14 +107,11 @@ body {
     opacity: 0.9;
 }
 
-/* Forzar que los iconos de enlace sean consistently grises y pequeños */
-.fa-external-link-alt {
+/* Iconos de enlace en el Sidebar: grises y pequeños */
+.sidebar-color address .fa-external-link-alt {
     color: #9ca3af !important;
-    /* text-gray-400 */
-    font-size: 0.45rem !important;
-    width: auto !important;
-    height: auto !important;
-    opacity: 0.7 !important;
+    font-size: 0.6rem !important;
+    opacity: 0.7;
 }
 
 /* PERSISTENCIA DE BARRA LATERAL (Independiente del tema) */
@@ -256,7 +253,7 @@ body.light-theme #software-secondary-list span {
     padding: 10px 14px;
     border-radius: 8px;
     font-size: 10px; /* Homologado a 10px */
-    z-index: 100;
+    z-index: 9999;
     opacity: 0;
     visibility: hidden;
     transition: var(--transition);
@@ -322,28 +319,7 @@ body.light-theme #software-secondary-list span {
     color: #374151 !important;
 }
 
-/* Blindaje: El sidebar SIEMPRE debe tener tooltips oscuros independientemente del tema */
-.sidebar-color .glass-tooltip {
-    background: rgba(15, 23, 42, 0.98) !important;
-    color: #cbd5e1 !important;
-    border-color: rgba(255, 255, 255, 0.15) !important;
-    box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.7) !important;
-}
-
-.sidebar-color .glass-tooltip strong {
-    color: #ffffff !important;
-}
-
-.sidebar-color .glass-tooltip p,
-.sidebar-color .glass-tooltip span,
-.sidebar-color .glass-tooltip em {
-    color: #cbd5e1 !important;
-}
-
-
-/* =========================================
-   COMPONENTS
-   ========================================= */
+/* Estilos para badges en formación (Asegura tamaño correcto en PDF) */
 /* No job-cards, just flow */
 .job-card {
     background-color: transparent;
@@ -618,29 +594,34 @@ body.light-theme #software-secondary-list span {
         body {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
-            background: #ffffff !important; /* Fondo de papel blanco */
+            background: #18181b !important;
+        }
+
+        body.light-theme {
+            background: #ffffff !important;
         }
 
         #cv-container {
             width: 210mm !important;
             height: 350mm !important; 
             margin: 0 !important;
-            background-color: #18181b !important; /* Gris Zinc-900 igual que en la web */
+            background-color: #18181b !important;
         }
 
-        /* FORZAR SIDEBAR OSCURO EN IMPRESIÓN (INCLUSO EN TEMA CLARO) */
+        /* FORZAR SIDEBAR OSCURO EN IMPRESIÓN (PARA MODO OSCURO) */
         .sidebar-color {
             background-color: #18181b !important;
             color: #ffffff !important;
         }
 
-        .light-theme .sidebar-color {
-            background-color: #18181b !important;
+
+        /* REGLAS PARA TEMA CLARO (SOBREESCRIBIR SOLO SI ES NECESARIO) */
+        body.light-theme #cv-container {
+            background-color: #ffffff !important;
         }
 
-        /* REGLAS PARA SIDEBAR CLARO EN IMPRESIÓN */
-        body.light-theme #cv-container .sidebar-color {
-            background-color: #f8fafc !important;
+        body.light-theme .sidebar-color {
+            background-color: transparent !important;
         }
 
         body.light-theme #cv-container .sidebar-color,
@@ -672,10 +653,10 @@ body.light-theme #software-secondary-list span {
             opacity: 0.8 !important;
         }
 
-        body.light-theme #cv-container .sidebar-color .soft-skill-tag {
-            background: rgba(255, 255, 255, 0.1) !important;
-            border-color: rgba(255, 255, 255, 0.15) !important;
-            color: #ffffff !important;
+        /* Restaurar Software Complementario */
+        .sidebar-color .soft-skill-tag {
+            background: rgba(0, 0, 0, 0.08) !important;
+            border-color: rgba(0, 0, 0, 0.1) !important;
         }
 
         /* Si el usuario tiene el modo claro activado en la web (Cuerpo Derecho) */
@@ -748,11 +729,13 @@ body.light-theme #software-secondary-list span {
 
 
         .skill-bar {
-            background: rgba(0, 0, 0, 0.1) !important;
+            background: rgba(255, 255, 255, 0.4) !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
         }
 
         .light-theme .skill-bar {
-            background: rgba(0, 0, 0, 0.05) !important;
+            background: rgba(0, 0, 0, 0.1) !important;
         }
 
         .skill-progress {
@@ -831,17 +814,6 @@ body.light-theme #software-secondary-list span {
         justify-content: flex-start !important;
     }
 
-    .soft-skill-tag {
-        background: rgba(255, 255, 255, 0.1) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        color: white !important;
-        min-width: fit-content !important;
-        width: auto !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 2px 6px !important;
-    }
 
     .light-theme .soft-skill-tag {
         background: #f1f5f9 !important;
@@ -1125,4 +1097,36 @@ body.light-theme .thin-scroll::-webkit-scrollbar-thumb {
     box-shadow: 0 0 30px rgba(74, 222, 128, 1);
 }
 
-/* Light Theme Adjustments - Mantener colores vibrantes */
+/* Light Theme Adjustments - Mantener colores vibrantes */
+
+/* === CORRECCIÓN FINAL CRÍTICA: VISIBILIDAD DE TAGS EN IMPRESIÓN === */
+@media print {
+    /* MODO OSCURO: Forzar fondo gris-azul Slate-600 */
+    .dark .soft-skill-tag,
+    .dark .sidebar .soft-skill-tag,
+    .dark .skill-tag {
+        background-color: #475569 !important; /* Slate-600 sólido */
+        border: 1px solid #64748b !important;
+        color: #ffffff !important;
+        display: inline-block !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* MODO CLARO: Mantener el gris suave del diseño web */
+    .light .soft-skill-tag,
+    .light .sidebar .soft-skill-tag {
+        background-color: #f1f5f9 !important; /* Slate-100 suave */
+        border: 1px solid #e2e8f0 !important;
+        color: #475569 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Forzar que el sidebar respete el motor de color */
+    .sidebar {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
+
