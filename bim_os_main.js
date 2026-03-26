@@ -18,8 +18,8 @@ const URL_SECTIONS = `https://raw.githubusercontent.com/eduardoehr89-source/port
 const URL_AI_REV = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Inteligencia%20Artificial_portafolio.csv?t=${timestamp}`;
 const URL_ACADEMIC_CV = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Formaci%C3%B3n%20acad%C3%A9mica_cv.csv?t=${timestamp}`;
 const URL_TECH_VALUE = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Valor%20T%C3%A9cnico%20Aplicado_portafolio.csv?t=${timestamp}`;
-const CLOUD_BADGE_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/master/CV/insignias/';
-const CLOUD_ASSET_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/master/';
+const CLOUD_BADGE_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/insignias/';
+const CLOUD_ASSET_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/';
 const URL_HOME = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Home_portafolio.csv?t=${timestamp}`;
 const URL_SUMMARY_LOCAL = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Resumen_portafolio.csv?t=${timestamp}`;
 
@@ -2184,20 +2184,18 @@ function processProjects(data) {
 
                 // La DB ya contiene rutas relativas completas desde la raíz del sitio
                 let rawImages = entry.images || [];
-                projectImages = rawImages.sort((a, b) => {
+                // 1. Clasificación alfabética (usando nombres originales)
+                const sortedImages = rawImages.sort((a, b) => {
                     const filenameA = a.split('/').pop().toLowerCase();
                     const filenameB = b.split('/').pop().toLowerCase();
-
                     const isAInfo = filenameA.includes('infograf');
                     const isBInfo = filenameB.includes('infograf');
-
                     if (isAInfo && !isBInfo) return 1;
                     if (!isAInfo && isBInfo) return -1;
-
                     return filenameA.localeCompare(filenameB);
                 });
 
-                // Diccionario de overrides para la portada
+                // 2. Diccionario de overrides para la portada
                 const topCoverOverrides = {
                     'P35': 'rea_02', // Aérea_02
                     'P27': 'scudo de Armas_02', // Estación Escudo de Armas_02
@@ -2206,23 +2204,22 @@ function processProjects(data) {
                     'P08': 'Fachada Principal_03'
                 };
 
-                // La portada por defecto es la primera imagen alfabéticamente
-                if (projectImages.length > 0) {
-                    coverImage = projectImages[0];
+                let rawCover = sortedImages.length > 0 ? sortedImages[0] : null;
 
-                    if (topCoverOverrides[pid]) {
-                        const keyword = topCoverOverrides[pid];
-                        // Buscar la imagen que contenga el keyword (ignorando mayúsculas/minúsculas para mayor seguridad)
-                        const foundImg = projectImages.find(img => img.toLowerCase().includes(keyword.toLowerCase()));
-                        if (foundImg) {
-                            coverImage = foundImg;
-                        }
-                    }
+                if (rawCover && topCoverOverrides[pid]) {
+                    const keyword = topCoverOverrides[pid];
+                    const foundImg = sortedImages.find(img => img.toLowerCase().includes(keyword.toLowerCase()));
+                    if (foundImg) rawCover = foundImg;
                 }
+
+                // 3. Codificación final para producción (Forzando CLOUD_ASSET_BASE)
+                projectImages = sortedImages.map(img => CLOUD_ASSET_BASE + encodeURI(img));
+                coverImage = rawCover ? CLOUD_ASSET_BASE + encodeURI(rawCover) : null;
             }
         } else {
             // Fallback antiguo: intentar adivinar ruta hardcodeada
-            coverImage = `img / ${pid} ${getVal(d, 'nombre')}/1.jpg`;
+            const fallbackPath = `img/${pid} ${getVal(d, 'nombre')}/1.jpg`;
+            coverImage = CLOUD_ASSET_BASE + encodeURI(fallbackPath);
             projectImages = [coverImage];
         }
 
@@ -3729,7 +3726,7 @@ function renderProjects(list) {
                 if (targetIdx !== undefined && imgList[targetIdx]) {
                     // Si el proyecto tiene una foto definida y existe en su array, sobreescribir miniatura
                     displayImage = imgList[targetIdx];
-                } else if (displayImage === undefined || displayImage.includes('undefined')) {
+                } else if (displayImage === undefined || !displayImage || String(displayImage).includes('undefined')) {
                     // Fallback si la principal es undefined pero tiene fotos
                     displayImage = imgList[0];
                 }
