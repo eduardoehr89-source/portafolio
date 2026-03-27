@@ -1,0 +1,7 @@
+Pilar,Herramientas Clave,Acción Técnica,Icono
+Agentes IA,"Gemini, Claude",Configuración de asistentes con instrucciones personalizadas (.md) para soporte técnico y validación de normativas en tiempo real.,chat-agent
+Automatización,"n8n, Power Automate, Cursor",Desarrollo de automatizaciones Cloud y scripting asistido por IA (Cursor/Copilot) para optimizar tareas repetitivas en el ecosistema AECO.,robot-automation
+Coordinación BIM,"Dalux, ACC (Autodesk)",Gestión de colisiones en ACC y supervisión de obra en Dalux. Implementación de workflows de inspección y secuenciación constructiva 4D.,clipboard-check
+Diseño Generativo,"Autodesk Forma, Giraffe, Speckle",Análisis de métricas urbanas y GIS en Autodesk Forma. Creación de prototipos 3D georreferenciados y coordinación mediante Speckle.,magic-wand
+Estrategia + IA,"Gemini, Notion, Antigravity",Diagnóstico de madurez digital y gestión de conocimiento en Notion. Despliegue de la infraestructura del portafolio mediante Antigravity.,brain-ia
+Visualización IA,"Flow (Google), Rendair",Generación de visualizaciones profesionales en Rendair y producción de video arquitectónico avanzado mediante Flow de Google.,image-ai
