@@ -3744,7 +3744,7 @@ function renderProjects(list) {
             <div class="group relative aspect-[4/3] bg-transparent rounded-lg overflow-hidden cursor-pointer border border-gray-800 hover:border-cyan-500 transition animate-stagger" 
                  style="animation-delay: ${idx * 0.02}s"
                  onclick="openGallery('${p.id}', event)">
-                ${displayImage && !displayImage.includes('undefined') ? `<img src="${displayImage}" loading="lazy" alt="${p.nombre}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">` : `<div class="absolute inset-0 flex items-center justify-center bg-[#0f141a] [.light-theme_&]:bg-slate-200 text-cyan-500/50 [.light-theme_&]:text-slate-400 text-3xl font-bold tracking-widest select-none">CONFIDENCIAL</div>`}
+                ${displayImage && !displayImage.includes('undefined') ? `<img src="${displayImage}" loading="lazy" alt="${p.nombre}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">` : `<div class="absolute inset-0 flex items-center justify-center bg-[#0f141a] [.light-theme_&]:bg-slate-200 select-none overflow-hidden"><span class="text-3xl font-light text-gray-400/20 tracking-[0.2em] uppercase transform -rotate-12 border border-gray-400/10 px-4 py-2 rounded-lg font-sans">CONFIDENCIAL</span></div>`}
                 <div class="absolute bottom-0 w-full p-3 bg-gradient-to-t from-black/90 to-transparent font-mono text-white flex flex-col justify-end" style="color: white !important;">
                     <div class="text-[10px] opacity-80" style="color: white !important;">${p.id}</div>
                     <div class="text-xs leading-tight my-0.5 flex items-center gap-1.5 overflow-visible">

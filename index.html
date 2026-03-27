@@ -724,8 +724,11 @@
                                 class="w-full h-full object-contain hidden select-none"
                                 style="image-orientation: none; max-width: 100vw; max-height: calc(100vh - 80px);">
                             <div id="modal-confidencial"
-                                class="w-full h-full hidden flex items-center justify-center text-gray-500 [.light-theme_&]:text-slate-400 font-bold tracking-[1em] text-2xl md:text-4xl bg-[#1a202c] [.light-theme_&]:bg-slate-100">
-                                CONFIDENCIAL
+                                class="absolute inset-0 flex items-center justify-center p-8 text-center pointer-events-none z-10 hidden">
+                                <span
+                                    class="text-4xl md:text-6xl font-light text-gray-400/40 tracking-[0.2em] uppercase transform -rotate-12 border-2 border-gray-400/20 px-8 py-4 rounded-xl select-none font-sans">
+                                    CONFIDENCIAL
+                                </span>
                             </div>
                         </div>
                         <button id="modal-nav-next" onclick="navigateImage(1)"
@@ -1086,7 +1089,7 @@
 
         <div class="absolute bottom-4 left-0 right-0 flex justify-center items-baseline pointer-events-none z-[100] gap-4 no-print">
             <span class="text-[9px] font-mono text-gray-500 uppercase tracking-[0.2em] pl-[0.2em] font-bold">POWERED BY GEMINI PRO & ANTIGRAVITY</span>
-            <span class="opacity-40 font-mono text-[9px] tracking-normal uppercase whitespace-nowrap">// ACTUALIZACIÓN MAR 2026</span>
+            <span class="opacity-40 font-mono text-[9px] tracking-[0.2em] uppercase whitespace-nowrap font-bold">// ACTUALIZACIÓN MAR 2026</span>
         </div>
     </section>
 
