@@ -7,21 +7,21 @@
 const cacheHour = Math.floor(Date.now() / (1000 * 60 * 60));
 const timestamp = `v1-${cacheHour}`;
 
-const URL_PROJECTS = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/Proyectos_portafolio.csv?t=${timestamp}`;
-const URL_DISCIPLINES = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Disciplinas_portafolio.csv?t=${timestamp}`;
-const URL_SOFTWARE = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Software_portafolio.csv?t=${timestamp}`;
-const URL_NORMS = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Normativas%20y%20Est%C3%A1ndares_portafolio.csv?t=${timestamp}`;
-const URL_EDUCATION = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Master%20MBIA_portafolio.csv?t=${timestamp}`;
-const URL_ROI = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/ROI_Scripts_portafolio.csv?t=${timestamp}`;
-const URL_COLLAB = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Colaboraci%C3%B3n_portafolio.csv?t=${timestamp}`;
-const URL_SECTIONS = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Dashboard%20global_secciones_portafolio.csv?t=${timestamp}`;
-const URL_AI_REV = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Inteligencia%20Artificial_portafolio.csv?t=${timestamp}`;
-const URL_ACADEMIC_CV = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Formaci%C3%B3n%20acad%C3%A9mica_cv.csv?t=${timestamp}`;
-const URL_TECH_VALUE = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Valor%20T%C3%A9cnico%20Aplicado_portafolio.csv?t=${timestamp}`;
-const CLOUD_BADGE_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/insignias/';
+const URL_PROJECTS = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_Informaci%C3%B3n%20proyectos/Proyectos_portafolio.csv?t=${timestamp}`;
+const URL_DISCIPLINES = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_Informaci%C3%B3n%20proyectos/Disciplinas_portafolio.csv?t=${timestamp}`;
+const URL_SOFTWARE = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_Informaci%C3%B3n%20proyectos/Software_portafolio.csv?t=${timestamp}`;
+const URL_NORMS = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_Informaci%C3%B3n%20proyectos/Normativas%20y%20Est%C3%A1ndares_portafolio.csv?t=${timestamp}`;
+const URL_EDUCATION = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_Informaci%C3%B3n%20proyectos/Master%20MBIA_portafolio.csv?t=${timestamp}`;
+const URL_ROI = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_Informaci%C3%B3n%20proyectos/ROI_Scripts_portafolio.csv?t=${timestamp}`;
+const URL_COLLAB = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_Informaci%C3%B3n%20proyectos/Colaboraci%C3%B3n_portafolio.csv?t=${timestamp}`;
+const URL_SECTIONS = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_Informaci%C3%B3n%20proyectos/Dashboard%20global_secciones_portafolio.csv?t=${timestamp}`;
+const URL_AI_REV = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_Informaci%C3%B3n%20proyectos/Inteligencia%20Artificial_portafolio.csv?t=${timestamp}`;
+const URL_ACADEMIC_CV = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Informaci%C3%B3n/Formaci%C3%B3n%20acad%C3%A9mica_cv.csv?t=${timestamp}`;
+const URL_TECH_VALUE = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_Informaci%C3%B3n%20proyectos/Valor%20T%C3%A9cnico%20Aplicado_portafolio.csv?t=${timestamp}`;
+const CLOUD_BADGE_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/insignias/';
 const CLOUD_ASSET_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/';
-const URL_HOME = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Home_portafolio.csv?t=${timestamp}`;
-const URL_SUMMARY_LOCAL = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Resumen_portafolio.csv?t=${timestamp}`;
+const URL_HOME = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_Informaci%C3%B3n%20proyectos/Home_portafolio.csv?t=${timestamp}`;
+const URL_SUMMARY_LOCAL = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_Informaci%C3%B3n%20proyectos/Resumen_portafolio.csv?t=${timestamp}`;
 
 const TOP_PROJECTS_LIST = [
     { name: "Barrio Santa Lucía", loc: "Monterrey" },
