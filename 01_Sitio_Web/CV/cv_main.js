@@ -598,8 +598,8 @@ function renderEducation(data, softwareData = []) {
             if (!badgeFile && normalizeStr(nombre).includes('aimaster')) {
                 badgeFile = 'AI Master Program_candidate_badge.png';
             }
-            // Forzar buildingSMART
-            if (!badgeFile && normalizeStr(nombre).includes('buildingsmart')) {
+            // Forzar buildingSMART (Mejorado: incluye institución)
+            if (!badgeFile && (normalizeStr(nombre).includes('buildingsmart') || normalizeStr(institucion).includes('buildingsmart'))) {
                 badgeFile = 'buildingSMART_Professional_Certification-Entry_Badge_(Spanish).png';
             }
             // Forzar Plannerly Level 1, 2, 3
@@ -613,7 +613,7 @@ function renderEducation(data, softwareData = []) {
                 badgeFile = '03_Expert_badge.png';
             }
             if (!badgeFile && (normalizeStr(nombre).includes('bootcamp') || normalizeStr(nombre).includes('boot camp'))) {
-                badgeFile = '04_BIM Boot Camp_badge_2.png';
+                badgeFile = '04_BIM Boot Camp_badge.png';
             }
             if (!badgeFile && normalizeStr(nombre).includes('troublemaker')) {
                 badgeFile = '05_Digital Troublemaker_badge.png';
@@ -636,7 +636,7 @@ function renderEducation(data, softwareData = []) {
                 } else if (normalizeStr(nombre).includes('expert') || normalizeStr(nombre).includes('level3')) {
                     finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/03_Expert_badge.png";
                 } else if (normalizeStr(nombre).includes('bootcamp') || normalizeStr(nombre).includes('boot camp') || normalizeStr(nombre).includes('boot')) {
-                    finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/04_BIM%20Boot%20Camp_badge_2.png";
+                    finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/04_BIM%20Boot%20Camp_badge.png";
                 }
 
                 const svgContent = isBimCollab ? '' : `
