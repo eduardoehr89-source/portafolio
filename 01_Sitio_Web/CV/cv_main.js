@@ -33,7 +33,7 @@ function executeProfileTransition(direction) {
     const backImg = document.getElementById('cv-profile-back');
     if (!frontImg || !backImg) return;
 
-    const basePath = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/f70bfc4c31c58274aaafa175d142f5a6f4145e46/CV/fotos%20de%20perfil/';
+    const basePath = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Fotos%20de%20perfil/';
     const totalImages = 8;
 
     // Determinamos el siguiente índice basándonos en la dirección
@@ -72,19 +72,24 @@ window.navigateProfile = function (direction) {
    DATA LOADING (CSV Parsing)
    ========================================= */
 const timestamp = `v_forced_${Date.now()}`;
+const isLocal = !window.location.hostname.includes('github.io');
+const GITHUB_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/';
+const LOCAL_BASE = '../../';
+const BASE_PATH = isLocal ? LOCAL_BASE : GITHUB_BASE;
+
 const CSV_URLS = {
-    experiencia: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Experiencia%20laboral_cv.csv?t=${timestamp}`,
-    formacion: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Formaci%C3%B3n%20acad%C3%A9mica_cv.csv?t=${timestamp}`,
-    software: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Software_portafolio.csv?t=${timestamp}`,
-    habilidades: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Soft%20skills_cv.csv?t=${timestamp}`,
-    contacto: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Contacto_cv.csv?t=${timestamp}`,
-    perfil: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/Perfil%20Profesional_cv.csv?t=${timestamp}`,
-    proyectos_global: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/refs/heads/main/Proyectos_portafolio.csv?t=${timestamp}`,
-    disciplinas_global: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Disciplinas_portafolio.csv?t=${timestamp}`,
-    normas: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Normativas%20y%20Est%C3%A1ndares_portafolio.csv?t=${timestamp}`,
-    summary: `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/Resumen_portafolio.csv?t=${timestamp}`
+    experiencia: `${BASE_PATH}01_Sitio_Web/CV/Informaci%C3%B3n/Experiencia%20laboral_cv.csv?t=${timestamp}`,
+    formacion: `${BASE_PATH}01_Sitio_Web/CV/Informaci%C3%B3n/Formaci%C3%B3n%20acad%C3%A9mica_cv.csv?t=${timestamp}`,
+    software: `${BASE_PATH}02_Herramientas/Informaci%C3%B3n/Software_portafolio.csv?t=${timestamp}`,
+    habilidades: `${BASE_PATH}01_Sitio_Web/CV/Informaci%C3%B3n/Soft%20skills_cv.csv?t=${timestamp}`,
+    contacto: `${BASE_PATH}01_Sitio_Web/CV/Informaci%C3%B3n/Contacto_cv.csv?t=${timestamp}`,
+    perfil: `${BASE_PATH}01_Sitio_Web/CV/Informaci%C3%B3n/Perfil%20Profesional_cv.csv?t=${timestamp}`,
+    proyectos_global: `${BASE_PATH}02_Herramientas/Informaci%C3%B3n/Proyectos_portafolio.csv?t=${timestamp}`,
+    disciplinas_global: `${BASE_PATH}02_Herramientas/Informaci%C3%B3n/Disciplinas_portafolio.csv?t=${timestamp}`,
+    normas: `${BASE_PATH}02_Herramientas/Informaci%C3%B3n/Normativas%20y%20Est%C3%A1ndares_portafolio.csv?t=${timestamp}`,
+    summary: `${BASE_PATH}02_Herramientas/Informaci%C3%B3n/Resumen_portafolio.csv?t=${timestamp}`
 };
-const CLOUD_BADGE_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/insignias/';
+const CLOUD_BADGE_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/';
 const CLOUD_ASSET_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/';
 
 async function loadExternalData() {
@@ -627,11 +632,11 @@ function renderEducation(data, softwareData = []) {
                 let finalBadgeSrc = (badgeFile && (badgeFile.includes('http://') || badgeFile.includes('https://'))) ? badgeFile : `${CLOUD_BADGE_BASE}${encodeURIComponent(badgeFile)}?t=${timestamp}`;
 
                 if (normalizeStr(nombre).includes('master') || normalizeStr(nombre).includes('superior')) {
-                    finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/c6e71f8f5be8c62df3bb908336bbcb1930351217/CV/insignias/BIM%20Master%20Program_certificate_badge.png";
+                    finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/BIM%20Master%20Program_certificate_badge.png";
                 } else if (normalizeStr(nombre).includes('expert') || normalizeStr(nombre).includes('level3')) {
-                    finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/insignias/03_Expert_badge.png";
+                    finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/03_Expert_badge.png";
                 } else if (normalizeStr(nombre).includes('bootcamp') || normalizeStr(nombre).includes('boot camp') || normalizeStr(nombre).includes('boot')) {
-                    finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/insignias/04_BIM%20Boot%20Camp_badge_2.png";
+                    finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/04_BIM%20Boot%20Camp_badge_2.png";
                 }
 
                 const svgContent = isBimCollab ? '' : `
@@ -647,7 +652,7 @@ function renderEducation(data, softwareData = []) {
                         ${svgContent}
                         <img src="${finalBadgeSrc}" alt="${nombre}" 
                              class="w-[95px] h-[95px] object-contain group-hover/cert:scale-110 transition-all duration-500 relative z-10"
-                             onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/insignias/badge_generic.png';">
+                             onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/badge_generic.png';">
                         <div class="glass-tooltip !bottom-[120%] !left-1/2 !-translate-x-1/2">
                             <strong class="text-blue-500 [.dark_&]:text-blue-400 block mb-0.5 text-[0.6rem]">${institucion}</strong>
                             <p class="text-[0.65rem] mb-1 font-bold leading-tight">${nombre}</p>
@@ -1349,7 +1354,7 @@ function initPrintLogic() {
         if (frontImg) {
             frontImg.style.transition = 'none';
             // Forzamos el SRC de la imagen 01
-            frontImg.src = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/f70bfc4c31c58274aaafa175d142f5a6f4145e46/CV/fotos%20de%20perfil/profile_optimized_01.jpg';
+            frontImg.src = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Fotos%20de%20perfil/profile_optimized_01.jpg';
             frontImg.style.opacity = '1';
         }
 
@@ -1385,13 +1390,13 @@ window.closePdfModal = () => {
 window.downloadPdf = async (doc, type) => {
     const documents = {
         'cv': {
-            'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/descargables/CV%20-%20Said%20Herrera_light%20mode.pdf',
-            'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/descargables/CV%20-%20Said%20Herrera_dark%20mode.pdf',
+            'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Descargables/CV%20-%20Said%20Herrera_light%20mode.pdf',
+            'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Descargables/CV%20-%20Said%20Herrera_dark%20mode.pdf',
             'filename': 'CV_Said_Herrera'
         },
         'portfolio': {
-            'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/descargables/Portafolio%20-%20Said%20Herrera_light%20mode.pdf',
-            'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/descargables/Portafolio%20-%20Said%20Herrera_dark%20mode.pdf',
+            'light': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/Portafolio_Resumido/Descargables/Portafolio%20-%20Said%20Herrera_light%20mode.pdf',
+            'dark': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/Portafolio_Resumido/Descargables/Portafolio%20-%20Said%20Herrera_dark%20mode.pdf',
             'filename': 'Portafolio_Said_Herrera'
         }
     };
