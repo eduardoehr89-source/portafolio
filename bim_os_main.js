@@ -1287,16 +1287,19 @@ function renderEducationView(mbiaData, cvData) {
         
         // --- FALLBACKS MANUALES POR NOMBRE ---
         if (lowNombre.includes('boot camp')) {
-             fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/04_BIM%20Boot%20Camp_badge_2.png";
+             fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/04_BIM%20Boot%20Camp_badge.png";
         } else if (lowNombre.includes('workshop')) {
             // URL específica proporcionada por el usuario para Butic Workshop
             fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/Unreal%20Engine%20Workshop_certificate_badge.png";
         } else if (lowNombre.includes('master') || lowNombre.includes('superior')) {
             // URL específica proporcionada por el usuario para Butic Master (BIM Master Program)
             fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/BIM%20Master%20Program_certificate_badge.png";
-        } else if (lowNombre.includes('buildingsmart')) {
+        }
+        // Forzar buildingSMART (Mejorado: incluye institución)
+        if (!badgeFile && (normalizeStr(nombre).includes('buildingsmart') || normalizeStr(institucion).includes('buildingsmart'))) {
             badgeFile = 'buildingSMART_Professional_Certification-Entry_Badge_(Spanish).png';
-        } else if (!badgeFile && !fullBadgeUrl && isPlannerly) {
+        }
+        else if (!badgeFile && !fullBadgeUrl && isPlannerly) {
             if (lowNombre.includes('expert') || lowNombre.includes('level 3')) {
                 fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/03_Expert_badge.png";
             } else if (lowNombre.includes('advanced') || lowNombre.includes('level 2')) badgeFile = '02_Advanced_badge.png';
@@ -3741,7 +3744,7 @@ function renderProjects(list) {
             <div class="group relative aspect-[4/3] bg-transparent rounded-lg overflow-hidden cursor-pointer border border-gray-800 hover:border-cyan-500 transition animate-stagger" 
                  style="animation-delay: ${idx * 0.02}s"
                  onclick="openGallery('${p.id}', event)">
-                ${displayImage && !displayImage.includes('undefined') ? `<img src="${displayImage}" loading="lazy" alt="${p.nombre}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">` : `<div class="absolute inset-0 flex items-center justify-center bg-transparent text-gray-500 text-3xl font-bold tracking-widest opacity-30 select-none">CONFIDENCIAL</div>`}
+                ${displayImage && !displayImage.includes('undefined') ? `<img src="${displayImage}" loading="lazy" alt="${p.nombre}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">` : `<div class="absolute inset-0 flex items-center justify-center bg-[#0f141a] [.light-theme_&]:bg-slate-200 text-cyan-500/50 [.light-theme_&]:text-slate-400 text-3xl font-bold tracking-widest select-none">CONFIDENCIAL</div>`}
                 <div class="absolute bottom-0 w-full p-3 bg-gradient-to-t from-black/90 to-transparent font-mono text-white flex flex-col justify-end" style="color: white !important;">
                     <div class="text-[10px] opacity-80" style="color: white !important;">${p.id}</div>
                     <div class="text-xs leading-tight my-0.5 flex items-center gap-1.5 overflow-visible">

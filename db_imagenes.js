@@ -116,8 +116,8 @@ const PROJECT_IMAGES_DB = {
             "03_Media/img_optimizadas/P08 Central de Mezclas/Sala de Espera_02.jpg",
             "03_Media/img_optimizadas/P08 Central de Mezclas/Site_01.jpg",
             "03_Media/img_optimizadas/P08 Central de Mezclas/Site_02.jpg",
-            "03_Media/videos_optimizados/P08 Central de Mezclas/Central de Mezclas.mp4",
-            "03_Media/videos_optimizados/P08 Central de Mezclas/Fachada Principal_01.mp4"
+            "03_Media/img_optimizadas/videos_optimizados/P08 Central de Mezclas/Central de Mezclas.mp4",
+            "03_Media/img_optimizadas/videos_optimizados/P08 Central de Mezclas/Fachada Principal_01.mp4"
         ]
     },
     "P09": {
@@ -314,9 +314,9 @@ const PROJECT_IMAGES_DB = {
             "03_Media/img_optimizadas/P18 Unidad de Medicina Familiar/Pasillo_06.jpg",
             "03_Media/img_optimizadas/P18 Unidad de Medicina Familiar/Sala de Espera_01.jpg",
             "03_Media/img_optimizadas/P18 Unidad de Medicina Familiar/Sala de Espera_02.jpg",
-            "03_Media/videos_optimizados/P18 Unidad de Medicina Familiar/Acceso_01.mp4",
-            "03_Media/videos_optimizados/P18 Unidad de Medicina Familiar/Pasillo_01.mp4",
-            "03_Media/videos_optimizados/P18 Unidad de Medicina Familiar/Unidad de Medicina Familiar.mp4"
+            "03_Media/img_optimizadas/videos_optimizados/P18 Unidad de Medicina Familiar/Acceso_01.mp4",
+            "03_Media/img_optimizadas/videos_optimizados/P18 Unidad de Medicina Familiar/Pasillo_01.mp4",
+            "03_Media/img_optimizadas/videos_optimizados/P18 Unidad de Medicina Familiar/Unidad de Medicina Familiar.mp4"
         ]
     },
     "P19": {
@@ -352,8 +352,8 @@ const PROJECT_IMAGES_DB = {
             "03_Media/img_optimizadas/P19 Hospital General de Zona/Sala de Juntas.jpg",
             "03_Media/img_optimizadas/P19 Hospital General de Zona/Site.jpg",
             "03_Media/img_optimizadas/P19 Hospital General de Zona/Subestación Eléctrica.jpg",
-            "03_Media/videos_optimizados/P19 Hospital General de Zona/Acceso principal.mp4",
-            "03_Media/videos_optimizados/P19 Hospital General de Zona/Hospital General de Zona.mp4"
+            "03_Media/img_optimizadas/videos_optimizados/P19 Hospital General de Zona/Acceso principal.mp4",
+            "03_Media/img_optimizadas/videos_optimizados/P19 Hospital General de Zona/Hospital General de Zona.mp4"
         ]
     },
     "P20": {
@@ -408,8 +408,8 @@ const PROJECT_IMAGES_DB = {
             "03_Media/img_optimizadas/P25 Puentes Periféricos/Ciclovía_02.jpg",
             "03_Media/img_optimizadas/P25 Puentes Periféricos/Infografía_PP.jpg",
             "03_Media/img_optimizadas/P25 Puentes Periféricos/Subestructura.jpg",
-            "03_Media/videos_optimizados/P25 Puentes Periféricos/Puentes Periféricos.mp4",
-            "03_Media/videos_optimizados/P25 Puentes Periféricos/Puentes Periféricos_01.mp4"
+            "03_Media/img_optimizadas/videos_optimizados/P25 Puentes Periféricos/Puentes Periféricos.mp4",
+            "03_Media/img_optimizadas/videos_optimizados/P25 Puentes Periféricos/Puentes Periféricos_01.mp4"
         ]
     },
     "P26": {
@@ -444,8 +444,8 @@ const PROJECT_IMAGES_DB = {
             "03_Media/img_optimizadas/P27 Tren Ligero/Talleres_01.jpg",
             "03_Media/img_optimizadas/P27 Tren Ligero/Talleres_02.jpg",
             "03_Media/img_optimizadas/P27 Tren Ligero/Talleres_03.jpg",
-            "03_Media/videos_optimizados/P27 Tren Ligero/Estación Heroe de Nacozari_01.mp4",
-            "03_Media/videos_optimizados/P27 Tren Ligero/Tren Ligero.mp4"
+            "03_Media/img_optimizadas/videos_optimizados/P27 Tren Ligero/Estación Heroe de Nacozari_01.mp4",
+            "03_Media/img_optimizadas/videos_optimizados/P27 Tren Ligero/Tren Ligero.mp4"
         ]
     },
     "P29": {
@@ -587,7 +587,7 @@ const PROJECT_IMAGES_DB = {
             "03_Media/img_optimizadas/P36 Residencias TEC/Sala de juegos_02.jpg",
             "03_Media/img_optimizadas/P36 Residencias TEC/Terraza_01.jpg",
             "03_Media/img_optimizadas/P36 Residencias TEC/Terraza_02.jpg",
-            "03_Media/videos_optimizados/P36 Residencias TEC/Residencias TEC.mp4"
+            "03_Media/img_optimizadas/videos_optimizados/P36 Residencias TEC/Residencias TEC.mp4"
         ]
     },
     "P38": {
@@ -669,10 +669,10 @@ const PROJECT_IMAGES_DB = {
             "03_Media/img_optimizadas/P41 Barrio Santa Lucía/Peatonal.jpg",
             "03_Media/img_optimizadas/P41 Barrio Santa Lucía/Sala-comedor_01.jpg",
             "03_Media/img_optimizadas/P41 Barrio Santa Lucía/Sala-comedor_02.jpg",
-            "03_Media/videos_optimizados/P41 Barrio Santa Lucía/Alberca_01.mp4",
-            "03_Media/videos_optimizados/P41 Barrio Santa Lucía/Barrio Santa Lucía.mp4",
-            "03_Media/videos_optimizados/P41 Barrio Santa Lucía/Lobby_01.mp4",
-            "03_Media/videos_optimizados/P41 Barrio Santa Lucía/Penthouse_01.mp4"
+            "03_Media/img_optimizadas/videos_optimizados/P41 Barrio Santa Lucía/Alberca_01.mp4",
+            "03_Media/img_optimizadas/videos_optimizados/P41 Barrio Santa Lucía/Barrio Santa Lucía.mp4",
+            "03_Media/img_optimizadas/videos_optimizados/P41 Barrio Santa Lucía/Lobby_01.mp4",
+            "03_Media/img_optimizadas/videos_optimizados/P41 Barrio Santa Lucía/Penthouse_01.mp4"
         ]
     }
 };
