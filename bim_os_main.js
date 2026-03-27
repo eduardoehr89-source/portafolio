@@ -1287,7 +1287,7 @@ function renderEducationView(mbiaData, cvData) {
         
         // --- FALLBACKS MANUALES POR NOMBRE ---
         if (lowNombre.includes('boot camp')) {
-             fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/04_BIM%20Boot%20Camp_badge.png";
+             fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/04_BIM%20Boot%20Camp_badge_02.png";
         } else if (lowNombre.includes('workshop')) {
             // URL específica proporcionada por el usuario para Butic Workshop
             fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/Unreal%20Engine%20Workshop_certificate_badge.png";
