@@ -551,7 +551,8 @@ function renderEducation(data, softwareData = []) {
             'aimaster': 1,
             'buildingsmart': 2,
             'iso19650': 3,
-            'plannerly': 3
+            'plannerly': 3,
+            'bootcamp': 4
         };
 
         const sortedCerts = [...certificationRecords].filter(cert => {
@@ -612,7 +613,7 @@ function renderEducation(data, softwareData = []) {
             if (!badgeFile && (normalizeStr(nombre).includes('level3') || normalizeStr(nombre).includes('expert'))) {
                 badgeFile = '03_Expert_badge.png';
             }
-            if (!badgeFile && (normalizeStr(nombre).includes('bootcamp') || normalizeStr(nombre).includes('boot camp'))) {
+            if (!badgeFile && (normalizeStr(nombre).includes('bootcamp') || normalizeStr(nombre).includes('bimbootcamp'))) {
                 badgeFile = '04_BIM Boot Camp_badge_02.png';
             }
             if (!badgeFile && normalizeStr(nombre).includes('troublemaker')) {
@@ -635,7 +636,7 @@ function renderEducation(data, softwareData = []) {
                     finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/BIM%20Master%20Program_certificate_badge.png";
                 } else if (normalizeStr(nombre).includes('expert') || normalizeStr(nombre).includes('level3')) {
                     finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/03_Expert_badge.png";
-                } else if (normalizeStr(nombre).includes('bootcamp') || normalizeStr(nombre).includes('boot camp') || normalizeStr(nombre).includes('boot')) {
+                } else if (normalizeStr(nombre).includes('bootcamp') || normalizeStr(nombre).includes('bimbootcamp')) {
                     finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/04_BIM%20Boot%20Camp_badge_02.png";
                 }
 
