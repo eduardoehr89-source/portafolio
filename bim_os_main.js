@@ -18,7 +18,7 @@ const URL_SECTIONS = `https://raw.githubusercontent.com/eduardoehr89-source/port
 const URL_AI_REV = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_informacion_proyectos/Inteligencia%20Artificial_portafolio.csv?t=${timestamp}`;
 const URL_ACADEMIC_CV = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/informacion/formacion_academica_cv.csv?t=${timestamp}`;
 const URL_TECH_VALUE = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_informacion_proyectos/Valor%20T%C3%A9cnico%20Aplicado_portafolio.csv?t=${timestamp}`;
-const CLOUD_BADGE_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/insignias/';
+const CLOUD_BADGE_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/';
 const CLOUD_ASSET_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/';
 const URL_HOME = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_informacion_proyectos/Home_portafolio.csv?t=${timestamp}`;
 const URL_SUMMARY_LOCAL = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_informacion_proyectos/Resumen_portafolio.csv?t=${timestamp}`;
@@ -1287,18 +1287,18 @@ function renderEducationView(mbiaData, cvData) {
         
         // --- FALLBACKS MANUALES POR NOMBRE ---
         if (lowNombre.includes('boot camp')) {
-             fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/7c4b2c7eb8c6fa7c275af16fd9a8f61fffb9847e/CV/insignias/04_BIM%20Boot%20Camp_badge_2.png";
+             fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/04_BIM%20Boot%20Camp_badge_2.png";
         } else if (lowNombre.includes('workshop')) {
             // URL específica proporcionada por el usuario para Butic Workshop
-            fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/c6e71f8f5be8c62df3bb908336bbcb1930351217/CV/insignias/Unreal%20Engine%20Workshop_certificate_badge.png";
+            fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/Unreal%20Engine%20Workshop_certificate_badge.png";
         } else if (lowNombre.includes('master') || lowNombre.includes('superior')) {
             // URL específica proporcionada por el usuario para Butic Master (BIM Master Program)
-            fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/c6e71f8f5be8c62df3bb908336bbcb1930351217/CV/insignias/BIM%20Master%20Program_certificate_badge.png";
+            fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/BIM%20Master%20Program_certificate_badge.png";
         } else if (lowNombre.includes('buildingsmart')) {
             badgeFile = 'buildingSMART_Professional_Certification-Entry_Badge_(Spanish).png';
         } else if (!badgeFile && !fullBadgeUrl && isPlannerly) {
             if (lowNombre.includes('expert') || lowNombre.includes('level 3')) {
-                fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/c6e71f8f5be8c62df3bb908336bbcb1930351217/CV/insignias/03_Expert_badge.png";
+                fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/03_Expert_badge.png";
             } else if (lowNombre.includes('advanced') || lowNombre.includes('level 2')) badgeFile = '02_Advanced_badge.png';
             else if (lowNombre.includes('basics') || lowNombre.includes('level 1')) badgeFile = '01_Basics_badge.png';
             else if (lowNombre.includes('troublemaker')) badgeFile = '05_Digital Troublemaker_badge.png';
@@ -1408,7 +1408,7 @@ function renderEducationView(mbiaData, cvData) {
 
         const badgeImgEl = finalBadgeSrc ? `<img src="${finalBadgeSrc}" alt="${nombre}" 
                      class="w-[95px] h-[95px] object-contain group-hover/cert:scale-110 transition-transform duration-500 relative z-10"
-                     onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/insignias/badge_generic.png';">` : customBadge;
+                     onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/badge_generic.png';">` : customBadge;
 
         const tooltipHTML = showTooltip ? `
              <div class="glass-tooltip !bottom-[120%] !left-1/2 !-translate-x-1/2 mt-auto">
