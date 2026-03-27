@@ -4233,8 +4233,9 @@ function updateModalContent() {
             if (imgTag) imgTag.classList.add('hidden');
             if (confTag) confTag.classList.add('hidden');
             videoEl.classList.remove('hidden');
-            if (videoEl.src !== currentSrc) {
-                videoEl.src = currentSrc;
+            const encodedSrc = encodeURI(currentSrc);
+            if (videoEl.src !== encodedSrc) {
+                videoEl.src = encodedSrc;
                 videoEl.load();
             }
             videoEl.play().catch(e => console.log("Auto-play prevented (User interacting?):", e));
@@ -4246,7 +4247,7 @@ function updateModalContent() {
             if (currentSrc && currentSrc !== 'undefined') {
                 confTag.classList.add('hidden');
                 imgTag.classList.remove('hidden');
-                imgTag.src = currentSrc;
+                imgTag.src = encodeURI(currentSrc);
             } else {
                 imgTag.classList.add('hidden');
                 confTag.classList.remove('hidden');
