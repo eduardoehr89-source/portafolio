@@ -284,7 +284,7 @@ function renderHome() {
         sidebarName.innerHTML = `${first}<br><span class="text-cyan-400">${rest}</span>`;
     }
     // Forzar el nuevo eslogan profesional (Homologado con CV)
-    const finalSlogan = `MODELADOR BIM SENIOR & <span class="font-normal">CITIZEN DEVELOPER</span> // MÉXICO`;
+    const finalSlogan = `MODELADOR BIM SENIOR // MÉXICO`;
     if (homeSlogan) homeSlogan.innerHTML = finalSlogan;
 
     // Actualizar Contadores

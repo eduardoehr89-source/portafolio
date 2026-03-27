@@ -369,22 +369,22 @@ const PROJECT_IMAGES_DB = {
     },
     "P21": {
         "images": [
-            "03_Media/img_optimizadas/P21 Belgica/Acceso Principal_01.jpg",
-            "03_Media/img_optimizadas/P21 Belgica/Acceso Principal_02.jpg",
-            "03_Media/img_optimizadas/P21 Belgica/Aérea.jpg",
-            "03_Media/img_optimizadas/P21 Belgica/Alberca.jpg",
-            "03_Media/img_optimizadas/P21 Belgica/Azotea.jpg",
-            "03_Media/img_optimizadas/P21 Belgica/Cuarto Eléctrico.jpg",
-            "03_Media/img_optimizadas/P21 Belgica/Cuarto Hidráulico.jpg",
-            "03_Media/img_optimizadas/P21 Belgica/Estacionamiento.jpg",
-            "03_Media/img_optimizadas/P21 Belgica/Gimnasio_01.jpg",
-            "03_Media/img_optimizadas/P21 Belgica/Gimnasio_02.jpg",
-            "03_Media/img_optimizadas/P21 Belgica/Jardín.jpg",
-            "03_Media/img_optimizadas/P21 Belgica/Lavandería.jpg",
-            "03_Media/img_optimizadas/P21 Belgica/Ludoteca.jpg",
-            "03_Media/img_optimizadas/P21 Belgica/Oficinas.jpg",
-            "03_Media/img_optimizadas/P21 Belgica/Recámara_01.jpg",
-            "03_Media/img_optimizadas/P21 Belgica/Sala-Comedor.jpg"
+            "03_Media/img_optimizadas/P21 Bélgica/Acceso Principal_01.jpg",
+            "03_Media/img_optimizadas/P21 Bélgica/Acceso Principal_02.jpg",
+            "03_Media/img_optimizadas/P21 Bélgica/Aérea.jpg",
+            "03_Media/img_optimizadas/P21 Bélgica/Alberca.jpg",
+            "03_Media/img_optimizadas/P21 Bélgica/Azotea.jpg",
+            "03_Media/img_optimizadas/P21 Bélgica/Cuarto Eléctrico.jpg",
+            "03_Media/img_optimizadas/P21 Bélgica/Cuarto Hidráulico.jpg",
+            "03_Media/img_optimizadas/P21 Bélgica/Estacionamiento.jpg",
+            "03_Media/img_optimizadas/P21 Bélgica/Gimnasio_01.jpg",
+            "03_Media/img_optimizadas/P21 Bélgica/Gimnasio_02.jpg",
+            "03_Media/img_optimizadas/P21 Bélgica/Jardín.jpg",
+            "03_Media/img_optimizadas/P21 Bélgica/Lavandería.jpg",
+            "03_Media/img_optimizadas/P21 Bélgica/Ludoteca.jpg",
+            "03_Media/img_optimizadas/P21 Bélgica/Oficinas.jpg",
+            "03_Media/img_optimizadas/P21 Bélgica/Recámara_01.jpg",
+            "03_Media/img_optimizadas/P21 Bélgica/Sala-Comedor.jpg"
         ]
     },
     "P22": {
