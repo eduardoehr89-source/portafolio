@@ -9,12 +9,12 @@ const GITHUB_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/porta
 const LOCAL_BASE = '../../';
 const BASE_PATH = isLocal ? LOCAL_BASE : GITHUB_BASE;
 
-const URL_PROJECTS = `${BASE_PATH}05_Informaci%C3%B3n%20proyectos/Proyectos_portafolio.csv?t=${timestamp}`;
-const URL_EDUCATION = `${BASE_PATH}01_Sitio_Web/CV/Informaci%C3%B3n/Formaci%C3%B3n%20acad%C3%A9mica_cv.csv?t=${timestamp}`;
-const URL_ROI_PROY = `${BASE_PATH}05_Informaci%C3%B3n%20proyectos/ROI_Scripts_portafolio%20resumido.txt?t=${timestamp}`;
+const URL_PROJECTS = `${BASE_PATH}05_informacion_proyectos/Proyectos_portafolio.csv?t=${timestamp}`;
+const URL_EDUCATION = `${BASE_PATH}01_Sitio_Web/CV/informacion/formacion_academica_cv.csv?t=${timestamp}`;
+const URL_ROI_PROY = `${BASE_PATH}05_informacion_proyectos/ROI_Scripts_portafolio%20resumido.txt?t=${timestamp}`;
 const CLOUD_ASSET_BASE = `${BASE_PATH}`;
 const CLOUD_BADGE_BASE = `${BASE_PATH}01_Sitio_Web/CV/Insignias/`;
-const URL_SUMMARY = `${BASE_PATH}05_Informaci%C3%B3n%20proyectos/Resumen_portafolio.csv?t=${timestamp}`;
+const URL_SUMMARY = `${BASE_PATH}05_informacion_proyectos/Resumen_portafolio.csv?t=${timestamp}`;
 
 const TOP_PROJECTS_NAMES = [
     "Barrio Santa Lucía",
