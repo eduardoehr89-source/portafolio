@@ -4233,8 +4233,11 @@ function updateModalContent() {
             if (imgTag) imgTag.classList.add('hidden');
             if (confTag) confTag.classList.add('hidden');
             videoEl.classList.remove('hidden');
-            const encodedSrc = encodeURI(currentSrc);
-            if (videoEl.src !== encodedSrc) {
+            // Evitar doble codificación si ya contiene %
+            const encodedSrc = currentSrc.includes('%') ? currentSrc : encodeURI(currentSrc);
+            const absoluteSrc = new URL(encodedSrc, window.location.href).href;
+
+            if (videoEl.src !== absoluteSrc) {
                 videoEl.src = encodedSrc;
                 videoEl.load();
             }
@@ -4247,7 +4250,8 @@ function updateModalContent() {
             if (currentSrc && currentSrc !== 'undefined') {
                 confTag.classList.add('hidden');
                 imgTag.classList.remove('hidden');
-                imgTag.src = encodeURI(currentSrc);
+                const encodedImgSrc = currentSrc.includes('%') ? currentSrc : encodeURI(currentSrc);
+                imgTag.src = encodedImgSrc;
             } else {
                 imgTag.classList.add('hidden');
                 confTag.classList.remove('hidden');
