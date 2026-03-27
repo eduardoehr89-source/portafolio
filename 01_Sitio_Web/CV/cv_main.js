@@ -33,7 +33,7 @@ function executeProfileTransition(direction) {
     const backImg = document.getElementById('cv-profile-back');
     if (!frontImg || !backImg) return;
 
-    const basePath = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Fotos%20de%20perfil/';
+    const basePath = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/fotos_perfil/';
     const totalImages = 8;
 
     // Determinamos el siguiente índice basándonos en la dirección
@@ -78,16 +78,16 @@ const LOCAL_BASE = '../../';
 const BASE_PATH = isLocal ? LOCAL_BASE : GITHUB_BASE;
 
 const CSV_URLS = {
-    experiencia: `${BASE_PATH}01_Sitio_Web/CV/Informaci%C3%B3n/Experiencia%20laboral_cv.csv?t=${timestamp}`,
-    formacion: `${BASE_PATH}01_Sitio_Web/CV/Informaci%C3%B3n/Formaci%C3%B3n%20acad%C3%A9mica_cv.csv?t=${timestamp}`,
-    software: `${BASE_PATH}02_Herramientas/Informaci%C3%B3n/Software_portafolio.csv?t=${timestamp}`,
-    habilidades: `${BASE_PATH}01_Sitio_Web/CV/Informaci%C3%B3n/Soft%20skills_cv.csv?t=${timestamp}`,
-    contacto: `${BASE_PATH}01_Sitio_Web/CV/Informaci%C3%B3n/Contacto_cv.csv?t=${timestamp}`,
-    perfil: `${BASE_PATH}01_Sitio_Web/CV/Informaci%C3%B3n/Perfil%20Profesional_cv.csv?t=${timestamp}`,
-    proyectos_global: `${BASE_PATH}02_Herramientas/Informaci%C3%B3n/Proyectos_portafolio.csv?t=${timestamp}`,
-    disciplinas_global: `${BASE_PATH}02_Herramientas/Informaci%C3%B3n/Disciplinas_portafolio.csv?t=${timestamp}`,
-    normas: `${BASE_PATH}02_Herramientas/Informaci%C3%B3n/Normativas%20y%20Est%C3%A1ndares_portafolio.csv?t=${timestamp}`,
-    summary: `${BASE_PATH}02_Herramientas/Informaci%C3%B3n/Resumen_portafolio.csv?t=${timestamp}`
+    experiencia: `${BASE_PATH}01_Sitio_Web/CV/informacion/experiencia_laboral_cv.csv?t=${timestamp}`,
+    formacion: `${BASE_PATH}01_Sitio_Web/CV/informacion/formacion_academica_cv.csv?t=${timestamp}`,
+    software: `${BASE_PATH}05_Informaci%C3%B3n%20proyectos/Software_portafolio.csv?t=${timestamp}`,
+    habilidades: `${BASE_PATH}01_Sitio_Web/CV/informacion/soft_skills_cv.csv?t=${timestamp}`,
+    contacto: `${BASE_PATH}01_Sitio_Web/CV/informacion/contacto_cv.csv?t=${timestamp}`,
+    perfil: `${BASE_PATH}01_Sitio_Web/CV/informacion/perfil_profesional_cv.csv?t=${timestamp}`,
+    proyectos_global: `${BASE_PATH}05_Informaci%C3%B3n%20proyectos/Proyectos_portafolio.csv?t=${timestamp}`,
+    disciplinas_global: `${BASE_PATH}05_Informaci%C3%B3n%20proyectos/Disciplinas_portafolio.csv?t=${timestamp}`,
+    normas: `${BASE_PATH}05_Informaci%C3%B3n%20proyectos/Normativas%20y%20Est%C3%A1ndares_portafolio.csv?t=${timestamp}`,
+    summary: `${BASE_PATH}05_Informaci%C3%B3n%20proyectos/Resumen_portafolio.csv?t=${timestamp}`
 };
 const CLOUD_BADGE_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/';
 const CLOUD_ASSET_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/';
