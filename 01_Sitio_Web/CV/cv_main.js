@@ -412,7 +412,7 @@ function renderEducation(data, softwareData = []) {
             badgeFile = 'BIM Master Program_certificate_badge.png';
         } else if (lowTitle.includes('aimaster')) {
             badgeFile = 'AI Master Program_candidate_badge.png';
-        } else if (lowTitle.includes('buildingsmart')) {
+        } else if (lowTitle.includes('buildingsmart') && lowTitle.includes('entry')) {
             badgeFile = 'buildingSMART_Professional_Certification-Entry_Badge_(Spanish).png';
         } else if (lowTitle.includes('level1')) {
             badgeFile = '01_Basics_badge.png';
@@ -599,8 +599,8 @@ function renderEducation(data, softwareData = []) {
             if (!badgeFile && normalizeStr(nombre).includes('aimaster')) {
                 badgeFile = 'AI Master Program_candidate_badge.png';
             }
-            // Forzar buildingSMART (Mejorado: incluye institución)
-            if (!badgeFile && (normalizeStr(nombre).includes('buildingsmart') || normalizeStr(institucion).includes('buildingsmart'))) {
+            // Forzar buildingSMART (Mejorado: incluye institución) - Solo si es Entry
+            if (!badgeFile && (normalizeStr(nombre).includes('buildingsmart') || normalizeStr(institucion).includes('buildingsmart')) && normalizeStr(nombre).includes('entry')) {
                 badgeFile = 'buildingSMART_Professional_Certification-Entry_Badge_(Spanish).png';
             }
             // Forzar Plannerly Level 1, 2, 3
