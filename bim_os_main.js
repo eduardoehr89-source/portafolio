@@ -1295,8 +1295,8 @@ function renderEducationView(mbiaData, cvData) {
             // URL específica proporcionada por el usuario para Butic Master (BIM Master Program)
             fullBadgeUrl = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/BIM%20Master%20Program_certificate_badge.png";
         }
-        // Forzar buildingSMART (Mejorado: incluye institución)
-        if (!badgeFile && (normalizeStr(nombre).includes('buildingsmart') || normalizeStr(institucion).includes('buildingsmart'))) {
+        // Forzar buildingSMART (Mejorado: incluye institución) - Solo si es Entry
+        if (!badgeFile && (normalizeStr(nombre).includes('buildingsmart') || normalizeStr(institucion).includes('buildingsmart')) && normalizeStr(nombre).includes('entry')) {
             badgeFile = 'buildingSMART_Professional_Certification-Entry_Badge_(Spanish).png';
         }
         else if (!badgeFile && !fullBadgeUrl && isPlannerly) {
@@ -1336,8 +1336,8 @@ function renderEducationView(mbiaData, cvData) {
         let customBadge = '';
         // Solo generamos customBadge si es SI (excluyendo a BUTIC por orden del usuario) o BimCollab.
         const isButicAny = lowInst.includes('butic') || lowNombre.includes('butic');
-        const isBsiAdvanced = (lowNombre.includes('buildingsmart') || lowInst.includes('buildingsmart')) && lowNombre.includes('advanced');
-        const isCustomTextFormat = (isGenericCSV || isBimCollabAny || isBsiAdvanced) && !isButicAny; 
+        const isBsiGen = (lowNombre.includes('buildingsmart') || lowInst.includes('buildingsmart')) && (lowNombre.includes('advanced') || lowNombre.includes('foundation'));
+        const isCustomTextFormat = (isGenericCSV || isBimCollabAny || isBsiGen) && !isButicAny; 
         
         if (isCustomTextFormat) {
             badgeFile = null;
@@ -1357,6 +1357,7 @@ function renderEducationView(mbiaData, cvData) {
             else if (lowInst.includes('tecnologico')) shortTitle = 'REVIT AVANZ';
             else if (lowNombre.includes('buildingsmart') || lowInst.includes('buildingsmart')) {
                 if (lowNombre.includes('advanced')) shortTitle = 'BSI ADVANCED';
+                else if (lowNombre.includes('foundation')) shortTitle = 'FOUNDATION';
                 else shortTitle = 'BSI';
             }
             else if (lowNombre.includes('univer') || lowInst.includes('univer')) {
@@ -1457,21 +1458,21 @@ function renderEducationView(mbiaData, cvData) {
     }
 
     const master = ongoing.find(e => normalizeStr(getVal(e, 'titulo', 'nombre')).match(/(master|mbia)/));
-    let bsiAdvanced = ongoing.find(e => {
+    let bsiFoundation = ongoing.find(e => {
         const title = normalizeStr(getVal(e, 'titulo', 'nombre'));
-        return (title.includes('buildingsmart') || title.includes('professional')) && title.includes('advanced');
+        return (title.includes('buildingsmart') || title.includes('professional')) && title.includes('foundation');
     });
 
     // FALLBACK: Si no se encuentra en los datos (por problemas de sincronización/CORS), lo creamos manualmente
-    if (!bsiAdvanced) {
-        console.warn('BSI Advanced no encontrado en datos, usando fallback manual');
-        bsiAdvanced = {
-            'Nombre': 'Professional Certification - Advanced',
+    if (!bsiFoundation) {
+        console.warn('BSI Foundation no encontrado en datos, usando fallback manual');
+        bsiFoundation = {
+            'Nombre': 'Professional Certification - Foundation',
             'Institucion': 'buildingSMART International',
             'Estado': 'Programado - Abril 2025',
             'URL Archivo': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/insignias/badge_generic.png',
             'color_badge': '#262626', // NEUTRAL GREY FORCE
-            'Titulo en badge genérico': 'ADVANCED'
+            'Titulo en badge genérico': 'FOUNDATION'
         };
     }
 
@@ -1530,10 +1531,10 @@ function renderEducationView(mbiaData, cvData) {
                 </div>
             </div>
 
-            <!-- Bloque 2: Herramientas Adicionales (BSI Advanced, Dynamo) -->
+            <!-- Bloque 2: Herramientas Adicionales (BSI Foundation, Dynamo) -->
             <div class="shrink-0 flex items-center justify-center min-w-fit px-4 border-l border-gray-800/15">
                 <div class="flex justify-center items-center gap-6 flex-nowrap">
-                    ${bsiAdvanced ? generateBadgeHtml(bsiAdvanced, 'bsi-adv', false) : '<!-- BSI Advanced missing -->'}
+                    ${bsiFoundation ? generateBadgeHtml(bsiFoundation, 'bsi-found', false) : '<!-- BSI Foundation missing -->'}
                     ${dynamo ? generateBadgeHtml(dynamo, 'dyn-main', false) : ''}
                 </div>
             </div>
