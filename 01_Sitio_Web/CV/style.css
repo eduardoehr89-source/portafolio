@@ -365,7 +365,7 @@ body.light-theme #software-secondary-list span {
 @media print {
     @page {
         margin: 0;
-        size: 210mm 365mm;
+        size: 210mm 380mm;
     }
 
     body {
@@ -378,7 +378,7 @@ body.light-theme #software-secondary-list span {
         box-shadow: none !important;
         margin: 0 !important;
         width: 210mm !important;
-        height: 365mm !important; 
+        height: 380mm !important; 
         border-radius: 0 !important;
         border: none !important;
         overflow: hidden !important; /* Volver a hidden para forzar 1 sola página si es necesario, pero asegurar contenido */
@@ -587,7 +587,7 @@ body.light-theme #software-secondary-list span {
 
     @media print {
         @page {
-            size: 210mm 365mm !important;
+            size: 210mm 380mm !important;
             margin: 0 !important;
         }
 
@@ -603,7 +603,7 @@ body.light-theme #software-secondary-list span {
 
         #cv-container {
             width: 210mm !important;
-            height: 365mm !important; 
+            height: 380mm !important; 
             margin: 0 !important;
             background-color: #18181b !important;
         }
