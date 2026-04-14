@@ -3,9 +3,8 @@
 // ==========================================================================
 // ==========================================================================
 
-// Cache horaria para evitar descargas innecesarias (Cambia cada 60 min)
-const cacheHour = Math.floor(Date.now() / (1000 * 60 * 60));
-const timestamp = `v1-${cacheHour}`;
+// Cache forzada para asegurar actualizaciones inmediatas
+const timestamp = `v_forced_${Date.now()}`;
 
 const URL_PROJECTS = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_informacion_proyectos/Proyectos_portafolio.csv?t=${timestamp}`;
 const URL_DISCIPLINES = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_informacion_proyectos/Disciplinas_portafolio.csv?t=${timestamp}`;
@@ -16,7 +15,7 @@ const URL_ROI = `https://raw.githubusercontent.com/eduardoehr89-source/portafoli
 const URL_COLLAB = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_informacion_proyectos/Colaboraci%C3%B3n_portafolio.csv?t=${timestamp}`;
 const URL_SECTIONS = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_informacion_proyectos/Dashboard%20global_secciones_portafolio.csv?t=${timestamp}`;
 const URL_AI_REV = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_informacion_proyectos/Inteligencia%20Artificial_portafolio.csv?t=${timestamp}`;
-const URL_ACADEMIC_CV = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/informacion/formacion_academica_cv.csv?t=${timestamp}`;
+const URL_ACADEMIC_CV = window.location.hostname.includes('github.io') ? `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/informacion/formacion_academica_cv.csv?t=${timestamp}` : `./01_Sitio_Web/CV/informacion/formacion_academica_cv.csv?t=${timestamp}`;
 const URL_TECH_VALUE = `https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/05_informacion_proyectos/Valor%20T%C3%A9cnico%20Aplicado_portafolio.csv?t=${timestamp}`;
 const CLOUD_BADGE_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/';
 const CLOUD_ASSET_BASE = 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/';
@@ -1463,19 +1462,7 @@ function renderEducationView(mbiaData, cvData) {
         return (title.includes('buildingsmart') || title.includes('professional')) && title.includes('foundation');
     });
 
-    // FALLBACK: Si no se encuentra en los datos (por problemas de sincronización/CORS), lo creamos manualmente
-    if (!bsiFoundation) {
-        console.warn('BSI Foundation no encontrado en datos, usando fallback manual');
-        bsiFoundation = {
-            'Nombre': 'Professional Certification - Foundation',
-            'Institucion': 'buildingSMART International',
-            'Estado': 'Programado - Abril 2025',
-            'URL Archivo': 'https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/CV/insignias/badge_generic.png',
-            'color_badge': '#262626', // NEUTRAL GREY FORCE
-            'Titulo en badge genérico': 'FOUNDATION'
-        };
-    }
-
+    // ELIMINADO: Fallback manual de BSI Foundation para permitir que se oculte dinámicamente.
     const dynamo = ongoing.find(e => normalizeStr(getVal(e, 'titulo', 'nombre')).includes('dynamo'));
 
     // Actualizar el contador en el título de Educación Previa
