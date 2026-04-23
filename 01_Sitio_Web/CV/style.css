@@ -602,7 +602,7 @@ body.light-theme .thin-scroll::-webkit-scrollbar-thumb {
    ========================================= */
 @media print {
     @page {
-        size: 210mm 280mm !important;
+        size: 210mm 285mm !important;
         margin: 0 !important;
     }
 
@@ -637,7 +637,7 @@ body.light-theme .thin-scroll::-webkit-scrollbar-thumb {
 
     #cv-container {
         width: 210mm !important;
-        height: 280mm !important; 
+        height: 285mm !important; 
         margin: 0 !important;
         display: flex !important;
         overflow: hidden !important;
