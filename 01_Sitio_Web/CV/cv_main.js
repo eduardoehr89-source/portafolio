@@ -459,7 +459,7 @@ function renderEducation(data, softwareData = []) {
                         ${finalUrl ?
                     `<a href="${finalUrl}" 
                                 target="_blank"
-                                class="text-[0.65rem] text-gray-500 dark:text-gray-400 hover:underline italic flex items-center gap-1 group/edu-link truncate max-w-[70%]">
+                                class="text-[0.65rem] text-gray-500 dark:text-gray-400 hover:underline italic flex items-center gap-1 group/edu-link max-w-[90%]">
                                 ${titulo}
                                 <i class="fas fa-external-link-alt text-[0.4rem] opacity-0 group-hover/edu-link:opacity-100 transition-opacity"></i>
                             </a>` :
