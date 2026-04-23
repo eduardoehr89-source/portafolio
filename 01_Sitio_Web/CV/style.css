@@ -677,8 +677,10 @@ body.light-theme .thin-scroll::-webkit-scrollbar-thumb {
     .skill-progress { background: #3b82f6 !important; height: 3px !important; }
 
     /* Compactar secciones */
-    section { margin-bottom: 0.5rem !important; }
-    .job-card { margin-bottom: 0.1rem !important; }
+    /* Espaciado de Experiencia para evitar amontonamiento */
+    section { margin-bottom: 1.2rem !important; }
+    .job-card { margin-bottom: 1rem !important; }
+    .job-card h4 { margin-top: 0.5rem !important; margin-bottom: 0.2rem !important; }
     
     /* Forzar foto de perfil */
     #cv-profile-front {
