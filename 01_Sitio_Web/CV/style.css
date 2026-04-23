@@ -597,35 +597,107 @@ body.light-theme .thin-scroll::-webkit-scrollbar-thumb {
 }
 
 /* Light Theme Adjustments - Mantener colores vibrantes */
-
-/* === CORRECCIÓN FINAL CRÍTICA: VISIBILIDAD DE TAGS EN IMPRESIÓN === */
+/* =========================================
+   BLOQUE DE IMPRESIÓN MAESTRO (PÁGINA ÚNICA)
+   ========================================= */
 @media print {
-    /* MODO OSCURO: Forzar fondo gris-azul Slate-600 */
-    .dark .soft-skill-tag,
-    .dark .sidebar .soft-skill-tag,
-    .dark .skill-tag {
-        background-color: #475569 !important; /* Slate-600 sólido */
-        border: 1px solid #64748b !important;
+    @page {
+        size: 210mm 310mm !important;
+        margin: 0 !important;
+    }
+
+    html, body {
+        height: 310mm !important;
+        width: 210mm !important;
+        overflow: hidden !important;
+        background: #09090b !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    #cv-container {
+        width: 210mm !important;
+        height: 310mm !important; 
+        margin: 0 !important;
+        background-color: #18181b !important;
+        color: #e5e7eb !important;
+        display: flex !important;
+        overflow: hidden !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+    }
+
+    /* Sidebar Fixes */
+    .sidebar-color {
+        background-color: #18181b !important;
         color: #ffffff !important;
-        display: inline-block !important;
+        width: 265px !important;
+        min-width: 265px !important;
+        flex: 0 0 265px !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
-    /* MODO CLARO: Mantener el gris suave del diseño web */
-    .light .soft-skill-tag,
-    .light .sidebar .soft-skill-tag {
-        background-color: #f1f5f9 !important; /* Slate-100 suave */
-        border: 1px solid #e2e8f0 !important;
-        color: #475569 !important;
+    /* Contenido Principal Fixes */
+    main.cv-container > div:last-child {
+        flex: 1 !important;
+        width: calc(210mm - 265px) !important;
+        background-color: #18181b !important;
+    }
+
+    /* Visibilidad de texto de actualización */
+    .cv-update-info {
+        opacity: 1 !important;
+        display: block !important;
+        visibility: visible !important;
+        margin-top: 2rem !important;
+        color: #9ca3af !important;
+    }
+
+    .cv-update-info p {
+        color: #9ca3af !important;
+        opacity: 1 !important;
+    }
+
+    /* Etiquetas sutiles (Sin tono azulado) */
+    .soft-skill-tag {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        color: #cbd5e1 !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
-    /* Forzar que el sidebar respete el motor de color */
-    .sidebar {
+    /* Ocultar Interfaz */
+    .no-print, .glass-tooltip, #menu-toggle-btn, .floating-controls, nav, .fixed {
+        display: none !important;
+    }
+
+    /* Barras de Software */
+    .skill-bar { 
+        background: rgba(255, 255, 255, 0.1) !important; 
+        height: 3px !important;
+    }
+    .skill-progress { 
+        background: #3b82f6 !important; 
+        height: 3px !important;
+    }
+
+    /* Compactar secciones para que quepan en 310mm */
+    section { margin-bottom: 0.6rem !important; }
+    .job-card { margin-bottom: 0.2rem !important; }
+    h3 { margin-bottom: 0.4rem !important; }
+    
+    /* Forzar foto de perfil */
+    #cv-profile-front {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
         -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
     }
 }
+
 
