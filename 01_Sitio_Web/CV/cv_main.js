@@ -654,7 +654,7 @@ function renderContact(data) {
             locationEl.innerHTML = `${detalle}<br><span class="block text-gray-500 font-normal italic uppercase text-[0.55rem] mt-0.5">INTERESADO EN TRABAJO REMOTO</span>`;
         }
         if (campo.includes('linkedin') && linkedinEl) {
-            linkedinEl.innerHTML = `${detalle.replace('linkedin.com/in/', '/in/')} <i class="fas fa-external-link-alt text-[0.45rem] text-gray-400 ml-1"></i>`;
+            linkedinEl.innerHTML = `LinkedIn <i class="fas fa-external-link-alt text-[0.45rem] text-gray-400 ml-1"></i>`;
             linkedinEl.href = detalle.startsWith('http') ? detalle : `https://${detalle}`;
         }
         if (campo.includes('nacionalidad') && nacionalidadEl) {
