@@ -2,8 +2,8 @@
    DESIGN SYSTEM & VARIABLES
    ========================================= */
 :root {
-    --primary: #3b82f6;
-    --primary-dark: #2563eb;
+    --primary: #ffffff;
+    --primary-dark: #a1a1aa;
     --secondary: #10b981;
     --sidebar-bg: #18181b; /* Gris Zinc-900 igual que en la web */
     /* Azul Marino Sólido para Light Mode */
@@ -91,7 +91,7 @@ body {
 
 .sidebar-section-title i,
 .sidebar-section-title svg {
-    color: #3b82f6 !important;
+    color: #ffffff !important;
     width: 0.75rem !important;
     /* Igual a w-3 del portafolio */
     height: 0.75rem !important;
@@ -101,7 +101,7 @@ body {
 
 /* Ajuste para iconos de identificación (lead icons) en contacto */
 .sidebar-color address i:not(.fa-external-link-alt) {
-    color: #3b82f6 !important;
+    color: #ffffff !important;
     width: 0.75rem !important;
     font-size: 0.65rem !important;
     opacity: 0.9;
@@ -143,12 +143,12 @@ body.light-theme .sidebar-color .text-gray-400 { color: #334155 !important; } /*
 body.light-theme .sidebar-color .text-black { color: #000000 !important; }
 
 /* Colores de Acento para Sidebar Claro */
-body.light-theme .sidebar-color .text-blue-400 { color: #2563eb !important; }
-body.light-theme .sidebar-color .text-blue-500 { color: #1d4ed8 !important; }
-body.light-theme .sidebar-color .text-cyan-400 { color: #0891b2 !important; }
-body.light-theme .sidebar-color .text-cyan-500 { color: #0e7490 !important; }
+body.light-theme .sidebar-color .text-blue-400 { color: #4b5563 !important; }
+body.light-theme .sidebar-color .text-blue-500 { color: #1f2937 !important; }
+body.light-theme .sidebar-color .text-cyan-400 { color: #6b7280 !important; }
+body.light-theme .sidebar-color .text-cyan-500 { color: #374151 !important; }
 body.light-theme .sidebar-color i[class*="text-blue"], 
-body.light-theme .sidebar-color i[class*="text-cyan"] { color: #2563eb !important; }
+body.light-theme .sidebar-color i[class*="text-cyan"] { color: #1f2937 !important; }
 
 /* Reset de Elementos Base */
 body.light-theme .sidebar-color h1,
@@ -166,7 +166,7 @@ body.light-theme .sidebar-color a:not(.nav-btn):not([class*="text-"]) {
 }
 
 body.light-theme .sidebar-color a:hover {
-    color: #3b82f6 !important; /* Azul en hover en lugar de blanco */
+    color: #000000 !important; /* Negro en hover en modo claro */
 }
 
 body.light-theme .sidebar-color .h-px {
@@ -198,9 +198,7 @@ body.light-theme .sidebar-color .h-px {
 }
 
 .soft-skill-tag:hover {
-    background: rgba(59, 130, 246, 0.2) !important;
-    border-color: var(--primary) !important;
-    color: var(--primary) !important; /* Azul en lugar de blanco */
+    color: #ffffff !important; /* Blanco en hover */
 }
 
 /* FIX LEGIBILIDAD TAGS EN MODO CLARO */
@@ -234,7 +232,7 @@ body.light-theme #software-secondary-list span {
     width: 0;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .glass-tooltip {
@@ -594,7 +592,7 @@ body.light-theme #software-secondary-list span {
         body {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
-            background: #18181b !important;
+            background: #ffffff !important;
         }
 
         body.light-theme {
@@ -605,12 +603,12 @@ body.light-theme #software-secondary-list span {
             width: 210mm !important;
             height: 400mm !important; 
             margin: 0 !important;
-            background-color: #18181b !important;
+            background-color: #ffffff !important;
         }
 
-        /* FORZAR SIDEBAR OSCURO EN IMPRESIÓN (PARA MODO OSCURO) */
+        /* FORZAR SIDEBAR NEUTRO EN IMPRESIÓN */
         .sidebar-color {
-            background-color: #18181b !important;
+            background-color: #1f2937 !important;
             color: #ffffff !important;
         }
 
@@ -621,54 +619,52 @@ body.light-theme #software-secondary-list span {
         }
 
         body.light-theme .sidebar-color {
-            background-color: transparent !important;
+            background-color: #1f2937 !important;
         }
 
         body.light-theme #cv-container .sidebar-color,
         body.light-theme #cv-container .sidebar-color * {
-            color: #1e293b !important;
+            color: #f3f4f6 !important;
         }
 
         body.light-theme #cv-container .sidebar-color .sidebar-section-title {
-            color: #0f172a !important;
+            color: #ffffff !important;
         }
 
         body.light-theme #cv-container .sidebar-color .soft-skill-tag {
-            background: rgba(0, 0, 0, 0.08) !important;
-            border-color: rgba(0, 0, 0, 0.2) !important;
-            color: #0f172a !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+            color: #ffffff !important;
             font-weight: 600 !important;
         }
 
-        /* Restaurar colores específicos de acento que SÍ deben verse en sidebar */
-        body.light-theme #cv-container .sidebar-color .text-blue-400,
-        body.light-theme #cv-container .sidebar-color .text-blue-500,
-        body.light-theme #cv-container .sidebar-color i[class*="text-blue"] {
-            color: #3b82f6 !important;
+        /* Restaurar colores neutros en sidebar */
+        body.light-theme #cv-container .sidebar-color .text-gray-400,
+        body.light-theme #cv-container .sidebar-color i[class*="text-"] {
+            color: #9ca3af !important;
         }
 
-        body.light-theme #cv-container .sidebar-color .sidebar-subtext,
-        body.light-theme #cv-container .sidebar-color .text-gray-400 {
-            color: #9ca3af !important;
+        body.light-theme #cv-container .sidebar-color .sidebar-subtext {
+            color: #d1d5db !important;
             opacity: 0.8 !important;
         }
 
         /* Restaurar Software Complementario */
         .sidebar-color .soft-skill-tag {
-            background: rgba(0, 0, 0, 0.08) !important;
-            border-color: rgba(0, 0, 0, 0.1) !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
         }
 
         /* Si el usuario tiene el modo claro activado en la web (Cuerpo Derecho) */
         .light-theme #cv-container {
             background-color: #ffffff !important;
-            color: #1e293b !important;
+            color: #111827 !important;
         }
 
-        /* Forzar visibilidad de las barras de progreso (Más contraste, grosor original) */
+        /* Forzar visibilidad de las barras de progreso (Gris neutro) */
         .skill-bar {
             height: 3px !important;
-            background-color: #6b7280 !important; /* Gris Zinc-500 para contraste claro */
+            background-color: #e5e7eb !important;
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
         }

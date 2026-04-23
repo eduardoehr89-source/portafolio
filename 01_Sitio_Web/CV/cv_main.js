@@ -256,48 +256,41 @@ function renderExperience(data) {
         article.innerHTML = `
             <div class="flex justify-between items-center mb-0.5">
                 <h4 class="text-xs font-bold text-gray-800 dark:text-white flex items-center">
-                    ${puesto.includes('Modelador BIM Senior') ? `
-                    <div class="premium-pulse-container pulse-blue">
-                        <span class="premium-pulse-aura"></span>
-                        <span class="premium-pulse-dot"></span>
-                    </div>` : '<span class="static-dot"></span>'}
                     ${puesto.replace(/\s*\((.*?)\)/g, ' <span class="font-normal opacity-80 ml-1.5">($1)</span>')}
                 </h4>
-                <div class="text-right flex items-center gap-2">
-                    <span class="text-[0.6rem] text-blue-600 dark:text-blue-400 whitespace-nowrap">${duration}</span>
-                    <span class="text-[0.6rem] text-gray-400 dark:text-gray-500 whitespace-nowrap">(${periodo})</span>
+                <div class="text-right">
+                    <span class="text-[0.6rem] text-gray-400 dark:text-gray-500 font-mono uppercase tracking-wider">${periodo.replace(/[a-zA-Z]{3,}\s/g, '').replace(/Presente/g, 'Presente')}</span>
                 </div>
             </div>
             
             ${mainUrl ?
-                `<a href="${mainUrl}" target="_blank" class="text-[0.65rem] font-semibold text-gray-500 dark:text-gray-400 italic mb-2.5 hover:text-blue-500 dark:hover:text-blue-300 transition-colors flex items-center gap-1 group/emp-link">
+                `<a href="${mainUrl}" target="_blank" class="text-[0.65rem] font-semibold text-gray-500 dark:text-gray-400 italic mb-2.5 hover:text-white transition-colors">
                     ${empresa}
-                    <i class="fas fa-external-link-alt text-[0.45rem] opacity-0 group-hover/emp-link:opacity-100 transition-opacity"></i>
                 </a>` :
                 `<p class="text-[0.65rem] font-semibold text-gray-500 dark:text-gray-400 italic mb-2.5">${empresa}</p>`
             }
 
             <div class="space-y-1.5">
                 ${descripcion.split('\n').filter(p => p.trim() !== '').map(p => {
-                    let pText = p.trim();
-                    const highlights = [
-                        "Eficiencia Operativa y Ahorro en Oficina (BIM + IA + ISO 19650):",
-                        "Control de Calidad y Prevención de Sobrecostos en Obra (Speckle + Dalux):",
-                        "Inteligencia de Datos y Control de Costos (Speckle + Power BI):",
-                        "Aceleración de Procesos (IA + Dynamo):"
-                    ];
-                    highlights.forEach(h => {
-                        if (pText.includes(h)) {
-                            pText = pText.replace(h, `<span class="font-semibold text-gray-800 dark:text-gray-100">${h}</span>`);
-                        }
-                    });
-                    return `
+                let pText = p.trim();
+                const highlights = [
+                    "Eficiencia en Oficina:",
+                    "Control en Obra:",
+                    "Inteligencia de Datos:",
+                    "Automatización con IA:"
+                ];
+                highlights.forEach(h => {
+                    if (pText.includes(h)) {
+                        pText = pText.replace(h, `<span class="font-semibold text-gray-800 dark:text-gray-100">${h}</span>`);
+                    }
+                });
+                return `
                         <div class="flex items-start gap-1.5">
                             <span class="text-gray-400 dark:text-gray-500 text-[0.6rem] mt-0.5">•</span>
                             <p class="text-[0.65rem] text-gray-600 dark:text-gray-300 text-justify leading-snug flex-1">${pText}</p>
                         </div>
                     `;
-                }).join('')}
+            }).join('')}
             </div>
         `;
         container.appendChild(article);
@@ -354,7 +347,7 @@ function renderEducation(data, softwareData = []) {
     }).sort((a, b) => {
         const nameA = normalizeStr(getVal(a, 'Nombre', 'Titulo'));
         const nameB = normalizeStr(getVal(b, 'Nombre', 'Titulo'));
-        
+
         // Prioridad estratégica: Butic (1) > buildingSMART (2) > Dynamo/Otros (3)
         const getPriority = (name) => {
             if (name.includes('aimaster') || name.includes('butic')) return 1;
@@ -362,7 +355,7 @@ function renderEducation(data, softwareData = []) {
             if (name.includes('dynamo')) return 3;
             return 99;
         };
-        
+
         return getPriority(nameA) - getPriority(nameB);
     });
 
@@ -428,110 +421,47 @@ function renderEducation(data, softwareData = []) {
 
         const isOngoing = estado.toLowerCase().includes('curso') || estado.toLowerCase().includes('cruso') || estado.toLowerCase().includes('presente');
         if (isOngoing && gridContainer) {
-            let iconClass = 'fa-graduation-cap';
-            const normalizedTitle = normalizeStr(titulo);
-            if (normalizedTitle.includes('dynamo')) iconClass = 'fa-laptop-code';
-            if (normalizedTitle.includes('solibri')) iconClass = 'fa-check-double';
-
-            const urlPagina = getVal(edu, 'URL Página', 'URL Pagina');
-            const isGenericCSV = (getVal(edu, 'Badge genérico', 'generico') || '').toUpperCase() === 'SI';
-            const titleCSV = getVal(edu, 'Titulo en badge genérico', 'titulo generico');
-
-            // Crear insignia circular personalizada si no hay imagen oficial o si se marca como genérico
-            let customBadge = '';
-            if (isGenericCSV || (!badgeFile && (normalizedTitle.includes('dynamo') || normalizedTitle.includes('solibri') || normalizedTitle.includes('advanced')))) {
-                let shortTitle = 'CERT';
-                if (titleCSV && titleCSV !== 'N/A' && titleCSV !== '') {
-                    shortTitle = titleCSV.trim();
-                } else if (normalizedTitle.includes('dynamo')) {
-                    shortTitle = 'DYNAMO';
-                } else if (normalizedTitle.includes('solibri')) {
-                    shortTitle = 'SOLIBRI';
-                } else if (normalizedTitle.includes('advanced')) {
-                    shortTitle = 'ADVANCED';
-                }
-
-                customBadge = `
-                    <div class="relative w-[95px] h-[95px] rounded-full bg-zinc-800 [.light-theme_&]:bg-zinc-200 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-lg">
-                        <span class="text-[10px] font-black text-white [.light-theme_&]:text-zinc-900 tracking-[0.1em] uppercase text-center px-2 leading-tight break-words">${shortTitle.split(' ').join('<br>')}</span>
-                    </div>`;
-            }
-
-            let badgeImg = badgeFile ? `
-                <div class="relative w-[120px] h-[120px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
-                    <svg viewBox="-20 -20 160 160" class="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
-                        <path id="curve-ongoing-${idx}" d="M 60, 60 m -70, 0 a 70, 70 0 1,1 140, 0 a 70, 70 0 1,1 -140, 0" fill="transparent" />
-                        <text class="text-[8.5px] font-black fill-gray-400 [.light-theme_&]:fill-gray-800 font-mono uppercase tracking-[0.2em]">
-                            <textPath href="#curve-ongoing-${idx}" startOffset="50%" text-anchor="middle">${institucion}</textPath>
-                        </text>
-                    </svg>
-                    <img src="${(badgeFile && (badgeFile.includes('http://') || badgeFile.includes('https://'))) ? badgeFile : `${CLOUD_BADGE_BASE}${encodeURIComponent(badgeFile)}?t=${timestamp}`}" class="w-[95px] h-[95px] object-contain relative z-10 transition-transform duration-500">
-                </div>
-            ` : (customBadge ? `
-                <div class="relative w-[120px] h-[120px] flex items-center justify-center shrink-0">
-                    <svg viewBox="-20 -20 160 160" class="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
-                        <path id="curve-ongoing-${idx}" d="M 60, 60 m -70, 0 a 70, 70 0 1,1 140, 0 a 70, 70 0 1,1 -140, 0" fill="transparent" />
-                        <text class="text-[8.5px] font-black fill-gray-400 [.light-theme_&]:fill-gray-800 font-mono uppercase tracking-[0.2em]">
-                            <textPath href="#curve-ongoing-${idx}" startOffset="50%" text-anchor="middle">${institucion}</textPath>
-                        </text>
-                    </svg>
-                    ${customBadge}
-                </div>
-            ` : `<i class="fas ${iconClass} text-xl text-gray-400 dark:text-white group-hover:scale-110 transition-transform mt-0.5"></i>`);
-
-            // Si tiene URL de página, envolver en enlace
-            if (urlPagina) {
-                badgeImg = `<a href="${urlPagina}" target="_blank" class="hover:scale-105 transition-transform inline-block">${badgeImg}</a>`;
-            }
-
-            const isAIMaster = titulo.toLowerCase().includes('ai master');
-            const hideText = isAIMaster || isGenericCSV || customBadge !== '';
-            gridContainer.innerHTML += `
-                <div class="future-study group flex flex-row items-center gap-3">
-                    ${badgeImg}
-                    <div class="flex flex-col ${hideText ? 'hidden' : ''}">
-                        <p class="text-[0.6rem] font-bold uppercase tracking-wider">${titulo}</p>
-                        ${urlPagina ?
-                    `<a href="${urlPagina}" target="_blank" class="text-[0.55rem] text-gray-500 dark:text-gray-400 normal-case leading-tight hover:text-sky-900 dark:hover:text-cyan-400 transition-colors flex items-center gap-1 group/inst-link">
-                                ${institucion}
-                                <i class="fas fa-external-link-alt text-[0.4rem] opacity-0 group-hover/inst-link:opacity-100 transition-opacity"></i>
+            const urlPagina = getVal(edu, 'URL Página', 'URL Pagina').trim();
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="flex flex-col mb-1.5">
+                    <div class="flex items-center justify-between">
+                        <strong class="text-[0.65rem] text-gray-800 dark:text-gray-200">${institucion}</strong>
+                        <span class="text-[0.55rem] text-gray-400 font-mono">${periodo || '2025-2026'}</span>
+                    </div>
+                    <div class="flex items-center justify-start gap-2">
+                         ${urlPagina ?
+                    `<a href="${urlPagina}" target="_blank" class="text-[0.65rem] text-gray-500 dark:text-gray-400 hover:underline italic truncate max-w-[85%] flex items-center gap-1 group/course-link">
+                                ${titulo}
+                                <i class="fas fa-external-link-alt text-[0.4rem] opacity-0 group-hover/course-link:opacity-100 transition-opacity"></i>
                             </a>` :
-                    `<p class="text-[0.55rem] text-gray-500 dark:text-gray-400 normal-case leading-tight">${institucion}</p>`
+                    `<span class="text-[0.65rem] text-gray-500 dark:text-gray-400 italic truncate max-w-[85%]">${titulo}</span>`
                 }
-                        <p class="text-[0.5rem] text-gray-400 dark:text-gray-500 font-normal opacity-80 leading-none mt-0.5">${ubicacion}</p>
                     </div>
                 </div>
             `;
+            gridContainer.appendChild(li);
         } else if (listContainer) {
-            const isWhitelisted = whitelist.some(w => normalizeStr(titulo).includes(w));
-            if (isWhitelisted && badgeFile) return;
+            const urlPagina = getVal(edu, 'URL Página', 'URL Pagina').trim();
+            const urlArchivo = getVal(edu, 'URL Archivo', 'Archivo', 'url archivo ', 'url archivo').trim();
+            const finalUrl = urlPagina || urlArchivo;
 
-            const urlPagina = getVal(edu, 'URL Página', 'URL Pagina');
-            const urlArchivo = getVal(edu, 'URL Archivo', 'Archivo', 'url archivo ', 'url archivo');
-
-            // Determinar si es una imagen para abrir en modal (SOLO para el certificado/archivo)
             const isImageCert = urlArchivo && (urlArchivo.toLowerCase().endsWith('.png') || urlArchivo.toLowerCase().endsWith('.jpg') || urlArchivo.toLowerCase().endsWith('.jpeg'));
 
             const li = document.createElement('li');
             li.innerHTML = `
                 <div class="flex flex-col mb-1.5">
                     <div class="flex items-center justify-between">
-                        ${urlPagina ?
-                    `<a href="${urlPagina}" target="_blank" class="text-[0.65rem] text-gray-800 dark:text-gray-200 font-bold hover:text-blue-500 dark:hover:text-blue-400 transition-colors flex items-center gap-1 group/inst-link">
-                                ${institucion}
-                                <i class="fas fa-external-link-alt text-[0.4rem] opacity-0 group-hover/inst-link:opacity-100 transition-opacity"></i>
-                            </a>` :
-                    `<strong class="text-[0.65rem] text-gray-800 dark:text-gray-200">${institucion}</strong>`
-                }
+                        <strong class="text-[0.65rem] text-gray-800 dark:text-gray-200">${institucion}</strong>
                         <span class="text-[0.55rem] text-gray-400 font-mono">${periodo}</span>
                     </div>
                     <div class="flex items-center justify-start gap-2">
-                        ${urlArchivo ?
-                    `<a href="${isImageCert ? 'javascript:void(0)' : encodeURI(urlArchivo)}" 
-                                ${isImageCert ? `onclick="openCertModal('${encodeURI(urlArchivo)}', '${titulo}')"` : 'target="_blank"'}
+                        ${finalUrl ?
+                    `<a href="${finalUrl}" 
+                                target="_blank"
                                 class="text-[0.65rem] text-gray-500 dark:text-gray-400 hover:underline italic flex items-center gap-1 group/edu-link truncate max-w-[70%]">
                                 ${titulo}
-                                <i class="fas ${isImageCert ? 'fa-search-plus' : 'fa-external-link-alt'} text-[0.4rem] opacity-0 group-hover/edu-link:opacity-100 transition-opacity"></i>
+                                <i class="fas fa-external-link-alt text-[0.4rem] opacity-0 group-hover/edu-link:opacity-100 transition-opacity"></i>
                             </a>` :
                     `<span class="text-[0.65rem] text-gray-500 dark:text-gray-400 italic truncate max-w-[70%]">${titulo}</span>`
                 }
@@ -573,133 +503,32 @@ function renderEducation(data, softwareData = []) {
             return orderA - orderB;
         });
 
-        sortedCerts.forEach((cert, idx) => {
+        sortedCerts.forEach((cert) => {
             const nombre = getVal(cert, 'Nombre');
             const institucion = getVal(cert, 'Institucion', 'Institución');
-            const archivos = getVal(cert, 'Archivos', 'archivos', 'url archivo ', 'url archivo') || '';
             const urlPagina = getVal(cert, 'URL Página', 'URL Pagina');
-            const urlArchivo = getVal(cert, 'URL Archivo', 'URL Archivo', 'url archivo ', 'url archivo');
-            const idCredencial = getVal(cert, 'ID / Credencial');
-            const estado = getVal(cert, 'Estado', 'estado') + ' ' + getVal(cert, 'periodo');
+            const finalUrl = urlPagina || urlArchivo;
 
-            // Determinar link prioritario: URL de página > URL de archivo
-            const mainLink = urlPagina || urlArchivo || '#';
-
-            // Buscar si hay un archivo de imagen de badge (cualquier imagen en la lista de archivos)
-            let badgeFile = archivos.split(',').map(s => s.trim()).find(s => {
-                const low = s.toLowerCase();
-                return low.endsWith('.png') || low.endsWith('.jpg') || low.endsWith('.svg') || low.includes('badge');
-            });
-
-            // Forzar badge específico para Master Superior / Master Program
-            if (!badgeFile && (normalizeStr(nombre).includes('master') || normalizeStr(nombre).includes('superior'))) {
-                badgeFile = 'BIM Master Program_certificate_badge.png';
-            }
-            // Forzar badge específico para AI Master si no se detecta uno
-            if (!badgeFile && normalizeStr(nombre).includes('aimaster')) {
-                badgeFile = 'AI Master Program_candidate_badge.png';
-            }
-            // Forzar buildingSMART (Mejorado: incluye institución) - Solo si es Entry
-            if (!badgeFile && (normalizeStr(nombre).includes('buildingsmart') || normalizeStr(institucion).includes('buildingsmart')) && normalizeStr(nombre).includes('entry')) {
-                badgeFile = 'buildingSMART_Professional_Certification-Entry_Badge_(Spanish).png';
-            }
-            // Forzar Plannerly Level 1, 2, 3
-            if (!badgeFile && normalizeStr(nombre).includes('level1')) {
-                badgeFile = '01_Basics_badge.png';
-            }
-            if (!badgeFile && normalizeStr(nombre).includes('level2')) {
-                badgeFile = '02_Advanced_badge.png';
-            }
-            if (!badgeFile && (normalizeStr(nombre).includes('level3') || normalizeStr(nombre).includes('expert'))) {
-                badgeFile = '03_Expert_badge.png';
-            }
-            if (!badgeFile && (normalizeStr(nombre).includes('bootcamp') || normalizeStr(nombre).includes('bimbootcamp'))) {
-                badgeFile = '04_BIM Boot Camp_badge_02.png';
-            }
-            if (!badgeFile && normalizeStr(nombre).includes('troublemaker')) {
-                badgeFile = '05_Digital Troublemaker_badge.png';
-            }
-            // Forzar BCF Manager (BIMcollab)
-            if (!badgeFile && normalizeStr(nombre).includes('bcfmanager')) {
-                badgeFile = 'BCF-manager-revit_certificate.png';
-            }
-
-            let badgeHtml = '';
-            if (badgeFile) {
-                // Badge con imagen + Texto Curvo (Ocultando para BIMcollab)
-                const isBimCollab = normalizeStr(nombre).includes('bimcollab') || normalizeStr(institucion).includes('bimcollab');
-
-                // Forzar URLs exactas para casos críticos reportados por el usuario
-                let finalBadgeSrc = (badgeFile && (badgeFile.includes('http://') || badgeFile.includes('https://'))) ? badgeFile : `${CLOUD_BADGE_BASE}${encodeURIComponent(badgeFile)}?t=${timestamp}`;
-
-                if (normalizeStr(nombre).includes('master') || normalizeStr(nombre).includes('superior')) {
-                    finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/BIM%20Master%20Program_certificate_badge.png";
-                } else if (normalizeStr(nombre).includes('expert') || normalizeStr(nombre).includes('level3')) {
-                    finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/03_Expert_badge.png";
-                } else if (normalizeStr(nombre).includes('bootcamp') || normalizeStr(nombre).includes('bimbootcamp')) {
-                    finalBadgeSrc = "https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/04_BIM%20Boot%20Camp_badge_02.png";
-                }
-
-                const svgContent = isBimCollab ? '' : `
-                        <svg viewBox="-20 -20 160 160" class="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
-                            <path id="curve-cert-${idx}" d="M 60, 60 m -70, 0 a 70, 70 0 1,1 140, 0 a 70, 70 0 1,1 -140, 0" fill="transparent" />
-                            <text class="text-[8.5px] font-black fill-gray-400 [.light-theme_&]:fill-gray-800 font-mono uppercase tracking-[0.20em]">
-                                <textPath href="#curve-cert-${idx}" startOffset="50%" text-anchor="middle">${institucion}</textPath>
-                            </text>
-                        </svg>`;
-
-                badgeHtml = `
-                    <div class="relative group/cert cursor-pointer flex items-center justify-center w-[120px] h-[120px]">
-                        ${svgContent}
-                        <img src="${finalBadgeSrc}" alt="${nombre}" 
-                             class="w-[95px] h-[95px] object-contain group-hover/cert:scale-110 transition-all duration-500 relative z-10"
-                             onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/eduardoehr89-source/portafolio/main/01_Sitio_Web/CV/Insignias/badge_generic.png';">
-                        <div class="glass-tooltip !bottom-[120%] !left-1/2 !-translate-x-1/2">
-                            <strong class="text-blue-500 [.dark_&]:text-blue-400 block mb-0.5 text-[0.6rem]">${institucion}</strong>
-                            <p class="text-[0.65rem] mb-1 font-bold leading-tight">${nombre}</p>
-                            <span class="text-[0.5rem] opacity-70 block border-t border-current/10 pt-1 uppercase">${estado} ${idCredencial !== 'N/A' ? `// ID: ${idCredencial}` : ''}</span>
-                        </div>
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="flex flex-col mb-1.5">
+                    <div class="flex items-center justify-between">
+                        <strong class="text-[0.65rem] text-gray-800 dark:text-gray-200">${institucion}</strong>
+                        <span class="text-[0.55rem] text-gray-400 font-mono">${periodo || ''}</span>
                     </div>
-                `;
-            } else {
-                // Si no tiene badge imagen, no mostrar nada en la sección de destacadas
-                return;
-            }
-
-            // Determinar si es BIMcollab para el modal
-            const isBimCollab = normalizeStr(nombre).includes('bimcollab') || normalizeStr(institucion).includes('bimcollab');
-
-            // Corregir URL de GitHub para el modal si es necesario
-            let finalUrlForModal = urlArchivo;
-            if (finalUrlForModal && finalUrlForModal.includes('github.com') && finalUrlForModal.includes('/blob/')) {
-                finalUrlForModal = finalUrlForModal.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
-            }
-
-            const isImageFilter = finalUrlForModal && (
-                finalUrlForModal.toLowerCase().includes('.png') ||
-                finalUrlForModal.toLowerCase().includes('.jpg') ||
-                finalUrlForModal.toLowerCase().includes('.jpeg')
-            );
-            const canOpenModal = isBimCollab && finalUrlForModal && isImageFilter;
-
-            const wrapper = document.createElement('a');
-            if (canOpenModal) {
-                wrapper.href = 'javascript:void(0)';
-                wrapper.onclick = (e) => {
-                    e.preventDefault();
-                    if (window.openCertModal) {
-                        window.openCertModal(encodeURI(finalUrlForModal), nombre);
-                    } else {
-                        window.open(encodeURI(mainLink), '_blank');
-                    }
-                };
-            } else {
-                wrapper.href = mainLink;
-                wrapper.target = "_blank";
-            }
-            wrapper.className = "flex-shrink-0 no-underline";
-            wrapper.innerHTML = badgeHtml;
-            certsContainer.appendChild(wrapper);
+                    <div class="flex items-center justify-start gap-2">
+                        ${finalUrl ?
+                    `<a href="${finalUrl}" target="_blank" class="text-[0.65rem] text-gray-500 dark:text-gray-400 hover:underline italic flex items-center gap-1 group/edu-link truncate max-w-[85%]">
+                                ${nombre}
+                                <i class="fas fa-external-link-alt text-[0.4rem] opacity-0 group-hover/edu-link:opacity-100 transition-opacity"></i>
+                            </a>` :
+                    `<span class="text-[0.65rem] text-gray-500 dark:text-gray-400 italic truncate max-w-[85%]">${nombre}</span>`
+                }
+                        ${idCredencial && idCredencial !== 'N/A' ? `<span class="text-[0.5rem] text-gray-400 opacity-70 font-mono whitespace-nowrap shrink-0">ID: ${idCredencial}</span>` : ''}
+                    </div>
+                </div>
+            `;
+            certsContainer.appendChild(li);
         });
     }
 }
@@ -712,12 +541,12 @@ function renderMiniFicha(nombre, institucion, id, estado = 'Finalizado') {
 
     return `
         <div class="relative group/cert cursor-pointer">
-            <div class="w-10 h-10 rounded border border-cyan-500/30 dark:border-cyan-400/20 bg-cyan-500/5 dark:bg-cyan-400/5 flex flex-col items-center justify-center p-1 group-hover/cert:border-cyan-400 transition-colors shadow-sm">
-                <i class="fas ${icon} text-sky-900 dark:text-cyan-400 group-hover/cert:text-white text-xs mb-0.5"></i>
-                <span class="text-[0.35rem] text-sky-900 dark:text-cyan-300 font-mono text-center leading-none uppercase truncate w-full font-bold">${institucion.split(' ')[0]}</span>
+            <div class="w-10 h-10 rounded border border-gray-500/30 dark:border-white/20 bg-gray-500/5 dark:bg-white/5 flex flex-col items-center justify-center p-1 group-hover/cert:border-white transition-colors shadow-sm">
+                <i class="fas ${icon} text-gray-900 dark:text-gray-400 group-hover/cert:text-white text-xs mb-0.5"></i>
+                <span class="text-[0.35rem] text-gray-900 dark:text-gray-300 font-mono text-center leading-none uppercase truncate w-full font-bold">${institucion.split(' ')[0]}</span>
             </div>
             <div class="glass-tooltip !bottom-[115%] !left-1/2 !-translate-x-1/2">
-                <strong class="text-blue-500 [.dark_&]:text-blue-400 block mb-0.5 text-[0.6rem]">${institucion}</strong>
+                <strong class="text-white block mb-0.5 text-[0.6rem]">${institucion}</strong>
                 <p class="text-[0.65rem] mb-1 font-bold leading-tight">${nombre}</p>
                 <span class="text-[0.5rem] opacity-70 block border-t border-current/10 pt-1 uppercase">${estado} ${id !== 'N/A' && id ? `// ID: ${id}` : ''}</span>
             </div>
@@ -732,13 +561,14 @@ function renderSoftware(data) {
     if (mainContainer) mainContainer.innerHTML = '';
     if (secondaryContainer) secondaryContainer.innerHTML = '';
 
-    const principalData = data.filter(sw => {
+    const principalData = data.filter(sw => normalizeStr(getVal(sw, 'Clasificación', 'Clasificacion')) === 'principal');
+    const secundarioData = data.filter(sw => normalizeStr(getVal(sw, 'Clasificación', 'Clasificacion')) === 'secundario');
+
+    const allSoftware = [...principalData, ...secundarioData].filter(sw => {
+        const n = normalizeStr(getVal(sw, 'Nombre', 'Item', 'Software'));
         const cls = normalizeStr(getVal(sw, 'Clasificación', 'Clasificacion'));
-        return cls === 'principal';
-    });
-    const secundarioData = data.filter(sw => {
-        const cls = normalizeStr(getVal(sw, 'Clasificación', 'Clasificacion'));
-        return cls === 'secundario';
+        if (cls === 'principal') return true;
+        return n.includes('dynamo') || n.includes('python') || n.includes('navisworks') || n.includes('powerbi') || n.includes('power bi');
     });
 
     const levelToPct = {
@@ -746,7 +576,7 @@ function renderSoftware(data) {
         'Bajo': 65, 'Básico': 55, 'Basico': 55, '': 0
     };
 
-    const sortedPrincipal = [...principalData].sort((a, b) => {
+    const sortedSoftware = allSoftware.sort((a, b) => {
         const valA = getVal(a, '% Dominio', 'Porcentaje', 'dominio');
         const valB = getVal(b, '% Dominio', 'Porcentaje', 'dominio');
         const pctA = parseInt(valA.replace('%', '')) || 0;
@@ -755,21 +585,19 @@ function renderSoftware(data) {
         return getVal(a, 'Nombre', 'Item').toLowerCase().localeCompare(getVal(b, 'Nombre', 'Item').toLowerCase());
     });
 
-    const sortedSecundario = [...secundarioData].sort((a, b) => {
-        return getVal(a, 'Nombre', 'Item').localeCompare(getVal(b, 'Nombre', 'Item'));
-    });
-
-    sortedPrincipal.forEach(sw => {
+    sortedSoftware.forEach(sw => {
         const nombre = getVal(sw, 'Nombre', 'Item', 'Software');
         const nivel = getVal(sw, 'Nivel');
         const capacidad = getVal(sw, 'Capacidad');
         let rawPct = getVal(sw, '% Dominio', 'Porcentaje Dominio', 'Porcentaje', 'dominio', 'Detalle');
         let porcentaje = parseInt(rawPct.replace('%', ''));
         if (!porcentaje || isNaN(porcentaje)) porcentaje = levelToPct[nivel] || 0;
+
         let displayNombre = nombre;
-        if (nombre.toLowerCase() === 'revit') {
+        if (nombre.toLowerCase().includes('revit')) {
             displayNombre = `Revit <span class="sidebar-subtext font-light lowercase">(multidisciplina)</span>`;
         }
+
         mainContainer.innerHTML += `
             <div class="group relative cursor-help flex items-center gap-2 mb-0">
                 <span class="text-[0.6rem] text-gray-100 dark:text-gray-200 w-24 shrink-0 truncate">${displayNombre}</span>
@@ -779,7 +607,7 @@ function renderSoftware(data) {
                 </div>
                 <div class="glass-tooltip">
                     <strong class="text-blue-500 [.dark_&]:text-blue-400 block mb-1 text-[0.6rem]">Nivel: ${nivel}</strong>
-                    <p class="mb-1 opacity-90">${capacidad}${nombre.toLowerCase() === 'revit' ? '. Incluye MEP Fabrication' : ''}</p>
+                    <p class="mb-1 opacity-90">${capacidad}${nombre.toLowerCase().includes('revit') ? '. Incluye MEP Fabrication' : ''}</p>
                 </div>
             </div>
         `;
@@ -794,29 +622,6 @@ function renderSoftware(data) {
             }
         });
     }, 50);
-
-    secondaryContainer.innerHTML = `
-            <div class="flex flex-wrap gap-1 w-full">
-                ${sortedSecundario.map(sw => {
-        const nombre = getVal(sw, 'Nombre', 'Item', 'Software');
-        const nivel = getVal(sw, 'Nivel');
-        const desc = getVal(sw, 'Descripción', 'Descripcion', 'desc');
-        const capacidad = getVal(sw, 'Capacidad');
-
-        if (normalizeStr(nombre).includes('solibri')) return ''; // Solibri pausado por usuario
-
-        return `
-                        <div class="soft-skill-tag group relative cursor-help py-0.5 px-1.5 grow min-w-[50px]">
-                            <span class="block px-1 text-center" title="${nombre}">${nombre}</span>
-                            <div class="glass-tooltip">
-                                <strong class="text-blue-500 [.dark_&]:text-blue-400 block mb-1 text-[0.6rem]">Nivel: ${nivel}</strong>
-                                <p class="mb-1 opacity-90">${capacidad || desc || ''}</p>
-                            </div>
-                        </div>
-                    `;
-    }).join('')}
-            </div>
-        `;
 }
 
 
@@ -892,7 +697,7 @@ function renderNorms(data) {
     container.innerHTML = '';
 
     // Selección de normativas destacadas con nombres de ficha simplificados
-    const important = ['ISO 19650', 'BEP', 'IFC / COBie', 'LOD', 'EIR', 'ISO 7817 (LOIN)'];
+    const important = ['Normas y Estandares Internacionales', 'BEP', 'IFC / COBie', 'LOD', 'EIR', 'ISO 7817 (LOIN)'];
 
     const seenKeywords = new Set();
     const filtered = [];
@@ -902,12 +707,12 @@ function renderNorms(data) {
         important.forEach(imp => {
             const cleanTitle = title.toUpperCase().replace(/[^A-Z0-9]/g, '');
             const cleanImp = imp.toUpperCase().replace(/[^A-Z0-9]/g, '');
-            
+
             let match = false;
             if (imp === 'ISO 7817 (LOIN)') {
                 match = cleanTitle.includes('7817') || cleanTitle.includes('LOIN');
-            } else if (imp === 'ISO 19650') {
-                match = cleanTitle.includes('19650');
+            } else if (imp === 'Normas y Estandares Internacionales') {
+                match = cleanTitle.includes('19650') || cleanTitle.includes('NORMA') || cleanTitle.includes('ESTANDAR');
             } else {
                 match = cleanTitle.includes(cleanImp);
             }
@@ -948,12 +753,10 @@ function renderSidebarPortfolioLink() {
 
     container.innerHTML = `
         <section class="mb-0">
-            <h3 class="sidebar-section-title">
-                <i data-lucide="globe"></i> Información Completa
-            </h3>
+            <h3 class="sidebar-section-title">Información Completa</h3>
             <div class="mt-2 flex flex-col items-center text-center">
                 <p class="sidebar-subtext italic mb-1 leading-tight px-2">
-                    Para explorar mi informacion profesional completa (Certificaciones, Galería, IA, Proyectos, ROI, etc.), visita mi ecosistema:
+                    Para conocer mi información completa (Certificaciones, Galería, IA, Proyectos, ROI, Software, etc.), visita mi ecosistema:
                 </p>
                 <a href="https://eduardoehr89-source.github.io/portafolio/index.html" target="_blank" class="flex items-center gap-2 group transition-all mb-1">
                     <span class="text-[0.65rem] font-bold text-blue-400 group-hover:text-blue-300 decoration-dotted underline-offsets-4 hover:underline uppercase tracking-widest leading-none flex items-center">
@@ -1349,7 +1152,7 @@ function initPrintLogic() {
     window.closeModal = () => modal.classList.add('hidden');
     window.confirmPrint = () => {
         window.closeModal();
-        
+
         // Resetear la imagen de perfil a la primera (01) para la impresión
         const frontImg = document.getElementById('cv-profile-front');
         if (frontImg) {
@@ -1367,7 +1170,7 @@ function initPrintLogic() {
                 b.style.width = w + '%';
             }
         });
-        
+
         // Esperar un poco más para que el navegador renderice la nueva imagen
         setTimeout(() => window.print(), 800);
     };
@@ -1508,8 +1311,8 @@ window.goBack = function () {
     window.history.back();
 };
 
-window.goForward = function () { 
-    window.history.forward(); 
+window.goForward = function () {
+    window.history.forward();
 };
 
 window.goHome = function (view = null) {
@@ -1546,7 +1349,7 @@ function trackPortfolioHistory() {
             historyData.stack.push({ id: currentPsid, url: window.location.href });
             historyData.index = historyData.stack.length - 1;
         }
-        
+
         sessionStorage.setItem('portfolio_history', JSON.stringify(historyData));
         updateNavigationVisuals(historyData);
     } catch (e) {
@@ -1557,7 +1360,7 @@ function trackPortfolioHistory() {
 function updateNavigationVisuals(data) {
     const backButtons = document.querySelectorAll('#nav-back, [id="nav-back"]');
     const forwardButtons = document.querySelectorAll('#nav-forward, [id="nav-forward"]');
-    
+
     const canGoBack = data.index > 0;
     const canGoForward = data.index < data.stack.length - 1;
 
@@ -1649,7 +1452,7 @@ function renderSummaryModal(data) {
         const value = getVal(item, 'Value', 'value');
         const desc = getVal(item, 'Description', 'description', 'desc');
         const link = getVal(item, 'Link', 'link');
-        
+
         // Mapeo básico de iconos según título o índice
         let icon = "box";
         const cleanTitle = normalizeStr(title);

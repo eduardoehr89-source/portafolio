@@ -9,7 +9,7 @@
 
     <!-- Fonts & Icons -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
@@ -22,7 +22,7 @@
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
+                        mono: ['IBM Plex Mono', 'monospace'],
                     }
                 }
             }
@@ -243,7 +243,7 @@
                 <div class="absolute bottom-0 left-0 right-0 p-4 text-center z-40">
                     <h1
                         style="color: white !important;"
-                        class="text-3xl font-light uppercase tracking-tighter text-white leading-none mb-1 drop-shadow-[0_4px_6px_rgba(0,0,0,1)] opacity-100">
+                        class="text-xl font-light uppercase tracking-[0.2em] text-white leading-none mb-1 drop-shadow-lg opacity-100">
                         SAID HERRERA
                     </h1>
                 </div>
@@ -252,16 +252,16 @@
             <!-- Textos trasladados desde la foto principal para visual más despejado -->
             <div class="flex flex-col items-center justify-center mt-3 mb-2 px-2 pointer-events-none text-center">
                 <h2
-                    class="text-[0.65rem] font-black text-gray-300 [.light-theme_&]:text-slate-600 tracking-[0.15em] uppercase flex flex-col items-center leading-tight w-full">
-                    <div class="w-full text-center">Modelador BIM Senior</div>
-                    <div class="font-normal whitespace-nowrap mt-1 w-full text-center">Citizen Developer</div>
+                    class="text-[0.6rem] font-bold text-gray-300 [.light-theme_&]:text-slate-600 tracking-[0.1em] uppercase flex flex-row gap-2 items-center leading-tight">
+                    <span>Modelador BIM Senior</span>
+                    <span class="text-gray-500 font-normal">|</span>
+                    <span class="font-normal">Citizen Developer</span>
                 </h2>
                 <p id="contact-nacionalidad"
-                    class="text-[0.5rem] text-gray-400 [.light-theme_&]:text-slate-500 uppercase tracking-widest mt-2 mb-1 italic font-medium">
+                    class="text-[0.5rem] text-gray-500 [.light-theme_&]:text-slate-500 uppercase tracking-widest mt-1 mb-1 italic font-medium">
                     MEXICANO</p>
                 <p id="contact-experiencia-line"
-                    class="text-[0.55rem] font-mono font-normal tracking-tighter uppercase leading-tight whitespace-nowrap"
-                    style="color: #3b82f6 !important;">
+                    class="text-[0.55rem] font-mono font-normal tracking-tighter uppercase leading-tight whitespace-nowrap text-gray-400">
                     10+ AÑOS EXP. | 20+ CIUDADES | 40+ PROYECTOS
                 </p>
             </div>
@@ -269,39 +269,26 @@
             <div class="h-px bg-white/10 my-2 opacity-50"></div>
 
             <section class="mb-2">
-                <h3 class="sidebar-section-title"><i data-lucide="user-round"></i> Contacto</h3>
+                <h3 class="sidebar-section-title">Contacto</h3>
                 <address class="text-[0.65rem] space-y-1 not-italic text-gray-300">
-                    <p class="flex items-center gap-2">
-                        <i class="fas fa-envelope w-4 text-center"></i>
+                    <p class="flex items-center gap-1">
                         <span id="contact-email">eduardoehr89@gmail.com</span>
                     </p>
-                    <p class="flex items-center gap-2">
-                        <i class="fab fa-whatsapp w-4 text-center"></i>
+                    <p class="flex items-center gap-1">
+                        
                         <a id="contact-phone" href="tel:+528120109796" class="hover:text-white transition-colors">+52 81
                             2010 9796</a>
                     </p>
-                    <p class="flex items-center gap-2">
-                        <i class="fas fa-map-marker-alt w-4 text-center"></i>
+                    <p class="flex items-center gap-1">
+                        
                         <span id="contact-location">Ciudad de M&eacute;xico, M&eacute;xico <span
                                 class="text-gray-500 font-normal italic ml-1 border-l border-gray-700 pl-2">// TRABAJO
                                 REMOTO</span></span>
                     </p>
-                    <div class="flex flex-wrap gap-x-4 gap-y-1">
-                        <p class="flex items-center gap-2">
-                            <i class="fab fa-linkedin w-4 text-center"></i>
-                            <a id="contact-linkedin" href="https://linkedin.com/in/eduardoehr/" target="_blank"
-                                class="hover:text-white transition-colors">/in/eduardoehr</a>
-                        </p>
-                    </div>
-                    <!-- QR LinkedIn Centered -->
-                    <div class="flex flex-col items-center mt-6 mb-4 w-full">
-                        <div id="qrcode-container"
-                            class="w-24 h-24 bg-white rounded-lg flex items-center justify-center border border-gray-200 p-2 shadow-inner transition-transform hover:scale-105">
-                            <span
-                                class="text-[5px] text-gray-400 text-center px-1 uppercase font-mono leading-tight">Cargando
-                                QR...</span>
-                        </div>
-                    </div>
+                    <p class="flex items-center gap-1">
+                        <a id="contact-linkedin" href="https://linkedin.com/in/eduardoehr/" target="_blank"
+                            class="hover:text-white transition-colors">/in/eduardoehr</a>
+                    </p>
                 </address>
 
                 <br> <!-- Espacio (1 enter) solicitado -->
@@ -311,7 +298,7 @@
 
 
             <section class="mb-4">
-                <h3 class="sidebar-section-title"><i data-lucide="brain"></i> Soft Skills</h3>
+                <h3 class="sidebar-section-title">Soft Skills</h3>
                 <div id="soft-skills-container" class="flex flex-wrap gap-0.5">
                     <!-- Dinámico -->
                 </div>
@@ -319,44 +306,31 @@
 
             <div class="h-px bg-white/10 my-2 opacity-50"></div>
 
-            <section class="mb-2">
-                <h3 class="sidebar-section-title"><i data-lucide="layers"></i> Software Stack</h3>
-                <h4 class="text-[0.45rem] font-light text-gray-400 uppercase tracking-wider mb-1">Herramientas
-                    Principales</h4>
-                <div id="software-main-container" class="space-y-0.5 mb-2">
-                    <!-- Dinámico -->
-                </div>
-
-                <h4 class="text-[0.55rem] font-light text-gray-400 mb-1.5 uppercase tracking-tighter">Software
-                    Complementario</h4>
-                <div id="software-secondary-list" class="text-[0.65rem] leading-tight flex flex-wrap gap-y-1">
-                    <!-- Dinámico -->
-                </div>
-            </section>
-
             <section class="mb-4">
-                <h3 class="sidebar-section-title"><i data-lucide="shield-check"></i> Normas y Estándares</h3>
-                <div id="normas-list" class="flex flex-wrap gap-1 w-full">
-                    <!-- Dinámico -->
+                <h3 class="sidebar-section-title">Software Stack</h3>
+                <div id="software-main-container" class="space-y-0.5">
+                    <!-- Dinámico: Todas las herramientas con barras -->
                 </div>
+                <div id="software-secondary-list" class="hidden"></div>
             </section>
 
-            <h3 class="sidebar-section-title"><i data-lucide="languages"></i> Idiomas</h3>
+
+
+                <h3 class="sidebar-section-title">Idiomas</h3>
             <div class="text-[0.65rem] text-gray-300 flex justify-between">
                 <span><strong class="text-white">Español:</strong> Nativo</span>
                 <span><strong class="text-white">Inglés:</strong> <a href="https://cert.efset.org/es/pfLEMW"
-                        target="_blank" class="text-white hover:text-cyan-400 transition-colors">A2 Básico <i
-                            class="fas fa-external-link-alt text-[0.45rem] text-gray-400"></i></a></span>
+                        target="_blank" class="text-white hover:text-gray-400 transition-colors">A2 Básico</a></span>
 
             </div>
             </section>
 
-            <div class="h-px bg-white/10 my-4 opacity-50"></div>
+            <div class="h-px bg-white/10 mt-[39px] mb-4 opacity-50"></div>
 
             <!-- Inyectado por JS: Información Completa (BIM.OS + QR) -->
             <div id="sidebar-portfolio-link-container"></div>
             <div class="mt-auto pt-6 text-center opacity-30 cv-update-info">
-                <p class="text-[7px] font-mono text-gray-500 uppercase tracking-[0.2em] font-bold">// ACTUALIZACIÓN MAR 2026</p>
+                <p class="text-[7px] font-mono text-gray-500 uppercase tracking-[0.2em] font-bold">// ACTUALIZACIÓN ABR 2026</p>
             </div>
 
         </aside>
@@ -374,12 +348,12 @@
             </section>
 
             <!-- Proyectos de Innovación -->
-            <section class="mb-8 p-4 bg-blue-500/5 dark:bg-blue-400/5 border-l-4 border-blue-500 rounded-r-xl">
+            <section class="mb-8 p-4 bg-gray-500/5 dark:bg-white/5 border-l-4 border-gray-400 rounded-r-xl">
                 <div class="flex justify-between items-center mb-1">
                     <h3 class="text-base font-bold uppercase tracking-wider text-gray-800 dark:text-white">
                         Proyecto de Innovación
                     </h3>
-                    <span class="text-[0.6rem] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">
+                    <span class="text-[0.6rem] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">
                         Proyecto en curso
                     </span>
                 </div>
@@ -402,11 +376,11 @@
                 <h3
                     class="text-base font-light uppercase tracking-wider mb-2 border-b border-gray-300 dark:border-white/10 pb-1 text-gray-800 dark:text-white">
                     Formación</h3>
-                <p class="text-[0.6rem] font-bold text-blue-500 dark:text-blue-400 uppercase tracking-widest mb-2">En
+                <p class="text-[0.6rem] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">En
                     curso (2025-2026)</p>
-                <div id="education-grid" class="flex justify-start gap-8 items-center w-full px-4 mb-4">
+                <ul id="education-grid" class="text-[0.65rem] space-y-1 ml-1 mb-4">
                     <!-- Dinámico: Estudios en curso -->
-                </div>
+                </ul>
 
                 <div class="mt-2">
                     <p
@@ -414,10 +388,10 @@
                         <b class="font-bold">Educación Previa</b> - Licencias y Certificaciones Destacadas
                     </p>
 
-                    <div id="certifications-badges-container"
-                        class="flex justify-start gap-8 items-center mb-4 w-full px-4">
-                        <!-- Dinámico: Badges e insignias -->
-                    </div>
+                    <ul id="certifications-badges-container"
+                        class="text-[0.65rem] space-y-1 ml-1 mb-4">
+                        <!-- Dinámico: Lista de certificaciones -->
+                    </ul>
 
                     <ul id="education-list" class="text-[0.65rem] space-y-1 ml-1">
                         <!-- Dinámico -->
