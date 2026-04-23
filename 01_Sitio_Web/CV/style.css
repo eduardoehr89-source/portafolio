@@ -585,31 +585,32 @@ body.light-theme #software-secondary-list span {
 
     @media print {
         @page {
-            size: 210mm 400mm !important;
+            size: 210mm 350mm !important;
             margin: 0 !important;
         }
 
         body {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
-            background: #ffffff !important;
-        }
-
-        body.light-theme {
-            background: #ffffff !important;
+            background: #09090b !important; /* Forzar fondo oscuro profundo */
+            color: #e5e7eb !important;
         }
 
         #cv-container {
             width: 210mm !important;
-            height: 400mm !important; 
+            height: 350mm !important; 
             margin: 0 !important;
-            background-color: #ffffff !important;
+            background-color: #18181b !important; /* Fondo Zinc-900 sólido para PDF */
+            color: #e5e7eb !important;
+            box-shadow: none !important;
         }
 
-        /* FORZAR SIDEBAR NEUTRO EN IMPRESIÓN */
+        /* FORZAR SIDEBAR DARK EN IMPRESIÓN */
         .sidebar-color {
-            background-color: #1f2937 !important;
+            background-color: #18181b !important;
             color: #ffffff !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
         }
 
 
