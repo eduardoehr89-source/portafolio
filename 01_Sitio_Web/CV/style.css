@@ -677,10 +677,10 @@ body.light-theme .thin-scroll::-webkit-scrollbar-thumb {
     .skill-progress { background: #3b82f6 !important; height: 3px !important; }
 
     /* Compactar secciones */
-    /* Espaciado de Experiencia para evitar amontonamiento */
-    section { margin-bottom: 1.2rem !important; }
-    .job-card { margin-bottom: 1rem !important; }
-    .job-card h4 { margin-top: 0.5rem !important; margin-bottom: 0.2rem !important; }
+    /* Espaciado de Experiencia equilibrado */
+    section { margin-bottom: 0.8rem !important; }
+    .job-card { margin-bottom: 0.7rem !important; }
+    .job-card h4 { margin-top: 0.3rem !important; margin-bottom: 0.1rem !important; }
     
     /* Forzar foto de perfil */
     #cv-profile-front {
