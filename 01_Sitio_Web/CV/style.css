@@ -419,10 +419,17 @@ body.light-theme #software-secondary-list span {
         }
 
         body.light-theme #cv-container .sidebar-color .soft-skill-tag {
-            background: rgba(255, 255, 255, 0.1) !important;
-            border-color: rgba(255, 255, 255, 0.2) !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
             color: #ffffff !important;
-            font-weight: 600 !important;
+            font-weight: 500 !important;
+        }
+
+        /* Ajuste para etiquetas en modo oscuro (PDF) */
+        .sidebar-color .soft-skill-tag {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+            color: #cbd5e1 !important;
         }
 
         /* Restaurar colores neutros en sidebar */
